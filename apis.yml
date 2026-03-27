@@ -1,0 +1,44 @@
+aid: basiq
+name: Basiq
+description: >-
+  Basiq is an open banking and financial data API platform providing unified
+  access to bank data and enrichment services in Australia and New Zealand.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Unified API
+  - Open Banking
+  - Financial Data
+  - Australia
+url: >-
+  https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/apis.yml
+created: '2026-03-27'
+modified: '2026-03-27'
+specificationVersion: '0.19'
+apis:
+  - aid: basiq:basiq
+    name: Basiq
+    description: >-
+      Basiq is an open banking and financial data API platform providing
+      unified access to bank data and enrichment services in Australia and
+      New Zealand.
+    humanURL: https://basiq.io/
+    tags:
+      - Unified API
+      - Open Banking
+      - Financial Data
+    properties:
+      - type: Documentation
+        url: https://api.basiq.io/reference
+      - type: Getting Started
+        url: https://api.basiq.io/reference/getting-started
+common:
+  - type: Website
+    url: https://basiq.io/
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: GitHub Organization
+    url: https://github.com/basiqio
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
