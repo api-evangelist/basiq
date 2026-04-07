@@ -6,10 +6,10 @@ description: >-
 type: Index
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
-  - Unified API
-  - Open Banking
-  - Financial Data
   - Australia
+  - Financial Data
+  - Open Banking
+  - Unified API
 url: >-
   https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/apis.yml
 created: '2026-03-27'
@@ -24,9 +24,9 @@ apis:
       New Zealand.
     humanURL: https://basiq.io/
     tags:
-      - Unified API
-      - Open Banking
       - Financial Data
+      - Open Banking
+      - Unified API
     properties:
       - type: Documentation
         url: https://api.basiq.io/reference
