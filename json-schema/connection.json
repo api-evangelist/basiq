@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/json-schema/connection.json",
+  "title": "Connection",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string",
+      "description": "Connection ID"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "active",
+        "pending",
+        "failed",
+        "disconnected"
+      ]
+    },
+    "institution": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "lastUpdated": {
+      "type": "string",
+      "format": "date-time"
+    }
+  }
+}

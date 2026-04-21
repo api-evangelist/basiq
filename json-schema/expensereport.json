@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/json-schema/expensereport.json",
+  "title": "ExpenseReport",
+  "type": "object",
+  "properties": {
+    "userId": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "object",
+      "properties": {
+        "totalMonthly": {
+          "type": "number"
+        }
+      }
+    },
+    "categories": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "category": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "percentage": {
+            "type": "number"
+          }
+        }
+      }
+    }
+  }
+}

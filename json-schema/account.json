@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/json-schema/account.json",
+  "title": "Account",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string",
+      "description": "Account name"
+    },
+    "accountNo": {
+      "type": "string",
+      "description": "Masked account number"
+    },
+    "currency": {
+      "type": "string",
+      "description": "ISO 4217 currency code"
+    },
+    "balance": {
+      "type": "number",
+      "format": "double",
+      "description": "Current balance"
+    },
+    "availableFunds": {
+      "type": "number",
+      "format": "double",
+      "description": "Available funds"
+    },
+    "accountType": {
+      "type": "string",
+      "enum": [
+        "transaction",
+        "savings",
+        "credit-card",
+        "mortgage",
+        "loan",
+        "investment"
+      ]
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "available",
+        "unavailable"
+      ]
+    }
+  }
+}

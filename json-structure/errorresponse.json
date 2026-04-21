@@ -1,0 +1,33 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/json-structure/errorresponse.json",
+  "title": "ErrorResponse",
+  "type": "record",
+  "fields": [
+    {
+      "name": "type",
+      "type": "xs:string",
+      "description": ""
+    },
+    {
+      "name": "title",
+      "type": "xs:string",
+      "description": ""
+    },
+    {
+      "name": "code",
+      "type": "xs:string",
+      "description": ""
+    },
+    {
+      "name": "detail",
+      "type": "xs:string",
+      "description": ""
+    },
+    {
+      "name": "source",
+      "type": "xs:complexType",
+      "description": ""
+    }
+  ]
+}

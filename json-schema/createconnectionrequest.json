@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/json-schema/createconnectionrequest.json",
+  "title": "CreateConnectionRequest",
+  "type": "object",
+  "properties": {
+    "institutionId": {
+      "type": "string",
+      "description": "Basiq institution ID for the bank"
+    },
+    "loginId": {
+      "type": "string",
+      "description": "User's bank login ID"
+    },
+    "password": {
+      "type": "string",
+      "description": "User's bank password (encrypted in transit)"
+    }
+  },
+  "required": [
+    "institutionId"
+  ]
+}

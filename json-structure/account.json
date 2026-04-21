@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/json-structure/account.json",
+  "title": "Account",
+  "type": "record",
+  "fields": [
+    {
+      "name": "id",
+      "type": "xs:string",
+      "description": ""
+    },
+    {
+      "name": "name",
+      "type": "xs:string",
+      "description": "Account name"
+    },
+    {
+      "name": "accountNo",
+      "type": "xs:string",
+      "description": "Masked account number"
+    },
+    {
+      "name": "currency",
+      "type": "xs:string",
+      "description": "ISO 4217 currency code"
+    },
+    {
+      "name": "balance",
+      "type": "xs:decimal",
+      "description": "Current balance"
+    },
+    {
+      "name": "availableFunds",
+      "type": "xs:decimal",
+      "description": "Available funds"
+    },
+    {
+      "name": "accountType",
+      "type": "xs:string",
+      "description": ""
+    },
+    {
+      "name": "status",
+      "type": "xs:string",
+      "description": ""
+    }
+  ]
+}

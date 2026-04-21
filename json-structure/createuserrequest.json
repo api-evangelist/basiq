@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/json-structure/createuserrequest.json",
+  "title": "CreateUserRequest",
+  "type": "record",
+  "fields": [
+    {
+      "name": "email",
+      "type": "xs:string",
+      "description": "User email address"
+    },
+    {
+      "name": "mobile",
+      "type": "xs:string",
+      "description": "User mobile number in E.164 format"
+    },
+    {
+      "name": "firstName",
+      "type": "xs:string",
+      "description": ""
+    },
+    {
+      "name": "lastName",
+      "type": "xs:string",
+      "description": ""
+    }
+  ]
+}

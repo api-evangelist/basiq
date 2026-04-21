@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/json-schema/incomeverification.json",
+  "title": "IncomeVerification",
+  "type": "object",
+  "properties": {
+    "userId": {
+      "type": "string"
+    },
+    "summary": {
+      "type": "object",
+      "properties": {
+        "regular": {
+          "type": "object",
+          "properties": {
+            "monthly": {
+              "type": "number"
+            },
+            "annual": {
+              "type": "number"
+            }
+          }
+        },
+        "irregular": {
+          "type": "object",
+          "properties": {
+            "monthly": {
+              "type": "number"
+            }
+          }
+        }
+      }
+    },
+    "incomeStreams": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "source": {
+            "type": "string"
+          },
+          "amount": {
+            "type": "number"
+          },
+          "frequency": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/json-structure/connectionlistresponse.json",
+  "title": "ConnectionListResponse",
+  "type": "record",
+  "fields": [
+    {
+      "name": "type",
+      "type": "xs:string",
+      "description": ""
+    },
+    {
+      "name": "data",
+      "type": "xs:sequence",
+      "description": ""
+    },
+    {
+      "name": "size",
+      "type": "xs:integer",
+      "description": ""
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/json-structure/transaction.json",
+  "title": "Transaction",
+  "type": "record",
+  "fields": [
+    {
+      "name": "id",
+      "type": "xs:string",
+      "description": ""
+    },
+    {
+      "name": "status",
+      "type": "xs:string",
+      "description": ""
+    },
+    {
+      "name": "description",
+      "type": "xs:string",
+      "description": "Raw transaction description from bank"
+    },
+    {
+      "name": "amount",
+      "type": "xs:decimal",
+      "description": ""
+    },
+    {
+      "name": "balance",
+      "type": "xs:decimal",
+      "description": ""
+    },
+    {
+      "name": "direction",
+      "type": "xs:string",
+      "description": ""
+    },
+    {
+      "name": "class",
+      "type": "xs:string",
+      "description": "Basiq transaction class (e.g., payment, transfer)"
+    },
+    {
+      "name": "subClass",
+      "type": "xs:complexType",
+      "description": ""
+    },
+    {
+      "name": "transactionDate",
+      "type": "xs:string",
+      "description": ""
+    },
+    {
+      "name": "postDate",
+      "type": "xs:string",
+      "description": ""
+    }
+  ]
+}

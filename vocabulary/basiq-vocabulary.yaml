@@ -1,0 +1,125 @@
+vocabulary: "1.0.0"
+
+info:
+  provider: "Basiq"
+  description: "Taxonomy for the Basiq open banking API covering user management, bank connections, accounts, transactions, and affordability."
+  created: "2026-04-19"
+  modified: "2026-04-19"
+
+operational:
+  apis:
+    - namespace: basiq-api
+      label: Basiq API
+      version: "3.0"
+      baseUrl: https://au-api.basiq.io
+      status: active
+
+  resources:
+    - name: users
+      description: End consumer records in the Basiq platform
+      apis: [basiq-api]
+      actions: [create, get, delete]
+    - name: connections
+      description: Bank connections linking a user to a financial institution
+      apis: [basiq-api]
+      actions: [list, create, get, delete]
+    - name: accounts
+      description: Bank accounts associated with a user's connections
+      apis: [basiq-api]
+      actions: [list, get]
+    - name: transactions
+      description: Bank transactions across all user accounts
+      apis: [basiq-api]
+      actions: [list, get]
+    - name: income
+      description: Income verification derived from transaction analysis
+      apis: [basiq-api]
+      actions: [get]
+    - name: expenses
+      description: Categorized expense reports derived from transaction analysis
+      apis: [basiq-api]
+      actions: [get]
+
+  actions:
+    - name: create
+      description: Create a new resource
+      methods: [POST]
+      pattern: write
+    - name: get
+      description: Retrieve a specific resource
+      methods: [GET]
+      pattern: read
+    - name: list
+      description: Retrieve a collection
+      methods: [GET]
+      pattern: read
+    - name: delete
+      description: Remove a resource
+      methods: [DELETE]
+      pattern: write
+
+  authentication:
+    schemes:
+      - name: BearerAuth
+        type: http
+        description: JWT Bearer token obtained via /token endpoint using API key
+
+capability:
+  workflows:
+    - name: Open Banking
+      file: capabilities/open-banking.yaml
+      description: Bank data retrieval, income verification, and affordability assessment
+      apis_combined: [basiq-api]
+      tool_count: 7
+      personas: [Fintech Developer, Lender, Financial Planner]
+      domains: [Open Banking, Financial Data, Affordability]
+
+  personas:
+    - id: fintech-developer
+      name: Fintech Developer
+      description: Developer building financial apps leveraging open banking data
+      workflows: [Open Banking]
+    - id: lender
+      name: Lender
+      description: Lender using bank data for income verification and affordability assessment
+      workflows: [Open Banking]
+    - id: financial-planner
+      name: Financial Planner
+      description: Financial advisor using transaction data for budgeting and planning
+      workflows: [Open Banking]
+
+  domains:
+    - name: Open Banking
+      description: Consumer-consented access to bank account and transaction data
+      resources: [users, connections, accounts]
+      workflows: [Open Banking]
+    - name: Affordability
+      description: Income verification and expense analysis for lending decisions
+      resources: [income, expenses, transactions]
+      workflows: [Open Banking]
+
+  namespaces:
+    - namespace: basiq-api
+      type: consumed
+    - namespace: basiq-mcp
+      type: mcp-exposed
+      port: 9080
+
+  binds:
+    - name: BASIQ_API_KEY
+      description: Basiq API key for server-side authentication
+      workflows: [Open Banking]
+
+crossReference:
+  - resource: connections
+    operations: [listConnections, createConnection, getConnection, deleteConnection]
+    workflows: [Open Banking]
+    personas: [Fintech Developer, Lender]
+  - resource: transactions
+    operations: [listTransactions, getTransaction]
+    workflows: [Open Banking]
+    personas: [Lender, Financial Planner]
+  - resource: income
+    operations: [getIncomeVerification]
+    workflows: [Open Banking]
+    personas: [Lender]

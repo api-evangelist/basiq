@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/json-schema/errorresponse.json",
+  "title": "ErrorResponse",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string"
+    },
+    "title": {
+      "type": "string"
+    },
+    "code": {
+      "type": "string"
+    },
+    "detail": {
+      "type": "string"
+    },
+    "source": {
+      "type": "object"
+    }
+  }
+}

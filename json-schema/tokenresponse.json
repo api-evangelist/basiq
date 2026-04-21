@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/json-schema/tokenresponse.json",
+  "title": "TokenResponse",
+  "type": "object",
+  "properties": {
+    "access_token": {
+      "type": "string",
+      "description": "JWT access token"
+    },
+    "token_type": {
+      "type": "string",
+      "description": "Token type (Bearer)"
+    },
+    "expires_in": {
+      "type": "integer",
+      "description": "Token expiry in seconds"
+    }
+  }
+}

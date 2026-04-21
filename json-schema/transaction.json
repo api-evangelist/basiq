@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/json-schema/transaction.json",
+  "title": "Transaction",
+  "type": "object",
+  "properties": {
+    "id": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string",
+      "enum": [
+        "posted",
+        "pending"
+      ]
+    },
+    "description": {
+      "type": "string",
+      "description": "Raw transaction description from bank"
+    },
+    "amount": {
+      "type": "number",
+      "format": "double"
+    },
+    "balance": {
+      "type": "number",
+      "format": "double"
+    },
+    "direction": {
+      "type": "string",
+      "enum": [
+        "credit",
+        "debit"
+      ]
+    },
+    "class": {
+      "type": "string",
+      "description": "Basiq transaction class (e.g., payment, transfer)"
+    },
+    "subClass": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "code": {
+          "type": "string"
+        }
+      }
+    },
+    "transactionDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "postDate": {
+      "type": "string",
+      "format": "date"
+    }
+  }
+}

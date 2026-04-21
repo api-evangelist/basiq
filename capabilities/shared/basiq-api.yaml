@@ -1,0 +1,74 @@
+name: Basiq API
+description: Shared per-API capability definition for the Basiq open banking and financial data API.
+api: basiq:basiq
+baseUrl: https://au-api.basiq.io
+auth:
+  type: bearer
+  scheme: JWT
+operations:
+  - operationId: createToken
+    summary: Create Token
+    method: POST
+    path: /token
+    description: Exchange API key for server or user access token.
+    tags: [Authentication]
+  - operationId: createUser
+    summary: Create User
+    method: POST
+    path: /users
+    description: Create a new Basiq user representing an end consumer.
+    tags: [Users]
+  - operationId: getUser
+    summary: Get User
+    method: GET
+    path: /users/{userId}
+    description: Retrieve a user by ID.
+    tags: [Users]
+  - operationId: listConnections
+    summary: List Connections
+    method: GET
+    path: /users/{userId}/connections
+    description: List all bank connections for a user.
+    tags: [Connections]
+  - operationId: createConnection
+    summary: Create Connection
+    method: POST
+    path: /users/{userId}/connections
+    description: Create a new bank connection for a user.
+    tags: [Connections]
+  - operationId: listAccounts
+    summary: List Accounts
+    method: GET
+    path: /users/{userId}/accounts
+    description: List all bank accounts for a user.
+    tags: [Accounts]
+  - operationId: getAccount
+    summary: Get Account
+    method: GET
+    path: /users/{userId}/accounts/{accountId}
+    description: Retrieve a specific bank account with balance.
+    tags: [Accounts]
+  - operationId: listTransactions
+    summary: List Transactions
+    method: GET
+    path: /users/{userId}/transactions
+    description: List all transactions for a user across all accounts.
+    tags: [Transactions]
+  - operationId: getTransaction
+    summary: Get Transaction
+    method: GET
+    path: /users/{userId}/transactions/{transactionId}
+    description: Retrieve a specific transaction.
+    tags: [Transactions]
+  - operationId: getIncomeVerification
+    summary: Get Income Verification
+    method: GET
+    path: /users/{userId}/income
+    description: Get income verification data derived from transaction analysis.
+    tags: [Affordability]
+  - operationId: getExpenses
+    summary: Get Expenses
+    method: GET
+    path: /users/{userId}/expenses
+    description: Get categorized expense data from transaction analysis.
+    tags: [Affordability]

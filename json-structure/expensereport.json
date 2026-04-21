@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/json-structure/expensereport.json",
+  "title": "ExpenseReport",
+  "type": "record",
+  "fields": [
+    {
+      "name": "userId",
+      "type": "xs:string",
+      "description": ""
+    },
+    {
+      "name": "summary",
+      "type": "xs:complexType",
+      "description": ""
+    },
+    {
+      "name": "categories",
+      "type": "xs:sequence",
+      "description": ""
+    }
+  ]
+}

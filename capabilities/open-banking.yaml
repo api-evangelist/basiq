@@ -1,0 +1,45 @@
+name: Open Banking
+description: >-
+  Workflow capability for building open banking and financial data applications
+  using the Basiq API. Covers bank connection, account data retrieval, transaction
+  history, and affordability assessment for Australian and New Zealand consumers.
+version: "1.0"
+apis:
+  - basiq:basiq
+personas:
+  - Fintech Developer
+  - Lender
+  - Financial Planner
+tools:
+  - name: create_user
+    description: Register a new end consumer to initiate their open banking journey.
+    operation: createUser
+    api: basiq:basiq
+  - name: connect_bank
+    description: Connect a user's bank account using institution credentials or CDR consent flow.
+    operation: createConnection
+    api: basiq:basiq
+  - name: get_accounts
+    description: Retrieve all bank accounts for a connected user including balances.
+    operation: listAccounts
+    api: basiq:basiq
+  - name: get_transactions
+    description: Fetch transaction history for a user across all connected accounts.
+    operation: listTransactions
+    api: basiq:basiq
+  - name: verify_income
+    description: Get income verification report derived from transaction pattern analysis.
+    operation: getIncomeVerification
+    api: basiq:basiq
+  - name: analyze_expenses
+    description: Get categorized monthly expense report for affordability assessment.
+    operation: getExpenses
+    api: basiq:basiq
+  - name: manage_connections
+    description: List, refresh, and manage user bank connections.
+    operation: listConnections
+    api: basiq:basiq
+mcp:
+  adapter: basiq-mcp
+  namespace: basiq-api
+  port: 9080

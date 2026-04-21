@@ -1,0 +1,38 @@
+{
+  "$schema": "https://json-structure.org/meta/extended/v0/#",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/json-structure/user.json",
+  "title": "User",
+  "type": "record",
+  "fields": [
+    {
+      "name": "id",
+      "type": "xs:string",
+      "description": "Basiq user ID"
+    },
+    {
+      "name": "email",
+      "type": "xs:string",
+      "description": ""
+    },
+    {
+      "name": "mobile",
+      "type": "xs:string",
+      "description": ""
+    },
+    {
+      "name": "firstName",
+      "type": "xs:string",
+      "description": ""
+    },
+    {
+      "name": "lastName",
+      "type": "xs:string",
+      "description": ""
+    },
+    {
+      "name": "createdDate",
+      "type": "xs:string",
+      "description": ""
+    }
+  ]
+}
