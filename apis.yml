@@ -8,6 +8,7 @@ description: >-
   user management, bank connections, account balances, transaction history, income
   verification, and expense categorization. Uses JWT Bearer token authentication.
 type: Index
+x-type: company
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Australia
@@ -20,7 +21,7 @@ tags:
 url: >-
   https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/apis.yml
 created: '2026-03-27'
-modified: '2026-04-19'
+modified: '2026-04-21'
 specificationVersion: '0.19'
 apis:
   - aid: basiq:basiq-api
