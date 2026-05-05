@@ -1,0 +1,13 @@
+{
+  "repo": "basiq",
+  "feeds": [
+    {
+      "source": "https://basiq.io/blog/",
+      "feed_url": "https://www.basiq.io/blog/feed/",
+      "saved": 10,
+      "title": "Open Banking API Platform \u2013 Basiq"
+    }
+  ],
+  "post_count": 10,
+  "fetched": "2026-05-03T23:23:40Z"
+}
