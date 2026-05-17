@@ -8,7 +8,7 @@ description: >-
   user management, bank connections, account balances, transaction history, income
   verification, and expense categorization. Uses JWT Bearer token authentication.
 type: Index
-x-type: company
+kind: company
 image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
 tags:
   - Australia
@@ -79,7 +79,7 @@ common:
     url: vocabulary/basiq-vocabulary.yaml
   - type: NaftikoCapability
     url: capabilities/open-banking.yaml
-  - type: JSON-LD
+  - type: JSONLD
     url: json-ld/basiq-context.jsonld
   - name: Features
     type: Features
