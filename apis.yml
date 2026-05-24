@@ -131,6 +131,8 @@ common:
   - name: ANZ
   - name: Westpac
   - name: NAB
+- type: LLMsTxt
+  url: https://api.basiq.io/llms.txt
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
