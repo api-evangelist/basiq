@@ -8,7 +8,7 @@ description: >-
   Bearer token authentication.
 type: Index
 kind: company
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 tags:
   - Australia
   - Banking
@@ -36,7 +36,7 @@ apis:
       - Financial Data
       - Open Banking
       - Transactions
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     baseURL: https://au-api.basiq.io
     properties:
       - type: Documentation
