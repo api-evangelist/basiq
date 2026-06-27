@@ -122,7 +122,7 @@ common:
       - name: ANZ
       - name: Westpac
       - name: NAB
-  - type: LLMsTxt
+  - type: LlmsText
     url: https://api.basiq.io/llms.txt
 maintainers:
   - FN: Kin Lane
