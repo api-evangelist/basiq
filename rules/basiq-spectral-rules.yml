@@ -1,3 +1,22 @@
+# basiq — Spectral ruleset (strengthened)
+# Plain Spectral. Existing hand-authored rules preserved; measured rules added
+# from this provider's own OpenAPI conventions by strengthen_ruleset.py,
+# then self-validated against the spec.
+#
+# Provenance:
+#   - servers-https-only: 100% of servers already https (error)
+#   - servers-expected-domain: 1/1 servers on basiq.io
+#   - path-params-casing: camel @ 100% (n=16)
+#   - operationid-casing: camel @ 100% (n=14)
+#   - schema-names-casing: pascal @ 100% (n=13)
+#   - schema-properties-casing: snake @ 70% (n=59)
+#   - security: global (root) — NOT emitting operation-security-required
+#   - error-schema-defined: ErrorResponse
+#   - pagination params observed: ['limit', 'offset']
+#   - merge: kept 15 existing, added 7 measured, upgraded 0
+#   - added: servers-expected-domain, path-params-casing, schema-names-casing, schema-properties-casing, security-schemes-defined, error-schema-defined, no-empty-descriptions
+extends:
+  - spectral:oas
 rules:
   basiq-bearer-auth-required:
     description: All protected operations must use BearerAuth security.
@@ -11,8 +30,8 @@ rules:
           type: array
           contains:
             type: object
-            required: [BearerAuth]
-
+            required:
+            - BearerAuth
   basiq-operation-id-required:
     description: All operations must have an operationId.
     message: Operation is missing operationId.
@@ -21,17 +40,15 @@ rules:
     then:
       field: operationId
       function: truthy
-
   basiq-operation-id-camel-case:
     description: Operation IDs must use camelCase.
-    message: "{{value}} must use camelCase."
+    message: '{{value}} must use camelCase.'
     severity: warn
     given: $.paths.*.*.operationId
     then:
       function: pattern
       functionOptions:
-        match: "^[a-z][a-zA-Z0-9]+$"
-
+        match: ^[a-z][a-zA-Z0-9]+$
   basiq-summary-required:
     description: All operations must have a summary.
     message: Operation is missing summary.
@@ -40,7 +57,6 @@ rules:
     then:
       field: summary
       function: truthy
-
   basiq-summary-title-case:
     description: Operation summaries must use Title Case.
     message: Summary must use Title Case.
@@ -49,8 +65,7 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^[A-Z][a-zA-Z0-9 ]+$"
-
+        match: ^[A-Z][a-zA-Z0-9 ]+$
   basiq-tags-required:
     description: All operations must be tagged.
     message: Operation must include at least one tag.
@@ -59,7 +74,6 @@ rules:
     then:
       field: tags
       function: truthy
-
   basiq-description-required:
     description: All operations must have a description.
     message: Operation is missing description.
@@ -68,25 +82,22 @@ rules:
     then:
       field: description
       function: truthy
-
   basiq-200-response-required:
     description: All GET operations must define a 200 response.
     message: GET operation is missing 200 success response.
     severity: error
     given: $.paths.*.get.responses
     then:
-      field: "200"
+      field: '200'
       function: truthy
-
   basiq-404-response-required:
     description: Parameterized path operations should define a 404 response.
     message: Operation on parameterized path is missing 404 response.
     severity: warn
     given: $.paths.*.get.responses
     then:
-      field: "404"
+      field: '404'
       function: truthy
-
   basiq-user-path-prefix:
     description: User-scoped resource paths should be nested under /users/{userId}.
     message: Resource path should be nested under /users/{userId}.
@@ -95,17 +106,15 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^/(token|users)"
-
+        match: ^/(token|users)
   basiq-response-schema-ref:
     description: Responses should reference schemas using $ref rather than inline definitions.
     message: Response content should use $ref to reference schemas.
     severity: warn
     given: $.paths.*.*.responses.*.content.application/json.schema
     then:
-      field: "$ref"
+      field: $ref
       function: truthy
-
   basiq-schema-description-required:
     description: All schema properties should have descriptions.
     message: Schema property is missing description.
@@ -114,7 +123,6 @@ rules:
     then:
       field: description
       function: truthy
-
   basiq-info-contact-required:
     description: API info must include contact details.
     message: API info is missing contact information.
@@ -123,7 +131,6 @@ rules:
     then:
       field: contact
       function: truthy
-
   basiq-server-url-https:
     description: Server URLs must use HTTPS.
     message: Server URL must use HTTPS.
@@ -132,13 +139,66 @@ rules:
     then:
       function: pattern
       functionOptions:
-        match: "^https://"
-
+        match: ^https://
   basiq-204-delete-response:
     description: DELETE operations should return 204 No Content.
     message: DELETE operation should define a 204 response.
     severity: warn
     given: $.paths.*.delete.responses
     then:
-      field: "204"
+      field: '204'
+      function: truthy
+  servers-expected-domain:
+    description: Server URLs should be on the basiq.io domain.
+    severity: warn
+    given: $.servers[*].url
+    then:
+      function: pattern
+      functionOptions:
+        match: basiq\.io
+  path-params-casing:
+    description: Path parameters should be camelCase (the dominant convention in this API).
+    severity: warn
+    given: $.paths[*].parameters[?(@.in=='path')].name
+    then:
+      function: casing
+      functionOptions:
+        type: camel
+  schema-names-casing:
+    description: Component schema names should be PascalCase (the dominant convention in this API).
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: pascal
+  schema-properties-casing:
+    description: Schema properties should be snake_case (the dominant convention in this API).
+    severity: info
+    given: $.components.schemas[*].properties
+    then:
+      field: '@key'
+      function: casing
+      functionOptions:
+        type: snake
+  security-schemes-defined:
+    description: Security schemes should be defined in components.
+    severity: warn
+    given: $.components
+    then:
+      field: securitySchemes
+      function: truthy
+  error-schema-defined:
+    description: A shared error schema (ErrorResponse) should be defined for error payloads.
+    severity: warn
+    given: $.components.schemas
+    then:
+      field: ErrorResponse
+      function: truthy
+  no-empty-descriptions:
+    description: Descriptions must not be empty strings.
+    severity: warn
+    given: $..description
+    then:
       function: truthy
