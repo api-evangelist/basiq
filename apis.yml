@@ -47,6 +47,8 @@ apis:
       - type: OpenAPI
         url: openapi/basiq-api-openapi.yml
 common:
+  - type: AgenticAccess
+    url: agentic-access/basiq-agentic-access.yml
   - type: DomainSecurity
     url: security/basiq-domain-security.yml
   - type: Authentication
