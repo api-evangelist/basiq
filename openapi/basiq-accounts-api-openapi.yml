@@ -1,0 +1,144 @@
+openapi: 3.0.3
+info:
+  title: Basiq Accounts API
+  description: The Basiq API is an open banking and financial data platform providing unified access to Australian and New Zealand bank account data. It enables financial applications to retrieve account balances, transactions, income verification, and expense categorization via consumer-consented bank connections using CDR (Consumer Data Right) and third-party open banking standards.
+  version: 3.0.0
+  contact:
+    name: Basiq Support
+    url: https://basiq.io/contact
+  termsOfService: https://basiq.io/legal/terms-of-use/
+servers:
+- url: https://au-api.basiq.io
+  description: Basiq API (Australia)
+security:
+- BearerAuth: []
+tags:
+- name: Accounts
+paths:
+  /users/{userId}/accounts:
+    get:
+      operationId: listAccounts
+      summary: List Accounts
+      description: List all bank accounts for a user across all connections.
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      responses:
+        '200':
+          description: List of accounts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AccountListResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /users/{userId}/accounts/{accountId}:
+    get:
+      operationId: getAccount
+      summary: Get Account
+      description: Retrieve a specific bank account with balance information.
+      tags:
+      - Accounts
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      - $ref: '#/components/parameters/AccountId'
+      responses:
+        '200':
+          description: Account record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Account'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    AccountListResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          default: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Account'
+        size:
+          type: integer
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        code:
+          type: string
+        detail:
+          type: string
+        source:
+          type: object
+    Account:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+          description: Account name
+        accountNo:
+          type: string
+          description: Masked account number
+        currency:
+          type: string
+          description: ISO 4217 currency code
+        balance:
+          type: number
+          format: double
+          description: Current balance
+        availableFunds:
+          type: number
+          format: double
+          description: Available funds
+        accountType:
+          type: string
+          enum:
+          - transaction
+          - savings
+          - credit-card
+          - mortgage
+          - loan
+          - investment
+        status:
+          type: string
+          enum:
+          - available
+          - unavailable
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    UserId:
+      name: userId
+      in: path
+      required: true
+      description: Basiq user ID
+      schema:
+        type: string
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      description: Basiq account ID
+      schema:
+        type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

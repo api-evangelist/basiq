@@ -1,0 +1,145 @@
+openapi: 3.0.3
+info:
+  title: Basiq Accounts Users API
+  description: The Basiq API is an open banking and financial data platform providing unified access to Australian and New Zealand bank account data. It enables financial applications to retrieve account balances, transactions, income verification, and expense categorization via consumer-consented bank connections using CDR (Consumer Data Right) and third-party open banking standards.
+  version: 3.0.0
+  contact:
+    name: Basiq Support
+    url: https://basiq.io/contact
+  termsOfService: https://basiq.io/legal/terms-of-use/
+servers:
+- url: https://au-api.basiq.io
+  description: Basiq API (Australia)
+security:
+- BearerAuth: []
+tags:
+- name: Users
+paths:
+  /users:
+    post:
+      operationId: createUser
+      summary: Create User
+      description: Create a new Basiq user representing an end consumer.
+      tags:
+      - Users
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateUserRequest'
+      responses:
+        '201':
+          description: User created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /users/{userId}:
+    get:
+      operationId: getUser
+      summary: Get User
+      description: Retrieve a user by ID.
+      tags:
+      - Users
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      responses:
+        '200':
+          description: User record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteUser
+      summary: Delete User
+      description: Delete a user and all associated connections and data.
+      tags:
+      - Users
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      responses:
+        '204':
+          description: User deleted
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Basiq user ID
+        email:
+          type: string
+        mobile:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+      required:
+      - id
+      - email
+    CreateUserRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: User email address
+        mobile:
+          type: string
+          description: User mobile number in E.164 format
+        firstName:
+          type: string
+        lastName:
+          type: string
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        code:
+          type: string
+        detail:
+          type: string
+        source:
+          type: object
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    UserId:
+      name: userId
+      in: path
+      required: true
+      description: Basiq user ID
+      schema:
+        type: string
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

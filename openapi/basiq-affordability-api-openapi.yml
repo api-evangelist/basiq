@@ -1,0 +1,140 @@
+openapi: 3.0.3
+info:
+  title: Basiq Accounts Affordability API
+  description: The Basiq API is an open banking and financial data platform providing unified access to Australian and New Zealand bank account data. It enables financial applications to retrieve account balances, transactions, income verification, and expense categorization via consumer-consented bank connections using CDR (Consumer Data Right) and third-party open banking standards.
+  version: 3.0.0
+  contact:
+    name: Basiq Support
+    url: https://basiq.io/contact
+  termsOfService: https://basiq.io/legal/terms-of-use/
+servers:
+- url: https://au-api.basiq.io
+  description: Basiq API (Australia)
+security:
+- BearerAuth: []
+tags:
+- name: Affordability
+paths:
+  /users/{userId}/income:
+    get:
+      operationId: getIncomeVerification
+      summary: Get Income Verification
+      description: Get income verification data derived from transaction analysis.
+      tags:
+      - Affordability
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      responses:
+        '200':
+          description: Income verification report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/IncomeVerification'
+        '404':
+          $ref: '#/components/responses/NotFound'
+  /users/{userId}/expenses:
+    get:
+      operationId: getExpenses
+      summary: Get Expenses
+      description: Get categorized expense data derived from transaction analysis.
+      tags:
+      - Affordability
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      responses:
+        '200':
+          description: Expense report
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ExpenseReport'
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    UserId:
+      name: userId
+      in: path
+      required: true
+      description: Basiq user ID
+      schema:
+        type: string
+  schemas:
+    IncomeVerification:
+      type: object
+      properties:
+        userId:
+          type: string
+        summary:
+          type: object
+          properties:
+            regular:
+              type: object
+              properties:
+                monthly:
+                  type: number
+                annual:
+                  type: number
+            irregular:
+              type: object
+              properties:
+                monthly:
+                  type: number
+        incomeStreams:
+          type: array
+          items:
+            type: object
+            properties:
+              source:
+                type: string
+              amount:
+                type: number
+              frequency:
+                type: string
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        code:
+          type: string
+        detail:
+          type: string
+        source:
+          type: object
+    ExpenseReport:
+      type: object
+      properties:
+        userId:
+          type: string
+        summary:
+          type: object
+          properties:
+            totalMonthly:
+              type: number
+        categories:
+          type: array
+          items:
+            type: object
+            properties:
+              category:
+                type: string
+              amount:
+                type: number
+              percentage:
+                type: number
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT

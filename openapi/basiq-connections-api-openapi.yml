@@ -1,0 +1,188 @@
+openapi: 3.0.3
+info:
+  title: Basiq Accounts Connections API
+  description: The Basiq API is an open banking and financial data platform providing unified access to Australian and New Zealand bank account data. It enables financial applications to retrieve account balances, transactions, income verification, and expense categorization via consumer-consented bank connections using CDR (Consumer Data Right) and third-party open banking standards.
+  version: 3.0.0
+  contact:
+    name: Basiq Support
+    url: https://basiq.io/contact
+  termsOfService: https://basiq.io/legal/terms-of-use/
+servers:
+- url: https://au-api.basiq.io
+  description: Basiq API (Australia)
+security:
+- BearerAuth: []
+tags:
+- name: Connections
+paths:
+  /users/{userId}/connections:
+    get:
+      operationId: listConnections
+      summary: List Connections
+      description: List all bank connections for a user.
+      tags:
+      - Connections
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      responses:
+        '200':
+          description: List of connections
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConnectionListResponse'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    post:
+      operationId: createConnection
+      summary: Create Connection
+      description: Create a new bank connection for a user.
+      tags:
+      - Connections
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateConnectionRequest'
+      responses:
+        '201':
+          description: Connection created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+  /users/{userId}/connections/{connectionId}:
+    get:
+      operationId: getConnection
+      summary: Get Connection
+      description: Retrieve a specific bank connection.
+      tags:
+      - Connections
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      - $ref: '#/components/parameters/ConnectionId'
+      responses:
+        '200':
+          description: Connection record
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Connection'
+        '404':
+          $ref: '#/components/responses/NotFound'
+    delete:
+      operationId: deleteConnection
+      summary: Delete Connection
+      description: Remove a bank connection and revoke consent.
+      tags:
+      - Connections
+      parameters:
+      - $ref: '#/components/parameters/UserId'
+      - $ref: '#/components/parameters/ConnectionId'
+      responses:
+        '204':
+          description: Connection deleted
+        '404':
+          $ref: '#/components/responses/NotFound'
+components:
+  parameters:
+    ConnectionId:
+      name: connectionId
+      in: path
+      required: true
+      description: Basiq connection ID
+      schema:
+        type: string
+    UserId:
+      name: userId
+      in: path
+      required: true
+      description: Basiq user ID
+      schema:
+        type: string
+  schemas:
+    CreateConnectionRequest:
+      type: object
+      properties:
+        institutionId:
+          type: string
+          description: Basiq institution ID for the bank
+        loginId:
+          type: string
+          description: User's bank login ID
+        password:
+          type: string
+          description: User's bank password (encrypted in transit)
+      required:
+      - institutionId
+    ConnectionListResponse:
+      type: object
+      properties:
+        type:
+          type: string
+          default: list
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Connection'
+        size:
+          type: integer
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        code:
+          type: string
+        detail:
+          type: string
+        source:
+          type: object
+    Connection:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Connection ID
+        status:
+          type: string
+          enum:
+          - active
+          - pending
+          - failed
+          - disconnected
+        institution:
+          type: object
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+        lastUpdated:
+          type: string
+          format: date-time
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
