@@ -8,7 +8,20 @@ description: >-
   Bearer token authentication.
 type: Index
 kind: company
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: self-serve
+  trial: false
+  try_now: true
+  public: false
+  label: Freemium · Self-serve signup
+  confidence: high
+  source:
+  - plans
+  - authentication
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/basiq.png
 tags:
   - Australia
   - Banking
@@ -22,30 +35,90 @@ created: '2026-03-27'
 modified: '2026-05-19'
 specificationVersion: '0.19'
 apis:
-  - aid: basiq:basiq-api
-    name: Basiq API
-    description: >-
-      The Basiq API provides open banking access to Australian and New Zealand bank data. Manage users, bank
-      connections, accounts, transactions, and affordability data (income verification, expense categorization) via JWT
-      Bearer token authentication.
-    humanURL: https://api.basiq.io/reference
-    tags:
-      - Accounts
-      - Australia
-      - CDR
-      - Financial Data
-      - Open Banking
-      - Transactions
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    baseURL: https://au-api.basiq.io
-    properties:
-      - type: Documentation
-        url: https://api.basiq.io/reference
-      - type: Documentation
-        url: https://api.basiq.io/reference/getting-started
-        name: Getting Started
-      - type: OpenAPI
-        url: openapi/basiq-api-openapi.yml
+- aid: basiq:basiq-accounts-api
+  name: Basiq Accounts API
+  description: The Accounts API from Basiq — 2 operation(s) for accounts.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-accounts-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: Documentation
+    url: https://api.basiq.io/reference/getting-started
+- aid: basiq:basiq-affordability-api
+  name: Basiq Affordability API
+  description: The Affordability API from Basiq — 2 operation(s) for affordability.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Affordability
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-affordability-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: Documentation
+    url: https://api.basiq.io/reference/getting-started
+- aid: basiq:basiq-authentication-api
+  name: Basiq Authentication API
+  description: The Authentication API from Basiq — 1 operation(s) for authentication.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Authentication
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-authentication-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: Documentation
+    url: https://api.basiq.io/reference/getting-started
+- aid: basiq:basiq-connections-api
+  name: Basiq Connections API
+  description: The Connections API from Basiq — 2 operation(s) for connections.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Connections
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-connections-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: Documentation
+    url: https://api.basiq.io/reference/getting-started
+- aid: basiq:basiq-transactions-api
+  name: Basiq Transactions API
+  description: The Transactions API from Basiq — 2 operation(s) for transactions.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Transactions
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-transactions-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: Documentation
+    url: https://api.basiq.io/reference/getting-started
+- aid: basiq:basiq-users-api
+  name: Basiq Users API
+  description: The Users API from Basiq — 2 operation(s) for users.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-users-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: Documentation
+    url: https://api.basiq.io/reference/getting-started
 common:
   - type: AgenticAccess
     url: agentic-access/basiq-agentic-access.yml
