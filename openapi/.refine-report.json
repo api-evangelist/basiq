@@ -1,0 +1,24 @@
+{
+  "provider": "basiq",
+  "sources": [
+    "basiq-accounts-api-openapi.yml",
+    "basiq-affordability-api-openapi.yml",
+    "basiq-authentication-api-openapi.yml",
+    "basiq-connections-api-openapi.yml",
+    "basiq-transactions-api-openapi.yml",
+    "basiq-users-api-openapi.yml"
+  ],
+  "outputs": [
+    "basiq-accounts-api-openapi.yml",
+    "basiq-affordability-api-openapi.yml",
+    "basiq-authentication-api-openapi.yml",
+    "basiq-connections-api-openapi.yml",
+    "basiq-transactions-api-openapi.yml",
+    "basiq-users-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
