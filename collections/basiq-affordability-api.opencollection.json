@@ -1,0 +1,62 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basiq Accounts Affordability API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Affordability",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get Income Verification",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://au-api.basiq.io/users/:userId/income",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "Basiq user ID"
+              }
+            ]
+          },
+          "docs": "Get income verification data derived from transaction analysis."
+        },
+        {
+          "info": {
+            "name": "Get Expenses",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://au-api.basiq.io/users/:userId/expenses",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "Basiq user ID"
+              }
+            ]
+          },
+          "docs": "Get categorized expense data derived from transaction analysis."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

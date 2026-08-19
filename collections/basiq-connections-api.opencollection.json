@@ -1,0 +1,116 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basiq Accounts Connections API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Connections",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Connections",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://au-api.basiq.io/users/:userId/connections",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "Basiq user ID"
+              }
+            ]
+          },
+          "docs": "List all bank connections for a user."
+        },
+        {
+          "info": {
+            "name": "Create Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://au-api.basiq.io/users/:userId/connections",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "Basiq user ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Create a new bank connection for a user."
+        },
+        {
+          "info": {
+            "name": "Get Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://au-api.basiq.io/users/:userId/connections/:connectionId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "Basiq user ID"
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Basiq connection ID"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific bank connection."
+        },
+        {
+          "info": {
+            "name": "Delete Connection",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://au-api.basiq.io/users/:userId/connections/:connectionId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "Basiq user ID"
+              },
+              {
+                "name": "connectionId",
+                "value": "",
+                "type": "path",
+                "description": "Basiq connection ID"
+              }
+            ]
+          },
+          "docs": "Remove a bank connection and revoke consent."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

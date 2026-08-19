@@ -1,0 +1,68 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Basiq Accounts API",
+    "version": "3.0.0"
+  },
+  "request": {
+    "auth": {
+      "type": "bearer",
+      "token": "{{bearerToken}}"
+    }
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List Accounts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://au-api.basiq.io/users/:userId/accounts",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "Basiq user ID"
+              }
+            ]
+          },
+          "docs": "List all bank accounts for a user across all connections."
+        },
+        {
+          "info": {
+            "name": "Get Account",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://au-api.basiq.io/users/:userId/accounts/:accountId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "",
+                "type": "path",
+                "description": "Basiq user ID"
+              },
+              {
+                "name": "accountId",
+                "value": "",
+                "type": "path",
+                "description": "Basiq account ID"
+              }
+            ]
+          },
+          "docs": "Retrieve a specific bank account with balance information."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
