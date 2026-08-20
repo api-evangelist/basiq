@@ -29,6 +29,14 @@ tags:
   - Financial Data
   - Fintech
   - Open Banking
+  - Transaction
+tags_raw:
+  - Australia
+  - Banking
+  - CDR
+  - Financial Data
+  - Fintech
+  - Open Banking
   - Transactions
 url: https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/apis.yml
 created: '2026-03-27'
@@ -41,6 +49,8 @@ apis:
   humanURL: https://api.basiq.io/reference
   baseURL: https://au-api.basiq.io
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -97,6 +107,8 @@ apis:
   humanURL: https://api.basiq.io/reference
   baseURL: https://au-api.basiq.io
   tags:
+  - Transaction
+  tags_raw:
   - Transactions
   properties:
   - type: OpenAPI
@@ -111,6 +123,8 @@ apis:
   humanURL: https://api.basiq.io/reference
   baseURL: https://au-api.basiq.io
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
