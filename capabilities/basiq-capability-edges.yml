@@ -1,0 +1,25 @@
+slug: basiq
+provider: Basiq
+generated_by: planning/capability-mapping/scripts/classify_capabilities.py
+model: claude-opus-5
+frame:
+- Banking & Capital Markets
+min_confidence: 0.7
+capability_model:
+  source: https://github.com/vincentmakes/turbo-ea-capabilities
+  license: CC-BY-4.0
+  attribution: Turbo EA Capabilities by Vincent Verdet — Turbo EA, https://github.com/vincentmakes/turbo-ea-capabilities,
+    CC BY 4.0
+  notice: NOTICE
+edge_count: 1
+edges:
+- tag: Affordability
+  spec_file: basiq-affordability-api-openapi.yml
+  capability_id: BC-1320.20
+  capability_id_l1: BC-1320
+  capability_name: Credit Underwriting & Decisioning Management
+  confidence: 0.72
+  evidence: GET /users/{userId}/income  Get Income Verification; GET /users/{userId}/expenses  Get Expenses;
+    schemas IncomeVerification, ExpenseReport; vendor serves "fintechs, lenders"
+  reason: Income verification and expense reporting are affordability inputs consumed in credit assessment/underwriting
+    decisions; some chance it is used purely for PFM analytics rather than lending decisioning.

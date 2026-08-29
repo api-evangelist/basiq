@@ -146,6 +146,9 @@ apis:
   - type: Documentation
     url: https://api.basiq.io/reference/getting-started
 common:
+  - type: CapabilityMap
+    url: capabilities/basiq-capability-edges.yml
+    name: Basiq Business Capability Map
   - type: AgenticAccess
     url: agentic-access/basiq-agentic-access.yml
   - type: DomainSecurity
