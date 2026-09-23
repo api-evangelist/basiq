@@ -1,12 +1,7 @@
 {
   "provider": "basiq",
   "sources": [
-    "basiq-accounts-api-openapi.yml",
-    "basiq-affordability-api-openapi.yml",
-    "basiq-authentication-api-openapi.yml",
-    "basiq-connections-api-openapi.yml",
-    "basiq-transactions-api-openapi.yml",
-    "basiq-users-api-openapi.yml"
+    "_original/basiq-api-openapi.yml"
   ],
   "outputs": [
     "basiq-accounts-api-openapi.yml",
@@ -19,6 +14,23 @@
   "archived": [],
   "errors": [],
   "warnings": [],
-  "notes": [],
-  "skipped": []
+  "notes": [
+    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "basiq-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "basiq-api-openapi.yml: declared missing tag: Accounts",
+    "basiq-api-openapi.yml: declared missing tag: Affordability",
+    "basiq-api-openapi.yml: declared missing tag: Authentication",
+    "basiq-api-openapi.yml: declared missing tag: Connections",
+    "basiq-api-openapi.yml: declared missing tag: Transactions",
+    "basiq-api-openapi.yml: declared missing tag: Users",
+    "apis.yml register: already-registered"
+  ],
+  "skipped": [
+    "basiq-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "basiq-affordability-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "basiq-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "basiq-connections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "basiq-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "basiq-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

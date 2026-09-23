@@ -1,6 +1,6 @@
-openapi: 3.0.3
+openapi: 3.2.0
 info:
-  title: Basiq Accounts Users API
+  title: Basiq Users API
   description: The Basiq API is an open banking and financial data platform providing unified access to Australian and New Zealand bank account data. It enables financial applications to retrieve account balances, transactions, income verification, and expense categorization via consumer-consented bank connections using CDR (Consumer Data Right) and third-party open banking standards.
   version: 3.0.0
   contact:
@@ -70,6 +70,33 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        code:
+          type: string
+        detail:
+          type: string
+        source:
+          type: object
+    CreateUserRequest:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: User email address
+        mobile:
+          type: string
+          description: User mobile number in E.164 format
+        firstName:
+          type: string
+        lastName:
+          type: string
     User:
       type: object
       properties:
@@ -90,33 +117,6 @@ components:
       required:
       - id
       - email
-    CreateUserRequest:
-      type: object
-      properties:
-        email:
-          type: string
-          format: email
-          description: User email address
-        mobile:
-          type: string
-          description: User mobile number in E.164 format
-        firstName:
-          type: string
-        lastName:
-          type: string
-    ErrorResponse:
-      type: object
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        code:
-          type: string
-        detail:
-          type: string
-        source:
-          type: object
   responses:
     NotFound:
       description: Resource not found
