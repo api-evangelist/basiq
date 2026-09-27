@@ -69,7 +69,48 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+  parameters:
+    UserId:
+      name: userId
+      in: path
+      required: true
+      description: Basiq user ID
+      schema:
+        type: string
   schemas:
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          description: Basiq user ID
+        email:
+          type: string
+        mobile:
+          type: string
+        firstName:
+          type: string
+        lastName:
+          type: string
+        createdDate:
+          type: string
+          format: date-time
+      required:
+      - id
+      - email
     ErrorResponse:
       type: object
       properties:
@@ -97,47 +138,6 @@ components:
           type: string
         lastName:
           type: string
-    User:
-      type: object
-      properties:
-        id:
-          type: string
-          description: Basiq user ID
-        email:
-          type: string
-        mobile:
-          type: string
-        firstName:
-          type: string
-        lastName:
-          type: string
-        createdDate:
-          type: string
-          format: date-time
-      required:
-      - id
-      - email
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    UserId:
-      name: userId
-      in: path
-      required: true
-      description: Basiq user ID
-      schema:
-        type: string
   securitySchemes:
     BearerAuth:
       type: http

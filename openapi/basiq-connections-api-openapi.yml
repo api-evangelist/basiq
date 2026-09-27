@@ -90,14 +90,20 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
+  responses:
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
+    BadRequest:
+      description: Invalid request parameters
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ErrorResponse'
   parameters:
-    ConnectionId:
-      name: connectionId
-      in: path
-      required: true
-      description: Basiq connection ID
-      schema:
-        type: string
     UserId:
       name: userId
       in: path
@@ -105,30 +111,27 @@ components:
       description: Basiq user ID
       schema:
         type: string
+    ConnectionId:
+      name: connectionId
+      in: path
+      required: true
+      description: Basiq connection ID
+      schema:
+        type: string
   schemas:
-    Connection:
+    ErrorResponse:
       type: object
       properties:
-        id:
+        type:
           type: string
-          description: Connection ID
-        status:
+        title:
           type: string
-          enum:
-          - active
-          - pending
-          - failed
-          - disconnected
-        institution:
+        code:
+          type: string
+        detail:
+          type: string
+        source:
           type: object
-          properties:
-            id:
-              type: string
-            name:
-              type: string
-        lastUpdated:
-          type: string
-          format: date-time
     CreateConnectionRequest:
       type: object
       properties:
@@ -155,32 +158,29 @@ components:
             $ref: '#/components/schemas/Connection'
         size:
           type: integer
-    ErrorResponse:
+    Connection:
       type: object
       properties:
-        type:
+        id:
           type: string
-        title:
+          description: Connection ID
+        status:
           type: string
-        code:
-          type: string
-        detail:
-          type: string
-        source:
+          enum:
+          - active
+          - pending
+          - failed
+          - disconnected
+        institution:
           type: object
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
+          properties:
+            id:
+              type: string
+            name:
+              type: string
+        lastUpdated:
+          type: string
+          format: date-time
   securitySchemes:
     BearerAuth:
       type: http

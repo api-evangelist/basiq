@@ -60,27 +60,19 @@ components:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
   schemas:
-    ExpenseReport:
+    ErrorResponse:
       type: object
       properties:
-        userId:
+        type:
           type: string
-        summary:
+        title:
+          type: string
+        code:
+          type: string
+        detail:
+          type: string
+        source:
           type: object
-          properties:
-            totalMonthly:
-              type: number
-        categories:
-          type: array
-          items:
-            type: object
-            properties:
-              category:
-                type: string
-              amount:
-                type: number
-              percentage:
-                type: number
     IncomeVerification:
       type: object
       properties:
@@ -112,19 +104,27 @@ components:
                 type: number
               frequency:
                 type: string
-    ErrorResponse:
+    ExpenseReport:
       type: object
       properties:
-        type:
+        userId:
           type: string
-        title:
-          type: string
-        code:
-          type: string
-        detail:
-          type: string
-        source:
+        summary:
           type: object
+          properties:
+            totalMonthly:
+              type: number
+        categories:
+          type: array
+          items:
+            type: object
+            properties:
+              category:
+                type: string
+              amount:
+                type: number
+              percentage:
+                type: number
   parameters:
     UserId:
       name: userId
