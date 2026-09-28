@@ -16,22 +16,29 @@ deployment:
 tools_count: 7
 tools:
 - name: list-endpoints
-  description: ''
+  description: Lists all API paths and their HTTP methods with summaries, organized by path. Results can
+    be passed directly into 'get-endpoint'.
 - name: get-endpoint
-  description: ''
+  description: Gets detailed information about a specific API endpoint, including security schemes and
+    servers
 - name: search-endpoints
-  description: ''
+  description: Performs a deep search through paths, operations, and parameters to discover relevant API
+    endpoints. Use this tool to find specific API capabilities, required parameters, or data models based
+    on search keywords. Results can be passed direct
 - name: list-specs
-  description: ''
+  description: Lists all available OpenAPI specs. Use the title to select a spec.
 - name: execute-request
-  description: ''
+  description: Executes an API request with a given HAR request object.
 - name: search
-  description: ''
+  description: Searches through documentation with the given search query, returning a list of results
+    with ID, title, and URL.
 - name: fetch
-  description: ''
+  description: Gets detailed content for documentation by ID returned from the `search` tool.
 tools_source: live tools/list via initialize handshake, 2026-09-11 (signals/audit_mcp_authorship.py --probe)
 authorship: platform
 authorship_note: 'PLATFORM-AUTHORED: this tool shape is shared with at least one other provider in the
   catalog, so it is a platform default appearing under this provider''s domain rather than an interface
   this provider designed. Shared shape: (''execute_request'', ''fetch'', ''get_endpoint'', ''list_*'',
   ''list_specs'', ''search'', ''search_*'')'
+descriptions_source: live tools/list (authorship probe or saved capture); filled by backfill-tools-from-authorship.py
+  --descriptions, 2026-09-28
