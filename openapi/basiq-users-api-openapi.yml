@@ -70,19 +70,20 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
-    ErrorResponse:
+    CreateUserRequest:
       type: object
       properties:
-        type:
+        email:
           type: string
-        title:
+          format: email
+          description: User email address
+        mobile:
           type: string
-        code:
+          description: User mobile number in E.164 format
+        firstName:
           type: string
-        detail:
+        lastName:
           type: string
-        source:
-          type: object
     User:
       type: object
       properties:
@@ -103,20 +104,27 @@ components:
       required:
       - id
       - email
-    CreateUserRequest:
+    ErrorResponse:
       type: object
       properties:
-        email:
+        type:
           type: string
-          format: email
-          description: User email address
-        mobile:
+        title:
           type: string
-          description: User mobile number in E.164 format
-        firstName:
+        code:
           type: string
-        lastName:
+        detail:
           type: string
+        source:
+          type: object
+  parameters:
+    UserId:
+      name: userId
+      in: path
+      required: true
+      description: Basiq user ID
+      schema:
+        type: string
   responses:
     NotFound:
       description: Resource not found
@@ -130,14 +138,6 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/ErrorResponse'
-  parameters:
-    UserId:
-      name: userId
-      in: path
-      required: true
-      description: Basiq user ID
-      schema:
-        type: string
   securitySchemes:
     BearerAuth:
       type: http
