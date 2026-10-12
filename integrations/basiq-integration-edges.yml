@@ -1,0 +1,31 @@
+generated: '2026-10-12'
+method: searched
+source:
+- https://zapier.com/apps/basiq/integrations
+- https://n8n.io/integrations/basiq/
+- https://composio.dev/toolkits/basiq
+- https://monid.ai/tools/basiq
+checked:
+- https://composio.dev/toolkits/basiq
+- https://monid.ai/tools/basiq
+- https://n8n.io/integrations/basiq/
+- https://zapier.com/apps/basiq/integrations
+summary: null
+marketplace_apps: []
+edges:
+- partner_name: zepto-payments
+  partner: zepto-payments
+  partner_match: domain
+  type: contract
+  channel: partner-built
+  relationship: processor-connection
+  direction: partner-built
+  evidence: https://github.com/api-evangelist/zepto-payments/blob/main/openapi/zepto-payments-contacts-api-openapi.yml
+  contract_reference:
+    repo: zepto-payments
+    spec_file: zepto-payments-contacts-api-openapi.yml
+    value: basiq
+    property: bank_account.iav_provider
+    detected_by: detect-payment-method-edges.py
+    detected: '2026-10-12'
+templates: []
