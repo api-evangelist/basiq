@@ -72,14 +72,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    UserId:
-      name: userId
-      in: path
-      required: true
-      description: Basiq user ID
-      schema:
-        type: string
   schemas:
     TransactionListResponse:
       type: object
@@ -148,6 +140,14 @@ components:
         postDate:
           type: string
           format: date
+  parameters:
+    UserId:
+      name: userId
+      in: path
+      required: true
+      description: Basiq user ID
+      schema:
+        type: string
   responses:
     NotFound:
       description: Resource not found

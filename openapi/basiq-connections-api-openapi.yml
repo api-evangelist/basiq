@@ -91,18 +91,18 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   parameters:
-    UserId:
-      name: userId
-      in: path
-      required: true
-      description: Basiq user ID
-      schema:
-        type: string
     ConnectionId:
       name: connectionId
       in: path
       required: true
       description: Basiq connection ID
+      schema:
+        type: string
+    UserId:
+      name: userId
+      in: path
+      required: true
+      description: Basiq user ID
       schema:
         type: string
   schemas:

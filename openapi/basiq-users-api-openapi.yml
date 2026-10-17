@@ -70,6 +70,19 @@ paths:
           $ref: '#/components/responses/NotFound'
 components:
   schemas:
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        code:
+          type: string
+        detail:
+          type: string
+        source:
+          type: object
     CreateUserRequest:
       type: object
       properties:
@@ -104,19 +117,6 @@ components:
       required:
       - id
       - email
-    ErrorResponse:
-      type: object
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        code:
-          type: string
-        detail:
-          type: string
-        source:
-          type: object
   parameters:
     UserId:
       name: userId

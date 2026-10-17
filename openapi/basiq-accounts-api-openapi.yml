@@ -53,21 +53,6 @@ paths:
         '404':
           $ref: '#/components/responses/NotFound'
 components:
-  parameters:
-    UserId:
-      name: userId
-      in: path
-      required: true
-      description: Basiq user ID
-      schema:
-        type: string
-    AccountId:
-      name: accountId
-      in: path
-      required: true
-      description: Basiq account ID
-      schema:
-        type: string
   schemas:
     AccountListResponse:
       type: object
@@ -81,6 +66,19 @@ components:
             $ref: '#/components/schemas/Account'
         size:
           type: integer
+    ErrorResponse:
+      type: object
+      properties:
+        type:
+          type: string
+        title:
+          type: string
+        code:
+          type: string
+        detail:
+          type: string
+        source:
+          type: object
     Account:
       type: object
       properties:
@@ -117,19 +115,21 @@ components:
           enum:
           - available
           - unavailable
-    ErrorResponse:
-      type: object
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        code:
-          type: string
-        detail:
-          type: string
-        source:
-          type: object
+  parameters:
+    UserId:
+      name: userId
+      in: path
+      required: true
+      description: Basiq user ID
+      schema:
+        type: string
+    AccountId:
+      name: accountId
+      in: path
+      required: true
+      description: Basiq account ID
+      schema:
+        type: string
   responses:
     NotFound:
       description: Resource not found
