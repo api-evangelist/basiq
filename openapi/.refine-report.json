@@ -1,13 +1,14 @@
 {
   "provider": "basiq",
   "sources": [
-    "_original/basiq-api-openapi.yml"
+    "_original/basiq-openapi.json"
   ],
   "outputs": [
     "basiq-accounts-api-openapi.yml",
-    "basiq-affordability-api-openapi.yml",
     "basiq-authentication-api-openapi.yml",
     "basiq-connections-api-openapi.yml",
+    "basiq-consents-api-openapi.yml",
+    "basiq-jobs-api-openapi.yml",
     "basiq-transactions-api-openapi.yml",
     "basiq-users-api-openapi.yml"
   ],
@@ -16,21 +17,15 @@
   "warnings": [],
   "notes": [
     "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
-    "basiq-api-openapi.yml: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
-    "basiq-api-openapi.yml: declared missing tag: Accounts",
-    "basiq-api-openapi.yml: declared missing tag: Affordability",
-    "basiq-api-openapi.yml: declared missing tag: Authentication",
-    "basiq-api-openapi.yml: declared missing tag: Connections",
-    "basiq-api-openapi.yml: declared missing tag: Transactions",
-    "basiq-api-openapi.yml: declared missing tag: Users",
-    "apis.yml register: already-registered"
+    "basiq-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "basiq-openapi.json: declared missing tag: Accounts",
+    "basiq-openapi.json: declared missing tag: Authentication",
+    "basiq-openapi.json: declared missing tag: Connections",
+    "basiq-openapi.json: declared missing tag: Consents",
+    "basiq-openapi.json: declared missing tag: Jobs",
+    "basiq-openapi.json: declared missing tag: Transactions",
+    "basiq-openapi.json: declared missing tag: Users",
+    "apis.yml register: written (+2 apis, 7 total)"
   ],
-  "skipped": [
-    "basiq-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "basiq-affordability-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "basiq-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "basiq-connections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "basiq-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
-    "basiq-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
-  ]
+  "skipped": []
 }

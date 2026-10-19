@@ -75,20 +75,6 @@ apis:
     url: https://api.basiq.io/reference
   - type: Documentation
     url: https://api.basiq.io/reference/getting-started
-- aid: basiq:basiq-affordability-api
-  name: Basiq Affordability API
-  description: The Affordability API from Basiq — 2 operation(s) for affordability.
-  humanURL: https://api.basiq.io/reference
-  baseURL: https://au-api.basiq.io
-  tags:
-  - Affordability
-  properties:
-  - type: OpenAPI
-    url: openapi/basiq-affordability-api-openapi.yml
-  - type: Documentation
-    url: https://api.basiq.io/reference
-  - type: Documentation
-    url: https://api.basiq.io/reference/getting-started
 - aid: basiq:basiq-authentication-api
   name: Basiq Authentication API
   description: The Authentication API from Basiq — 1 operation(s) for authentication.
@@ -145,6 +131,34 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/basiq-users-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: Documentation
+    url: https://api.basiq.io/reference/getting-started
+- aid: basiq:basiq-consents-api
+  name: Basiq Consents API
+  description: The Consents API from Basiq — 2 operation(s) for consents.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Consents
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-consents-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: Documentation
+    url: https://api.basiq.io/reference/getting-started
+- aid: basiq:basiq-jobs-api
+  name: Basiq Jobs API
+  description: The Jobs API from Basiq — 3 operation(s) for jobs.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Jobs
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-jobs-api-openapi.yml
   - type: Documentation
     url: https://api.basiq.io/reference
   - type: Documentation

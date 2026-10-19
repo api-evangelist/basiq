@@ -1,144 +1,2270 @@
 openapi: 3.2.0
 info:
-  title: Basiq Accounts API
-  description: The Basiq API is an open banking and financial data platform providing unified access to Australian and New Zealand bank account data. It enables financial applications to retrieve account balances, transactions, income verification, and expense categorization via consumer-consented bank connections using CDR (Consumer Data Right) and third-party open banking standards.
+  title: Connect Accounts API
+  description: All included utility endpoints for Basiq partners
   version: 3.0.0
-  contact:
-    name: Basiq Support
-    url: https://basiq.io/contact
-  termsOfService: https://basiq.io/legal/terms-of-use/
+  termsOfService: https://docs.basiq.io/en/collections/440849-privacy-terms-and-common-questions
+  license:
+    name: Commercial
+    url: https://basiq.io
 servers:
 - url: https://au-api.basiq.io
-  description: Basiq API (Australia)
 security:
-- BearerAuth: []
+- api_key: []
+- services_token: []
 tags:
 - name: Accounts
 paths:
   /users/{userId}/accounts:
     get:
-      operationId: listAccounts
-      summary: List Accounts
-      description: List all bank accounts for a user across all connections.
       tags:
       - Accounts
+      summary: List all accounts
+      description: List all accounts belonging to a user
+      operationId: getAccounts
       parameters:
-      - $ref: '#/components/parameters/UserId'
+      - name: userId
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: string
+      - name: filter
+        in: query
+        description: 'Account filters: account.id, connection.id, institution.id. Only the equals (eq) operation is currently supported.'
+        schema:
+          type: string
       responses:
         '200':
-          description: List of accounts
+          description: Returns a account with details.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AccountListResponse'
+                required:
+                - data
+                - links
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Type of the response, always "list".
+                    example: list
+                  data:
+                    type: array
+                    description: Container object, containing account details.
+                    items:
+                      title: AccountResponseResource
+                      required:
+                      - type
+                      - id
+                      - lastUpdated
+                      - status
+                      - name
+                      - displayName
+                      - accountNo
+                      - accountHolder
+                      - isOwned
+                      - accountOwnership
+                      - balance
+                      - availableFunds
+                      - creditLimit
+                      - currency
+                      - class
+                      - connection
+                      - institution
+                      - transactionIntervals
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          description: Always "account".
+                          example: account
+                        id:
+                          type: string
+                          description: Uniquely identifies the account.
+                          example: s55bf3
+                        name:
+                          type: string
+                          description: Mapped directly from CDR 'nickname'. Represents the user-defined name for the account without fallback to displayName.
+                          example: My Home Loan
+                        displayName:
+                          type: string
+                          description: Mapped directly from CDR 'displayName'. Represents the institution-defined display name for the account.
+                          example: Hooli Home Loan
+                        depositRate:
+                          type: string
+                          description: current rate to calculate interest earned being applied to deposit balances as it stands at the time of the API call.
+                        lendingRate:
+                          type: string
+                          description: The current rate to calculate interest payable being applied to lending balances as it stands at the time of the API call.
+                        bsb:
+                          type: string
+                          description: The unmasked BSB for the account. Is expected to be formatted as digits only with leading zeros included and no punctuation or spaces.
+                        unmaskedAccNum:
+                          type: string
+                          description: The unmasked account number for the account. Should not be supplied if the account number is a PAN requiring PCI compliance. Is expected to be formatted as digits only with leading zeros included and no punctuation or spaces.
+                        creationDate:
+                          type: string
+                          description: Date that the account was created (if known).
+                        accountHolder:
+                          type:
+                          - string
+                          - 'null'
+                          description: The name of the account holder as returned by the institution. No formatting is applied. Returns a string or null when not available.
+                          example: GAVIN BELSON
+                        maskedNumber:
+                          type: string
+                          description: A masked version of the account. Whether BSB/Account Number, Credit Card PAN or another number.
+                        accountOwnership:
+                          type: string
+                          description: Value indicating the number of customers that have ownership of the account, according to the data holder's definition of account ownership. Does not indicate that all account owners are eligible consumers.
+                          example: ONE_PARTY
+                          enum:
+                          - UNKNOWN
+                          - ONE_PARTY
+                          - TWO_PARTY
+                          - MANY_PARTY
+                          - OTHER
+                        isOwned:
+                          type: boolean
+                          description: Flag indicating that the customer associated with the authorisation is an owner of the account. Does not indicate sole ownership, however. If not present then 'true' is assumed.
+                          example: true
+                        amortisedLimit:
+                          type: string
+                          description: Object representing the available limit amortised according to payment schedule. Assumed to be zero if absent.
+                        bundleName:
+                          type: string
+                          description: Optional field to indicate if this account is part of a bundle that is providing additional benefit to the customer.
+                        purses:
+                          type: array
+                          description: Optional array of balances for the account in other currencies. Included to support accounts that support multi-currency purses such as Travel Cards.
+                          items:
+                            required:
+                            - amount
+                            properties:
+                              amount:
+                                type: string
+                                description: The balance available for this additional currency purse.
+                              currency:
+                                type: string
+                                description: The currency for the purse.
+                            x-readme-ref-name: pursesClass
+                        accountNo:
+                          type: string
+                          description: BSB + account number.
+                          example: '600000157441965'
+                        availableFunds:
+                          type:
+                          - string
+                          - 'null'
+                          description: Funds that are available to an account holder for withdrawal or other use. This may include funds from an overdraft facility or line of credit. As well as funds classified as the available balance, such as from cleared and existing deposits.
+                          example: '420.28'
+                        balance:
+                          type:
+                          - string
+                          - 'null'
+                          description: Amount of funds in the account right now - excluding any pending transactions. For a credit card this would be zero or the minus amount spent.
+                          example: '356.50'
+                        creditLimit:
+                          type:
+                          - string
+                          - 'null'
+                          description: Eligible account types are credit-card, loan and mortgage.
+                          example: '400000.00'
+                        class:
+                          type: object
+                          description: Describes the class (type) of accounts.
+                          required:
+                          - type
+                          - product
+                          properties:
+                            type:
+                              type: string
+                              description: Account type
+                              example: mortgage
+                              enum:
+                              - transaction
+                              - savings
+                              - credit-card
+                              - mortgage
+                              - loan
+                              - investment
+                              - term-deposit
+                              - insurance
+                              - foreign
+                              - unknown
+                            product:
+                              type: string
+                              description: Product name.
+                              example: Hooli Home Loan
+                        connection:
+                          type: string
+                          description: The id of the connection resource that was used to retrieve the account.
+                          example: 8fce3b
+                        currency:
+                          type: string
+                          description: The currency the funds are stored in, using ISO 4217 standard.
+                          example: AUD
+                        institution:
+                          type: string
+                          description: The id of the institution resource the account originated from.
+                          example: AU00000
+                        lastUpdated:
+                          type: string
+                          description: Timestamp of last update, UTC, RFC 3339 format e.g. "2017-09-28T13:39:33Z"
+                          example: '2019-09-28T13:39:33Z'
+                        status:
+                          type: string
+                          description: Account status
+                          example: available
+                          enum:
+                          - available
+                          - unavailable
+                        meta:
+                          properties:
+                            fees:
+                              type:
+                              - array
+                              - 'null'
+                              items:
+                                required:
+                                - name
+                                - feeType
+                                type: object
+                                properties:
+                                  name:
+                                    type: string
+                                    description: (mandatory) - Name of the fee.
+                                    example: Dishonour fee
+                                  feeType:
+                                    type: string
+                                    description: (mandatory) - The type of fee.
+                                    enum:
+                                    - DEPOSIT
+                                    - EVENT
+                                    - EXIT
+                                    - PAYMENT
+                                    - PERIODIC
+                                    - PURCHASE
+                                    - TRANSACTION
+                                    - UPFRONT
+                                    - VARIABLE
+                                    - WITHDRAWAL
+                                    example: EVENT
+                                  amount:
+                                    type: string
+                                    description: (conditional) - The amount charged for the fee.
+                                    example: '10.00'
+                                  balanceRate:
+                                    type: string
+                                    description: A fee rate calculated based on a proportion of the balance. One of amount, balanceRate, transactionRate and accruedRate is mandatory unless the feeType "VARIABLE" is supplied.
+                                  transactionRate:
+                                    type: string
+                                    description: A fee rate calculated based on a proportion of a transaction. One of amount, balanceRate, transactionRate and accruedRate is mandatory unless the feeType "VARIABLE" is supplied.
+                                  accruedRate:
+                                    type: string
+                                    description: A fee rate calculated based on a proportion of the calculated interest accrued on the account. One of amount, balanceRate, transactionRate and accruedRate is mandatory unless the feeType "VARIABLE" is supplied.
+                                  accrualFrequency:
+                                    type: string
+                                    description: (optional) - The indicative frequency with which the fee is calculated on the account.
+                                    example: P1M
+                                  currency:
+                                    type: string
+                                    description: The currency the fee will be charged in. Assumes AUD if absent.
+                                  additionalValue:
+                                    type: string
+                                    description: Display text providing more information on the fee.
+                                  additionalInfo:
+                                    type: string
+                                    description: Display text providing more information on the fee.
+                                  additionalInfoUri:
+                                    type: string
+                                    description: Link to a web page with more information on this fee.
+                                  discounts:
+                                    type:
+                                    - array
+                                    - 'null'
+                                    items:
+                                      required:
+                                      - discountType
+                                      - description
+                                      properties:
+                                        description:
+                                          type: string
+                                          description: Description of the discount.
+                                        discountType:
+                                          type: string
+                                          description: The type of discount. See the next section for an overview of valid values and their meaning.
+                                        amount:
+                                          type: string
+                                          description: Dollar value of the discount. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory.
+                                        balanceRate:
+                                          type: string
+                                          description: A discount rate calculated based on a proportion of the balance. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory. Unless noted in additionalInfo, assumes the application and calculation frequency are the same as the corresponding fee.
+                                        transactionRate:
+                                          type: string
+                                          description: A discount rate calculated based on a proportion of a transaction. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory.
+                                        accruedRate:
+                                          type: string
+                                          description: A discount rate calculated based on a proportion of the calculated interest accrued on the account. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory. Unless noted in additionalInfo, assumes the application and calculation frequency are the same as the corresponding fee.
+                                        feeRate:
+                                          type: string
+                                          description: A discount rate calculated based on a proportion of the fee to which this discount is attached. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory. Unless noted in additionalInfo, assumes the application and calculation frequency are the same as the corresponding fee.
+                                        additionalValue:
+                                          type: string
+                                          description: Generic field containing additional information relevant to the discountType specified. Whether mandatory or not is dependent on the value of discountType.
+                                        additionalInfo:
+                                          type: string
+                                          description: Display text providing more information on the discount.
+                                        additionalInfoUri:
+                                          type: string
+                                          description: Link to a web page with more information on this discount.
+                                        eligibility:
+                                          type: array
+                                          description: Eligibility constraints that apply to this discount. Mandatory if discountType is ELIGIBILITY_ONLY.
+                                          items:
+                                            required:
+                                            - discountEligibilityType
+                                            properties:
+                                              discountEligibilityType:
+                                                type: string
+                                                description: The type of the specific eligibility constraint for a discountType.
+                                                enum:
+                                                - BUSINESS
+                                                - EMPLOYMENT_STATUS
+                                                - INTRODUCTORY
+                                                - MAX_AGE
+                                                - MIN_AGE
+                                                - MIN_INCOME
+                                                - MIN_TURNOVER
+                                                - NATURAL_PERSON
+                                                - OTHER
+                                                - PENSION_RECIPIENT
+                                                - RESIDENCY_STATUS
+                                                - STAFF
+                                                - STUDENT
+                                              additionalValue:
+                                                type: string
+                                                description: Generic field containing additional information relevant to the discountEligibilityType specified. Whether mandatory or not is dependent on the value of discountEligibilityType.
+                                              additionalInfo:
+                                                type: string
+                                                description: Display text providing more information on this eligibility constraint. Whether mandatory or not is dependent on the value of discountEligibilityType.
+                                              additionalInfoUri:
+                                                type: string
+                                                description: Link to a web page with more information on this eligibility constraint.
+                                            x-readme-ref-name: feesdiscounteligibilityMetadata
+                                      x-readme-ref-name: feesdiscountMetadata
+                                x-readme-ref-name: feesAccountMetadata
+                            depositRates:
+                              type:
+                              - array
+                              - 'null'
+                              items:
+                                required:
+                                - depositRateType
+                                - rate
+                                type: object
+                                properties:
+                                  depositRateType:
+                                    type: string
+                                    description: The type of rate (base, bonus, etc).
+                                    example: VARIABLE
+                                    enum:
+                                    - BONUS
+                                    - BUNDLE_BONUS
+                                    - FIXED
+                                    - FLOATING
+                                    - INTRODUCTORY
+                                    - MARKET_LINKED
+                                    - VARIABLE
+                                  rate:
+                                    type: string
+                                    description: The rate to be applied.
+                                    example: '0.0385'
+                                  calculationFrequency:
+                                    type: string
+                                    description: The period after which the rate is applied to the balance to calculate the amount due for the period. Calculation of the amount is often daily (as balances may change) but accumulated until the total amount is 'applied' to the account (see applicationFrequency). Formatted according to ISO 8601 Durations (excludes recurrence syntax).
+                                  applicationFrequency:
+                                    type: string
+                                    description: The period after which the calculated amount(s) are 'applied' (i.e. debited or credited) to the account.
+                                    example: P1M
+                                  tiers:
+                                    type:
+                                    - array
+                                    - 'null'
+                                    items:
+                                      required:
+                                      - name
+                                      - unitOfMeasure
+                                      - minimumValue
+                                      properties:
+                                        name:
+                                          type: string
+                                          description: A display name for the tier.
+                                        unitOfMeasure:
+                                          type: string
+                                          description: The unit of measure that applies to the minimumValue and maximumValue values e.g. a DOLLAR amount. PERCENT (in the case of loan-to-value ratio or LVR). Tier term period representing a discrete number of MONTH's or DAY's (in the case of term deposit tiers).
+                                          enum:
+                                          - DAY
+                                          - DOLLAR
+                                          - MONTH
+                                          - PERCENT
+                                        minimumValue:
+                                          type: integer
+                                          description: The number of unitOfMeasure units that form the lower bound of the tier. The tier should be inclusive of this value.
+                                        maximumValue:
+                                          type: integer
+                                          description: 'The number of unitOfMeasure units that form the upper bound of the tier or band. For a tier with a discrete value (as opposed to a range of values e.g. 1 month) this must be the same as minimumValue. Where this is the same as the minimumValue value of the next-higher tier the referenced tier should be exclusive of this value. For example a term deposit of 2 months falls into the upper tier of the following tiers: (1 - 2 months, 2 - 3 months). If absent the tier''s range has no upper bound.. '
+                                        rateApplicationMethod:
+                                          type: string
+                                          description: The method used to calculate the amount to be applied using one or more tiers. A single rate may be applied to the entire balance or each applicable tier rate is applied to the portion of the balance that falls into that tier (referred to as 'bands' or 'steps').
+                                          enum:
+                                          - PER_TIER
+                                          - WHOLE_BALANCE
+                                        applicabilityConditions:
+                                          type:
+                                          - object
+                                          - 'null'
+                                          properties:
+                                            additionalInfo:
+                                              type: string
+                                              description: Display text providing more information on the condition.
+                                            additionalInfoUri:
+                                              type: string
+                                              description: Link to a web page with more information on this condition.
+                                          x-readme-ref-name: feesAccountMetadepositratestiersRateCondition
+                                        additionalInfo:
+                                          type: string
+                                          description: Display text providing more information on the rate tier.
+                                        additionalInfoUri:
+                                          type: string
+                                          description: Link to a web page with more information on this rate tier.
+                                      x-readme-ref-name: feesAccountMetadepositratestiers
+                                  additionalValue:
+                                    type: string
+                                    description: Generic field containing additional information relevant to the lendingRateType specified. Whether mandatory or not is dependent on the value of lendingRateType.
+                                  additionalInfo:
+                                    type: string
+                                    description: Display text providing more information on the rate.
+                                  additionalInfoUri:
+                                    type: string
+                                    description: Link to a web page with more information on this rate.
+                                x-readme-ref-name: depositRateAccountMetadata
+                            lendingRates:
+                              type:
+                              - array
+                              - 'null'
+                              items:
+                                required:
+                                - lendingRateType
+                                - rate
+                                type: object
+                                properties:
+                                  lendingRateType:
+                                    type: string
+                                    description: The type of rate (fixed, variable, etc).
+                                    example: PURCHASE
+                                    enum:
+                                    - BUNDLE_DISCOUNT_FIXED
+                                    - BUNDLE_DISCOUNT_VARIABLE
+                                    - CASH_ADVANCE
+                                    - DISCOUNT
+                                    - FIXED
+                                    - FLOATING
+                                    - INTRODUCTORY
+                                    - MARKET_LINKED
+                                    - PENALTY
+                                    - PURCHASE
+                                    - VARIABLE
+                                  rate:
+                                    type: string
+                                    description: The rate to be applied.
+                                    example: '0.2024'
+                                  comparisonRate:
+                                    type: string
+                                    description: A comparison rate equivalent for this rate.
+                                  calculationFrequency:
+                                    type: string
+                                    description: The period after which the rate is applied to the balance to calculate the amount due for the period. Calculation of the amount is often daily (as balances may change) but accumulated until the total amount is 'applied' to the account (see applicationFrequency). Formatted according to ISO 8601 Durations (excludes recurrence syntax).
+                                  applicationFrequency:
+                                    type: string
+                                    description: The period after which the calculated amount(s) (see calculationFrequency) are 'applied' (i.e. debited or credited) to the account. Formatted according to ISO 8601 Durations (excludes recurrence syntax).
+                                  interestPaymentDue:
+                                    type: string
+                                    description: When loan payments are due to be paid within each period. The investment benefit of earlier payments affect the rate that can be offered.
+                                    enum:
+                                    - IN_ADVANCE
+                                    - IN_ARREARS
+                                    example: IN_ADVANCE
+                                  repaymentType:
+                                    type: string
+                                    description: Options in place for repayments. If absent, the lending rate is applicable to all repayment types.
+                                    enum:
+                                    - INTEREST_ONLY
+                                    - PRINCIPAL_AND_INTEREST
+                                    example: INTEREST_ONLY
+                                  loanPurpose:
+                                    type: string
+                                    description: The reason for taking out the loan. If absent, the lending rate is applicable to all loan purposes.
+                                    enum:
+                                    - INVESTMENT
+                                    - OWNER_OCCUPIED
+                                    example: INVESTMENT
+                                  tiers:
+                                    type:
+                                    - array
+                                    - 'null'
+                                    items:
+                                      required:
+                                      - name
+                                      - unitOfMeasure
+                                      - minimumValue
+                                      properties:
+                                        name:
+                                          type: string
+                                          description: A display name for the tier.
+                                        unitOfMeasure:
+                                          type: string
+                                          description: The unit of measure that applies to the minimumValue and maximumValue values e.g. a DOLLAR amount. PERCENT (in the case of loan-to-value ratio or LVR). Tier term period representing a discrete number of MONTH's or DAY's (in the case of term deposit tiers).
+                                          enum:
+                                          - DAY
+                                          - DOLLAR
+                                          - MONTH
+                                          - PERCENT
+                                        minimumValue:
+                                          type: integer
+                                          description: The number of unitOfMeasure units that form the lower bound of the tier. The tier should be inclusive of this value.
+                                        maximumValue:
+                                          type: integer
+                                          description: 'The number of unitOfMeasure units that form the upper bound of the tier or band. For a tier with a discrete value (as opposed to a range of values e.g. 1 month) this must be the same as minimumValue. Where this is the same as the minimumValue value of the next-higher tier the referenced tier should be exclusive of this value. For example a term deposit of 2 months falls into the upper tier of the following tiers: (1 - 2 months, 2 - 3 months). If absent the tier''s range has no upper bound.. '
+                                        rateApplicationMethod:
+                                          type: string
+                                          description: The method used to calculate the amount to be applied using one or more tiers. A single rate may be applied to the entire balance or each applicable tier rate is applied to the portion of the balance that falls into that tier (referred to as 'bands' or 'steps').
+                                          enum:
+                                          - PER_TIER
+                                          - WHOLE_BALANCE
+                                        applicabilityConditions:
+                                          type:
+                                          - object
+                                          - 'null'
+                                          properties:
+                                            additionalInfo:
+                                              type: string
+                                              description: Display text providing more information on the condition.
+                                            additionalInfoUri:
+                                              type: string
+                                              description: Link to a web page with more information on this condition.
+                                          x-readme-ref-name: feesAccountMetadepositratestiersRateCondition
+                                        additionalInfo:
+                                          type: string
+                                          description: Display text providing more information on the rate tier.
+                                        additionalInfoUri:
+                                          type: string
+                                          description: Link to a web page with more information on this rate tier.
+                                      x-readme-ref-name: feesAccountMetadepositratestiers
+                                  additionalValue:
+                                    type: string
+                                    description: Generic field containing additional information relevant to the depositRateType specified. Whether mandatory or not is dependent on the value of depositRateType.
+                                  additionalInfo:
+                                    type: string
+                                    description: Display text providing more information on the rate.
+                                  additionalInfoUri:
+                                    type: string
+                                    description: Link to a web page with more information on this rate.
+                                x-readme-ref-name: lendingRateAccountMetadata
+                            termDeposit:
+                              type: array
+                              items:
+                                required:
+                                - lodgementDate
+                                - maturityDate
+                                - maturityInstructions
+                                properties:
+                                  lodgementDate:
+                                    type: string
+                                    description: The lodgement date of the original deposit.
+                                  maturityDate:
+                                    type: string
+                                    description: Maturity date for the term deposit.
+                                  maturityAmount:
+                                    type: string
+                                    description: Amount to be paid upon maturity. If absent, it implies the amount to paid is variable and cannot currently be calculated.
+                                  maturityCurrency:
+                                    type: string
+                                    description: If absent assumes AUD.
+                                  maturityInstructions:
+                                    type: string
+                                    description: Current instructions on action to be taken at maturity. This includes default actions that may be specified in the terms and conditions for the product e.g. roll-over to the same term and frequency of interest payments.
+                                    enum:
+                                    - HOLD_ON_MATURITY
+                                    - PAID_OUT_AT_MATURITY
+                                    - ROLLED_OVER
+                                    example: PAID_OUT_AT_MATURITY
+                                x-readme-ref-name: termDepositMetadata
+                            loan:
+                              type:
+                              - object
+                              - 'null'
+                              properties:
+                                startDate:
+                                  type: string
+                                  description: Start date for the loan.
+                                  example: '2019-10-01'
+                                endDate:
+                                  type: string
+                                  description: Date that the loan is due to be repaid in full.
+                                  example: '2045-10-01'
+                                repaymentType:
+                                  type: string
+                                  description: Options in place for repayments. If absent defaults to PRINCIPAL_AND_INTEREST.
+                                  example: PRINCIPAL_AND_INTEREST
+                                  enum:
+                                  - INTEREST_ONLY
+                                  - PRINCIPAL_AND_INTEREST
+                                originalLoanAmount:
+                                  type: string
+                                  description: Optional loan value.
+                                originalLoanCurrency:
+                                  type: string
+                                  description: If absent assumes AUD.
+                                minInstalmentAmount:
+                                  type: string
+                                  description: Minimum amount of next instalment.
+                                nextInstalmentDate:
+                                  type: string
+                                  description: Next date that an instalment is required.
+                                minInstalmentCurrency:
+                                  type: string
+                                  description: If absent assumes AUD.
+                                maxRedraw:
+                                  type: string
+                                  description: Maximum amount of funds that can be redrawn. If not present, redraw is not available even if the feature exists for the account.
+                                maxRedrawCurrency:
+                                  type: string
+                                  description: If absent assumes AUD.
+                                minRedraw:
+                                  type: string
+                                  description: Minimum redraw amount.
+                                minRedrawCurrency:
+                                  type: string
+                                  description: If absent assumes AUD.
+                                repaymentFrequency:
+                                  type: string
+                                  description: The expected or required repayment frequency. Formatted according to ISO 8601 Durations (excludes recurrence syntax).
+                                offsetAccountIds:
+                                  type: array
+                                  description: The accountIDs of the configured offset accounts attached to this loan. Only offset accounts that can be accessed under the current authorisation should be included. It is expected behaviour that offsetAccountEnabled is set to true but the offsetAccountIds field is absent or empty. This represents a situation where an offset account exists but details can not be accessed under the current authorisation.
+                                  items:
+                                    type: string
+                                offsetAccountEnabled:
+                                  type: boolean
+                                  description: Set to true if one or more offset accounts are configured for this loan account.
+                                  example: true
+                            creditCard:
+                              required:
+                              - minPaymentAmount
+                              - paymentDueAmount
+                              - paymentDueDate
+                              type: object
+                              properties:
+                                minPaymentAmount:
+                                  type: string
+                                  description: The minimum payment amount due for the next card payment.
+                                  example: '117.00'
+                                paymentDueAmount:
+                                  type: string
+                                  description: The amount due for the next card payment.
+                                  example: '5847.00'
+                                paymentCurrency:
+                                  type: string
+                                  description: If absent assumes AUD.
+                                  example: AUD
+                                paymentDueDate:
+                                  type: string
+                                  description: Date that the next payment for the card is due.
+                                  example: '2023-12-12'
+                            features:
+                              type:
+                              - array
+                              - 'null'
+                              description: Array of features available for the product.
+                              items:
+                                required:
+                                - featureType
+                                properties:
+                                  featureType:
+                                    type: string
+                                    enum:
+                                    - ADDITIONAL_CARDS
+                                    - BALANCE_TRANSFERS
+                                    - BILL_PAYMENT
+                                    - BONUS_REWARDS
+                                    - CARD_ACCESS
+                                    - CASHBACK_OFFER
+                                    - COMPLEMENTARY_PRODUCT_DISCOUNTS
+                                    - DIGITAL_BANKING
+                                    - DIGITAL_WALLET
+                                    - DONATE_INTEREST
+                                    - EXTRA_REPAYMENTS
+                                    - FRAUD_PROTECTION
+                                    - FREE_TXNS
+                                    - FREE_TXNS_ALLOWANCE
+                                    - GUARANTOR
+                                    - INSURANCE
+                                    - INSTALMENT_PLAN
+                                    - INTEREST_FREE
+                                    - INTEREST_FREE_TRANSFERS
+                                    - LOYALTY_PROGRAM
+                                    - NOTIFICATIONS
+                                    - NPP_ENABLED
+                                    - NPP_PAYID
+                                    - OFFSET
+                                    - OTHER
+                                    - OVERDRAFT
+                                    - REDRAW
+                                    - RELATIONSHIP_MANAGEMENT
+                                    - UNLIMITED_TXNS
+                                    description: The type of feature described.
+                                  additionalValue:
+                                    type: string
+                                    description: Generic field containing additional information relevant to the featureType specified. Whether mandatory or not is dependent on the value of the featureType.
+                                  additionalInfo:
+                                    type: string
+                                    description: Display text providing more information on the feature. Mandatory if the feature type is set to OTHER.
+                                  additionalInfoUri:
+                                    type: string
+                                    description: Link to a web page with more information on this feature.
+                                  isActivated:
+                                    type: boolean
+                                    description: 'true if the feature is already activated and false if the feature is available for activation. Defaults to true if absent.
+
+                                      > Note: this is an additional field appended to the feature object defined in the Product Reference payload.
+
+                                      '
+                                    example: true
+                                x-readme-ref-name: featureClass
+                            addresses:
+                              type:
+                              - array
+                              - 'null'
+                              description: The addresses for the account to be used for correspondence.
+                              items:
+                                type: object
+                                properties:
+                                  addressType:
+                                    type: string
+                                    description: The type of address object present.
+                                    enum:
+                                    - paf
+                                    - simple
+                                    example: paf
+                                  simple:
+                                    required:
+                                    - addressLine1
+                                    - city
+                                    - state
+                                    type: object
+                                    properties:
+                                      mailingName:
+                                        type: string
+                                        description: Name of the individual or business formatted for inclusion in an address used for physical mail.
+                                      addressLine1:
+                                        type: string
+                                        description: First line of the standard address object.
+                                      addressLine2:
+                                        type: string
+                                        description: Second line of the standard address object.
+                                      addressLine3:
+                                        type: string
+                                        description: Third line of the standard address object.
+                                      postcode:
+                                        type: string
+                                        description: Mandatory for Australian addresses.
+                                      city:
+                                        type: string
+                                        description: Name of the city or locality.
+                                      state:
+                                        type: string
+                                        description: Free text if the country is not Australia. If country is Australia then must be one of the values defined by the State Type Abbreviation in the PAF file format. NSW, QLD, VIC, NT, WA, SA, TAS, ACT.
+                                      country:
+                                        type: string
+                                        description: A valid ISO 3166 Alpha-3 country code. Australia (AUS) is assumed if country is not present.
+                                      paf:
+                                        required:
+                                        - localityName
+                                        - postcode
+                                        - state
+                                        type: object
+                                        description: Australian address formatted according to the file format defined by the PAF file format.
+                                        properties:
+                                          dpid:
+                                            type: string
+                                            description: Unique identifier for an address as defined by Australia Post. Also known as Delivery Point Identifier.
+                                          thoroughfareNumber1:
+                                            type: integer
+                                            description: Thoroughfare number for a property (first number in a property ranged address).
+                                          thoroughfareNumber1Suffix:
+                                            type: string
+                                            description: Suffix for the thoroughfare number. Only relevant is thoroughfareNumber1 is populated.
+                                          thoroughfareNumber2:
+                                            type: integer
+                                            description: Second thoroughfare number (only used if the property has a ranged address eg 23-25).
+                                          thoroughfareNumber2Suffix:
+                                            type: string
+                                            description: Suffix for the second thoroughfare number. Only relevant is thoroughfareNumber2 is populated.
+                                          flatUnitType:
+                                            type: string
+                                            description: Type of flat or unit for the address.
+                                          flatUnitNumber:
+                                            type: string
+                                            description: Unit number (including suffix, if applicable).
+                                          floorLevelType:
+                                            type: string
+                                            description: Type of floor or level for the address.
+                                          floorLevelNumber:
+                                            type: string
+                                            description: Floor or level number (including alpha characters).
+                                          lotNumber:
+                                            type: string
+                                            description: Allotment number for the address.
+                                          buildingName1:
+                                            type: string
+                                            description: Building/Property name 1.
+                                          buildingName2:
+                                            type: string
+                                            description: Building/Property name 2.
+                                          streetName:
+                                            type: string
+                                            description: The name of the street.
+                                          streetType:
+                                            type: string
+                                            description: The street type. Valid enumeration defined by Australia Post PAF code file.
+                                          streetSuffix:
+                                            type: string
+                                            description: The street type suffix. Valid enumeration defined by Australia Post PAF code file.
+                                          postalDeliveryType:
+                                            type: string
+                                            description: Postal delivery type. (eg. PO BOX). Valid enumeration defined by Australia Post PAF code file.
+                                          postalDeliveryNumber:
+                                            type: integer
+                                            description: Postal delivery number if the address is a postal delivery type.
+                                          postalDeliveryNumberPrefix:
+                                            type: string
+                                            description: Postal delivery number prefix related to the postal delivery number.
+                                          postalDeliveryNumberSuffix:
+                                            type: string
+                                            description: Postal delivery number suffix related to the postal delivery number.
+                                          localityName:
+                                            type: string
+                                            description: Full name of locality.
+                                          postcode:
+                                            type: string
+                                            description: Postcode for the locality.
+                                          state:
+                                            type: string
+                                            description: State in which the address belongs. Valid enumeration defined by Australia Post PAF code file State Type Abbreviation. NSW, QLD, VIC, NT, WA, SA, TAS, ACT, AAT.
+                          x-readme-ref-name: Metadata
+                        transactionIntervals:
+                          type: array
+                          description: 'An array of date intervals indicating the coverage of the transaction data relating to the account.
+
+                            Will return a single element for accounts sourced from a single bank connection.
+
+                            Will return multiple elements in cases where there have been multiple PDF/CSV uploads for an account.'
+                          items:
+                            required:
+                            - from
+                            - to
+                            type: object
+                            properties:
+                              from:
+                                type: string
+                                description: Date of first transaction on this account
+                                example: '2018-07-01'
+                              to:
+                                type: string
+                                description: Date of last transaction on this account
+                                example: '2018-12-30'
+                            x-readme-ref-name: AccountTransactionInterval
+                      description: Container object with account details
+                      x-readme-ref-name: AccountResponseResource
+                  links:
+                    title: ResourceAccountLink
+                    required:
+                    - self
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        description: URL of the resource.
+                        example: https://au-api.basiq.io/users/cd6fbd92/accounts/319ae910
+                      transactions:
+                        type: string
+                        description: transactions link to the transactions associated with this account.
+                        example: https://au-api.basiq.io/users/ea3a81/transactions?filter=account.id.eq('s55bf3')
+                      connection:
+                        type: string
+                        description: connection associated to User.
+                        example: https://au-api.basiq.io/users/cd6fbd92/connections/321312asa
+                      institution:
+                        type: string
+                        description: institution link to the institution associated with this account.
+                        example: https://au-api.basiq.io/institutions/AU00000
+                      statements:
+                        type: string
+                        example: []
+                    description: Link object containing a link to the resource, self reference.
+                    x-readme-ref-name: ResourceAccountLink
+                x-readme-ref-name: AccountsResponseResource
+        '400':
+          description: Returns error that server cannot or will not process the request due to something that is perceived to be a client error
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: parameter-not-valid
+                          enum:
+                          - parameter-not-supplied
+                          - parameter-not-valid
+                          - unsupported-accept
+                          - invalid-content
+                          - institution-not-supported
+                          - invalid-credentials
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: The provided filter parameter is in invalid format or unsupported.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Parameter not valid.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                x-readme-ref-name: BadRequestError
+              examples:
+                Bad Request:
+                  value:
+                    type: list
+                    correlationId: ac5ah5i
+                    data:
+                    - type: error
+                      title: Parameter not valid.
+                      code: parameter-not-valid
+                      detail: ID value is not valid.
+                      source:
+                        parameter: id
+                Invalid Filters:
+                  value:
+                    type: list
+                    correlationId: ac5ah55
+                    data:
+                    - type: error
+                      code: parameter-not-valid
+                      title: Parameter value is not valid
+                      detail: The provided filter parameter is in invalid format or unsupported
+                      source:
+                        parameter: filter
+        '403':
+          description: Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - source
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: forbidden-access
+                          enum:
+                          - forbidden-access
+                          - no-production-access
+                          - access-denied
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Access to this resource is forbidden.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Forbidden Access
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: ForbiddenAccessError
         '404':
-          $ref: '#/components/responses/NotFound'
+          description: Returns error indicating that server can't find requested resource.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: resource-not-found
+                          enum:
+                          - resource-not-found
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Resource not found.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Requested resource is not found.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: NotFoundError
+        '500':
+          description: Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: internal-server-error
+                          enum:
+                          - internal-server-error
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Internal Server error. Contact support.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Internal Server error.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: InternalServerError
+      security:
+      - services_token: []
   /users/{userId}/accounts/{accountId}:
     get:
-      operationId: getAccount
-      summary: Get Account
-      description: Retrieve a specific bank account with balance information.
       tags:
       - Accounts
+      summary: Retrieve an account
+      description: Retrieve a specific account belonging to a user
+      operationId: getAccount
       parameters:
-      - $ref: '#/components/parameters/UserId'
-      - $ref: '#/components/parameters/AccountId'
+      - name: userId
+        in: path
+        description: User identifier
+        required: true
+        schema:
+          type: string
+      - name: accountId
+        in: path
+        description: Account identifier
+        required: true
+        schema:
+          type: string
+      - name: filter
+        in: query
+        description: Account filters; account.id, connection.id, institution.id, Only equals (eq) operation is currently supported.
+        schema:
+          type: string
       responses:
         '200':
-          description: Account record
+          description: Returns a account with details.
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Account'
+                title: AccountResponseResource
+                required:
+                - type
+                - id
+                - displayName
+                - lastUpdated
+                - status
+                - name
+                - accountNo
+                - accountHolder
+                - isOwned
+                - accountOwnership
+                - balance
+                - availableFunds
+                - creditLimit
+                - currency
+                - class
+                - connection
+                - institution
+                - transactionIntervals
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "account".
+                    example: account
+                  id:
+                    type: string
+                    description: Uniquely identifies the account.
+                    example: s55bf3
+                  name:
+                    type: string
+                    description: Mapped directly from CDR 'nickname'. Represents the user-defined name for the account without fallback to displayName.
+                    example: My Home Loan
+                  displayName:
+                    type: string
+                    description: Mapped directly from CDR 'displayName'. Represents the institution-defined display name for the account.
+                    example: Hooli Home Loan
+                  depositRate:
+                    type: string
+                    description: current rate to calculate interest earned being applied to deposit balances as it stands at the time of the API call.
+                  lendingRate:
+                    type: string
+                    description: The current rate to calculate interest payable being applied to lending balances as it stands at the time of the API call.
+                  bsb:
+                    type: string
+                    description: The unmasked BSB for the account. Is expected to be formatted as digits only with leading zeros included and no punctuation or spaces.
+                  unmaskedAccNum:
+                    type: string
+                    description: The unmasked account number for the account. Should not be supplied if the account number is a PAN requiring PCI compliance. Is expected to be formatted as digits only with leading zeros included and no punctuation or spaces.
+                  creationDate:
+                    type: string
+                    description: Date that the account was created (if known).
+                  accountHolder:
+                    type:
+                    - string
+                    - 'null'
+                    description: The name of the account holder as returned by the institution. No formatting is applied. Returns a string or null when not available.
+                    example: GAVIN BELSON
+                  maskedNumber:
+                    type: string
+                    description: A masked version of the account. Whether BSB/Account Number, Credit Card PAN or another number.
+                  accountOwnership:
+                    type: string
+                    description: Value indicating the number of customers that have ownership of the account, according to the data holder's definition of account ownership. Does not indicate that all account owners are eligible consumers.
+                    example: ONE_PARTY
+                    enum:
+                    - UNKNOWN
+                    - ONE_PARTY
+                    - TWO_PARTY
+                    - MANY_PARTY
+                    - OTHER
+                  isOwned:
+                    type: boolean
+                    description: Flag indicating that the customer associated with the authorisation is an owner of the account. Does not indicate sole ownership, however. If not present then 'true' is assumed.
+                    example: true
+                  amortisedLimit:
+                    type: string
+                    description: Object representing the available limit amortised according to payment schedule. Assumed to be zero if absent.
+                  bundleName:
+                    type: string
+                    description: Optional field to indicate if this account is part of a bundle that is providing additional benefit to the customer.
+                  purses:
+                    type: array
+                    description: Optional array of balances for the account in other currencies. Included to support accounts that support multi-currency purses such as Travel Cards.
+                    items:
+                      required:
+                      - amount
+                      properties:
+                        amount:
+                          type: string
+                          description: The balance available for this additional currency purse.
+                        currency:
+                          type: string
+                          description: The currency for the purse.
+                      x-readme-ref-name: pursesClass
+                  accountNo:
+                    type: string
+                    description: BSB + account number.
+                    example: '600000157441965'
+                  availableFunds:
+                    type:
+                    - string
+                    - 'null'
+                    description: Funds that are available to an account holder for withdrawal or other use. This may include funds from an overdraft facility or line of credit. As well as funds classified as the available balance, such as from cleared and existing deposits.
+                    example: '420.28'
+                  balance:
+                    type:
+                    - string
+                    - 'null'
+                    description: Amount of funds in the account right now - excluding any pending transactions. For a credit card this would be zero or the minus amount spent.
+                    example: '356.50'
+                  creditLimit:
+                    type:
+                    - string
+                    - 'null'
+                    description: Eligible account types are credit-card, loan and mortgage.
+                    example: '400000.00'
+                  class:
+                    description: Describes the class(type) of accounts. - transaction - savings - credit-card - mortgage - loan - investment - term-deposit - insurance - foreign - unknown
+                    required:
+                    - type
+                    - product
+                    properties:
+                      type:
+                        type: string
+                        description: Account type
+                        example: mortgage
+                      product:
+                        type: string
+                        description: Product name.
+                        example: Hooli Home Loan
+                    x-readme-ref-name: AccountClass
+                  connection:
+                    type: string
+                    description: The id of the connection resource that was used to retrieve the account.
+                    example: 8fce3b
+                  currency:
+                    type: string
+                    description: The currency the funds are stored in, using ISO 4217 standard.
+                    example: AUD
+                  institution:
+                    type: string
+                    description: The id of the institution resource the account originated from.
+                    example: AU00000
+                  lastUpdated:
+                    type: string
+                    description: Timestamp of last update, UTC, RFC 3339 format e.g. "2017-09-28T13:39:33Z"
+                    example: '2019-09-28T13:39:33Z'
+                  status:
+                    type: string
+                    description: Account status
+                    example: available
+                    enum:
+                    - available
+                    - unavailable
+                  meta:
+                    properties:
+                      fees:
+                        type:
+                        - array
+                        - 'null'
+                        items:
+                          required:
+                          - name
+                          - feeType
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: (mandatory) - Name of the fee.
+                              example: Dishonour fee
+                            feeType:
+                              type: string
+                              description: (mandatory) - The type of fee.
+                              enum:
+                              - DEPOSIT
+                              - EVENT
+                              - EXIT
+                              - PAYMENT
+                              - PERIODIC
+                              - PURCHASE
+                              - TRANSACTION
+                              - UPFRONT
+                              - VARIABLE
+                              - WITHDRAWAL
+                              example: EVENT
+                            amount:
+                              type: string
+                              description: (conditional) - The amount charged for the fee.
+                              example: '10.00'
+                            balanceRate:
+                              type: string
+                              description: A fee rate calculated based on a proportion of the balance. One of amount, balanceRate, transactionRate and accruedRate is mandatory unless the feeType "VARIABLE" is supplied.
+                            transactionRate:
+                              type: string
+                              description: A fee rate calculated based on a proportion of a transaction. One of amount, balanceRate, transactionRate and accruedRate is mandatory unless the feeType "VARIABLE" is supplied.
+                            accruedRate:
+                              type: string
+                              description: A fee rate calculated based on a proportion of the calculated interest accrued on the account. One of amount, balanceRate, transactionRate and accruedRate is mandatory unless the feeType "VARIABLE" is supplied.
+                            accrualFrequency:
+                              type: string
+                              description: (optional) - The indicative frequency with which the fee is calculated on the account.
+                              example: P1M
+                            currency:
+                              type: string
+                              description: The currency the fee will be charged in. Assumes AUD if absent.
+                            additionalValue:
+                              type: string
+                              description: Display text providing more information on the fee.
+                            additionalInfo:
+                              type: string
+                              description: Display text providing more information on the fee.
+                            additionalInfoUri:
+                              type: string
+                              description: Link to a web page with more information on this fee.
+                            discounts:
+                              type:
+                              - array
+                              - 'null'
+                              items:
+                                required:
+                                - discountType
+                                - description
+                                properties:
+                                  description:
+                                    type: string
+                                    description: Description of the discount.
+                                  discountType:
+                                    type: string
+                                    description: The type of discount. See the next section for an overview of valid values and their meaning.
+                                  amount:
+                                    type: string
+                                    description: Dollar value of the discount. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory.
+                                  balanceRate:
+                                    type: string
+                                    description: A discount rate calculated based on a proportion of the balance. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory. Unless noted in additionalInfo, assumes the application and calculation frequency are the same as the corresponding fee.
+                                  transactionRate:
+                                    type: string
+                                    description: A discount rate calculated based on a proportion of a transaction. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory.
+                                  accruedRate:
+                                    type: string
+                                    description: A discount rate calculated based on a proportion of the calculated interest accrued on the account. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory. Unless noted in additionalInfo, assumes the application and calculation frequency are the same as the corresponding fee.
+                                  feeRate:
+                                    type: string
+                                    description: A discount rate calculated based on a proportion of the fee to which this discount is attached. Note that the currency of the fee discount is expected to be the same as the currency of the fee itself. One of amount, balanceRate, transactionRate, accruedRate and feeRate is mandatory. Unless noted in additionalInfo, assumes the application and calculation frequency are the same as the corresponding fee.
+                                  additionalValue:
+                                    type: string
+                                    description: Generic field containing additional information relevant to the discountType specified. Whether mandatory or not is dependent on the value of discountType.
+                                  additionalInfo:
+                                    type: string
+                                    description: Display text providing more information on the discount.
+                                  additionalInfoUri:
+                                    type: string
+                                    description: Link to a web page with more information on this discount.
+                                  eligibility:
+                                    type: array
+                                    description: Eligibility constraints that apply to this discount. Mandatory if discountType is ELIGIBILITY_ONLY.
+                                    items:
+                                      required:
+                                      - discountEligibilityType
+                                      properties:
+                                        discountEligibilityType:
+                                          type: string
+                                          description: The type of the specific eligibility constraint for a discountType.
+                                          enum:
+                                          - BUSINESS
+                                          - EMPLOYMENT_STATUS
+                                          - INTRODUCTORY
+                                          - MAX_AGE
+                                          - MIN_AGE
+                                          - MIN_INCOME
+                                          - MIN_TURNOVER
+                                          - NATURAL_PERSON
+                                          - OTHER
+                                          - PENSION_RECIPIENT
+                                          - RESIDENCY_STATUS
+                                          - STAFF
+                                          - STUDENT
+                                        additionalValue:
+                                          type: string
+                                          description: Generic field containing additional information relevant to the discountEligibilityType specified. Whether mandatory or not is dependent on the value of discountEligibilityType.
+                                        additionalInfo:
+                                          type: string
+                                          description: Display text providing more information on this eligibility constraint. Whether mandatory or not is dependent on the value of discountEligibilityType.
+                                        additionalInfoUri:
+                                          type: string
+                                          description: Link to a web page with more information on this eligibility constraint.
+                                      x-readme-ref-name: feesdiscounteligibilityMetadata
+                                x-readme-ref-name: feesdiscountMetadata
+                          x-readme-ref-name: feesAccountMetadata
+                      depositRates:
+                        type:
+                        - array
+                        - 'null'
+                        items:
+                          required:
+                          - depositRateType
+                          - rate
+                          type: object
+                          properties:
+                            depositRateType:
+                              type: string
+                              description: The type of rate (base, bonus, etc).
+                              example: VARIABLE
+                              enum:
+                              - BONUS
+                              - BUNDLE_BONUS
+                              - FIXED
+                              - FLOATING
+                              - INTRODUCTORY
+                              - MARKET_LINKED
+                              - VARIABLE
+                            rate:
+                              type: string
+                              description: The rate to be applied.
+                              example: '0.0385'
+                            calculationFrequency:
+                              type: string
+                              description: The period after which the rate is applied to the balance to calculate the amount due for the period. Calculation of the amount is often daily (as balances may change) but accumulated until the total amount is 'applied' to the account (see applicationFrequency). Formatted according to ISO 8601 Durations (excludes recurrence syntax).
+                            applicationFrequency:
+                              type: string
+                              description: The period after which the calculated amount(s) are 'applied' (i.e. debited or credited) to the account.
+                              example: P1M
+                            tiers:
+                              type:
+                              - array
+                              - 'null'
+                              items:
+                                required:
+                                - name
+                                - unitOfMeasure
+                                - minimumValue
+                                properties:
+                                  name:
+                                    type: string
+                                    description: A display name for the tier.
+                                  unitOfMeasure:
+                                    type: string
+                                    description: The unit of measure that applies to the minimumValue and maximumValue values e.g. a DOLLAR amount. PERCENT (in the case of loan-to-value ratio or LVR). Tier term period representing a discrete number of MONTH's or DAY's (in the case of term deposit tiers).
+                                    enum:
+                                    - DAY
+                                    - DOLLAR
+                                    - MONTH
+                                    - PERCENT
+                                  minimumValue:
+                                    type: integer
+                                    description: The number of unitOfMeasure units that form the lower bound of the tier. The tier should be inclusive of this value.
+                                  maximumValue:
+                                    type: integer
+                                    description: 'The number of unitOfMeasure units that form the upper bound of the tier or band. For a tier with a discrete value (as opposed to a range of values e.g. 1 month) this must be the same as minimumValue. Where this is the same as the minimumValue value of the next-higher tier the referenced tier should be exclusive of this value. For example a term deposit of 2 months falls into the upper tier of the following tiers: (1 - 2 months, 2 - 3 months). If absent the tier''s range has no upper bound.. '
+                                  rateApplicationMethod:
+                                    type: string
+                                    description: The method used to calculate the amount to be applied using one or more tiers. A single rate may be applied to the entire balance or each applicable tier rate is applied to the portion of the balance that falls into that tier (referred to as 'bands' or 'steps').
+                                    enum:
+                                    - PER_TIER
+                                    - WHOLE_BALANCE
+                                  applicabilityConditions:
+                                    type:
+                                    - object
+                                    - 'null'
+                                    properties:
+                                      additionalInfo:
+                                        type: string
+                                        description: Display text providing more information on the condition.
+                                      additionalInfoUri:
+                                        type: string
+                                        description: Link to a web page with more information on this condition.
+                                    x-readme-ref-name: feesAccountMetadepositratestiersRateCondition
+                                  additionalInfo:
+                                    type: string
+                                    description: Display text providing more information on the rate tier.
+                                  additionalInfoUri:
+                                    type: string
+                                    description: Link to a web page with more information on this rate tier.
+                                x-readme-ref-name: feesAccountMetadepositratestiers
+                            additionalValue:
+                              type: string
+                              description: Generic field containing additional information relevant to the lendingRateType specified. Whether mandatory or not is dependent on the value of lendingRateType.
+                            additionalInfo:
+                              type: string
+                              description: Display text providing more information on the rate.
+                            additionalInfoUri:
+                              type: string
+                              description: Link to a web page with more information on this rate.
+                          x-readme-ref-name: depositRateAccountMetadata
+                      lendingRates:
+                        type:
+                        - array
+                        - 'null'
+                        items:
+                          required:
+                          - lendingRateType
+                          - rate
+                          type: object
+                          properties:
+                            lendingRateType:
+                              type: string
+                              description: The type of rate (fixed, variable, etc).
+                              example: PURCHASE
+                              enum:
+                              - BUNDLE_DISCOUNT_FIXED
+                              - BUNDLE_DISCOUNT_VARIABLE
+                              - CASH_ADVANCE
+                              - DISCOUNT
+                              - FIXED
+                              - FLOATING
+                              - INTRODUCTORY
+                              - MARKET_LINKED
+                              - PENALTY
+                              - PURCHASE
+                              - VARIABLE
+                            rate:
+                              type: string
+                              description: The rate to be applied.
+                              example: '0.2024'
+                            comparisonRate:
+                              type: string
+                              description: A comparison rate equivalent for this rate.
+                            calculationFrequency:
+                              type: string
+                              description: The period after which the rate is applied to the balance to calculate the amount due for the period. Calculation of the amount is often daily (as balances may change) but accumulated until the total amount is 'applied' to the account (see applicationFrequency). Formatted according to ISO 8601 Durations (excludes recurrence syntax).
+                            applicationFrequency:
+                              type: string
+                              description: The period after which the calculated amount(s) (see calculationFrequency) are 'applied' (i.e. debited or credited) to the account. Formatted according to ISO 8601 Durations (excludes recurrence syntax).
+                            interestPaymentDue:
+                              type: string
+                              description: When loan payments are due to be paid within each period. The investment benefit of earlier payments affect the rate that can be offered.
+                              enum:
+                              - IN_ADVANCE
+                              - IN_ARREARS
+                              example: IN_ADVANCE
+                            repaymentType:
+                              type: string
+                              description: Options in place for repayments. If absent, the lending rate is applicable to all repayment types.
+                              enum:
+                              - INTEREST_ONLY
+                              - PRINCIPAL_AND_INTEREST
+                              example: INTEREST_ONLY
+                            loanPurpose:
+                              type: string
+                              description: The reason for taking out the loan. If absent, the lending rate is applicable to all loan purposes.
+                              enum:
+                              - INVESTMENT
+                              - OWNER_OCCUPIED
+                              example: INVESTMENT
+                            tiers:
+                              type:
+                              - array
+                              - 'null'
+                              items:
+                                required:
+                                - name
+                                - unitOfMeasure
+                                - minimumValue
+                                properties:
+                                  name:
+                                    type: string
+                                    description: A display name for the tier.
+                                  unitOfMeasure:
+                                    type: string
+                                    description: The unit of measure that applies to the minimumValue and maximumValue values e.g. a DOLLAR amount. PERCENT (in the case of loan-to-value ratio or LVR). Tier term period representing a discrete number of MONTH's or DAY's (in the case of term deposit tiers).
+                                    enum:
+                                    - DAY
+                                    - DOLLAR
+                                    - MONTH
+                                    - PERCENT
+                                  minimumValue:
+                                    type: integer
+                                    description: The number of unitOfMeasure units that form the lower bound of the tier. The tier should be inclusive of this value.
+                                  maximumValue:
+                                    type: integer
+                                    description: 'The number of unitOfMeasure units that form the upper bound of the tier or band. For a tier with a discrete value (as opposed to a range of values e.g. 1 month) this must be the same as minimumValue. Where this is the same as the minimumValue value of the next-higher tier the referenced tier should be exclusive of this value. For example a term deposit of 2 months falls into the upper tier of the following tiers: (1 - 2 months, 2 - 3 months). If absent the tier''s range has no upper bound.. '
+                                  rateApplicationMethod:
+                                    type: string
+                                    description: The method used to calculate the amount to be applied using one or more tiers. A single rate may be applied to the entire balance or each applicable tier rate is applied to the portion of the balance that falls into that tier (referred to as 'bands' or 'steps').
+                                    enum:
+                                    - PER_TIER
+                                    - WHOLE_BALANCE
+                                  applicabilityConditions:
+                                    type:
+                                    - object
+                                    - 'null'
+                                    properties:
+                                      additionalInfo:
+                                        type: string
+                                        description: Display text providing more information on the condition.
+                                      additionalInfoUri:
+                                        type: string
+                                        description: Link to a web page with more information on this condition.
+                                    x-readme-ref-name: feesAccountMetadepositratestiersRateCondition
+                                  additionalInfo:
+                                    type: string
+                                    description: Display text providing more information on the rate tier.
+                                  additionalInfoUri:
+                                    type: string
+                                    description: Link to a web page with more information on this rate tier.
+                                x-readme-ref-name: feesAccountMetadepositratestiers
+                            additionalValue:
+                              type: string
+                              description: Generic field containing additional information relevant to the depositRateType specified. Whether mandatory or not is dependent on the value of depositRateType.
+                            additionalInfo:
+                              type: string
+                              description: Display text providing more information on the rate.
+                            additionalInfoUri:
+                              type: string
+                              description: Link to a web page with more information on this rate.
+                          x-readme-ref-name: lendingRateAccountMetadata
+                      termDeposit:
+                        type: array
+                        items:
+                          required:
+                          - lodgementDate
+                          - maturityDate
+                          - maturityInstructions
+                          properties:
+                            lodgementDate:
+                              type: string
+                              description: The lodgement date of the original deposit.
+                            maturityDate:
+                              type: string
+                              description: Maturity date for the term deposit.
+                            maturityAmount:
+                              type: string
+                              description: Amount to be paid upon maturity. If absent, it implies the amount to paid is variable and cannot currently be calculated.
+                            maturityCurrency:
+                              type: string
+                              description: If absent assumes AUD.
+                            maturityInstructions:
+                              type: string
+                              description: Current instructions on action to be taken at maturity. This includes default actions that may be specified in the terms and conditions for the product e.g. roll-over to the same term and frequency of interest payments.
+                              enum:
+                              - HOLD_ON_MATURITY
+                              - PAID_OUT_AT_MATURITY
+                              - ROLLED_OVER
+                              example: PAID_OUT_AT_MATURITY
+                          x-readme-ref-name: termDepositMetadata
+                      loan:
+                        type:
+                        - object
+                        - 'null'
+                        properties:
+                          startDate:
+                            type: string
+                            description: Start date for the loan.
+                            example: '2019-10-01'
+                          endDate:
+                            type: string
+                            description: Date that the loan is due to be repaid in full.
+                            example: '2045-10-01'
+                          repaymentType:
+                            type: string
+                            description: Options in place for repayments. If absent defaults to PRINCIPAL_AND_INTEREST.
+                            example: PRINCIPAL_AND_INTEREST
+                            enum:
+                            - INTEREST_ONLY
+                            - PRINCIPAL_AND_INTEREST
+                          originalLoanAmount:
+                            type: string
+                            description: Optional loan value.
+                          originalLoanCurrency:
+                            type: string
+                            description: If absent assumes AUD.
+                          minInstalmentAmount:
+                            type: string
+                            description: Minimum amount of next instalment.
+                          nextInstalmentDate:
+                            type: string
+                            description: Next date that an instalment is required.
+                          minInstalmentCurrency:
+                            type: string
+                            description: If absent assumes AUD.
+                          maxRedraw:
+                            type: string
+                            description: Maximum amount of funds that can be redrawn. If not present, redraw is not available even if the feature exists for the account.
+                          maxRedrawCurrency:
+                            type: string
+                            description: If absent assumes AUD.
+                          minRedraw:
+                            type: string
+                            description: Minimum redraw amount.
+                          minRedrawCurrency:
+                            type: string
+                            description: If absent assumes AUD.
+                          repaymentFrequency:
+                            type: string
+                            description: The expected or required repayment frequency. Formatted according to ISO 8601 Durations (excludes recurrence syntax).
+                          offsetAccountIds:
+                            type: array
+                            description: The accountIDs of the configured offset accounts attached to this loan. Only offset accounts that can be accessed under the current authorisation should be included. It is expected behaviour that offsetAccountEnabled is set to true but the offsetAccountIds field is absent or empty. This represents a situation where an offset account exists but details can not be accessed under the current authorisation.
+                            items:
+                              type: string
+                          offsetAccountEnabled:
+                            type: boolean
+                            description: Set to true if one or more offset accounts are configured for this loan account.
+                            example: true
+                      creditCard:
+                        required:
+                        - minPaymentAmount
+                        - paymentDueAmount
+                        - paymentDueDate
+                        type: object
+                        properties:
+                          minPaymentAmount:
+                            type: string
+                            description: The minimum payment amount due for the next card payment.
+                            example: '117.00'
+                          paymentDueAmount:
+                            type: string
+                            description: The amount due for the next card payment.
+                            example: '5847.00'
+                          paymentCurrency:
+                            type: string
+                            description: If absent assumes AUD.
+                            example: AUD
+                          paymentDueDate:
+                            type: string
+                            description: Date that the next payment for the card is due.
+                            example: '2023-12-12'
+                      features:
+                        type:
+                        - array
+                        - 'null'
+                        description: Array of features available for the product.
+                        items:
+                          required:
+                          - featureType
+                          properties:
+                            featureType:
+                              type: string
+                              enum:
+                              - ADDITIONAL_CARDS
+                              - BALANCE_TRANSFERS
+                              - BILL_PAYMENT
+                              - BONUS_REWARDS
+                              - CARD_ACCESS
+                              - CASHBACK_OFFER
+                              - COMPLEMENTARY_PRODUCT_DISCOUNTS
+                              - DIGITAL_BANKING
+                              - DIGITAL_WALLET
+                              - DONATE_INTEREST
+                              - EXTRA_REPAYMENTS
+                              - FRAUD_PROTECTION
+                              - FREE_TXNS
+                              - FREE_TXNS_ALLOWANCE
+                              - GUARANTOR
+                              - INSURANCE
+                              - INSTALMENT_PLAN
+                              - INTEREST_FREE
+                              - INTEREST_FREE_TRANSFERS
+                              - LOYALTY_PROGRAM
+                              - NOTIFICATIONS
+                              - NPP_ENABLED
+                              - NPP_PAYID
+                              - OFFSET
+                              - OTHER
+                              - OVERDRAFT
+                              - REDRAW
+                              - RELATIONSHIP_MANAGEMENT
+                              - UNLIMITED_TXNS
+                              description: The type of feature described.
+                            additionalValue:
+                              type: string
+                              description: Generic field containing additional information relevant to the featureType specified. Whether mandatory or not is dependent on the value of the featureType.
+                            additionalInfo:
+                              type: string
+                              description: Display text providing more information on the feature. Mandatory if the feature type is set to OTHER.
+                            additionalInfoUri:
+                              type: string
+                              description: Link to a web page with more information on this feature.
+                            isActivated:
+                              type: boolean
+                              description: 'true if the feature is already activated and false if the feature is available for activation. Defaults to true if absent.
+
+                                > Note: this is an additional field appended to the feature object defined in the Product Reference payload.
+
+                                '
+                              example: true
+                          x-readme-ref-name: featureClass
+                      addresses:
+                        type:
+                        - array
+                        - 'null'
+                        description: The addresses for the account to be used for correspondence.
+                        items:
+                          type: object
+                          properties:
+                            addressType:
+                              type: string
+                              description: The type of address object present.
+                              enum:
+                              - paf
+                              - simple
+                              example: paf
+                            simple:
+                              required:
+                              - addressLine1
+                              - city
+                              - state
+                              type: object
+                              properties:
+                                mailingName:
+                                  type: string
+                                  description: Name of the individual or business formatted for inclusion in an address used for physical mail.
+                                addressLine1:
+                                  type: string
+                                  description: First line of the standard address object.
+                                addressLine2:
+                                  type: string
+                                  description: Second line of the standard address object.
+                                addressLine3:
+                                  type: string
+                                  description: Third line of the standard address object.
+                                postcode:
+                                  type: string
+                                  description: Mandatory for Australian addresses.
+                                city:
+                                  type: string
+                                  description: Name of the city or locality.
+                                state:
+                                  type: string
+                                  description: Free text if the country is not Australia. If country is Australia then must be one of the values defined by the State Type Abbreviation in the PAF file format. NSW, QLD, VIC, NT, WA, SA, TAS, ACT.
+                                country:
+                                  type: string
+                                  description: A valid ISO 3166 Alpha-3 country code. Australia (AUS) is assumed if country is not present.
+                                paf:
+                                  required:
+                                  - localityName
+                                  - postcode
+                                  - state
+                                  type: object
+                                  description: Australian address formatted according to the file format defined by the PAF file format.
+                                  properties:
+                                    dpid:
+                                      type: string
+                                      description: Unique identifier for an address as defined by Australia Post. Also known as Delivery Point Identifier.
+                                    thoroughfareNumber1:
+                                      type: integer
+                                      description: Thoroughfare number for a property (first number in a property ranged address).
+                                    thoroughfareNumber1Suffix:
+                                      type: string
+                                      description: Suffix for the thoroughfare number. Only relevant is thoroughfareNumber1 is populated.
+                                    thoroughfareNumber2:
+                                      type: integer
+                                      description: Second thoroughfare number (only used if the property has a ranged address eg 23-25).
+                                    thoroughfareNumber2Suffix:
+                                      type: string
+                                      description: Suffix for the second thoroughfare number. Only relevant is thoroughfareNumber2 is populated.
+                                    flatUnitType:
+                                      type: string
+                                      description: Type of flat or unit for the address.
+                                    flatUnitNumber:
+                                      type: string
+                                      description: Unit number (including suffix, if applicable).
+                                    floorLevelType:
+                                      type: string
+                                      description: Type of floor or level for the address.
+                                    floorLevelNumber:
+                                      type: string
+                                      description: Floor or level number (including alpha characters).
+                                    lotNumber:
+                                      type: string
+                                      description: Allotment number for the address.
+                                    buildingName1:
+                                      type: string
+                                      description: Building/Property name 1.
+                                    buildingName2:
+                                      type: string
+                                      description: Building/Property name 2.
+                                    streetName:
+                                      type: string
+                                      description: The name of the street.
+                                    streetType:
+                                      type: string
+                                      description: The street type. Valid enumeration defined by Australia Post PAF code file.
+                                    streetSuffix:
+                                      type: string
+                                      description: The street type suffix. Valid enumeration defined by Australia Post PAF code file.
+                                    postalDeliveryType:
+                                      type: string
+                                      description: Postal delivery type. (eg. PO BOX). Valid enumeration defined by Australia Post PAF code file.
+                                    postalDeliveryNumber:
+                                      type: integer
+                                      description: Postal delivery number if the address is a postal delivery type.
+                                    postalDeliveryNumberPrefix:
+                                      type: string
+                                      description: Postal delivery number prefix related to the postal delivery number.
+                                    postalDeliveryNumberSuffix:
+                                      type: string
+                                      description: Postal delivery number suffix related to the postal delivery number.
+                                    localityName:
+                                      type: string
+                                      description: Full name of locality.
+                                    postcode:
+                                      type: string
+                                      description: Postcode for the locality.
+                                    state:
+                                      type: string
+                                      description: State in which the address belongs. Valid enumeration defined by Australia Post PAF code file State Type Abbreviation. NSW, QLD, VIC, NT, WA, SA, TAS, ACT, AAT.
+                    x-readme-ref-name: Metadata
+                  transactionIntervals:
+                    type: array
+                    description: 'An array of date intervals indicating the coverage of the transaction data relating to the account.
+
+                      Will return a single element for accounts sourced from a single bank connection.
+
+                      Will return multiple elements in cases where there have been multiple PDF/CSV uploads for an account.'
+                    items:
+                      required:
+                      - from
+                      - to
+                      type: object
+                      properties:
+                        from:
+                          type: string
+                          description: Date of first transaction on this account
+                          example: '2018-07-01'
+                        to:
+                          type: string
+                          description: Date of last transaction on this account
+                          example: '2018-12-30'
+                      x-readme-ref-name: AccountTransactionInterval
+                description: Container object with account details
+                x-readme-ref-name: AccountResponseResource
+        '400':
+          description: Returns error that server cannot or will not process the request due to something that is perceived to be a client error
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: parameter-not-valid
+                          enum:
+                          - parameter-not-supplied
+                          - parameter-not-valid
+                          - unsupported-accept
+                          - invalid-content
+                          - institution-not-supported
+                          - invalid-credentials
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: The provided filter parameter is in invalid format or unsupported.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Parameter not valid.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                x-readme-ref-name: BadRequestError
+        '403':
+          description: Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - source
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: forbidden-access
+                          enum:
+                          - forbidden-access
+                          - no-production-access
+                          - access-denied
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Access to this resource is forbidden.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Forbidden Access
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: ForbiddenAccessError
         '404':
-          $ref: '#/components/responses/NotFound'
+          description: Returns error indicating that server can't find requested resource.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: resource-not-found
+                          enum:
+                          - resource-not-found
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Resource not found.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Requested resource is not found.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: NotFoundError
+        '500':
+          description: Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: internal-server-error
+                          enum:
+                          - internal-server-error
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Internal Server error. Contact support.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Internal Server error.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: InternalServerError
+      security:
+      - services_token: []
 components:
-  schemas:
-    AccountListResponse:
-      type: object
-      properties:
-        type:
-          type: string
-          default: list
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Account'
-        size:
-          type: integer
-    ErrorResponse:
-      type: object
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        code:
-          type: string
-        detail:
-          type: string
-        source:
-          type: object
-    Account:
-      type: object
-      properties:
-        id:
-          type: string
-        name:
-          type: string
-          description: Account name
-        accountNo:
-          type: string
-          description: Masked account number
-        currency:
-          type: string
-          description: ISO 4217 currency code
-        balance:
-          type: number
-          format: double
-          description: Current balance
-        availableFunds:
-          type: number
-          format: double
-          description: Available funds
-        accountType:
-          type: string
-          enum:
-          - transaction
-          - savings
-          - credit-card
-          - mortgage
-          - loan
-          - investment
-        status:
-          type: string
-          enum:
-          - available
-          - unavailable
-  parameters:
-    UserId:
-      name: userId
-      in: path
-      required: true
-      description: Basiq user ID
-      schema:
-        type: string
-    AccountId:
-      name: accountId
-      in: path
-      required: true
-      description: Basiq account ID
-      schema:
-        type: string
-  responses:
-    NotFound:
-      description: Resource not found
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
-    BearerAuth:
+    api_key:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-default: Basic NjMxMjNmMWMtZjYxMy00ZjMyLWFiYzUtYzBhZDdhYTY2YmU1OjQ3NWYwMzhkLTBlZmItNGM1ZS1iMzQ0LTAzMzYxOTkyYTRlMw==
+    services_token:
       type: http
       scheme: bearer
       bearerFormat: JWT
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true
+  samples-languages:
+  - curl
+  - node
+  - ruby
+  - javascript
+  - python

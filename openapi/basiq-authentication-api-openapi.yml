@@ -1,89 +1,255 @@
 openapi: 3.2.0
 info:
-  title: Basiq Authentication API
-  description: The Basiq API is an open banking and financial data platform providing unified access to Australian and New Zealand bank account data. It enables financial applications to retrieve account balances, transactions, income verification, and expense categorization via consumer-consented bank connections using CDR (Consumer Data Right) and third-party open banking standards.
+  title: Connect Authentication API
+  description: All included utility endpoints for Basiq partners
   version: 3.0.0
-  contact:
-    name: Basiq Support
-    url: https://basiq.io/contact
-  termsOfService: https://basiq.io/legal/terms-of-use/
+  termsOfService: https://docs.basiq.io/en/collections/440849-privacy-terms-and-common-questions
+  license:
+    name: Commercial
+    url: https://basiq.io
 servers:
 - url: https://au-api.basiq.io
-  description: Basiq API (Australia)
 security:
-- BearerAuth: []
+- api_key: []
+- services_token: []
 tags:
 - name: Authentication
 paths:
   /token:
     post:
-      operationId: createToken
-      summary: Create Token
-      description: Exchange API key for a server token or user token for API access.
       tags:
       - Authentication
-      security: []
-      requestBody:
+      summary: Generate an auth token
+      description: Use this endpoint to retrieve a token that will be passed as authorization header for Basiq API
+      operationId: postToken
+      parameters:
+      - name: basiq-version
+        in: header
         required: true
+        schema:
+          type: string
+          example: '3.0'
+      requestBody:
         content:
           application/x-www-form-urlencoded:
             schema:
-              type: object
               properties:
-                grant_type:
-                  type: string
-                  enum:
-                  - client_credentials
                 scope:
                   type: string
-                  description: SERVER_ACCESS or CLIENT_ACCESS
-              required:
-              - grant_type
+                userId:
+                  type: string
+            examples:
+              client_access:
+                summary: For all client side requests
+                value:
+                  scope: CLIENT_ACCESS
+                  userId: 6dd30ce4-d4ba-11ec-9d64-0242ac120002
+              server_access:
+                summary: For all server side requests
+                value:
+                  scope: SERVER_ACCESS
       responses:
         '200':
-          description: Access token
+          description: 'Return token object that will be used for Basiq API requests. '
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/TokenResponse'
+                required:
+                - access_token
+                - expires_in
+                - token_type
+                type: object
+                properties:
+                  access_token:
+                    type: string
+                    description: The generated access token.
+                    example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiaWF0IjoxNTE2MjM5MDIyfQ.SflKxwRJSMeKKF2QT4fwpMeJf36POk6yJV_adQssw5c
+                  expires_in:
+                    type: integer
+                    description: Expires in 3600 seconds
+                    format: int64
+                    example: 3600
+                  token_type:
+                    type: string
+                    description: This value will always be `Bearer`.
+                    example: Bearer
+                x-readme-ref-name: TokenPostResponse
         '400':
-          $ref: '#/components/responses/BadRequest'
+          description: Returns error that server cannot or will not process the request as it does not conform.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Parameter not valid.
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: parameter-not-valid
+                          enum:
+                          - parameter-not-supplied
+                          - parameter-not-valid
+                          - unsupported-accept
+                          - invalid-content
+                          - institution-not-supported
+                          - invalid-credentials
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: ID value is not valid.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: id
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                x-readme-ref-name: BadRequestError
+        '404':
+          description: Returns error indicating that server can't find requested resource.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: resource-not-found
+                          enum:
+                          - resource-not-found
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Resource not found.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Requested resource is not found.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                x-readme-ref-name: NotFoundError
+        '500':
+          description: Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: internal-server-error
+                          enum:
+                          - internal-server-error
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Internal Server error. Contact support.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Internal Server error.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                x-readme-ref-name: InternalServerError
+      security:
+      - api_key: []
 components:
-  schemas:
-    ErrorResponse:
-      type: object
-      properties:
-        type:
-          type: string
-        title:
-          type: string
-        code:
-          type: string
-        detail:
-          type: string
-        source:
-          type: object
-    TokenResponse:
-      type: object
-      properties:
-        access_token:
-          type: string
-          description: JWT access token
-        token_type:
-          type: string
-          description: Token type (Bearer)
-        expires_in:
-          type: integer
-          description: Token expiry in seconds
-  responses:
-    BadRequest:
-      description: Invalid request parameters
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/ErrorResponse'
   securitySchemes:
-    BearerAuth:
+    api_key:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-default: Basic NjMxMjNmMWMtZjYxMy00ZjMyLWFiYzUtYzBhZDdhYTY2YmU1OjQ3NWYwMzhkLTBlZmItNGM1ZS1iMzQ0LTAzMzYxOTkyYTRlMw==
+    services_token:
       type: http
       scheme: bearer
       bearerFormat: JWT
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true
+  samples-languages:
+  - curl
+  - node
+  - ruby
+  - javascript
+  - python
