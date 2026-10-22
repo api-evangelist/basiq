@@ -1,0 +1,12 @@
+{
+ "url": "https://api.basiq.io/openapi/identity.json",
+ "final": "https://api.basiq.io/openapi/identity.json",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 48565,
+ "sha256": "ff6a5d53eab17e4ff0a93d138a2a48eb43ca09802dee0fcce93647a3e589bd59",
+ "fetched_at": "2026-10-21",
+ "fetched_by": "contract module (curl)",
+ "mirror": "https://raw.githubusercontent.com/basiqio-oss/Basiq-docs/refs/heads/v3.0/reference/identity.json",
+ "ownership": "servers[] https://au-api.basiq.io (Basiq's documented production base) and termsOfService on docs.basiq.io where present; Basiq's own page https://api.basiq.io/reference/openapi.md links these files in its GitHub org basiqio-oss/Basiq-docs (same content)."
+}

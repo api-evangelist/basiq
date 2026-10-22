@@ -1,0 +1,195 @@
+generated: '2026-10-21'
+method: searched
+source: https://api.basiq.io/docs/codes
+docs:
+- https://api.basiq.io/docs/codes
+- https://api.basiq.io/docs/errors
+- https://api.basiq.io/docs/http-errors-per-endpoint
+format: basiq-json-error-list
+envelope:
+  content_type: application/json
+  shape: '{"type":"list","correlationId":..., "data":[{"type":"error","code","title","detail","source":{"pointer","parameter"}}]}'
+  fields:
+    correlationId: a unique identifier for this particular occurrence of the problem.
+    code: an application-specific error code, expressed as a string value.
+    title: a short, human-readable summary of the problem.
+    detail: a human-readable explanation specific to this occurrence of the problem.
+    source: an object containing references to the source of the error (pointer, parameter).
+  multiple_errors: true
+note: Bank-returned Consent UI errors are not a fixed list; they surface on the Jobs endpoint in the failed step result {code,title,detail}. Rows below are copied from the Codes page tables (Connect, Identity,
+  Reports, Data, Affordability, Enrich), de-duplicated.
+problems:
+- status: 400
+  code: invalid-content
+  title: Invalid request content
+  detail: Posted user or mobile is not in valid format.
+  endpoints: POST /users, POST /users/{userId}/auth_link
+- status: 400
+  code: parameter-not-supplied
+  title: Required parameter not supplied
+  detail: Required user, job, consent, email, mobile, or business parameters were not supplied.
+  source: userId, jobId, consentId, email/mobile fields
+  endpoints: Users, consents, auth links, jobs
+- status: 400
+  code: parameter-not-valid
+  title: Required parameter not valid / Parameter value is not valid
+  detail: A header, path parameter, email, mobile, user ID, or consent ID value is not valid.
+  source: Authorization, userId, consentId, email, mobile
+  endpoints: /token, users, consents, auth links, jobs
+- status: 400
+  code: resource-not-found
+  title: Requested resource is not found
+  detail: Requested job does not exist.
+  endpoints: GET /jobs/{jobId}
+- status: 400
+  code: unsupported-accept
+  title: Accept type is not supported
+  detail: The requested endpoint does not support the supplied `Accept` header.
+  endpoints: Users
+- status: 401
+  code: access-denied
+  title: access-denied
+  detail: Token has expired.
+  endpoints: POST /users, POST /jobs/{jobId}/mfa
+- status: 401
+  code: invalid-authorization-token
+  title: Invalid authorization token
+  detail: Empty response detail.
+  endpoints: Users, jobs MFA
+- status: 401
+  code: unauthorised-access
+  title: unauthorised-access
+  detail: You are not authorized to access this resource.
+  endpoints: Consents, auth links, events, jobs
+- status: 403
+  code: access-denied
+  title: access-denied
+  detail: Your account has been disabled, or the token has expired.
+  endpoints: /token, users, consents, auth links, events, jobs
+- status: 403
+  code: forbidden-access
+  title: forbidden-access
+  detail: Access to this resource is forbidden.
+  endpoints: POST /users
+- status: 403
+  code: request-not-valid
+  title: Invalid request
+  detail: Missing Authentication Token.
+  endpoints: DELETE /users/{userId}
+- status: 403
+  code: Forbidden access
+  title: Forbidden access
+  detail: Access to this resource is forbidden.
+  endpoints: POST /jobs/{jobId}/mfa
+- status: 404
+  code: parameter-not-valid
+  title: We have encountered an error
+  detail: Unable to authenticate. Check your API key.
+  source: header/Authorization, Authorization
+  endpoints: POST /token
+- status: 404
+  code: resource-not-found
+  title: Requested resource is not found
+  detail: Requested user or consent does not exist.
+  endpoints: Users, consents
+- status: 415
+  code: unsupported-content-type
+  title: Request content type is not supported
+  detail: Content type is not supported on requested endpoint.
+  endpoints: POST /users/{userId}/auth_link
+- status: 500
+  code: parameter-not-valid
+  title: We have encountered an error
+  detail: Internal server error.
+  source: Authorization when returned from /token; otherwise —
+  endpoints: /token, users, consents, auth links, events, jobs
+- status: 503
+  code: service-unavailable
+  title: service-unavailable
+  detail: Service is currently unavailable. Please try again later.
+  endpoints: Users, jobs MFA
+- status: 503
+  code: Service unavailable
+  title: Service unavailable
+  detail: Service is currently unavailable. Please try again later.
+  endpoints: Users, consents, auth links, events, jobs
+- status: 400
+  code: parameter-not-supplied
+  title: Required parameter not supplied
+  detail: User ID not supplied.
+  source: userId
+  endpoints: GET /users/{userId}/identities, GET /users/{userId}/identities/{identityId}
+- status: 400
+  code: parameter-not-valid
+  title: Parameter value is not valid
+  detail: User ID value is not valid.
+  source: userId
+  endpoints: Identity endpoints
+- status: 403
+  code: access-denied
+  title: access-denied
+  detail: Token has expired.
+  endpoints: Identity endpoints
+- status: 404
+  code: resource-not-found
+  title: Requested resource is not found
+  detail: Requested identity does not exist.
+  endpoints: GET /users/{userId}/identities/{identityId}
+- status: 400
+  code: invalid-content
+  title: Invalid request content
+  detail: Invalid accounts.
+  endpoints: POST /reports
+- status: 401
+  code: Invalid authorization token
+  title: Invalid authorization token
+  detail: Empty response detail.
+  endpoints: GET /reports, report transactions, report types
+- status: 404
+  code: resource-not-found
+  title: Requested resource is not found
+  detail: Requested user, report, or report type does not exist.
+  endpoints: Reports endpoints
+- status: 500
+  code: Internal server error
+  title: Internal server error
+  detail: Internal server error.
+  endpoints: Reports endpoints
+- status: 400
+  code: parameter-not-valid
+  title: Parameter value is not valid
+  detail: User ID, account ID, transaction ID, or connection ID value is not valid.
+  source: userId, accountId, transactionId, connectionId
+  endpoints: Accounts, transactions, connections
+- status: 400
+  code: unsupported-accept
+  title: Accept type is not supported
+  detail: Accept type `application/jsons` is not supported on requested endpoint.
+  endpoints: Accounts, transactions, connections, connectors
+- status: 404
+  code: resource-not-found
+  title: Requested resource is not found
+  detail: Requested connector does not exist.
+  endpoints: GET /connectors/{connectorId}/method
+- status: 400
+  code: parameter-not-valid
+  title: Parameter value is not valid
+  detail: User ID or limit value is not valid.
+  source: userId, limit
+  endpoints: Affordability, expense, income endpoints
+- status: 400
+  code: path-parameter-not-valid
+  title: Parameter value is not valid
+  detail: Snapshot ID value is not valid.
+  source: snapshotId
+  endpoints: Expense and income snapshot endpoints
+- status: 404
+  code: resource-not-found
+  title: Requested resource is not found
+  detail: Requested user or snapshot does not exist, or the user does not have any accounts.
+  endpoints: Affordability snapshot and transaction endpoints
+- status: 429
+  code: too-many-requests
+  title: Too many requests.
+  detail: Query limit reached.
+  endpoints: All endpoints

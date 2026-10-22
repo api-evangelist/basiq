@@ -1,0 +1,4075 @@
+openapi: 3.2.0
+info:
+  title: Affordability API
+  version: 3.0.0
+  license:
+    name: commercial
+    url: https://basiq.io
+servers:
+- url: https://au-api.basiq.io
+security:
+- services_token: []
+tags:
+- name: Affordability
+paths:
+  /users/{userId}/affordability:
+    get:
+      tags:
+      - Affordability
+      summary: List affordability summaries
+      description: Returns a list of affordability summaries that have been generated for a specific user.
+      operationId: getAffordabilityList
+      deprecated: true
+      parameters:
+      - name: userId
+        in: path
+        description: The identifier of the user.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns a list with a data property that contains an array of affordability resources.
+          content:
+            application/json:
+              schema:
+                title: AffordabilityListResponse
+                required:
+                - data
+                - links
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "List".
+                    example: list
+                  data:
+                    type: array
+                    items:
+                      required:
+                      - fromMonth
+                      - generatedDate
+                      - id
+                      - links
+                      - toMonth
+                      - type
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          description: Always "affordability".
+                          example: affordability
+                        id:
+                          type: string
+                          description: Uniquely identifies the affordability summary.
+                          example: s55bf3
+                        coverageDays:
+                          type: integer
+                          description: Number of days covered by the summary
+                          format: int64
+                          example: 392
+                        fromMonth:
+                          type: string
+                          description: Start month for the period for which the Affordability summary is generated. The period of time relates to the account and transaction data used as input into the summary.
+                          example: 2019-03
+                        toMonth:
+                          type: string
+                          description: End month (usually the current month) for the period for which the Affordability summary is generated.
+                          example: 2020-03
+                        generatedDate:
+                          type: string
+                          description: Date the summary was generated.
+                          example: '2020-03-26T06:56:44'
+                        institutions:
+                          type: array
+                          description: An array of institution ids to indicate the sources of transaction data, aggregated to generate the affordability resource.
+                          example: AU00000
+                          items:
+                            type: string
+                        links:
+                          title: AffordabilityLinksInList
+                          required:
+                          - expenses
+                          - income
+                          - self
+                          type: object
+                          properties:
+                            expenses:
+                              type: string
+                              description: Link to the expenses
+                              example: https://au-api.basiq.io/users/25c8d1ed77/expenses/s55bf5
+                            income:
+                              type: string
+                              description: Link to the income
+                              example: https://au-api.basiq.io/users/25c8d1ed77/income/s55bf4
+                            self:
+                              type: string
+                              description: Link to the affordability resource
+                              example: https://au-api.basiq.io/users/25c8d1ed77/affordability/s55bf3
+                          description: Object containing links to resources.
+                          x-readme-ref-name: AffordabilityLinksInList
+                      x-readme-ref-name: AffordabilityListData
+                  links:
+                    required:
+                    - self
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        description: Link to the requested user affordability resources
+                        example: https://au-api.basiq.io/users/25c8d1ed77/affordability
+                    x-readme-ref-name: AffordabilityListLinks
+                description: Container object, containing affordability list details.
+                x-readme-ref-name: AffordabilityListResponse
+        '400':
+          description: Returns error that server cannot or will not process the request due to something that is perceived to be a client error.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: parameter-not-valid
+                          enum:
+                          - parameter-not-supplied
+                          - parameter-not-valid
+                          - unsupported-accept
+                          - invalid-content
+                          - institution-not-supported
+                          - invalid-credentials
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: ID value is not valid.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Parameter not valid.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                x-readme-ref-name: BadRequestError
+        '404':
+          description: Returns error indicating that server can't find requested resource.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: resource-not-found
+                          enum:
+                          - resource-not-found
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Resource not found.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Requested resource is not found.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: NotFoundError
+        '500':
+          description: Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: internal-server-error
+                          enum:
+                          - internal-server-error
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Internal Server error. Contact support.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Internal Server error.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: InternalServerError
+      security:
+      - services_token: []
+    post:
+      tags:
+      - Affordability
+      summary: Create an affordability summaries
+      description: Create an affordability summaries for a user
+      operationId: postAffordability
+      deprecated: true
+      parameters:
+      - name: userId
+        in: path
+        description: The identifier of the user.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accounts:
+                  type: array
+                  description: The list of accounts to be included in the affordability otherwise all the user accounts will be included in the summary
+                  example:
+                  - s55bf3
+                  - s55bf4
+                  items:
+                    type: string
+                fromMonth:
+                  type: string
+                  description: The first/start month to be included in the affordability output e.g. "fromMonth":"2019-05". Resulting affordability resource will be based on data between fromMonth and toMonth.
+                  example: 2019-05
+                toMonth:
+                  type: string
+                  description: The last/end month to be included in the affordability output e.g. "toMonth":"2019-09". Resulting affordability resource will be based on data between fromMonth and toMonth.
+                  example: 2019-09
+              x-readme-ref-name: AffordabilityPostRequest
+        required: false
+      responses:
+        '200':
+          description: Returns a created affordability resource, if the operation succeeded.
+          content:
+            application/json:
+              schema:
+                title: AffordabilityResponse
+                required:
+                - assets
+                - external
+                - fromMonth
+                - generatedDate
+                - id
+                - liabilities
+                - links
+                - summary
+                - toMonth
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "affordability".
+                    example: affordability
+                  id:
+                    type: string
+                    description: Uniquely identifies the affordability summary.
+                    example: s55bf3
+                  coverageDays:
+                    type: integer
+                    description: Number of days covered by the summary
+                    format: int64
+                    example: 392
+                  assets:
+                    type: array
+                    description: Assets
+                    items:
+                      required:
+                      - account
+                      - availableFunds
+                      - balance
+                      - currency
+                      - institution
+                      - previous6Months
+                      - type
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          description: Type of account
+                          example: account
+                        account:
+                          required:
+                          - product
+                          - type
+                          type: object
+                          properties:
+                            product:
+                              type: string
+                              description: Identifies the Product as defined by institution
+                              example: Hooli Transaction
+                            type:
+                              type: string
+                              description: Identifies the Account type defined by institution
+                              example: transaction
+                          x-readme-ref-name: AccountType
+                        availableFunds:
+                          type: string
+                          description: The available funds at the time of the query.
+                          example: '45670.98'
+                        balance:
+                          type: string
+                          description: The currency in which the account is recorded.
+                          example: '35298.67'
+                        currency:
+                          type: string
+                          description: The currency in which the account is recorded.
+                          example: AUD
+                        institution:
+                          type: string
+                          description: The name of the financial institution with whom the account is held.
+                          example: Hooli
+                        previous6Months:
+                          required:
+                          - maxBalance
+                          - minBalance
+                          type: object
+                          properties:
+                            maxBalance:
+                              type:
+                              - string
+                              - 'null'
+                              example: '38309.44'
+                            minBalance:
+                              type:
+                              - string
+                              - 'null'
+                              example: '10032.81'
+                          x-readme-ref-name: AssetsPrevious6MonthsData
+                      x-readme-ref-name: AffordabilityAssetsData
+                  external:
+                    type: array
+                    description: External
+                    items:
+                      required:
+                      - changeHistory
+                      - payments
+                      - source
+                      type: object
+                      properties:
+                        changeHistory:
+                          type: array
+                          description: Each transaction (repeated for each source ordered by most recent)
+                          items:
+                            required:
+                            - amount
+                            - date
+                            - source
+                            type: object
+                            properties:
+                              amount:
+                                type: string
+                                description: Amount of payment
+                                example: '-146.50'
+                              date:
+                                type: string
+                                description: Date
+                                format: date
+                                example: '2019-03-31'
+                              source:
+                                type: string
+                                description: Full transaction description
+                                example: 'AFTERPAY MELBOURNE VI AUS Card xx3854 Value Date: 10/11/2019'
+                            x-readme-ref-name: ChangeHistoryExternal
+                        payments:
+                          type: array
+                          description: Aggregated attributes relating to payments for this source (identified as an external liability)
+                          items:
+                            required:
+                            - amountAvg
+                            - amountAvgMonthly
+                            - first
+                            - last
+                            - noOccurrences
+                            - total
+                            type: object
+                            properties:
+                              amountAvg:
+                                type: string
+                                description: Number of occurrences for same source (in this group)
+                                example: '-50.50'
+                              amountAvgMonthly:
+                                type: string
+                                description: Average monthly payment amount
+                                example: '-20.00'
+                              first:
+                                type: string
+                                description: Date of first payment
+                                format: date
+                                example: '2019-03-15'
+                              last:
+                                type: string
+                                description: Date of last payment
+                                format: date
+                                example: '2020-03-15'
+                              noOccurrences:
+                                type: integer
+                                description: Number of occurrences for same source (in this group)
+                                format: int64
+                                example: 2
+                              total:
+                                type: string
+                                description: Amount of total payments identified for source in the affordability snapshot
+                                example: '-146.50'
+                            x-readme-ref-name: ExternalPayment
+                        source:
+                          type: string
+                          description: Source of external liability (cleaned transaction description).
+                          example: afterpay
+                      x-readme-ref-name: ExternalLiabilityData
+                  fromMonth:
+                    type: string
+                    description: Start month for the period for which the Affordability summary is generated. The period of time relates to the account and transaction data used as input into the summary.
+                    example: 2019-03
+                  toMonth:
+                    type: string
+                    description: End month (usually the current month) for the period for which the Affordability summary is generated.
+                    example: 2020-03
+                  generatedDate:
+                    type: string
+                    description: Date the summary was generated.
+                    example: '2020-03-26T06:56:44'
+                  liabilities:
+                    required:
+                    - credit
+                    - loan
+                    type: object
+                    properties:
+                      credit:
+                        type: array
+                        description: Credit Liabilities
+                        items:
+                          required:
+                          - account
+                          - availableFunds
+                          - balance
+                          - creditLimit
+                          - currency
+                          - institution
+                          - previous6Months
+                          - previousMonth
+                          type: object
+                          properties:
+                            account:
+                              required:
+                              - product
+                              - type
+                              type: object
+                              properties:
+                                product:
+                                  type: string
+                                  description: Identifies the Product as defined by institution
+                                  example: Hooli Transaction
+                                type:
+                                  type: string
+                                  description: Identifies the Account type defined by institution
+                                  example: transaction
+                              x-readme-ref-name: AccountType
+                            availableFunds:
+                              type:
+                              - string
+                              - 'null'
+                              description: The available funds at the time of the query.
+                              example: '8286.80'
+                            balance:
+                              type:
+                              - string
+                              - 'null'
+                              description: The balance at the time of the query.
+                              example: '-11713.20'
+                            creditLimit:
+                              type:
+                              - string
+                              - 'null'
+                              description: Total credit limit available for the specified credit facility.
+                              example: '20000.00'
+                            currency:
+                              type: string
+                              description: The currency in which the account is recorded.
+                              example: AUD
+                            institution:
+                              type: string
+                              description: The name of the financial institution with whom the account is held.
+                              example: Hooli
+                            previous6Months:
+                              required:
+                              - cashAdvances
+                              type: object
+                              properties:
+                                cashAdvances:
+                                  type: string
+                                  description: Value of cash advances in period
+                                  example: -2053.5
+                              x-readme-ref-name: Previous6MonthsCreditLiabilities
+                            previousMonth:
+                              required:
+                              - maxBalance
+                              - minBalance
+                              - totalCredits
+                              - totalDebits
+                              type: object
+                              properties:
+                                maxBalance:
+                                  type: string
+                                  example: -12329.16
+                                minBalance:
+                                  type: string
+                                  example: -3174.16
+                                totalCredits:
+                                  type: string
+                                  example: '0.00'
+                                totalDebits:
+                                  type: string
+                                  example: -8287.1
+                              x-readme-ref-name: PreviousMonthDataLiabilities
+                          x-readme-ref-name: CreditLiabilities
+                      loan:
+                        type: array
+                        description: Loan Liabilities
+                        items:
+                          required:
+                          - account
+                          - availableFunds
+                          - balance
+                          - changeHistory
+                          - currency
+                          - institution
+                          - previous6Months
+                          - previousMonth
+                          type: object
+                          properties:
+                            account:
+                              required:
+                              - product
+                              - type
+                              type: object
+                              properties:
+                                product:
+                                  type: string
+                                  description: Identifies the Product as defined by institution
+                                  example: Hooli Transaction
+                                type:
+                                  type: string
+                                  description: Identifies the Account type defined by institution
+                                  example: transaction
+                              x-readme-ref-name: AccountType
+                            availableFunds:
+                              type:
+                              - string
+                              - 'null'
+                              description: The available funds at the time of the query.
+                              example: '87767.00'
+                            balance:
+                              type:
+                              - string
+                              - 'null'
+                              description: The balance at the time of the query.
+                              example: '-312233.00'
+                            changeHistory:
+                              type: array
+                              description: List of account transactions changes
+                              items:
+                                required:
+                                - amount
+                                - date
+                                - direction
+                                - source
+                                type: object
+                                properties:
+                                  amount:
+                                    type: string
+                                    description: Amount loan-interest or loan-repayment
+                                    example: '5768.00'
+                                  date:
+                                    type: string
+                                    description: Date
+                                    format: date
+                                    example: '2019-03-31'
+                                  direction:
+                                    type: string
+                                    description: Debit or Credit
+                                    example: credit
+                                    enum:
+                                    - debit
+                                    - credit
+                                  source:
+                                    type: string
+                                    description: Cleaned transaction description
+                                    example: Transfer Platnm Homeloan 346454
+                                x-readme-ref-name: ChangeHistoryAffordabilityData
+                            currency:
+                              type: string
+                              description: The currency in which the account is recorded.
+                              example: AUD
+                            institution:
+                              type: string
+                              description: The name of the financial institution with whom the account is held.
+                              example: Hooli
+                            previous6Months:
+                              required:
+                              - arrears
+                              type: object
+                              properties:
+                                arrears:
+                                  type:
+                                  - string
+                                  - 'null'
+                                  description: Has the loan been in arrears in the past 6 months - returned as a string value (true or false or null)
+                                  example: 'true'
+                              x-readme-ref-name: Previous6MonthsLoan
+                            previousMonth:
+                              required:
+                              - totalCredits
+                              - totalDebits
+                              - totalInterestCharged
+                              - totalRepayments
+                              type: object
+                              properties:
+                                totalCredits:
+                                  type: string
+                                  example: '0.00'
+                                totalDebits:
+                                  type: string
+                                  example: -8287.1
+                                totalInterestCharged:
+                                  type: string
+                                  example: -4303.5
+                                totalRepayments:
+                                  type: string
+                                  example: '5768.00'
+                              x-readme-ref-name: PreviousMonthDataLoanLiabilities
+                          x-readme-ref-name: LoanLiabilities
+                    x-readme-ref-name: LiabilitiesData
+                  summary:
+                    required:
+                    - assets
+                    - creditLimit
+                    - expenses
+                    - liabilities
+                    - loanRepaymentMonthly
+                    - netPosition
+                    - potentialLiabilitiesMonthly
+                    - regularIncome
+                    - savings
+                    type: object
+                    properties:
+                      assets:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total of cash based assets
+                        example: '59983.11'
+                      creditLimit:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total credit limit across all credit cards and overdrafts
+                        example: '20000.00'
+                      expenses:
+                        type: string
+                        description: Provides an average of monthly expenses calculated for the whole period of data retrieved (e.g. 13 months)
+                        example: '-12046.00'
+                      liabilities:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total of account based liabilities split into credit and loan liabilities
+                        example: '-323946.20'
+                      loanRepaymentMonthly:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total of all repayments monthly to disclosed loan liabilities as an average monthly amount
+                        example: '5284.00'
+                      netPosition:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total assets minus total liabilities
+                        example: -263963.09
+                      potentialLiabilitiesMonthly:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total of all repayments monthly to potential undisclosed loan liabilities as an average monthly amount
+                        example: -1727
+                      regularIncome:
+                        required:
+                        - previous3Months
+                        type: object
+                        properties:
+                          previous3Months:
+                            required:
+                            - avgMonthly
+                            type: object
+                            properties:
+                              avgMonthly:
+                                type:
+                                - string
+                                - 'null'
+                                example: '18098.00'
+                            x-readme-ref-name: AvgMonthlyData
+                        x-readme-ref-name: AffordabilityRegularIncomeData
+                      savings:
+                        type:
+                        - string
+                        - 'null'
+                        description: Average of monthly savings calculated for the whole period of data retrieved (e.g. 13 months)
+                        example: '93.00'
+                    x-readme-ref-name: AffordabilitySummary
+                  links:
+                    title: GetAffordabilityLinks
+                    required:
+                    - accounts
+                    - expenses
+                    - income
+                    - self
+                    type: object
+                    properties:
+                      accounts:
+                        type: array
+                        description: Links of accounts
+                        example:
+                        - https://au-api.basiq.io/users/25c8d1ed77/accounts/s55bf5
+                        - https://au-api.basiq.io/users/25c8d1ed77/accounts/s55bf4
+                        items:
+                          type: string
+                      expenses:
+                        type: string
+                        description: Link to the expenses
+                        example: https://au-api.basiq.io/users/25c8d1ed77/expenses/s55bf5
+                      income:
+                        type: string
+                        description: Link to the income
+                        example: https://au-api.basiq.io/users/25c8d1ed77/income/s55bf4
+                      self:
+                        type: string
+                        description: Link to the affordability resource
+                        example: https://au-api.basiq.io/users/25c8d1ed77/affordability/s55bf3
+                    description: Object containing links to resources.
+                    x-readme-ref-name: GetAffordabilityLinks
+                description: 'Container object, containing affordability details.
+
+
+                  The affordability object includes a summary of financial position, assets, liabilities, with links to an income object and an expenses object, for an individual user for account and transaction data stored against that user.'
+                x-readme-ref-name: AffordabilityResponse
+            application/pdf:
+              schema:
+                title: AffordabilityResponse
+                required:
+                - assets
+                - external
+                - fromMonth
+                - generatedDate
+                - id
+                - liabilities
+                - links
+                - summary
+                - toMonth
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "affordability".
+                    example: affordability
+                  id:
+                    type: string
+                    description: Uniquely identifies the affordability summary.
+                    example: s55bf3
+                  coverageDays:
+                    type: integer
+                    description: Number of days covered by the summary
+                    format: int64
+                    example: 392
+                  assets:
+                    type: array
+                    description: Assets
+                    items:
+                      required:
+                      - account
+                      - availableFunds
+                      - balance
+                      - currency
+                      - institution
+                      - previous6Months
+                      - type
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          description: Type of account
+                          example: account
+                        account:
+                          required:
+                          - product
+                          - type
+                          type: object
+                          properties:
+                            product:
+                              type: string
+                              description: Identifies the Product as defined by institution
+                              example: Hooli Transaction
+                            type:
+                              type: string
+                              description: Identifies the Account type defined by institution
+                              example: transaction
+                          x-readme-ref-name: AccountType
+                        availableFunds:
+                          type: string
+                          description: The available funds at the time of the query.
+                          example: '45670.98'
+                        balance:
+                          type: string
+                          description: The currency in which the account is recorded.
+                          example: '35298.67'
+                        currency:
+                          type: string
+                          description: The currency in which the account is recorded.
+                          example: AUD
+                        institution:
+                          type: string
+                          description: The name of the financial institution with whom the account is held.
+                          example: Hooli
+                        previous6Months:
+                          required:
+                          - maxBalance
+                          - minBalance
+                          type: object
+                          properties:
+                            maxBalance:
+                              type:
+                              - string
+                              - 'null'
+                              example: '38309.44'
+                            minBalance:
+                              type:
+                              - string
+                              - 'null'
+                              example: '10032.81'
+                          x-readme-ref-name: AssetsPrevious6MonthsData
+                      x-readme-ref-name: AffordabilityAssetsData
+                  external:
+                    type: array
+                    description: External
+                    items:
+                      required:
+                      - changeHistory
+                      - payments
+                      - source
+                      type: object
+                      properties:
+                        changeHistory:
+                          type: array
+                          description: Each transaction (repeated for each source ordered by most recent)
+                          items:
+                            required:
+                            - amount
+                            - date
+                            - source
+                            type: object
+                            properties:
+                              amount:
+                                type: string
+                                description: Amount of payment
+                                example: '-146.50'
+                              date:
+                                type: string
+                                description: Date
+                                format: date
+                                example: '2019-03-31'
+                              source:
+                                type: string
+                                description: Full transaction description
+                                example: 'AFTERPAY MELBOURNE VI AUS Card xx3854 Value Date: 10/11/2019'
+                            x-readme-ref-name: ChangeHistoryExternal
+                        payments:
+                          type: array
+                          description: Aggregated attributes relating to payments for this source (identified as an external liability)
+                          items:
+                            required:
+                            - amountAvg
+                            - amountAvgMonthly
+                            - first
+                            - last
+                            - noOccurrences
+                            - total
+                            type: object
+                            properties:
+                              amountAvg:
+                                type: string
+                                description: Number of occurrences for same source (in this group)
+                                example: '-50.50'
+                              amountAvgMonthly:
+                                type: string
+                                description: Average monthly payment amount
+                                example: '-20.00'
+                              first:
+                                type: string
+                                description: Date of first payment
+                                format: date
+                                example: '2019-03-15'
+                              last:
+                                type: string
+                                description: Date of last payment
+                                format: date
+                                example: '2020-03-15'
+                              noOccurrences:
+                                type: integer
+                                description: Number of occurrences for same source (in this group)
+                                format: int64
+                                example: 2
+                              total:
+                                type: string
+                                description: Amount of total payments identified for source in the affordability snapshot
+                                example: '-146.50'
+                            x-readme-ref-name: ExternalPayment
+                        source:
+                          type: string
+                          description: Source of external liability (cleaned transaction description).
+                          example: afterpay
+                      x-readme-ref-name: ExternalLiabilityData
+                  fromMonth:
+                    type: string
+                    description: Start month for the period for which the Affordability summary is generated. The period of time relates to the account and transaction data used as input into the summary.
+                    example: 2019-03
+                  toMonth:
+                    type: string
+                    description: End month (usually the current month) for the period for which the Affordability summary is generated.
+                    example: 2020-03
+                  generatedDate:
+                    type: string
+                    description: Date the summary was generated.
+                    example: '2020-03-26T06:56:44'
+                  liabilities:
+                    required:
+                    - credit
+                    - loan
+                    type: object
+                    properties:
+                      credit:
+                        type: array
+                        description: Credit Liabilities
+                        items:
+                          required:
+                          - account
+                          - availableFunds
+                          - balance
+                          - creditLimit
+                          - currency
+                          - institution
+                          - previous6Months
+                          - previousMonth
+                          type: object
+                          properties:
+                            account:
+                              required:
+                              - product
+                              - type
+                              type: object
+                              properties:
+                                product:
+                                  type: string
+                                  description: Identifies the Product as defined by institution
+                                  example: Hooli Transaction
+                                type:
+                                  type: string
+                                  description: Identifies the Account type defined by institution
+                                  example: transaction
+                              x-readme-ref-name: AccountType
+                            availableFunds:
+                              type:
+                              - string
+                              - 'null'
+                              description: The available funds at the time of the query.
+                              example: '8286.80'
+                            balance:
+                              type:
+                              - string
+                              - 'null'
+                              description: The balance at the time of the query.
+                              example: '-11713.20'
+                            creditLimit:
+                              type:
+                              - string
+                              - 'null'
+                              description: Total credit limit available for the specified credit facility.
+                              example: '20000.00'
+                            currency:
+                              type: string
+                              description: The currency in which the account is recorded.
+                              example: AUD
+                            institution:
+                              type: string
+                              description: The name of the financial institution with whom the account is held.
+                              example: Hooli
+                            previous6Months:
+                              required:
+                              - cashAdvances
+                              type: object
+                              properties:
+                                cashAdvances:
+                                  type: string
+                                  description: Value of cash advances in period
+                                  example: -2053.5
+                              x-readme-ref-name: Previous6MonthsCreditLiabilities
+                            previousMonth:
+                              required:
+                              - maxBalance
+                              - minBalance
+                              - totalCredits
+                              - totalDebits
+                              type: object
+                              properties:
+                                maxBalance:
+                                  type: string
+                                  example: -12329.16
+                                minBalance:
+                                  type: string
+                                  example: -3174.16
+                                totalCredits:
+                                  type: string
+                                  example: '0.00'
+                                totalDebits:
+                                  type: string
+                                  example: -8287.1
+                              x-readme-ref-name: PreviousMonthDataLiabilities
+                          x-readme-ref-name: CreditLiabilities
+                      loan:
+                        type: array
+                        description: Loan Liabilities
+                        items:
+                          required:
+                          - account
+                          - availableFunds
+                          - balance
+                          - changeHistory
+                          - currency
+                          - institution
+                          - previous6Months
+                          - previousMonth
+                          type: object
+                          properties:
+                            account:
+                              required:
+                              - product
+                              - type
+                              type: object
+                              properties:
+                                product:
+                                  type: string
+                                  description: Identifies the Product as defined by institution
+                                  example: Hooli Transaction
+                                type:
+                                  type: string
+                                  description: Identifies the Account type defined by institution
+                                  example: transaction
+                              x-readme-ref-name: AccountType
+                            availableFunds:
+                              type:
+                              - string
+                              - 'null'
+                              description: The available funds at the time of the query.
+                              example: '87767.00'
+                            balance:
+                              type:
+                              - string
+                              - 'null'
+                              description: The balance at the time of the query.
+                              example: '-312233.00'
+                            changeHistory:
+                              type: array
+                              description: List of account transactions changes
+                              items:
+                                required:
+                                - amount
+                                - date
+                                - direction
+                                - source
+                                type: object
+                                properties:
+                                  amount:
+                                    type: string
+                                    description: Amount loan-interest or loan-repayment
+                                    example: '5768.00'
+                                  date:
+                                    type: string
+                                    description: Date
+                                    format: date
+                                    example: '2019-03-31'
+                                  direction:
+                                    type: string
+                                    description: Debit or Credit
+                                    example: credit
+                                    enum:
+                                    - debit
+                                    - credit
+                                  source:
+                                    type: string
+                                    description: Cleaned transaction description
+                                    example: Transfer Platnm Homeloan 346454
+                                x-readme-ref-name: ChangeHistoryAffordabilityData
+                            currency:
+                              type: string
+                              description: The currency in which the account is recorded.
+                              example: AUD
+                            institution:
+                              type: string
+                              description: The name of the financial institution with whom the account is held.
+                              example: Hooli
+                            previous6Months:
+                              required:
+                              - arrears
+                              type: object
+                              properties:
+                                arrears:
+                                  type:
+                                  - string
+                                  - 'null'
+                                  description: Has the loan been in arrears in the past 6 months - returned as a string value (true or false or null)
+                                  example: 'true'
+                              x-readme-ref-name: Previous6MonthsLoan
+                            previousMonth:
+                              required:
+                              - totalCredits
+                              - totalDebits
+                              - totalInterestCharged
+                              - totalRepayments
+                              type: object
+                              properties:
+                                totalCredits:
+                                  type: string
+                                  example: '0.00'
+                                totalDebits:
+                                  type: string
+                                  example: -8287.1
+                                totalInterestCharged:
+                                  type: string
+                                  example: -4303.5
+                                totalRepayments:
+                                  type: string
+                                  example: '5768.00'
+                              x-readme-ref-name: PreviousMonthDataLoanLiabilities
+                          x-readme-ref-name: LoanLiabilities
+                    x-readme-ref-name: LiabilitiesData
+                  summary:
+                    required:
+                    - assets
+                    - creditLimit
+                    - expenses
+                    - liabilities
+                    - loanRepaymentMonthly
+                    - netPosition
+                    - potentialLiabilitiesMonthly
+                    - regularIncome
+                    - savings
+                    type: object
+                    properties:
+                      assets:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total of cash based assets
+                        example: '59983.11'
+                      creditLimit:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total credit limit across all credit cards and overdrafts
+                        example: '20000.00'
+                      expenses:
+                        type: string
+                        description: Provides an average of monthly expenses calculated for the whole period of data retrieved (e.g. 13 months)
+                        example: '-12046.00'
+                      liabilities:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total of account based liabilities split into credit and loan liabilities
+                        example: '-323946.20'
+                      loanRepaymentMonthly:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total of all repayments monthly to disclosed loan liabilities as an average monthly amount
+                        example: '5284.00'
+                      netPosition:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total assets minus total liabilities
+                        example: -263963.09
+                      potentialLiabilitiesMonthly:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total of all repayments monthly to potential undisclosed loan liabilities as an average monthly amount
+                        example: -1727
+                      regularIncome:
+                        required:
+                        - previous3Months
+                        type: object
+                        properties:
+                          previous3Months:
+                            required:
+                            - avgMonthly
+                            type: object
+                            properties:
+                              avgMonthly:
+                                type:
+                                - string
+                                - 'null'
+                                example: '18098.00'
+                            x-readme-ref-name: AvgMonthlyData
+                        x-readme-ref-name: AffordabilityRegularIncomeData
+                      savings:
+                        type:
+                        - string
+                        - 'null'
+                        description: Average of monthly savings calculated for the whole period of data retrieved (e.g. 13 months)
+                        example: '93.00'
+                    x-readme-ref-name: AffordabilitySummary
+                  links:
+                    title: GetAffordabilityLinks
+                    required:
+                    - accounts
+                    - expenses
+                    - income
+                    - self
+                    type: object
+                    properties:
+                      accounts:
+                        type: array
+                        description: Links of accounts
+                        example:
+                        - https://au-api.basiq.io/users/25c8d1ed77/accounts/s55bf5
+                        - https://au-api.basiq.io/users/25c8d1ed77/accounts/s55bf4
+                        items:
+                          type: string
+                      expenses:
+                        type: string
+                        description: Link to the expenses
+                        example: https://au-api.basiq.io/users/25c8d1ed77/expenses/s55bf5
+                      income:
+                        type: string
+                        description: Link to the income
+                        example: https://au-api.basiq.io/users/25c8d1ed77/income/s55bf4
+                      self:
+                        type: string
+                        description: Link to the affordability resource
+                        example: https://au-api.basiq.io/users/25c8d1ed77/affordability/s55bf3
+                    description: Object containing links to resources.
+                    x-readme-ref-name: GetAffordabilityLinks
+                description: 'Container object, containing affordability details.
+
+
+                  The affordability object includes a summary of financial position, assets, liabilities, with links to an income object and an expenses object, for an individual user for account and transaction data stored against that user.'
+                x-readme-ref-name: AffordabilityResponse
+        '201':
+          description: Returns a created affordability PDF Report, if the operation succeeded.
+          content: {}
+        '204':
+          description: Returns no content if there are none transactions for the requested period.
+          content: {}
+        '400':
+          description: Returns error that server cannot or will not process the request due to something that is perceived to be a client error.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: parameter-not-valid
+                          enum:
+                          - parameter-not-supplied
+                          - parameter-not-valid
+                          - unsupported-accept
+                          - invalid-content
+                          - institution-not-supported
+                          - invalid-credentials
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: ID value is not valid.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Parameter not valid.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                x-readme-ref-name: BadRequestError
+            application/pdf:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: parameter-not-valid
+                          enum:
+                          - parameter-not-supplied
+                          - parameter-not-valid
+                          - unsupported-accept
+                          - invalid-content
+                          - institution-not-supported
+                          - invalid-credentials
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: ID value is not valid.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Parameter not valid.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                x-readme-ref-name: BadRequestError
+        '403':
+          description: Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - source
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: forbidden-access
+                          enum:
+                          - forbidden-access
+                          - no-production-access
+                          - access-denied
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Access to this resource is forbidden.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Forbidden Access
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: ForbiddenAccessError
+            application/pdf:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - source
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: forbidden-access
+                          enum:
+                          - forbidden-access
+                          - no-production-access
+                          - access-denied
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Access to this resource is forbidden.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Forbidden Access
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: ForbiddenAccessError
+        '404':
+          description: Returns error indicating that server can't find requested resource.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: resource-not-found
+                          enum:
+                          - resource-not-found
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Resource not found.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Requested resource is not found.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: NotFoundError
+            application/pdf:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: resource-not-found
+                          enum:
+                          - resource-not-found
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Resource not found.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Requested resource is not found.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: NotFoundError
+        '500':
+          description: Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: internal-server-error
+                          enum:
+                          - internal-server-error
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Internal Server error. Contact support.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Internal Server error.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: InternalServerError
+            application/pdf:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: internal-server-error
+                          enum:
+                          - internal-server-error
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Internal Server error. Contact support.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Internal Server error.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: InternalServerError
+      security:
+      - services_token: []
+  /users/{userId}/affordability/{snapshotId}:
+    get:
+      tags:
+      - Affordability
+      summary: Retrieve an affordability summary
+      description: Retrieves a specific, pre existing affordability summaries
+      operationId: getAffordability
+      deprecated: true
+      parameters:
+      - name: userId
+        in: path
+        description: The identifier of the user.
+        required: true
+        schema:
+          type: string
+      - name: snapshotId
+        in: path
+        description: The identifier of the affordability summaries to be retrieved.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns a saved affordability resource JSON or PDF summary file, if the operation succeeded.
+          content:
+            application/json:
+              schema:
+                title: AffordabilityResponse
+                required:
+                - assets
+                - external
+                - fromMonth
+                - generatedDate
+                - id
+                - liabilities
+                - links
+                - summary
+                - toMonth
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "affordability".
+                    example: affordability
+                  id:
+                    type: string
+                    description: Uniquely identifies the affordability summary.
+                    example: s55bf3
+                  coverageDays:
+                    type: integer
+                    description: Number of days covered by the summary
+                    format: int64
+                    example: 392
+                  assets:
+                    type: array
+                    description: Assets
+                    items:
+                      required:
+                      - account
+                      - availableFunds
+                      - balance
+                      - currency
+                      - institution
+                      - previous6Months
+                      - type
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          description: Type of account
+                          example: account
+                        account:
+                          required:
+                          - product
+                          - type
+                          type: object
+                          properties:
+                            product:
+                              type: string
+                              description: Identifies the Product as defined by institution
+                              example: Hooli Transaction
+                            type:
+                              type: string
+                              description: Identifies the Account type defined by institution
+                              example: transaction
+                          x-readme-ref-name: AccountType
+                        availableFunds:
+                          type: string
+                          description: The available funds at the time of the query.
+                          example: '45670.98'
+                        balance:
+                          type: string
+                          description: The currency in which the account is recorded.
+                          example: '35298.67'
+                        currency:
+                          type: string
+                          description: The currency in which the account is recorded.
+                          example: AUD
+                        institution:
+                          type: string
+                          description: The name of the financial institution with whom the account is held.
+                          example: Hooli
+                        previous6Months:
+                          required:
+                          - maxBalance
+                          - minBalance
+                          type: object
+                          properties:
+                            maxBalance:
+                              type:
+                              - string
+                              - 'null'
+                              example: '38309.44'
+                            minBalance:
+                              type:
+                              - string
+                              - 'null'
+                              example: '10032.81'
+                          x-readme-ref-name: AssetsPrevious6MonthsData
+                      x-readme-ref-name: AffordabilityAssetsData
+                  external:
+                    type: array
+                    description: External
+                    items:
+                      required:
+                      - changeHistory
+                      - payments
+                      - source
+                      type: object
+                      properties:
+                        changeHistory:
+                          type: array
+                          description: Each transaction (repeated for each source ordered by most recent)
+                          items:
+                            required:
+                            - amount
+                            - date
+                            - source
+                            type: object
+                            properties:
+                              amount:
+                                type: string
+                                description: Amount of payment
+                                example: '-146.50'
+                              date:
+                                type: string
+                                description: Date
+                                format: date
+                                example: '2019-03-31'
+                              source:
+                                type: string
+                                description: Full transaction description
+                                example: 'AFTERPAY MELBOURNE VI AUS Card xx3854 Value Date: 10/11/2019'
+                            x-readme-ref-name: ChangeHistoryExternal
+                        payments:
+                          type: array
+                          description: Aggregated attributes relating to payments for this source (identified as an external liability)
+                          items:
+                            required:
+                            - amountAvg
+                            - amountAvgMonthly
+                            - first
+                            - last
+                            - noOccurrences
+                            - total
+                            type: object
+                            properties:
+                              amountAvg:
+                                type: string
+                                description: Number of occurrences for same source (in this group)
+                                example: '-50.50'
+                              amountAvgMonthly:
+                                type: string
+                                description: Average monthly payment amount
+                                example: '-20.00'
+                              first:
+                                type: string
+                                description: Date of first payment
+                                format: date
+                                example: '2019-03-15'
+                              last:
+                                type: string
+                                description: Date of last payment
+                                format: date
+                                example: '2020-03-15'
+                              noOccurrences:
+                                type: integer
+                                description: Number of occurrences for same source (in this group)
+                                format: int64
+                                example: 2
+                              total:
+                                type: string
+                                description: Amount of total payments identified for source in the affordability snapshot
+                                example: '-146.50'
+                            x-readme-ref-name: ExternalPayment
+                        source:
+                          type: string
+                          description: Source of external liability (cleaned transaction description).
+                          example: afterpay
+                      x-readme-ref-name: ExternalLiabilityData
+                  fromMonth:
+                    type: string
+                    description: Start month for the period for which the Affordability summary is generated. The period of time relates to the account and transaction data used as input into the summary.
+                    example: 2019-03
+                  toMonth:
+                    type: string
+                    description: End month (usually the current month) for the period for which the Affordability summary is generated.
+                    example: 2020-03
+                  generatedDate:
+                    type: string
+                    description: Date the summary was generated.
+                    example: '2020-03-26T06:56:44'
+                  liabilities:
+                    required:
+                    - credit
+                    - loan
+                    type: object
+                    properties:
+                      credit:
+                        type: array
+                        description: Credit Liabilities
+                        items:
+                          required:
+                          - account
+                          - availableFunds
+                          - balance
+                          - creditLimit
+                          - currency
+                          - institution
+                          - previous6Months
+                          - previousMonth
+                          type: object
+                          properties:
+                            account:
+                              required:
+                              - product
+                              - type
+                              type: object
+                              properties:
+                                product:
+                                  type: string
+                                  description: Identifies the Product as defined by institution
+                                  example: Hooli Transaction
+                                type:
+                                  type: string
+                                  description: Identifies the Account type defined by institution
+                                  example: transaction
+                              x-readme-ref-name: AccountType
+                            availableFunds:
+                              type:
+                              - string
+                              - 'null'
+                              description: The available funds at the time of the query.
+                              example: '8286.80'
+                            balance:
+                              type:
+                              - string
+                              - 'null'
+                              description: The balance at the time of the query.
+                              example: '-11713.20'
+                            creditLimit:
+                              type:
+                              - string
+                              - 'null'
+                              description: Total credit limit available for the specified credit facility.
+                              example: '20000.00'
+                            currency:
+                              type: string
+                              description: The currency in which the account is recorded.
+                              example: AUD
+                            institution:
+                              type: string
+                              description: The name of the financial institution with whom the account is held.
+                              example: Hooli
+                            previous6Months:
+                              required:
+                              - cashAdvances
+                              type: object
+                              properties:
+                                cashAdvances:
+                                  type: string
+                                  description: Value of cash advances in period
+                                  example: -2053.5
+                              x-readme-ref-name: Previous6MonthsCreditLiabilities
+                            previousMonth:
+                              required:
+                              - maxBalance
+                              - minBalance
+                              - totalCredits
+                              - totalDebits
+                              type: object
+                              properties:
+                                maxBalance:
+                                  type: string
+                                  example: -12329.16
+                                minBalance:
+                                  type: string
+                                  example: -3174.16
+                                totalCredits:
+                                  type: string
+                                  example: '0.00'
+                                totalDebits:
+                                  type: string
+                                  example: -8287.1
+                              x-readme-ref-name: PreviousMonthDataLiabilities
+                          x-readme-ref-name: CreditLiabilities
+                      loan:
+                        type: array
+                        description: Loan Liabilities
+                        items:
+                          required:
+                          - account
+                          - availableFunds
+                          - balance
+                          - changeHistory
+                          - currency
+                          - institution
+                          - previous6Months
+                          - previousMonth
+                          type: object
+                          properties:
+                            account:
+                              required:
+                              - product
+                              - type
+                              type: object
+                              properties:
+                                product:
+                                  type: string
+                                  description: Identifies the Product as defined by institution
+                                  example: Hooli Transaction
+                                type:
+                                  type: string
+                                  description: Identifies the Account type defined by institution
+                                  example: transaction
+                              x-readme-ref-name: AccountType
+                            availableFunds:
+                              type:
+                              - string
+                              - 'null'
+                              description: The available funds at the time of the query.
+                              example: '87767.00'
+                            balance:
+                              type:
+                              - string
+                              - 'null'
+                              description: The balance at the time of the query.
+                              example: '-312233.00'
+                            changeHistory:
+                              type: array
+                              description: List of account transactions changes
+                              items:
+                                required:
+                                - amount
+                                - date
+                                - direction
+                                - source
+                                type: object
+                                properties:
+                                  amount:
+                                    type: string
+                                    description: Amount loan-interest or loan-repayment
+                                    example: '5768.00'
+                                  date:
+                                    type: string
+                                    description: Date
+                                    format: date
+                                    example: '2019-03-31'
+                                  direction:
+                                    type: string
+                                    description: Debit or Credit
+                                    example: credit
+                                    enum:
+                                    - debit
+                                    - credit
+                                  source:
+                                    type: string
+                                    description: Cleaned transaction description
+                                    example: Transfer Platnm Homeloan 346454
+                                x-readme-ref-name: ChangeHistoryAffordabilityData
+                            currency:
+                              type: string
+                              description: The currency in which the account is recorded.
+                              example: AUD
+                            institution:
+                              type: string
+                              description: The name of the financial institution with whom the account is held.
+                              example: Hooli
+                            previous6Months:
+                              required:
+                              - arrears
+                              type: object
+                              properties:
+                                arrears:
+                                  type:
+                                  - string
+                                  - 'null'
+                                  description: Has the loan been in arrears in the past 6 months - returned as a string value (true or false or null)
+                                  example: 'true'
+                              x-readme-ref-name: Previous6MonthsLoan
+                            previousMonth:
+                              required:
+                              - totalCredits
+                              - totalDebits
+                              - totalInterestCharged
+                              - totalRepayments
+                              type: object
+                              properties:
+                                totalCredits:
+                                  type: string
+                                  example: '0.00'
+                                totalDebits:
+                                  type: string
+                                  example: -8287.1
+                                totalInterestCharged:
+                                  type: string
+                                  example: -4303.5
+                                totalRepayments:
+                                  type: string
+                                  example: '5768.00'
+                              x-readme-ref-name: PreviousMonthDataLoanLiabilities
+                          x-readme-ref-name: LoanLiabilities
+                    x-readme-ref-name: LiabilitiesData
+                  summary:
+                    required:
+                    - assets
+                    - creditLimit
+                    - expenses
+                    - liabilities
+                    - loanRepaymentMonthly
+                    - netPosition
+                    - potentialLiabilitiesMonthly
+                    - regularIncome
+                    - savings
+                    type: object
+                    properties:
+                      assets:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total of cash based assets
+                        example: '59983.11'
+                      creditLimit:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total credit limit across all credit cards and overdrafts
+                        example: '20000.00'
+                      expenses:
+                        type: string
+                        description: Provides an average of monthly expenses calculated for the whole period of data retrieved (e.g. 13 months)
+                        example: '-12046.00'
+                      liabilities:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total of account based liabilities split into credit and loan liabilities
+                        example: '-323946.20'
+                      loanRepaymentMonthly:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total of all repayments monthly to disclosed loan liabilities as an average monthly amount
+                        example: '5284.00'
+                      netPosition:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total assets minus total liabilities
+                        example: -263963.09
+                      potentialLiabilitiesMonthly:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total of all repayments monthly to potential undisclosed loan liabilities as an average monthly amount
+                        example: -1727
+                      regularIncome:
+                        required:
+                        - previous3Months
+                        type: object
+                        properties:
+                          previous3Months:
+                            required:
+                            - avgMonthly
+                            type: object
+                            properties:
+                              avgMonthly:
+                                type:
+                                - string
+                                - 'null'
+                                example: '18098.00'
+                            x-readme-ref-name: AvgMonthlyData
+                        x-readme-ref-name: AffordabilityRegularIncomeData
+                      savings:
+                        type:
+                        - string
+                        - 'null'
+                        description: Average of monthly savings calculated for the whole period of data retrieved (e.g. 13 months)
+                        example: '93.00'
+                    x-readme-ref-name: AffordabilitySummary
+                  links:
+                    title: GetAffordabilityLinks
+                    required:
+                    - accounts
+                    - expenses
+                    - income
+                    - self
+                    type: object
+                    properties:
+                      accounts:
+                        type: array
+                        description: Links of accounts
+                        example:
+                        - https://au-api.basiq.io/users/25c8d1ed77/accounts/s55bf5
+                        - https://au-api.basiq.io/users/25c8d1ed77/accounts/s55bf4
+                        items:
+                          type: string
+                      expenses:
+                        type: string
+                        description: Link to the expenses
+                        example: https://au-api.basiq.io/users/25c8d1ed77/expenses/s55bf5
+                      income:
+                        type: string
+                        description: Link to the income
+                        example: https://au-api.basiq.io/users/25c8d1ed77/income/s55bf4
+                      self:
+                        type: string
+                        description: Link to the affordability resource
+                        example: https://au-api.basiq.io/users/25c8d1ed77/affordability/s55bf3
+                    description: Object containing links to resources.
+                    x-readme-ref-name: GetAffordabilityLinks
+                description: 'Container object, containing affordability details.
+
+
+                  The affordability object includes a summary of financial position, assets, liabilities, with links to an income object and an expenses object, for an individual user for account and transaction data stored against that user.'
+                x-readme-ref-name: AffordabilityResponse
+            application/pdf:
+              schema:
+                title: AffordabilityResponse
+                required:
+                - assets
+                - external
+                - fromMonth
+                - generatedDate
+                - id
+                - liabilities
+                - links
+                - summary
+                - toMonth
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "affordability".
+                    example: affordability
+                  id:
+                    type: string
+                    description: Uniquely identifies the affordability summary.
+                    example: s55bf3
+                  coverageDays:
+                    type: integer
+                    description: Number of days covered by the summary
+                    format: int64
+                    example: 392
+                  assets:
+                    type: array
+                    description: Assets
+                    items:
+                      required:
+                      - account
+                      - availableFunds
+                      - balance
+                      - currency
+                      - institution
+                      - previous6Months
+                      - type
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          description: Type of account
+                          example: account
+                        account:
+                          required:
+                          - product
+                          - type
+                          type: object
+                          properties:
+                            product:
+                              type: string
+                              description: Identifies the Product as defined by institution
+                              example: Hooli Transaction
+                            type:
+                              type: string
+                              description: Identifies the Account type defined by institution
+                              example: transaction
+                          x-readme-ref-name: AccountType
+                        availableFunds:
+                          type: string
+                          description: The available funds at the time of the query.
+                          example: '45670.98'
+                        balance:
+                          type: string
+                          description: The currency in which the account is recorded.
+                          example: '35298.67'
+                        currency:
+                          type: string
+                          description: The currency in which the account is recorded.
+                          example: AUD
+                        institution:
+                          type: string
+                          description: The name of the financial institution with whom the account is held.
+                          example: Hooli
+                        previous6Months:
+                          required:
+                          - maxBalance
+                          - minBalance
+                          type: object
+                          properties:
+                            maxBalance:
+                              type:
+                              - string
+                              - 'null'
+                              example: '38309.44'
+                            minBalance:
+                              type:
+                              - string
+                              - 'null'
+                              example: '10032.81'
+                          x-readme-ref-name: AssetsPrevious6MonthsData
+                      x-readme-ref-name: AffordabilityAssetsData
+                  external:
+                    type: array
+                    description: External
+                    items:
+                      required:
+                      - changeHistory
+                      - payments
+                      - source
+                      type: object
+                      properties:
+                        changeHistory:
+                          type: array
+                          description: Each transaction (repeated for each source ordered by most recent)
+                          items:
+                            required:
+                            - amount
+                            - date
+                            - source
+                            type: object
+                            properties:
+                              amount:
+                                type: string
+                                description: Amount of payment
+                                example: '-146.50'
+                              date:
+                                type: string
+                                description: Date
+                                format: date
+                                example: '2019-03-31'
+                              source:
+                                type: string
+                                description: Full transaction description
+                                example: 'AFTERPAY MELBOURNE VI AUS Card xx3854 Value Date: 10/11/2019'
+                            x-readme-ref-name: ChangeHistoryExternal
+                        payments:
+                          type: array
+                          description: Aggregated attributes relating to payments for this source (identified as an external liability)
+                          items:
+                            required:
+                            - amountAvg
+                            - amountAvgMonthly
+                            - first
+                            - last
+                            - noOccurrences
+                            - total
+                            type: object
+                            properties:
+                              amountAvg:
+                                type: string
+                                description: Number of occurrences for same source (in this group)
+                                example: '-50.50'
+                              amountAvgMonthly:
+                                type: string
+                                description: Average monthly payment amount
+                                example: '-20.00'
+                              first:
+                                type: string
+                                description: Date of first payment
+                                format: date
+                                example: '2019-03-15'
+                              last:
+                                type: string
+                                description: Date of last payment
+                                format: date
+                                example: '2020-03-15'
+                              noOccurrences:
+                                type: integer
+                                description: Number of occurrences for same source (in this group)
+                                format: int64
+                                example: 2
+                              total:
+                                type: string
+                                description: Amount of total payments identified for source in the affordability snapshot
+                                example: '-146.50'
+                            x-readme-ref-name: ExternalPayment
+                        source:
+                          type: string
+                          description: Source of external liability (cleaned transaction description).
+                          example: afterpay
+                      x-readme-ref-name: ExternalLiabilityData
+                  fromMonth:
+                    type: string
+                    description: Start month for the period for which the Affordability summary is generated. The period of time relates to the account and transaction data used as input into the summary.
+                    example: 2019-03
+                  toMonth:
+                    type: string
+                    description: End month (usually the current month) for the period for which the Affordability summary is generated.
+                    example: 2020-03
+                  generatedDate:
+                    type: string
+                    description: Date the summary was generated.
+                    example: '2020-03-26T06:56:44'
+                  liabilities:
+                    required:
+                    - credit
+                    - loan
+                    type: object
+                    properties:
+                      credit:
+                        type: array
+                        description: Credit Liabilities
+                        items:
+                          required:
+                          - account
+                          - availableFunds
+                          - balance
+                          - creditLimit
+                          - currency
+                          - institution
+                          - previous6Months
+                          - previousMonth
+                          type: object
+                          properties:
+                            account:
+                              required:
+                              - product
+                              - type
+                              type: object
+                              properties:
+                                product:
+                                  type: string
+                                  description: Identifies the Product as defined by institution
+                                  example: Hooli Transaction
+                                type:
+                                  type: string
+                                  description: Identifies the Account type defined by institution
+                                  example: transaction
+                              x-readme-ref-name: AccountType
+                            availableFunds:
+                              type:
+                              - string
+                              - 'null'
+                              description: The available funds at the time of the query.
+                              example: '8286.80'
+                            balance:
+                              type:
+                              - string
+                              - 'null'
+                              description: The balance at the time of the query.
+                              example: '-11713.20'
+                            creditLimit:
+                              type:
+                              - string
+                              - 'null'
+                              description: Total credit limit available for the specified credit facility.
+                              example: '20000.00'
+                            currency:
+                              type: string
+                              description: The currency in which the account is recorded.
+                              example: AUD
+                            institution:
+                              type: string
+                              description: The name of the financial institution with whom the account is held.
+                              example: Hooli
+                            previous6Months:
+                              required:
+                              - cashAdvances
+                              type: object
+                              properties:
+                                cashAdvances:
+                                  type: string
+                                  description: Value of cash advances in period
+                                  example: -2053.5
+                              x-readme-ref-name: Previous6MonthsCreditLiabilities
+                            previousMonth:
+                              required:
+                              - maxBalance
+                              - minBalance
+                              - totalCredits
+                              - totalDebits
+                              type: object
+                              properties:
+                                maxBalance:
+                                  type: string
+                                  example: -12329.16
+                                minBalance:
+                                  type: string
+                                  example: -3174.16
+                                totalCredits:
+                                  type: string
+                                  example: '0.00'
+                                totalDebits:
+                                  type: string
+                                  example: -8287.1
+                              x-readme-ref-name: PreviousMonthDataLiabilities
+                          x-readme-ref-name: CreditLiabilities
+                      loan:
+                        type: array
+                        description: Loan Liabilities
+                        items:
+                          required:
+                          - account
+                          - availableFunds
+                          - balance
+                          - changeHistory
+                          - currency
+                          - institution
+                          - previous6Months
+                          - previousMonth
+                          type: object
+                          properties:
+                            account:
+                              required:
+                              - product
+                              - type
+                              type: object
+                              properties:
+                                product:
+                                  type: string
+                                  description: Identifies the Product as defined by institution
+                                  example: Hooli Transaction
+                                type:
+                                  type: string
+                                  description: Identifies the Account type defined by institution
+                                  example: transaction
+                              x-readme-ref-name: AccountType
+                            availableFunds:
+                              type:
+                              - string
+                              - 'null'
+                              description: The available funds at the time of the query.
+                              example: '87767.00'
+                            balance:
+                              type:
+                              - string
+                              - 'null'
+                              description: The balance at the time of the query.
+                              example: '-312233.00'
+                            changeHistory:
+                              type: array
+                              description: List of account transactions changes
+                              items:
+                                required:
+                                - amount
+                                - date
+                                - direction
+                                - source
+                                type: object
+                                properties:
+                                  amount:
+                                    type: string
+                                    description: Amount loan-interest or loan-repayment
+                                    example: '5768.00'
+                                  date:
+                                    type: string
+                                    description: Date
+                                    format: date
+                                    example: '2019-03-31'
+                                  direction:
+                                    type: string
+                                    description: Debit or Credit
+                                    example: credit
+                                    enum:
+                                    - debit
+                                    - credit
+                                  source:
+                                    type: string
+                                    description: Cleaned transaction description
+                                    example: Transfer Platnm Homeloan 346454
+                                x-readme-ref-name: ChangeHistoryAffordabilityData
+                            currency:
+                              type: string
+                              description: The currency in which the account is recorded.
+                              example: AUD
+                            institution:
+                              type: string
+                              description: The name of the financial institution with whom the account is held.
+                              example: Hooli
+                            previous6Months:
+                              required:
+                              - arrears
+                              type: object
+                              properties:
+                                arrears:
+                                  type:
+                                  - string
+                                  - 'null'
+                                  description: Has the loan been in arrears in the past 6 months - returned as a string value (true or false or null)
+                                  example: 'true'
+                              x-readme-ref-name: Previous6MonthsLoan
+                            previousMonth:
+                              required:
+                              - totalCredits
+                              - totalDebits
+                              - totalInterestCharged
+                              - totalRepayments
+                              type: object
+                              properties:
+                                totalCredits:
+                                  type: string
+                                  example: '0.00'
+                                totalDebits:
+                                  type: string
+                                  example: -8287.1
+                                totalInterestCharged:
+                                  type: string
+                                  example: -4303.5
+                                totalRepayments:
+                                  type: string
+                                  example: '5768.00'
+                              x-readme-ref-name: PreviousMonthDataLoanLiabilities
+                          x-readme-ref-name: LoanLiabilities
+                    x-readme-ref-name: LiabilitiesData
+                  summary:
+                    required:
+                    - assets
+                    - creditLimit
+                    - expenses
+                    - liabilities
+                    - loanRepaymentMonthly
+                    - netPosition
+                    - potentialLiabilitiesMonthly
+                    - regularIncome
+                    - savings
+                    type: object
+                    properties:
+                      assets:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total of cash based assets
+                        example: '59983.11'
+                      creditLimit:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total credit limit across all credit cards and overdrafts
+                        example: '20000.00'
+                      expenses:
+                        type: string
+                        description: Provides an average of monthly expenses calculated for the whole period of data retrieved (e.g. 13 months)
+                        example: '-12046.00'
+                      liabilities:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total of account based liabilities split into credit and loan liabilities
+                        example: '-323946.20'
+                      loanRepaymentMonthly:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total of all repayments monthly to disclosed loan liabilities as an average monthly amount
+                        example: '5284.00'
+                      netPosition:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total assets minus total liabilities
+                        example: -263963.09
+                      potentialLiabilitiesMonthly:
+                        type:
+                        - string
+                        - 'null'
+                        description: Total of all repayments monthly to potential undisclosed loan liabilities as an average monthly amount
+                        example: -1727
+                      regularIncome:
+                        required:
+                        - previous3Months
+                        type: object
+                        properties:
+                          previous3Months:
+                            required:
+                            - avgMonthly
+                            type: object
+                            properties:
+                              avgMonthly:
+                                type:
+                                - string
+                                - 'null'
+                                example: '18098.00'
+                            x-readme-ref-name: AvgMonthlyData
+                        x-readme-ref-name: AffordabilityRegularIncomeData
+                      savings:
+                        type:
+                        - string
+                        - 'null'
+                        description: Average of monthly savings calculated for the whole period of data retrieved (e.g. 13 months)
+                        example: '93.00'
+                    x-readme-ref-name: AffordabilitySummary
+                  links:
+                    title: GetAffordabilityLinks
+                    required:
+                    - accounts
+                    - expenses
+                    - income
+                    - self
+                    type: object
+                    properties:
+                      accounts:
+                        type: array
+                        description: Links of accounts
+                        example:
+                        - https://au-api.basiq.io/users/25c8d1ed77/accounts/s55bf5
+                        - https://au-api.basiq.io/users/25c8d1ed77/accounts/s55bf4
+                        items:
+                          type: string
+                      expenses:
+                        type: string
+                        description: Link to the expenses
+                        example: https://au-api.basiq.io/users/25c8d1ed77/expenses/s55bf5
+                      income:
+                        type: string
+                        description: Link to the income
+                        example: https://au-api.basiq.io/users/25c8d1ed77/income/s55bf4
+                      self:
+                        type: string
+                        description: Link to the affordability resource
+                        example: https://au-api.basiq.io/users/25c8d1ed77/affordability/s55bf3
+                    description: Object containing links to resources.
+                    x-readme-ref-name: GetAffordabilityLinks
+                description: 'Container object, containing affordability details.
+
+
+                  The affordability object includes a summary of financial position, assets, liabilities, with links to an income object and an expenses object, for an individual user for account and transaction data stored against that user.'
+                x-readme-ref-name: AffordabilityResponse
+        '400':
+          description: Returns error that server cannot or will not process the request due to something that is perceived to be a client error.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: parameter-not-valid
+                          enum:
+                          - parameter-not-supplied
+                          - parameter-not-valid
+                          - unsupported-accept
+                          - invalid-content
+                          - institution-not-supported
+                          - invalid-credentials
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: ID value is not valid.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Parameter not valid.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                x-readme-ref-name: BadRequestError
+            application/pdf:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: parameter-not-valid
+                          enum:
+                          - parameter-not-supplied
+                          - parameter-not-valid
+                          - unsupported-accept
+                          - invalid-content
+                          - institution-not-supported
+                          - invalid-credentials
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: ID value is not valid.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Parameter not valid.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                x-readme-ref-name: BadRequestError
+        '403':
+          description: Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - source
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: forbidden-access
+                          enum:
+                          - forbidden-access
+                          - no-production-access
+                          - access-denied
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Access to this resource is forbidden.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Forbidden Access
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: ForbiddenAccessError
+            application/pdf:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - source
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: forbidden-access
+                          enum:
+                          - forbidden-access
+                          - no-production-access
+                          - access-denied
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Access to this resource is forbidden.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Forbidden Access
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: ForbiddenAccessError
+        '404':
+          description: Returns error indicating that server can't find requested resource.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: resource-not-found
+                          enum:
+                          - resource-not-found
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Resource not found.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Requested resource is not found.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: NotFoundError
+            application/pdf:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: resource-not-found
+                          enum:
+                          - resource-not-found
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Resource not found.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Requested resource is not found.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: NotFoundError
+        '500':
+          description: Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: internal-server-error
+                          enum:
+                          - internal-server-error
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Internal Server error. Contact support.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Internal Server error.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: InternalServerError
+            application/pdf:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: internal-server-error
+                          enum:
+                          - internal-server-error
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Internal Server error. Contact support.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Internal Server error.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: InternalServerError
+      security:
+      - services_token: []
+  /users/{userId}/affordability/{snapshotId}/transactions:
+    get:
+      tags:
+      - Affordability
+      summary: List affordability summary transactions
+      description: Use this endpoint to retrieve a paginated list of transactions associated with an affordability summary.
+      operationId: getAffordabilitySnapshotTransactions
+      deprecated: true
+      parameters:
+      - name: userId
+        in: path
+        description: The identifier of the user.
+        required: true
+        schema:
+          type: string
+      - name: snapshotId
+        in: path
+        description: The identifier of the affordability summary to be retrieved.
+        required: true
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: This represents the maximum number of transactions that may be included in the response (maximum of 500). Note that by default 500 transactions are returned if this value is not specified.
+        schema:
+          type: integer
+      responses:
+        '200':
+          description: Returns a affordability resource transactions JSON or CSV file, if the operation succeeded.
+          content:
+            application/json:
+              schema:
+                title: AffordabilityTransactionsResponse
+                required:
+                - count
+                - data
+                - links
+                - size
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  count:
+                    type: integer
+                    description: Count of the transactions in the response.
+                    format: int64
+                    example: 100
+                  size:
+                    type: integer
+                    format: int64
+                    example: 500
+                  data:
+                    type: array
+                    items:
+                      required:
+                      - account
+                      - amount
+                      - balance
+                      - class
+                      - description
+                      - direction
+                      - id
+                      - institution
+                      - links
+                      - postDate
+                      - status
+                      - transactionDate
+                      - type
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          description: Value is "transaction".
+                          example: transaction
+                        id:
+                          type: string
+                          description: Uniquely identifies the transaction.
+                          example: d3de1ca1
+                        account:
+                          type: string
+                          description: The id of the account resource the transaction belongs to.
+                          example: d3de1ca1
+                        amount:
+                          type: string
+                          description: Transaction amount. Outgoing funds are expressed as negative values.
+                          example: '123.12'
+                        balance:
+                          type: string
+                          description: Value of the account balance at time the transaction was completed.
+                          example: '123.12'
+                        class:
+                          type: string
+                          description: Describes the class(type) of transaction.
+                          example: payment
+                          enum:
+                          - bank-fee
+                          - payment
+                          - cash-withdrawal
+                          - transfer
+                          - loan-interest
+                          - refund
+                          - direct-cedit
+                          - interest
+                          - loan-repayment
+                        description:
+                          type: string
+                          description: The transaction description as submitted by the institution..
+                          example: DEBIT Only About Children Seaforth
+                        direction:
+                          type: string
+                          description: Identifies if the transaction is of debit or credit type.
+                          example: credit
+                          enum:
+                          - debit
+                          - credit
+                        institution:
+                          type: string
+                          description: The id of the institution resource the transaction originated from.
+                          example: AU00000
+                        postDate:
+                          type: string
+                          description: Date the transaction was posted as provided by the institution (this is the same date that appears on a bank statement). This value is null if the record is pending. e.g. "2017-11-10T21:46:44Z" or 2017-11-10T00:00:00Z.
+                          example: '2018-11-02T00:00:00Z'
+                        subClass:
+                          required:
+                          - title
+                          - Code
+                          type: object
+                          properties:
+                            title:
+                              type: string
+                              description: The subClass attribute will only return values for payment transactions (i.e. will be empty for all others) ( [affordability only] - HEC classification class is returned by default or custom class is returned if configured - ask us about custom category mapping)
+                              example: Formal child care services nec
+                            Code:
+                              type: integer
+                              description: The subClass attribute will only return values for payment transactions (i.e. will be empty for all others) ( [affordability only] - HEC classification class is returned by default or custom class is returned if configured - ask us about custom category mapping)
+                              example: 801050199
+                          x-readme-ref-name: subClassAffordability
+                        status:
+                          type: string
+                          description: Identifies if a transaction is pending or posted. A pending transaction is an approved debit or credit transaction that has not been fully processed yet (i.e. has not been posted). Find out more about pending transaction and how to deal with them within your app. Note that pending transactions are not available for all institutions.
+                          example: pending
+                          enum:
+                          - pending
+                          - posted
+                        transactionDate:
+                          type: string
+                          description: Date that the user executed the transaction as provided by the institution. Note that not all transactions provide this value (varies by institution) e.g. "2017-11-10T00:00:00Z"
+                          example: '2018-11-02T00:00:00Z'
+                        links:
+                          required:
+                          - account
+                          - institution
+                          type: object
+                          properties:
+                            account:
+                              type: string
+                              description: Url of the account.
+                              example: https://au-api.basiq.io/users/6a52015e/accounts/31eb30a0
+                            institution:
+                              type: string
+                              description: Url of the institution.
+                              example: https://au-api.basiq.io/institutions/AU00000
+                          x-readme-ref-name: AffordabilityTransactionLinks
+                      x-readme-ref-name: TransactionDataAffordability
+                  links:
+                    required:
+                    - self
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        description: Self reference url.
+                        example: https://au-api.basiq.io/users/115dc708/affordability/9dedbb28/transactions
+                      next:
+                        type: string
+                        description: Url to next result.
+                        example: https://au-api.basiq.io/users/115dc708/affordability/9dedbb28/transactions?next=9b7d9a64
+                    x-readme-ref-name: AffordabilityTransactionsGetLinks
+                description: Container object, containing affordability snapshot transaction.
+                x-readme-ref-name: AffordabilityTransactionsResponse
+            application/csv:
+              schema:
+                title: AffordabilityTransactionsResponse
+                required:
+                - count
+                - data
+                - links
+                - size
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  count:
+                    type: integer
+                    description: Count of the transactions in the response.
+                    format: int64
+                    example: 100
+                  size:
+                    type: integer
+                    format: int64
+                    example: 500
+                  data:
+                    type: array
+                    items:
+                      required:
+                      - account
+                      - amount
+                      - balance
+                      - class
+                      - description
+                      - direction
+                      - id
+                      - institution
+                      - links
+                      - postDate
+                      - status
+                      - transactionDate
+                      - type
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          description: Value is "transaction".
+                          example: transaction
+                        id:
+                          type: string
+                          description: Uniquely identifies the transaction.
+                          example: d3de1ca1
+                        account:
+                          type: string
+                          description: The id of the account resource the transaction belongs to.
+                          example: d3de1ca1
+                        amount:
+                          type: string
+                          description: Transaction amount. Outgoing funds are expressed as negative values.
+                          example: '123.12'
+                        balance:
+                          type: string
+                          description: Value of the account balance at time the transaction was completed.
+                          example: '123.12'
+                        class:
+                          type: string
+                          description: Describes the class(type) of transaction.
+                          example: payment
+                          enum:
+                          - bank-fee
+                          - payment
+                          - cash-withdrawal
+                          - transfer
+                          - loan-interest
+                          - refund
+                          - direct-cedit
+                          - interest
+                          - loan-repayment
+                        description:
+                          type: string
+                          description: The transaction description as submitted by the institution..
+                          example: DEBIT Only About Children Seaforth
+                        direction:
+                          type: string
+                          description: Identifies if the transaction is of debit or credit type.
+                          example: credit
+                          enum:
+                          - debit
+                          - credit
+                        institution:
+                          type: string
+                          description: The id of the institution resource the transaction originated from.
+                          example: AU00000
+                        postDate:
+                          type: string
+                          description: Date the transaction was posted as provided by the institution (this is the same date that appears on a bank statement). This value is null if the record is pending. e.g. "2017-11-10T21:46:44Z" or 2017-11-10T00:00:00Z.
+                          example: '2018-11-02T00:00:00Z'
+                        subClass:
+                          required:
+                          - title
+                          - Code
+                          type: object
+                          properties:
+                            title:
+                              type: string
+                              description: The subClass attribute will only return values for payment transactions (i.e. will be empty for all others) ( [affordability only] - HEC classification class is returned by default or custom class is returned if configured - ask us about custom category mapping)
+                              example: Formal child care services nec
+                            Code:
+                              type: integer
+                              description: The subClass attribute will only return values for payment transactions (i.e. will be empty for all others) ( [affordability only] - HEC classification class is returned by default or custom class is returned if configured - ask us about custom category mapping)
+                              example: 801050199
+                          x-readme-ref-name: subClassAffordability
+                        status:
+                          type: string
+                          description: Identifies if a transaction is pending or posted. A pending transaction is an approved debit or credit transaction that has not been fully processed yet (i.e. has not been posted). Find out more about pending transaction and how to deal with them within your app. Note that pending transactions are not available for all institutions.
+                          example: pending
+                          enum:
+                          - pending
+                          - posted
+                        transactionDate:
+                          type: string
+                          description: Date that the user executed the transaction as provided by the institution. Note that not all transactions provide this value (varies by institution) e.g. "2017-11-10T00:00:00Z"
+                          example: '2018-11-02T00:00:00Z'
+                        links:
+                          required:
+                          - account
+                          - institution
+                          type: object
+                          properties:
+                            account:
+                              type: string
+                              description: Url of the account.
+                              example: https://au-api.basiq.io/users/6a52015e/accounts/31eb30a0
+                            institution:
+                              type: string
+                              description: Url of the institution.
+                              example: https://au-api.basiq.io/institutions/AU00000
+                          x-readme-ref-name: AffordabilityTransactionLinks
+                      x-readme-ref-name: TransactionDataAffordability
+                  links:
+                    required:
+                    - self
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        description: Self reference url.
+                        example: https://au-api.basiq.io/users/115dc708/affordability/9dedbb28/transactions
+                      next:
+                        type: string
+                        description: Url to next result.
+                        example: https://au-api.basiq.io/users/115dc708/affordability/9dedbb28/transactions?next=9b7d9a64
+                    x-readme-ref-name: AffordabilityTransactionsGetLinks
+                description: Container object, containing affordability snapshot transaction.
+                x-readme-ref-name: AffordabilityTransactionsResponse
+        '400':
+          description: Returns error that server cannot or will not process the request due to something that is perceived to be a client error.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: parameter-not-valid
+                          enum:
+                          - parameter-not-supplied
+                          - parameter-not-valid
+                          - unsupported-accept
+                          - invalid-content
+                          - institution-not-supported
+                          - invalid-credentials
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: ID value is not valid.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Parameter not valid.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                x-readme-ref-name: BadRequestError
+            application/csv:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: parameter-not-valid
+                          enum:
+                          - parameter-not-supplied
+                          - parameter-not-valid
+                          - unsupported-accept
+                          - invalid-content
+                          - institution-not-supported
+                          - invalid-credentials
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: ID value is not valid.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Parameter not valid.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                x-readme-ref-name: BadRequestError
+        '403':
+          description: Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - source
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: forbidden-access
+                          enum:
+                          - forbidden-access
+                          - no-production-access
+                          - access-denied
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Access to this resource is forbidden.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Forbidden Access
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: ForbiddenAccessError
+            application/csv:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - source
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: forbidden-access
+                          enum:
+                          - forbidden-access
+                          - no-production-access
+                          - access-denied
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Access to this resource is forbidden.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Forbidden Access
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: ForbiddenAccessError
+        '404':
+          description: Returns error indicating that server can't find requested resource.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: resource-not-found
+                          enum:
+                          - resource-not-found
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Resource not found.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Requested resource is not found.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: NotFoundError
+            application/csv:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: resource-not-found
+                          enum:
+                          - resource-not-found
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Resource not found.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Requested resource is not found.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: NotFoundError
+        '500':
+          description: Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: internal-server-error
+                          enum:
+                          - internal-server-error
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Internal Server error. Contact support.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Internal Server error.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: InternalServerError
+            application/csv:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: internal-server-error
+                          enum:
+                          - internal-server-error
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Internal Server error. Contact support.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Internal Server error.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: InternalServerError
+      security:
+      - services_token: []
+components:
+  securitySchemes:
+    services_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true
+  samples-languages:
+  - curl
+  - node
+  - ruby
+  - javascript
+  - python

@@ -1,0 +1,30 @@
+overlay: 1.0.0
+info:
+  title: Basiq Connect Transactions API overlay
+  version: 1.0.0
+extends: openapi/basiq-transactions-api-openapi.yml
+x-generated: '2026-10-21'
+x-method: generated
+actions:
+- target: $.info
+  update:
+    x-provider: Basiq
+    x-mcp-server: https://api.basiq.io/mcp
+    x-llms-txt: https://api.basiq.io/llms.txt
+- target: $.servers[0]
+  update:
+    description: Basiq production API (Australia)
+- target: $.components.securitySchemes.api_key
+  update:
+    description: Basic auth with the Basiq API key; only used to call POST /token, which returns a services_token.
+- target: $.components.securitySchemes.services_token
+  update:
+    description: Bearer JWT from POST /token (scope SERVER_ACCESS for server-side, CLIENT_ACCESS bound to a userId for client-side).
+- target: $.paths['/users/{userId}/transactions'].get
+  update:
+    x-mcp-tool: execute-request
+    x-safe: true
+- target: $.paths['/users/{userId}/transactions/{transactionId}'].get
+  update:
+    x-mcp-tool: execute-request
+    x-safe: true

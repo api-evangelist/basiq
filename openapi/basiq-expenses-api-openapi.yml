@@ -1,0 +1,1740 @@
+openapi: 3.2.0
+info:
+  title: Affordability Expenses API
+  version: 3.0.0
+  license:
+    name: commercial
+    url: https://basiq.io
+servers:
+- url: https://au-api.basiq.io
+security:
+- services_token: []
+tags:
+- name: Expenses
+paths:
+  /users/{userId}/expenses:
+    post:
+      tags:
+      - Expenses
+      summary: Create an expense summary
+      description: Create a new expense summary for a user
+      operationId: postExpenses
+      deprecated: true
+      parameters:
+      - name: userId
+        in: path
+        description: The identifier of the user.
+        required: true
+        schema:
+          type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                accounts:
+                  type: array
+                  description: The list of accounts to be included in the expenses otherwise all the user accounts will be included in the summary
+                  example:
+                  - s55bf3
+                  - s55bf4
+                  items:
+                    type: string
+                fromMonth:
+                  type: string
+                  description: The first/start month to be included in the expense output e.g. "fromMonth":"2019-05". Resulting expenses resource will be based on data between fromMonth and toMonth.
+                  example: 2019-05
+                toMonth:
+                  type: string
+                  description: The last/end month to be included in the expense output e.g. "toMonth":"2019-09". Resulting expenses resource will be based on data between fromMonth and toMonth.
+                  example: 2019-09
+              x-readme-ref-name: ExpensesPostRequest
+        required: false
+      responses:
+        '200':
+          description: Returns a created expenses resource, if the operation succeeded.
+          content:
+            application/json:
+              schema:
+                title: ExpensesResponse
+                required:
+                - bankFees
+                - cashWithdrawals
+                - externalTransfers
+                - fromMonth
+                - id
+                - loanInterests
+                - loanRepayments
+                - payments
+                - toMonth
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Value of this resource is "expenses".
+                    example: expenses
+                  id:
+                    type: string
+                    description: Uniquely identifies the expenses summary.
+                    example: s55bf3
+                  coverageDays:
+                    type: integer
+                    description: Number of days covered by the summary
+                    format: int64
+                    example: 392
+                  bankFees:
+                    required:
+                    - avgMonthly
+                    - changeHistory
+                    - summary
+                    type: object
+                    properties:
+                      avgMonthly:
+                        type: string
+                        description: Average amount monthly
+                        example: '-421.00'
+                      changeHistory:
+                        type: array
+                        items:
+                          required:
+                          - amount
+                          - date
+                          type: object
+                          properties:
+                            amount:
+                              type: string
+                              description: Amount of expense that period
+                              example: '-11.00'
+                            date:
+                              type: string
+                              description: Month expense relates
+                              example: 2018-09
+                          description: Amount classified as spent that month (repeated each month of data)
+                          x-readme-ref-name: ChangeHistoryExpensesClass
+                      summary:
+                        type: string
+                        description: Summary period "monthly"
+                        example: monthly
+                    description: Average monthly amount for given class for defined period
+                    x-readme-ref-name: ClassResourceExpenses
+                  cashWithdrawals:
+                    required:
+                    - avgMonthly
+                    - changeHistory
+                    - summary
+                    type: object
+                    properties:
+                      avgMonthly:
+                        type: string
+                        description: Average amount monthly
+                        example: '-421.00'
+                      changeHistory:
+                        type: array
+                        items:
+                          required:
+                          - amount
+                          - date
+                          type: object
+                          properties:
+                            amount:
+                              type: string
+                              description: Amount of expense that period
+                              example: '-11.00'
+                            date:
+                              type: string
+                              description: Month expense relates
+                              example: 2018-09
+                          description: Amount classified as spent that month (repeated each month of data)
+                          x-readme-ref-name: ChangeHistoryExpensesClass
+                      summary:
+                        type: string
+                        description: Summary period "monthly"
+                        example: monthly
+                    description: Average monthly amount for given class for defined period
+                    x-readme-ref-name: ClassResourceExpenses
+                  externalTransfers:
+                    required:
+                    - avgMonthly
+                    - changeHistory
+                    - summary
+                    type: object
+                    properties:
+                      avgMonthly:
+                        type: string
+                        description: Average amount monthly
+                        example: '-421.00'
+                      changeHistory:
+                        type: array
+                        items:
+                          required:
+                          - amount
+                          - date
+                          type: object
+                          properties:
+                            amount:
+                              type: string
+                              description: Amount of expense that period
+                              example: '-11.00'
+                            date:
+                              type: string
+                              description: Month expense relates
+                              example: 2018-09
+                          description: Amount classified as spent that month (repeated each month of data)
+                          x-readme-ref-name: ChangeHistoryExpensesClass
+                      summary:
+                        type: string
+                        description: Summary period "monthly"
+                        example: monthly
+                    description: Average monthly amount for given class for defined period
+                    x-readme-ref-name: ClassResourceExpenses
+                  fromMonth:
+                    type: string
+                    description: First 'month' occurrence of expenses categorised going back as far as 13 months.
+                    example: 2017-12
+                  loanInterests:
+                    required:
+                    - avgMonthly
+                    - changeHistory
+                    - summary
+                    type: object
+                    properties:
+                      avgMonthly:
+                        type: string
+                        description: Average amount monthly
+                        example: '-421.00'
+                      changeHistory:
+                        type: array
+                        items:
+                          required:
+                          - amount
+                          - date
+                          type: object
+                          properties:
+                            amount:
+                              type: string
+                              description: Amount of expense that period
+                              example: '-11.00'
+                            date:
+                              type: string
+                              description: Month expense relates
+                              example: 2018-09
+                          description: Amount classified as spent that month (repeated each month of data)
+                          x-readme-ref-name: ChangeHistoryExpensesClass
+                      summary:
+                        type: string
+                        description: Summary period "monthly"
+                        example: monthly
+                    description: Average monthly amount for given class for defined period
+                    x-readme-ref-name: ClassResourceExpenses
+                  loanRepayments:
+                    required:
+                    - avgMonthly
+                    - changeHistory
+                    - summary
+                    type: object
+                    properties:
+                      avgMonthly:
+                        type: string
+                        description: Average amount monthly
+                        example: '-421.00'
+                      changeHistory:
+                        type: array
+                        items:
+                          required:
+                          - amount
+                          - date
+                          type: object
+                          properties:
+                            amount:
+                              type: string
+                              description: Amount of expense that period
+                              example: '-11.00'
+                            date:
+                              type: string
+                              description: Month expense relates
+                              example: 2018-09
+                          description: Amount classified as spent that month (repeated each month of data)
+                          x-readme-ref-name: ChangeHistoryExpensesClass
+                      summary:
+                        type: string
+                        description: Summary period "monthly"
+                        example: monthly
+                    description: Average monthly amount for given class for defined period
+                    x-readme-ref-name: ClassResourceExpenses
+                  payments:
+                    type: array
+                    items:
+                      required:
+                      - avgMonthly
+                      - division
+                      - percentageTotal
+                      - subCategory
+                      type: object
+                      properties:
+                        avgMonthly:
+                          type: string
+                          description: 'Average monthly amount by category for defined period (up to 13 months). This number monthly is calculated as follows: (Total Expenses/Report Coverage Days)*30. This allows data with partial months to be calculated correctly.'
+                          example: '-636.88'
+                        division:
+                          type: string
+                          description: 'Top level summary: category name. e.g. Medical care and heath expenses, Food and non-alcoholic beverages, Education'
+                          example: Education
+                        percentageTotal:
+                          type: number
+                          description: Average monthly amount expressed as a percentage of total expenses.
+                          format: double
+                          example: '-636.88'
+                        subCategory:
+                          type: array
+                          items:
+                            required:
+                            - category
+                            - changeHistory
+                            - summary
+                            type: object
+                            properties:
+                              category:
+                                required:
+                                - expenseClass
+                                type: object
+                                properties:
+                                  expenseClass:
+                                    required:
+                                    - classCode
+                                    - classTitle
+                                    - divisionCode
+                                    - divisionTitle
+                                    type: object
+                                    properties:
+                                      classCode:
+                                        type: string
+                                        description: 'Classification code for HEC classification: 4 levels class, group, subdivision and division.'
+                                        example: '0703030101'
+                                      classTitle:
+                                        type: string
+                                        description: 'Classification code for HEC classification: 4 levels class, group, subdivision and division.'
+                                        example: Non-electrical household appliances
+                                      divisionCode:
+                                        type: string
+                                        example: '04'
+                                      divisionTitle:
+                                        type: string
+                                        example: Alcoholic beverages
+                                    description: Class represents one class of classification system
+                                    x-readme-ref-name: ExpensesClass
+                                description: Category data
+                                x-readme-ref-name: CategoryDataExpenses
+                              changeHistory:
+                                type: array
+                                items:
+                                  required:
+                                  - amount
+                                  - date
+                                  type: object
+                                  properties:
+                                    amount:
+                                      type: string
+                                      description: Amount of expense that period
+                                      example: '-11.00'
+                                    date:
+                                      type: string
+                                      description: Month expense relates
+                                      example: 2018-09
+                                  description: Amount classified as spent that month (repeated each month of data)
+                                  x-readme-ref-name: ChangeHistoryExpensesClass
+                              summary:
+                                type: string
+                                description: Summary period "monthly".
+                                example: monthly
+                            description: Payments Sub-Category
+                            x-readme-ref-name: SubCategoryExpenses
+                      description: Payments Summary
+                      x-readme-ref-name: PaymentsSummaryExpenses
+                  toMonth:
+                    type: string
+                    description: Latest 'month' occurrence of expenses categorised.
+                    example: 2018-12
+                  links:
+                    required:
+                    - accounts
+                    - self
+                    type: object
+                    properties:
+                      accounts:
+                        type: array
+                        description: Links of accounts
+                        example:
+                        - https://au-api.basiq.io/users/25c8d1ed77/accounts/s55bf5
+                        - https://au-api.basiq.io/users/25c8d1ed77/accounts/s55bf4
+                        items:
+                          type: string
+                      self:
+                        type: string
+                        description: Link to the requested expenses resource
+                        example: https://au-api.basiq.io/users/25c8d1ed77/expenses/s55bf4
+                    x-readme-ref-name: ExpensesLinks
+                description: 'Container object, containing expenses details.
+
+
+                  The Expenses object returns an aggregated list of expenses by category of spend.'
+                x-readme-ref-name: ExpensesResponse
+        '204':
+          description: Returns no content if there are none transactions for the requested period.
+          content: {}
+        '400':
+          description: Returns error that server cannot or will not process the request due to something that is perceived to be a client error.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: parameter-not-valid
+                          enum:
+                          - parameter-not-supplied
+                          - parameter-not-valid
+                          - unsupported-accept
+                          - invalid-content
+                          - institution-not-supported
+                          - invalid-credentials
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: ID value is not valid.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Parameter not valid.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                x-readme-ref-name: BadRequestError
+        '403':
+          description: Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - source
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: forbidden-access
+                          enum:
+                          - forbidden-access
+                          - no-production-access
+                          - access-denied
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Access to this resource is forbidden.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Forbidden Access
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: ForbiddenAccessError
+        '404':
+          description: Returns error indicating that server can't find requested resource.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: resource-not-found
+                          enum:
+                          - resource-not-found
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Resource not found.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Requested resource is not found.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: NotFoundError
+        '500':
+          description: Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: internal-server-error
+                          enum:
+                          - internal-server-error
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Internal Server error. Contact support.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Internal Server error.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: InternalServerError
+      security:
+      - services_token: []
+  /users/{userId}/expenses/{snapshotId}:
+    get:
+      tags:
+      - Expenses
+      summary: Retrieve an expense summary
+      description: Retrieve an existing expense summary for a specific user
+      operationId: getExpenses
+      deprecated: true
+      parameters:
+      - name: userId
+        in: path
+        description: The identifier of the user.
+        required: true
+        schema:
+          type: string
+      - name: snapshotId
+        in: path
+        description: The identifier of the expense summary to be retrieved.
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns a saved expenses resource, if the operation succeeded.
+          content:
+            application/json:
+              schema:
+                title: ExpensesResponse
+                required:
+                - bankFees
+                - cashWithdrawals
+                - externalTransfers
+                - fromMonth
+                - id
+                - loanInterests
+                - loanRepayments
+                - payments
+                - toMonth
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Value of this resource is "expenses".
+                    example: expenses
+                  id:
+                    type: string
+                    description: Uniquely identifies the expenses summary.
+                    example: s55bf3
+                  coverageDays:
+                    type: integer
+                    description: Number of days covered by the summary
+                    format: int64
+                    example: 392
+                  bankFees:
+                    required:
+                    - avgMonthly
+                    - changeHistory
+                    - summary
+                    type: object
+                    properties:
+                      avgMonthly:
+                        type: string
+                        description: Average amount monthly
+                        example: '-421.00'
+                      changeHistory:
+                        type: array
+                        items:
+                          required:
+                          - amount
+                          - date
+                          type: object
+                          properties:
+                            amount:
+                              type: string
+                              description: Amount of expense that period
+                              example: '-11.00'
+                            date:
+                              type: string
+                              description: Month expense relates
+                              example: 2018-09
+                          description: Amount classified as spent that month (repeated each month of data)
+                          x-readme-ref-name: ChangeHistoryExpensesClass
+                      summary:
+                        type: string
+                        description: Summary period "monthly"
+                        example: monthly
+                    description: Average monthly amount for given class for defined period
+                    x-readme-ref-name: ClassResourceExpenses
+                  cashWithdrawals:
+                    required:
+                    - avgMonthly
+                    - changeHistory
+                    - summary
+                    type: object
+                    properties:
+                      avgMonthly:
+                        type: string
+                        description: Average amount monthly
+                        example: '-421.00'
+                      changeHistory:
+                        type: array
+                        items:
+                          required:
+                          - amount
+                          - date
+                          type: object
+                          properties:
+                            amount:
+                              type: string
+                              description: Amount of expense that period
+                              example: '-11.00'
+                            date:
+                              type: string
+                              description: Month expense relates
+                              example: 2018-09
+                          description: Amount classified as spent that month (repeated each month of data)
+                          x-readme-ref-name: ChangeHistoryExpensesClass
+                      summary:
+                        type: string
+                        description: Summary period "monthly"
+                        example: monthly
+                    description: Average monthly amount for given class for defined period
+                    x-readme-ref-name: ClassResourceExpenses
+                  externalTransfers:
+                    required:
+                    - avgMonthly
+                    - changeHistory
+                    - summary
+                    type: object
+                    properties:
+                      avgMonthly:
+                        type: string
+                        description: Average amount monthly
+                        example: '-421.00'
+                      changeHistory:
+                        type: array
+                        items:
+                          required:
+                          - amount
+                          - date
+                          type: object
+                          properties:
+                            amount:
+                              type: string
+                              description: Amount of expense that period
+                              example: '-11.00'
+                            date:
+                              type: string
+                              description: Month expense relates
+                              example: 2018-09
+                          description: Amount classified as spent that month (repeated each month of data)
+                          x-readme-ref-name: ChangeHistoryExpensesClass
+                      summary:
+                        type: string
+                        description: Summary period "monthly"
+                        example: monthly
+                    description: Average monthly amount for given class for defined period
+                    x-readme-ref-name: ClassResourceExpenses
+                  fromMonth:
+                    type: string
+                    description: First 'month' occurrence of expenses categorised going back as far as 13 months.
+                    example: 2017-12
+                  loanInterests:
+                    required:
+                    - avgMonthly
+                    - changeHistory
+                    - summary
+                    type: object
+                    properties:
+                      avgMonthly:
+                        type: string
+                        description: Average amount monthly
+                        example: '-421.00'
+                      changeHistory:
+                        type: array
+                        items:
+                          required:
+                          - amount
+                          - date
+                          type: object
+                          properties:
+                            amount:
+                              type: string
+                              description: Amount of expense that period
+                              example: '-11.00'
+                            date:
+                              type: string
+                              description: Month expense relates
+                              example: 2018-09
+                          description: Amount classified as spent that month (repeated each month of data)
+                          x-readme-ref-name: ChangeHistoryExpensesClass
+                      summary:
+                        type: string
+                        description: Summary period "monthly"
+                        example: monthly
+                    description: Average monthly amount for given class for defined period
+                    x-readme-ref-name: ClassResourceExpenses
+                  loanRepayments:
+                    required:
+                    - avgMonthly
+                    - changeHistory
+                    - summary
+                    type: object
+                    properties:
+                      avgMonthly:
+                        type: string
+                        description: Average amount monthly
+                        example: '-421.00'
+                      changeHistory:
+                        type: array
+                        items:
+                          required:
+                          - amount
+                          - date
+                          type: object
+                          properties:
+                            amount:
+                              type: string
+                              description: Amount of expense that period
+                              example: '-11.00'
+                            date:
+                              type: string
+                              description: Month expense relates
+                              example: 2018-09
+                          description: Amount classified as spent that month (repeated each month of data)
+                          x-readme-ref-name: ChangeHistoryExpensesClass
+                      summary:
+                        type: string
+                        description: Summary period "monthly"
+                        example: monthly
+                    description: Average monthly amount for given class for defined period
+                    x-readme-ref-name: ClassResourceExpenses
+                  payments:
+                    type: array
+                    items:
+                      required:
+                      - avgMonthly
+                      - division
+                      - percentageTotal
+                      - subCategory
+                      type: object
+                      properties:
+                        avgMonthly:
+                          type: string
+                          description: 'Average monthly amount by category for defined period (up to 13 months). This number monthly is calculated as follows: (Total Expenses/Report Coverage Days)*30. This allows data with partial months to be calculated correctly.'
+                          example: '-636.88'
+                        division:
+                          type: string
+                          description: 'Top level summary: category name. e.g. Medical care and heath expenses, Food and non-alcoholic beverages, Education'
+                          example: Education
+                        percentageTotal:
+                          type: number
+                          description: Average monthly amount expressed as a percentage of total expenses.
+                          format: double
+                          example: '-636.88'
+                        subCategory:
+                          type: array
+                          items:
+                            required:
+                            - category
+                            - changeHistory
+                            - summary
+                            type: object
+                            properties:
+                              category:
+                                required:
+                                - expenseClass
+                                type: object
+                                properties:
+                                  expenseClass:
+                                    required:
+                                    - classCode
+                                    - classTitle
+                                    - divisionCode
+                                    - divisionTitle
+                                    type: object
+                                    properties:
+                                      classCode:
+                                        type: string
+                                        description: 'Classification code for HEC classification: 4 levels class, group, subdivision and division.'
+                                        example: '0703030101'
+                                      classTitle:
+                                        type: string
+                                        description: 'Classification code for HEC classification: 4 levels class, group, subdivision and division.'
+                                        example: Non-electrical household appliances
+                                      divisionCode:
+                                        type: string
+                                        example: '04'
+                                      divisionTitle:
+                                        type: string
+                                        example: Alcoholic beverages
+                                    description: Class represents one class of classification system
+                                    x-readme-ref-name: ExpensesClass
+                                description: Category data
+                                x-readme-ref-name: CategoryDataExpenses
+                              changeHistory:
+                                type: array
+                                items:
+                                  required:
+                                  - amount
+                                  - date
+                                  type: object
+                                  properties:
+                                    amount:
+                                      type: string
+                                      description: Amount of expense that period
+                                      example: '-11.00'
+                                    date:
+                                      type: string
+                                      description: Month expense relates
+                                      example: 2018-09
+                                  description: Amount classified as spent that month (repeated each month of data)
+                                  x-readme-ref-name: ChangeHistoryExpensesClass
+                              summary:
+                                type: string
+                                description: Summary period "monthly".
+                                example: monthly
+                            description: Payments Sub-Category
+                            x-readme-ref-name: SubCategoryExpenses
+                      description: Payments Summary
+                      x-readme-ref-name: PaymentsSummaryExpenses
+                  toMonth:
+                    type: string
+                    description: Latest 'month' occurrence of expenses categorised.
+                    example: 2018-12
+                  links:
+                    required:
+                    - accounts
+                    - self
+                    type: object
+                    properties:
+                      accounts:
+                        type: array
+                        description: Links of accounts
+                        example:
+                        - https://au-api.basiq.io/users/25c8d1ed77/accounts/s55bf5
+                        - https://au-api.basiq.io/users/25c8d1ed77/accounts/s55bf4
+                        items:
+                          type: string
+                      self:
+                        type: string
+                        description: Link to the requested expenses resource
+                        example: https://au-api.basiq.io/users/25c8d1ed77/expenses/s55bf4
+                    x-readme-ref-name: ExpensesLinks
+                description: 'Container object, containing expenses details.
+
+
+                  The Expenses object returns an aggregated list of expenses by category of spend.'
+                x-readme-ref-name: ExpensesResponse
+            text/csv:
+              schema:
+                title: ExpensesResponse
+                required:
+                - bankFees
+                - cashWithdrawals
+                - externalTransfers
+                - fromMonth
+                - id
+                - loanInterests
+                - loanRepayments
+                - payments
+                - toMonth
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Value of this resource is "expenses".
+                    example: expenses
+                  id:
+                    type: string
+                    description: Uniquely identifies the expenses summary.
+                    example: s55bf3
+                  coverageDays:
+                    type: integer
+                    description: Number of days covered by the summary
+                    format: int64
+                    example: 392
+                  bankFees:
+                    required:
+                    - avgMonthly
+                    - changeHistory
+                    - summary
+                    type: object
+                    properties:
+                      avgMonthly:
+                        type: string
+                        description: Average amount monthly
+                        example: '-421.00'
+                      changeHistory:
+                        type: array
+                        items:
+                          required:
+                          - amount
+                          - date
+                          type: object
+                          properties:
+                            amount:
+                              type: string
+                              description: Amount of expense that period
+                              example: '-11.00'
+                            date:
+                              type: string
+                              description: Month expense relates
+                              example: 2018-09
+                          description: Amount classified as spent that month (repeated each month of data)
+                          x-readme-ref-name: ChangeHistoryExpensesClass
+                      summary:
+                        type: string
+                        description: Summary period "monthly"
+                        example: monthly
+                    description: Average monthly amount for given class for defined period
+                    x-readme-ref-name: ClassResourceExpenses
+                  cashWithdrawals:
+                    required:
+                    - avgMonthly
+                    - changeHistory
+                    - summary
+                    type: object
+                    properties:
+                      avgMonthly:
+                        type: string
+                        description: Average amount monthly
+                        example: '-421.00'
+                      changeHistory:
+                        type: array
+                        items:
+                          required:
+                          - amount
+                          - date
+                          type: object
+                          properties:
+                            amount:
+                              type: string
+                              description: Amount of expense that period
+                              example: '-11.00'
+                            date:
+                              type: string
+                              description: Month expense relates
+                              example: 2018-09
+                          description: Amount classified as spent that month (repeated each month of data)
+                          x-readme-ref-name: ChangeHistoryExpensesClass
+                      summary:
+                        type: string
+                        description: Summary period "monthly"
+                        example: monthly
+                    description: Average monthly amount for given class for defined period
+                    x-readme-ref-name: ClassResourceExpenses
+                  externalTransfers:
+                    required:
+                    - avgMonthly
+                    - changeHistory
+                    - summary
+                    type: object
+                    properties:
+                      avgMonthly:
+                        type: string
+                        description: Average amount monthly
+                        example: '-421.00'
+                      changeHistory:
+                        type: array
+                        items:
+                          required:
+                          - amount
+                          - date
+                          type: object
+                          properties:
+                            amount:
+                              type: string
+                              description: Amount of expense that period
+                              example: '-11.00'
+                            date:
+                              type: string
+                              description: Month expense relates
+                              example: 2018-09
+                          description: Amount classified as spent that month (repeated each month of data)
+                          x-readme-ref-name: ChangeHistoryExpensesClass
+                      summary:
+                        type: string
+                        description: Summary period "monthly"
+                        example: monthly
+                    description: Average monthly amount for given class for defined period
+                    x-readme-ref-name: ClassResourceExpenses
+                  fromMonth:
+                    type: string
+                    description: First 'month' occurrence of expenses categorised going back as far as 13 months.
+                    example: 2017-12
+                  loanInterests:
+                    required:
+                    - avgMonthly
+                    - changeHistory
+                    - summary
+                    type: object
+                    properties:
+                      avgMonthly:
+                        type: string
+                        description: Average amount monthly
+                        example: '-421.00'
+                      changeHistory:
+                        type: array
+                        items:
+                          required:
+                          - amount
+                          - date
+                          type: object
+                          properties:
+                            amount:
+                              type: string
+                              description: Amount of expense that period
+                              example: '-11.00'
+                            date:
+                              type: string
+                              description: Month expense relates
+                              example: 2018-09
+                          description: Amount classified as spent that month (repeated each month of data)
+                          x-readme-ref-name: ChangeHistoryExpensesClass
+                      summary:
+                        type: string
+                        description: Summary period "monthly"
+                        example: monthly
+                    description: Average monthly amount for given class for defined period
+                    x-readme-ref-name: ClassResourceExpenses
+                  loanRepayments:
+                    required:
+                    - avgMonthly
+                    - changeHistory
+                    - summary
+                    type: object
+                    properties:
+                      avgMonthly:
+                        type: string
+                        description: Average amount monthly
+                        example: '-421.00'
+                      changeHistory:
+                        type: array
+                        items:
+                          required:
+                          - amount
+                          - date
+                          type: object
+                          properties:
+                            amount:
+                              type: string
+                              description: Amount of expense that period
+                              example: '-11.00'
+                            date:
+                              type: string
+                              description: Month expense relates
+                              example: 2018-09
+                          description: Amount classified as spent that month (repeated each month of data)
+                          x-readme-ref-name: ChangeHistoryExpensesClass
+                      summary:
+                        type: string
+                        description: Summary period "monthly"
+                        example: monthly
+                    description: Average monthly amount for given class for defined period
+                    x-readme-ref-name: ClassResourceExpenses
+                  payments:
+                    type: array
+                    items:
+                      required:
+                      - avgMonthly
+                      - division
+                      - percentageTotal
+                      - subCategory
+                      type: object
+                      properties:
+                        avgMonthly:
+                          type: string
+                          description: 'Average monthly amount by category for defined period (up to 13 months). This number monthly is calculated as follows: (Total Expenses/Report Coverage Days)*30. This allows data with partial months to be calculated correctly.'
+                          example: '-636.88'
+                        division:
+                          type: string
+                          description: 'Top level summary: category name. e.g. Medical care and heath expenses, Food and non-alcoholic beverages, Education'
+                          example: Education
+                        percentageTotal:
+                          type: number
+                          description: Average monthly amount expressed as a percentage of total expenses.
+                          format: double
+                          example: '-636.88'
+                        subCategory:
+                          type: array
+                          items:
+                            required:
+                            - category
+                            - changeHistory
+                            - summary
+                            type: object
+                            properties:
+                              category:
+                                required:
+                                - expenseClass
+                                type: object
+                                properties:
+                                  expenseClass:
+                                    required:
+                                    - classCode
+                                    - classTitle
+                                    - divisionCode
+                                    - divisionTitle
+                                    type: object
+                                    properties:
+                                      classCode:
+                                        type: string
+                                        description: 'Classification code for HEC classification: 4 levels class, group, subdivision and division.'
+                                        example: '0703030101'
+                                      classTitle:
+                                        type: string
+                                        description: 'Classification code for HEC classification: 4 levels class, group, subdivision and division.'
+                                        example: Non-electrical household appliances
+                                      divisionCode:
+                                        type: string
+                                        example: '04'
+                                      divisionTitle:
+                                        type: string
+                                        example: Alcoholic beverages
+                                    description: Class represents one class of classification system
+                                    x-readme-ref-name: ExpensesClass
+                                description: Category data
+                                x-readme-ref-name: CategoryDataExpenses
+                              changeHistory:
+                                type: array
+                                items:
+                                  required:
+                                  - amount
+                                  - date
+                                  type: object
+                                  properties:
+                                    amount:
+                                      type: string
+                                      description: Amount of expense that period
+                                      example: '-11.00'
+                                    date:
+                                      type: string
+                                      description: Month expense relates
+                                      example: 2018-09
+                                  description: Amount classified as spent that month (repeated each month of data)
+                                  x-readme-ref-name: ChangeHistoryExpensesClass
+                              summary:
+                                type: string
+                                description: Summary period "monthly".
+                                example: monthly
+                            description: Payments Sub-Category
+                            x-readme-ref-name: SubCategoryExpenses
+                      description: Payments Summary
+                      x-readme-ref-name: PaymentsSummaryExpenses
+                  toMonth:
+                    type: string
+                    description: Latest 'month' occurrence of expenses categorised.
+                    example: 2018-12
+                  links:
+                    required:
+                    - accounts
+                    - self
+                    type: object
+                    properties:
+                      accounts:
+                        type: array
+                        description: Links of accounts
+                        example:
+                        - https://au-api.basiq.io/users/25c8d1ed77/accounts/s55bf5
+                        - https://au-api.basiq.io/users/25c8d1ed77/accounts/s55bf4
+                        items:
+                          type: string
+                      self:
+                        type: string
+                        description: Link to the requested expenses resource
+                        example: https://au-api.basiq.io/users/25c8d1ed77/expenses/s55bf4
+                    x-readme-ref-name: ExpensesLinks
+                description: 'Container object, containing expenses details.
+
+
+                  The Expenses object returns an aggregated list of expenses by category of spend.'
+                x-readme-ref-name: ExpensesResponse
+        '400':
+          description: Returns error that server cannot or will not process the request due to something that is perceived to be a client error.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: parameter-not-valid
+                          enum:
+                          - parameter-not-supplied
+                          - parameter-not-valid
+                          - unsupported-accept
+                          - invalid-content
+                          - institution-not-supported
+                          - invalid-credentials
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: ID value is not valid.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Parameter not valid.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                x-readme-ref-name: BadRequestError
+            text/csv:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: parameter-not-valid
+                          enum:
+                          - parameter-not-supplied
+                          - parameter-not-valid
+                          - unsupported-accept
+                          - invalid-content
+                          - institution-not-supported
+                          - invalid-credentials
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: ID value is not valid.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Parameter not valid.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                x-readme-ref-name: BadRequestError
+        '403':
+          description: Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - source
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: forbidden-access
+                          enum:
+                          - forbidden-access
+                          - no-production-access
+                          - access-denied
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Access to this resource is forbidden.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Forbidden Access
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: ForbiddenAccessError
+            text/csv:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - source
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: forbidden-access
+                          enum:
+                          - forbidden-access
+                          - no-production-access
+                          - access-denied
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Access to this resource is forbidden.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Forbidden Access
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: ForbiddenAccessError
+        '404':
+          description: Returns error indicating that server can't find requested resource.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: resource-not-found
+                          enum:
+                          - resource-not-found
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Resource not found.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Requested resource is not found.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: NotFoundError
+            text/csv:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: resource-not-found
+                          enum:
+                          - resource-not-found
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Resource not found.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Requested resource is not found.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: NotFoundError
+        '500':
+          description: Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: internal-server-error
+                          enum:
+                          - internal-server-error
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Internal Server error. Contact support.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Internal Server error.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: InternalServerError
+            text/csv:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: internal-server-error
+                          enum:
+                          - internal-server-error
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Internal Server error. Contact support.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Internal Server error.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: InternalServerError
+      security:
+      - services_token: []
+components:
+  securitySchemes:
+    services_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true
+  samples-languages:
+  - curl
+  - node
+  - ruby
+  - javascript
+  - python

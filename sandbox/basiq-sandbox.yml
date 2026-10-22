@@ -1,0 +1,44 @@
+generated: '2026-10-21'
+method: searched
+source: https://api.basiq.io/reference/testing
+docs: https://api.basiq.io/reference/testing
+description: >-
+  Basiq provides a free sandbox environment (API key from the Developer Dashboard) with test institutions whose
+  personas mimic real users, accruing new transactions over time. A separate deterministic Open Banking (CDR)
+  sandbox uses the Hooli OB institution (AU00000) and a mock Data Holder to exercise the full consent lifecycle
+  (authorize, extend, refresh, revoke). Unhappy-path and MFA test users return fixed errors / challenges.
+modes:
+- name: Standard sandbox
+  note: '"You can use our sandbox environment for free right now - just grab an API key to get started (via the Developer Dashboard)."'
+  limits: '"There is a limit of 500 for sandbox connections."'
+- name: Open Banking sandbox
+  institution: Hooli OB (AU00000)
+  enable: Set institution method for Hooli OB (AU00000) to `open-banking` in the Dashboard Customizer UI.
+  announced: https://api.basiq.io/changelog/jun26-open-banking-sandbox
+key_formats:
+  note: No distinct test-vs-live key prefix is documented; API keys are issued in the Dashboard per application.
+test_values:
+  open_banking:
+  - member_number: '374829'
+    otp: '227470'
+    institution: Hooli OB (AU00000) - open-banking
+  unhappy_path_users:
+  - {loginId: bighead, password: password, error: invalid-credentials, detail: Account is locked}
+  - {loginId: erlich, password: aviato, error: account-not-accessible-requires-user-action, detail: An action is required from end-user before account details can be returned.}
+  - {loginId: jianYang, password: nothotdog, error: service-unavailable, detail: Service is currently unavailable. Please try again later.}
+  mfa_users:
+    banks: ['Pied Piper Bank (mfa-challenge always)', 'Nucleus Bank (mfa-challenge intermittent - 50/50)']
+    users:
+    - {loginId: jared, password: django, method: token, solution: '1234'}
+    - {loginId: richard, password: tabsnotspaces, method: token, solution: '1234'}
+    - {loginId: gavinBelson, password: hooli2016, method: security-questions, solution: Hooli}
+    - {loginId: Gilfoyle, password: PiedPiper, method: security-questions, solution: Hooli}
+    - {loginId: Whistler, password: ShowBox, method: security-questions, solution: 'Basiq, AU00000'}
+    - {loginId: Wentworth-Smith, password: whislter, method: security-questions, solution: 'Basiq, AU00000'}
+  happy_path_personas_note: The testing page also lists happy-path personas (e.g. Wentworth-Smith/whislter, Whistler/ShowBox, Gilfoyle/PiedPiper, gavinBelson/hooli2016, jared/django, richard/tabsnotspaces, laurieBream/business2024 for business consumer consent, ashMann/hooli2024) with their account profiles.
+time_simulation: none documented
+triggers:
+- Unhappy-path users always return the same error at the same job step.
+- Enrich sandbox users can run 100 requests per month (https://api.basiq.io/docs/api-rate-limiting).
+gaps:
+- No documented test-vs-live key prefix or mode flag.

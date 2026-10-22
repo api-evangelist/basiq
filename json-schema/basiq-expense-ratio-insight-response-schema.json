@@ -1,0 +1,114 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/main/json-schema/basiq-expense-ratio-insight-response-schema.json",
+  "title": "ExpenseRatioInsightResponse",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/_original/basiq-insights-openapi.json#/components/schemas/ExpenseRatioInsightResponse",
+  "type": "object",
+  "required": [
+    "type",
+    "id",
+    "created",
+    "insightType",
+    "data",
+    "links"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "insight"
+      ],
+      "description": "Type of response object"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this insight"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the insight was created"
+    },
+    "insightType": {
+      "type": "string",
+      "enum": [
+        "expense-ratio"
+      ],
+      "description": "Type of insight returned"
+    },
+    "data": {
+      "type": "array",
+      "description": "Array containing expense ratio result",
+      "items": {
+        "$ref": "#/$defs/ExpenseRatioInsightDataItem"
+      }
+    },
+    "links": {
+      "type": "object",
+      "required": [
+        "self"
+      ],
+      "properties": {
+        "self": {
+          "type": "string",
+          "format": "uri",
+          "description": "Self-referencing link to this insight"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "ExpenseRatioInsightDataItem": {
+      "type": "object",
+      "required": [
+        "input",
+        "result"
+      ],
+      "properties": {
+        "input": {
+          "type": "object",
+          "required": [
+            "expense"
+          ],
+          "properties": {
+            "expense": {
+              "type": "string",
+              "description": "Echo of the expense value from request"
+            }
+          },
+          "description": "Echo of the input parameters"
+        },
+        "result": {
+          "type": "object",
+          "required": [
+            "range"
+          ],
+          "properties": {
+            "range": {
+              "type": "string",
+              "enum": [
+                "0% to 10%",
+                "10% to 20%",
+                "20% to 30%",
+                "30% to 40%",
+                "40% to 50%",
+                "50% to 60%",
+                "60% to 70%",
+                "70% to 80%",
+                "80% to 90%",
+                "90% to 100%",
+                "Income Exceeded"
+              ],
+              "description": "Expense-to-income ratio range. Calculated as: expense / ME040 (Average Monthly Credit). 'Income Exceeded' indicates ratio greater than 100%."
+            }
+          },
+          "description": "Result containing the expense ratio range"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,2071 @@
+{
+  "info": {
+    "_postman_id": "5a401b5e-6ef8-436a-8e46-e41a9da33ff9",
+    "name": "REPORTING Reports API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:24:20.000Z",
+    "updatedAt": "2026-10-22T02:24:20.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-5a401b5e-6ef8-436a-8e46-e41a9da33ff9"
+  },
+  "item": [
+    {
+      "name": "reports",
+      "item": [
+        {
+          "name": "{id}",
+          "item": [
+            {
+              "name": "Retrieve a report",
+              "id": "19121867-4fbe-4e19-8144-4ea0ddc7f652",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/pdf"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "65ffd0ee-002a-4626-93e6-b259d1da0a39",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the generated report"
+                    }
+                  ]
+                },
+                "description": "Use this endpoint to retrieve a specific report. Ensure you check the\ndocumentation for the schema of each report type.\n\n| Request Header | Description |\n|----------------|-----------------------------------------------------------------------------|\n| Accept | Specifies the format of the response. Use `application/pdf` |\n\nIf you want to generate the PDF, make sure to change `accept`\nin the CURL request to `application/pdf` for PDF generation."
+              },
+              "response": [
+                {
+                  "id": "a767ea3e-2e92-4be8-89bf-a80e756df687",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/pdf"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"<string>\",\n  \"id\": \"<string>\",\n  \"title\": \"<string>\",\n  \"reportType\": \"<string>\",\n  \"createdDate\": \"<dateTime>\",\n  \"createdBy\": \"<string>\",\n  \"filters\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<array>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<array>\"\n    }\n  ],\n  \"data\": {\n    \"metrics\": [\n      {\n        \"id\": \"<string>\",\n        \"title\": \"<string>\",\n        \"description\": \"<string>\",\n        \"sections\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"result\": {\n          \"value\": \"<string>\",\n          \"format\": \"<string>\"\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"title\": \"<string>\",\n        \"description\": \"<string>\",\n        \"sections\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"result\": {\n          \"value\": \"<string>\",\n          \"format\": \"<string>\"\n        }\n      }\n    ],\n    \"groups\": [\n      {\n        \"id\": \"<string>\",\n        \"title\": \"<string>\",\n        \"sections\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"analysis\": {\n          \"summary\": {\n            \"transactionCount\": \"<integer>\",\n            \"overallPercentage\": {\n              \"credit\": \"<number>\",\n              \"debit\": \"<number>\"\n            }\n          },\n          \"range\": {\n            \"startDate\": \"<date>\",\n            \"endDate\": \"<date>\",\n            \"duration\": \"<integer>\"\n          },\n          \"amount\": {\n            \"total\": \"<string>\",\n            \"min\": \"<string>\",\n            \"max\": \"<string>\",\n            \"average\": {\n              \"transaction\": \"<string>\",\n              \"month\": \"<string>\",\n              \"medianTransaction\": \"<string>\",\n              \"medianMonth\": \"<string>\",\n              \"ongoingMonth\": \"<string>\"\n            },\n            \"stableMonths\": \"<integer>\",\n            \"secureMonths\": \"<integer>\"\n          },\n          \"frequency\": {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"display\": \"<string>\",\n            \"next\": {\n              \"date\": \"<date>\",\n              \"amount\": \"<string>\"\n            }\n          }\n        },\n        \"subgroup\": [\n          {\n            \"id\": \"<string>\",\n            \"name\": \"<string>\",\n            \"analysis\": {\n              \"summary\": {\n                \"transactionCount\": \"<integer>\",\n                \"overallPercentage\": {\n                  \"credit\": \"<number>\",\n                  \"debit\": \"<number>\"\n                }\n              },\n              \"range\": {\n                \"startDate\": \"<date>\",\n                \"endDate\": \"<date>\",\n                \"duration\": \"<integer>\"\n              },\n              \"amount\": {\n                \"total\": \"<string>\",\n                \"min\": \"<string>\",\n                \"max\": \"<string>\",\n                \"average\": {\n                  \"transaction\": \"<string>\",\n                  \"month\": \"<string>\",\n                  \"medianTransaction\": \"<string>\",\n                  \"medianMonth\": \"<string>\",\n                  \"ongoingMonth\": \"<string>\"\n                },\n                \"stableMonths\": \"<integer>\",\n                \"secureMonths\": \"<integer>\"\n              },\n              \"frequency\": {\n                \"type\": \"<string>\",\n                \"amount\": \"<string>\",\n                \"display\": \"<string>\",\n                \"next\": {\n                  \"date\": \"<date>\",\n                  \"amount\": \"<string>\"\n                }\n              }\n            },\n            \"transactions\": [\n              {\n                \"id\": \"<string>\",\n                \"date\": \"<date>\",\n                \"description\": \"<string>\",\n                \"amount\": \"<string>\"\n              },\n              {\n                \"id\": \"<string>\",\n                \"date\": \"<date>\",\n                \"description\": \"<string>\",\n                \"amount\": \"<string>\"\n              }\n            ]\n          },\n          {\n            \"id\": \"<string>\",\n            \"name\": \"<string>\",\n            \"analysis\": {\n              \"summary\": {\n                \"transactionCount\": \"<integer>\",\n                \"overallPercentage\": {\n                  \"credit\": \"<number>\",\n                  \"debit\": \"<number>\"\n                }\n              },\n              \"range\": {\n                \"startDate\": \"<date>\",\n                \"endDate\": \"<date>\",\n                \"duration\": \"<integer>\"\n              },\n              \"amount\": {\n                \"total\": \"<string>\",\n                \"min\": \"<string>\",\n                \"max\": \"<string>\",\n                \"average\": {\n                  \"transaction\": \"<string>\",\n                  \"month\": \"<string>\",\n                  \"medianTransaction\": \"<string>\",\n                  \"medianMonth\": \"<string>\",\n                  \"ongoingMonth\": \"<string>\"\n                },\n                \"stableMonths\": \"<integer>\",\n                \"secureMonths\": \"<integer>\"\n              },\n              \"frequency\": {\n                \"type\": \"<string>\",\n                \"amount\": \"<string>\",\n                \"display\": \"<string>\",\n                \"next\": {\n                  \"date\": \"<date>\",\n                  \"amount\": \"<string>\"\n                }\n              }\n            },\n            \"transactions\": [\n              {\n                \"id\": \"<string>\",\n                \"date\": \"<date>\",\n                \"description\": \"<string>\",\n                \"amount\": \"<string>\"\n              },\n              {\n                \"id\": \"<string>\",\n                \"date\": \"<date>\",\n                \"description\": \"<string>\",\n                \"amount\": \"<string>\"\n              }\n            ]\n          }\n        ]\n      },\n      {\n        \"id\": \"<string>\",\n        \"title\": \"<string>\",\n        \"sections\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"analysis\": {\n          \"summary\": {\n            \"transactionCount\": \"<integer>\",\n            \"overallPercentage\": {\n              \"credit\": \"<number>\",\n              \"debit\": \"<number>\"\n            }\n          },\n          \"range\": {\n            \"startDate\": \"<date>\",\n            \"endDate\": \"<date>\",\n            \"duration\": \"<integer>\"\n          },\n          \"amount\": {\n            \"total\": \"<string>\",\n            \"min\": \"<string>\",\n            \"max\": \"<string>\",\n            \"average\": {\n              \"transaction\": \"<string>\",\n              \"month\": \"<string>\",\n              \"medianTransaction\": \"<string>\",\n              \"medianMonth\": \"<string>\",\n              \"ongoingMonth\": \"<string>\"\n            },\n            \"stableMonths\": \"<integer>\",\n            \"secureMonths\": \"<integer>\"\n          },\n          \"frequency\": {\n            \"type\": \"<string>\",\n            \"amount\": \"<string>\",\n            \"display\": \"<string>\",\n            \"next\": {\n              \"date\": \"<date>\",\n              \"amount\": \"<string>\"\n            }\n          }\n        },\n        \"subgroup\": [\n          {\n            \"id\": \"<string>\",\n            \"name\": \"<string>\",\n            \"analysis\": {\n              \"summary\": {\n                \"transactionCount\": \"<integer>\",\n                \"overallPercentage\": {\n                  \"credit\": \"<number>\",\n                  \"debit\": \"<number>\"\n                }\n              },\n              \"range\": {\n                \"startDate\": \"<date>\",\n                \"endDate\": \"<date>\",\n                \"duration\": \"<integer>\"\n              },\n              \"amount\": {\n                \"total\": \"<string>\",\n                \"min\": \"<string>\",\n                \"max\": \"<string>\",\n                \"average\": {\n                  \"transaction\": \"<string>\",\n                  \"month\": \"<string>\",\n                  \"medianTransaction\": \"<string>\",\n                  \"medianMonth\": \"<string>\",\n                  \"ongoingMonth\": \"<string>\"\n                },\n                \"stableMonths\": \"<integer>\",\n                \"secureMonths\": \"<integer>\"\n              },\n              \"frequency\": {\n                \"type\": \"<string>\",\n                \"amount\": \"<string>\",\n                \"display\": \"<string>\",\n                \"next\": {\n                  \"date\": \"<date>\",\n                  \"amount\": \"<string>\"\n                }\n              }\n            },\n            \"transactions\": [\n              {\n                \"id\": \"<string>\",\n                \"date\": \"<date>\",\n                \"description\": \"<string>\",\n                \"amount\": \"<string>\"\n              },\n              {\n                \"id\": \"<string>\",\n                \"date\": \"<date>\",\n                \"description\": \"<string>\",\n                \"amount\": \"<string>\"\n              }\n            ]\n          },\n          {\n            \"id\": \"<string>\",\n            \"name\": \"<string>\",\n            \"analysis\": {\n              \"summary\": {\n                \"transactionCount\": \"<integer>\",\n                \"overallPercentage\": {\n                  \"credit\": \"<number>\",\n                  \"debit\": \"<number>\"\n                }\n              },\n              \"range\": {\n                \"startDate\": \"<date>\",\n                \"endDate\": \"<date>\",\n                \"duration\": \"<integer>\"\n              },\n              \"amount\": {\n                \"total\": \"<string>\",\n                \"min\": \"<string>\",\n                \"max\": \"<string>\",\n                \"average\": {\n                  \"transaction\": \"<string>\",\n                  \"month\": \"<string>\",\n                  \"medianTransaction\": \"<string>\",\n                  \"medianMonth\": \"<string>\",\n                  \"ongoingMonth\": \"<string>\"\n                },\n                \"stableMonths\": \"<integer>\",\n                \"secureMonths\": \"<integer>\"\n              },\n              \"frequency\": {\n                \"type\": \"<string>\",\n                \"amount\": \"<string>\",\n                \"display\": \"<string>\",\n                \"next\": {\n                  \"date\": \"<date>\",\n                  \"amount\": \"<string>\"\n                }\n              }\n            },\n            \"transactions\": [\n              {\n                \"id\": \"<string>\",\n                \"date\": \"<date>\",\n                \"description\": \"<string>\",\n                \"amount\": \"<string>\"\n              },\n              {\n                \"id\": \"<string>\",\n                \"date\": \"<date>\",\n                \"description\": \"<string>\",\n                \"amount\": \"<string>\"\n              }\n            ]\n          }\n        ]\n      }\n    ],\n    \"accounts\": [\n      {\n        \"id\": \"<string>\",\n        \"accountNo\": \"<string>\",\n        \"name\": \"<string>\",\n        \"currency\": \"<string>\",\n        \"balance\": \"<string>\",\n        \"availableFunds\": \"<string>\",\n        \"lastUpdated\": \"<dateTime>\",\n        \"institution\": \"<string>\",\n        \"class\": {\n          \"type\": \"<string>\",\n          \"product\": \"<string>\"\n        },\n        \"transactionIntervals\": [\n          {\n            \"from\": \"<date>\",\n            \"to\": \"<date>\"\n          },\n          {\n            \"from\": \"<date>\",\n            \"to\": \"<date>\"\n          }\n        ],\n        \"accountHolder\": \"<string>\",\n        \"accountOwnership\": \"<string>\",\n        \"connection\": \"<string>\",\n        \"status\": \"<string>\",\n        \"creditLimit\": \"<string>\",\n        \"links\": {\n          \"self\": \"<string>\",\n          \"transactions\": \"<string>\",\n          \"institution\": \"<string>\"\n        }\n      },\n      {\n        \"id\": \"<string>\",\n        \"accountNo\": \"<string>\",\n        \"name\": \"<string>\",\n        \"currency\": \"<string>\",\n        \"balance\": \"<string>\",\n        \"availableFunds\": \"<string>\",\n        \"lastUpdated\": \"<dateTime>\",\n        \"institution\": \"<string>\",\n        \"class\": {\n          \"type\": \"<string>\",\n          \"product\": \"<string>\"\n        },\n        \"transactionIntervals\": [\n          {\n            \"from\": \"<date>\",\n            \"to\": \"<date>\"\n          },\n          {\n            \"from\": \"<date>\",\n            \"to\": \"<date>\"\n          }\n        ],\n        \"accountHolder\": \"<string>\",\n        \"accountOwnership\": \"<string>\",\n        \"connection\": \"<string>\",\n        \"status\": \"<string>\",\n        \"creditLimit\": \"<string>\",\n        \"links\": {\n          \"self\": \"<string>\",\n          \"transactions\": \"<string>\",\n          \"institution\": \"<string>\"\n        }\n      }\n    ]\n  },\n  \"transactions\": \"<string>\",\n  \"links\": {\n    \"self\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T02:24:21.000Z",
+                  "updatedAt": "2026-10-22T02:24:21.000Z",
+                  "uid": "35240-a767ea3e-2e92-4be8-89bf-a80e756df687"
+                },
+                {
+                  "id": "3a348a55-10d4-4a8c-9ce6-9b5e1b019afe",
+                  "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"unsupported-accept\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-credentials\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:24:21.000Z",
+                  "updatedAt": "2026-10-22T02:24:21.000Z",
+                  "uid": "35240-3a348a55-10d4-4a8c-9ce6-9b5e1b019afe"
+                },
+                {
+                  "id": "4b686ee9-f25d-483f-932b-db315a9b1b23",
+                  "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"access-denied\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"no-production-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"aliqua ea culpa\"\n}",
+                  "createdAt": "2026-10-22T02:24:21.000Z",
+                  "updatedAt": "2026-10-22T02:24:21.000Z",
+                  "uid": "35240-4b686ee9-f25d-483f-932b-db315a9b1b23"
+                },
+                {
+                  "id": "f0106178-61b7-482c-ad3e-95349c3b4166",
+                  "name": "Returns error indicating that server can't find requested resource.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": -31498804.09842658\n}",
+                  "createdAt": "2026-10-22T02:24:21.000Z",
+                  "updatedAt": "2026-10-22T02:24:21.000Z",
+                  "uid": "35240-f0106178-61b7-482c-ad3e-95349c3b4166"
+                },
+                {
+                  "id": "44a7d057-9fa3-4fdd-a9be-e16e2320e2e2",
+                  "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": 37032893\n}",
+                  "createdAt": "2026-10-22T02:24:21.000Z",
+                  "updatedAt": "2026-10-22T02:24:21.000Z",
+                  "uid": "35240-44a7d057-9fa3-4fdd-a9be-e16e2320e2e2"
+                }
+              ],
+              "createdAt": "2026-10-22T02:24:21.000Z",
+              "updatedAt": "2026-10-22T02:24:21.000Z",
+              "uid": "35240-19121867-4fbe-4e19-8144-4ea0ddc7f652"
+            },
+            {
+              "name": "Delete a report",
+              "id": "88392b8c-c07b-4a6e-8c5e-4e5378aee46b",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "DELETE",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports/:id",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports",
+                    ":id"
+                  ],
+                  "variable": [
+                    {
+                      "id": "87133294-a9d8-46d8-99f0-ec123d2ef49c",
+                      "key": "id",
+                      "value": "<string>",
+                      "description": "(Required) The ID of the generated report"
+                    }
+                  ]
+                },
+                "description": "Permanently deletes a report and all associated snapshot data."
+              },
+              "response": [
+                {
+                  "id": "2db97146-2591-4d71-bc7c-2861a7c76389",
+                  "name": "Deletion succeeded.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "No Content",
+                  "code": 204,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T02:24:21.000Z",
+                  "updatedAt": "2026-10-22T02:24:21.000Z",
+                  "uid": "35240-2db97146-2591-4d71-bc7c-2861a7c76389"
+                },
+                {
+                  "id": "90dc14e4-3bc0-44d0-9b41-31d25358a274",
+                  "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"unsupported-accept\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-credentials\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:24:21.000Z",
+                  "updatedAt": "2026-10-22T02:24:21.000Z",
+                  "uid": "35240-90dc14e4-3bc0-44d0-9b41-31d25358a274"
+                },
+                {
+                  "id": "f10d7164-e3e5-4b9f-afd5-620357edea5d",
+                  "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"access-denied\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"no-production-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"aliqua ea culpa\"\n}",
+                  "createdAt": "2026-10-22T02:24:21.000Z",
+                  "updatedAt": "2026-10-22T02:24:21.000Z",
+                  "uid": "35240-f10d7164-e3e5-4b9f-afd5-620357edea5d"
+                },
+                {
+                  "id": "61154477-a001-403c-9e9c-389b37b23264",
+                  "name": "Returns error indicating that server can't find requested resource.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": -31498804.09842658\n}",
+                  "createdAt": "2026-10-22T02:24:21.000Z",
+                  "updatedAt": "2026-10-22T02:24:21.000Z",
+                  "uid": "35240-61154477-a001-403c-9e9c-389b37b23264"
+                },
+                {
+                  "id": "28b8aaf3-bf07-4a2d-bc48-d75d08994ac0",
+                  "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                  "originalRequest": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": 37032893\n}",
+                  "createdAt": "2026-10-22T02:24:21.000Z",
+                  "updatedAt": "2026-10-22T02:24:21.000Z",
+                  "uid": "35240-28b8aaf3-bf07-4a2d-bc48-d75d08994ac0"
+                }
+              ],
+              "createdAt": "2026-10-22T02:24:21.000Z",
+              "updatedAt": "2026-10-22T02:24:21.000Z",
+              "uid": "35240-88392b8c-c07b-4a6e-8c5e-4e5378aee46b"
+            }
+          ],
+          "id": "e25701ca-5cac-4e9e-a5b3-57f1586f640a",
+          "createdAt": "2026-10-22T02:24:21.000Z",
+          "updatedAt": "2026-10-22T02:24:21.000Z",
+          "uid": "35240-e25701ca-5cac-4e9e-a5b3-57f1586f640a"
+        },
+        {
+          "name": "{reportId}",
+          "item": [
+            {
+              "name": "transactions",
+              "item": [
+                {
+                  "name": "Retrieve Report transactions",
+                  "id": "85fc30e3-c99e-43bb-b0a2-dc29dc3330c4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/:reportId/transactions?filter=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        ":reportId",
+                        "transactions"
+                      ],
+                      "query": [
+                        {
+                          "description": "- account.id.eq('15a28893-e8c9-4441-a076-470195218738')\n- transaction.postDate.bt('2022-10-01,2022-10-10')\n- transaction.postDate.(eq|gt|lt|gteq|lteq)('2022-12-03T00:00:00Z')\n- institution.id.eq('AU00001')\n- connection.id.eq('12857a4c-931d-4a5a-ab74-399dafb03bfe')\n- transaction.id.eq('14198297-b3b5-415c-b6ad-8a14476ef61c')\n- transaction.direction.eq('credit')\n- transaction.class.eq('transfer')\n- transaction.status.eq('posted')\n\nTransactions can be filtered based on date & datetime.",
+                          "key": "filter",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "0ccd3f55-3ff7-4f80-9a6c-bad1e3324bf5",
+                          "key": "reportId",
+                          "value": "<string>",
+                          "description": "(Required) The ID of the generated report"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve transactions belonging to the report identified by {reportId}."
+                  },
+                  "response": [
+                    {
+                      "id": "02bb8ffe-14bb-42e2-b6e4-a5d3bfa0063e",
+                      "name": "Returns a list with a data property that contains an array of transactions. Each entry in the array is a separate object. If no data is returned, the resulting array will be empty. ",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reports/:reportId/transactions?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reports",
+                            ":reportId",
+                            "transactions"
+                          ],
+                          "query": [
+                            {
+                              "description": "- account.id.eq('15a28893-e8c9-4441-a076-470195218738')\n- transaction.postDate.bt('2022-10-01,2022-10-10')\n- transaction.postDate.(eq|gt|lt|gteq|lteq)('2022-12-03T00:00:00Z')\n- institution.id.eq('AU00001')\n- connection.id.eq('12857a4c-931d-4a5a-ab74-399dafb03bfe')\n- transaction.id.eq('14198297-b3b5-415c-b6ad-8a14476ef61c')\n- transaction.direction.eq('credit')\n- transaction.class.eq('transfer')\n- transaction.status.eq('posted')\n\nTransactions can be filtered based on date & datetime.",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "reportId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"size\": \"<long>\",\n  \"count\": \"<long>\",\n  \"data\": [\n    {\n      \"account\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"balance\": \"<string>\",\n      \"class\": \"cash-withdrawal\",\n      \"connection\": \"<string>\",\n      \"description\": \"<string>\",\n      \"direction\": \"credit\",\n      \"enrich\": {\n        \"cleanDescription\": \"<string>\",\n        \"tags\": {},\n        \"category\": {\n          \"anzsic\": {\n            \"class\": {\n              \"title\": \"<string>\",\n              \"code\": \"<string>\"\n            },\n            \"division\": {\n              \"title\": \"<string>\",\n              \"code\": \"<string>\"\n            },\n            \"group\": {\n              \"code\": \"<string>\",\n              \"title\": \"<string>\"\n            },\n            \"subdivision\": {\n              \"code\": \"<string>\",\n              \"title\": \"<string>\"\n            }\n          }\n        },\n        \"location\": {\n          \"country\": \"<string>\",\n          \"formattedAddress\": \"<string>\",\n          \"geometry\": {\n            \"lat\": \"<string>\",\n            \"lng\": \"<string>\"\n          },\n          \"postalCode\": \"<string>\",\n          \"route\": \"<string>\",\n          \"routeNo\": \"<string>\",\n          \"state\": \"<string>\",\n          \"suburb\": \"<string>\"\n        },\n        \"merchant\": {\n          \"id\": \"<string>\",\n          \"businessName\": \"<string>\",\n          \"ABN\": \"<string>\",\n          \"website\": \"<string>\",\n          \"logoMaster\": \"<string>\",\n          \"logoThumb\": \"<string>\",\n          \"phoneNumber\": {\n            \"international\": \"<string>\",\n            \"local\": \"<string>\"\n          }\n        }\n      },\n      \"id\": \"<string>\",\n      \"institution\": \"<string>\",\n      \"postDate\": \"<string>\",\n      \"status\": \"posted\",\n      \"transactionDate\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": \"mollit\"\n    },\n    {\n      \"account\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"balance\": \"<string>\",\n      \"class\": \"loan-interest\",\n      \"connection\": \"<string>\",\n      \"description\": \"<string>\",\n      \"direction\": \"credit\",\n      \"enrich\": {\n        \"cleanDescription\": \"<string>\",\n        \"tags\": {},\n        \"category\": {\n          \"anzsic\": {\n            \"class\": {\n              \"title\": \"<string>\",\n              \"code\": \"<string>\"\n            },\n            \"division\": {\n              \"title\": \"<string>\",\n              \"code\": \"<string>\"\n            },\n            \"group\": {\n              \"code\": \"<string>\",\n              \"title\": \"<string>\"\n            },\n            \"subdivision\": {\n              \"code\": \"<string>\",\n              \"title\": \"<string>\"\n            }\n          }\n        },\n        \"location\": {\n          \"country\": \"<string>\",\n          \"formattedAddress\": \"<string>\",\n          \"geometry\": {\n            \"lat\": \"<string>\",\n            \"lng\": \"<string>\"\n          },\n          \"postalCode\": \"<string>\",\n          \"route\": \"<string>\",\n          \"routeNo\": \"<string>\",\n          \"state\": \"<string>\",\n          \"suburb\": \"<string>\"\n        },\n        \"merchant\": {\n          \"id\": \"<string>\",\n          \"businessName\": \"<string>\",\n          \"ABN\": \"<string>\",\n          \"website\": \"<string>\",\n          \"logoMaster\": \"<string>\",\n          \"logoThumb\": \"<string>\",\n          \"phoneNumber\": {\n            \"international\": \"<string>\",\n            \"local\": \"<string>\"\n          }\n        }\n      },\n      \"id\": \"<string>\",\n      \"institution\": \"<string>\",\n      \"postDate\": \"<string>\",\n      \"status\": \"pending\",\n      \"transactionDate\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": -15706140.316041455\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:24:21.000Z",
+                      "updatedAt": "2026-10-22T02:24:21.000Z",
+                      "uid": "35240-02bb8ffe-14bb-42e2-b6e4-a5d3bfa0063e"
+                    },
+                    {
+                      "id": "64e0c8ea-3f1b-4553-ba0a-3aea37902871",
+                      "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reports/:reportId/transactions?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reports",
+                            ":reportId",
+                            "transactions"
+                          ],
+                          "query": [
+                            {
+                              "description": "- account.id.eq('15a28893-e8c9-4441-a076-470195218738')\n- transaction.postDate.bt('2022-10-01,2022-10-10')\n- transaction.postDate.(eq|gt|lt|gteq|lteq)('2022-12-03T00:00:00Z')\n- institution.id.eq('AU00001')\n- connection.id.eq('12857a4c-931d-4a5a-ab74-399dafb03bfe')\n- transaction.id.eq('14198297-b3b5-415c-b6ad-8a14476ef61c')\n- transaction.direction.eq('credit')\n- transaction.class.eq('transfer')\n- transaction.status.eq('posted')\n\nTransactions can be filtered based on date & datetime.",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "reportId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"<string>\",\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"code\": \"invalid-content\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"code\": \"institution-not-supported\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:24:21.000Z",
+                      "updatedAt": "2026-10-22T02:24:21.000Z",
+                      "uid": "35240-64e0c8ea-3f1b-4553-ba0a-3aea37902871"
+                    },
+                    {
+                      "id": "0cae34db-445a-47c2-b5ae-9a677226c8cd",
+                      "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reports/:reportId/transactions?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reports",
+                            ":reportId",
+                            "transactions"
+                          ],
+                          "query": [
+                            {
+                              "description": "- account.id.eq('15a28893-e8c9-4441-a076-470195218738')\n- transaction.postDate.bt('2022-10-01,2022-10-10')\n- transaction.postDate.(eq|gt|lt|gteq|lteq)('2022-12-03T00:00:00Z')\n- institution.id.eq('AU00001')\n- connection.id.eq('12857a4c-931d-4a5a-ab74-399dafb03bfe')\n- transaction.id.eq('14198297-b3b5-415c-b6ad-8a14476ef61c')\n- transaction.direction.eq('credit')\n- transaction.class.eq('transfer')\n- transaction.status.eq('posted')\n\nTransactions can be filtered based on date & datetime.",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "reportId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"<string>\",\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"code\": \"invalid-content\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"code\": \"institution-not-supported\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:24:21.000Z",
+                      "updatedAt": "2026-10-22T02:24:21.000Z",
+                      "uid": "35240-0cae34db-445a-47c2-b5ae-9a677226c8cd"
+                    },
+                    {
+                      "id": "d39112ab-ea53-42da-96c5-a8f84277be07",
+                      "name": "Returns error indicating that server can't find requested resource.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reports/:reportId/transactions?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reports",
+                            ":reportId",
+                            "transactions"
+                          ],
+                          "query": [
+                            {
+                              "description": "- account.id.eq('15a28893-e8c9-4441-a076-470195218738')\n- transaction.postDate.bt('2022-10-01,2022-10-10')\n- transaction.postDate.(eq|gt|lt|gteq|lteq)('2022-12-03T00:00:00Z')\n- institution.id.eq('AU00001')\n- connection.id.eq('12857a4c-931d-4a5a-ab74-399dafb03bfe')\n- transaction.id.eq('14198297-b3b5-415c-b6ad-8a14476ef61c')\n- transaction.direction.eq('credit')\n- transaction.class.eq('transfer')\n- transaction.status.eq('posted')\n\nTransactions can be filtered based on date & datetime.",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "reportId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"<string>\",\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"code\": \"invalid-content\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"code\": \"institution-not-supported\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:24:21.000Z",
+                      "updatedAt": "2026-10-22T02:24:21.000Z",
+                      "uid": "35240-d39112ab-ea53-42da-96c5-a8f84277be07"
+                    },
+                    {
+                      "id": "466d5381-175c-42ee-8720-977e54372a98",
+                      "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reports/:reportId/transactions?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reports",
+                            ":reportId",
+                            "transactions"
+                          ],
+                          "query": [
+                            {
+                              "description": "- account.id.eq('15a28893-e8c9-4441-a076-470195218738')\n- transaction.postDate.bt('2022-10-01,2022-10-10')\n- transaction.postDate.(eq|gt|lt|gteq|lteq)('2022-12-03T00:00:00Z')\n- institution.id.eq('AU00001')\n- connection.id.eq('12857a4c-931d-4a5a-ab74-399dafb03bfe')\n- transaction.id.eq('14198297-b3b5-415c-b6ad-8a14476ef61c')\n- transaction.direction.eq('credit')\n- transaction.class.eq('transfer')\n- transaction.status.eq('posted')\n\nTransactions can be filtered based on date & datetime.",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "reportId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"<string>\",\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"code\": \"invalid-content\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"code\": \"institution-not-supported\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:24:21.000Z",
+                      "updatedAt": "2026-10-22T02:24:21.000Z",
+                      "uid": "35240-466d5381-175c-42ee-8720-977e54372a98"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:24:21.000Z",
+                  "updatedAt": "2026-10-22T02:24:21.000Z",
+                  "uid": "35240-85fc30e3-c99e-43bb-b0a2-dc29dc3330c4"
+                }
+              ],
+              "id": "acef12f0-6cba-43a9-9a47-28d6fa113eeb",
+              "createdAt": "2026-10-22T02:24:21.000Z",
+              "updatedAt": "2026-10-22T02:24:21.000Z",
+              "uid": "35240-acef12f0-6cba-43a9-9a47-28d6fa113eeb"
+            }
+          ],
+          "id": "275fa324-5fd2-459f-9e03-83e79e461424",
+          "createdAt": "2026-10-22T02:24:21.000Z",
+          "updatedAt": "2026-10-22T02:24:21.000Z",
+          "uid": "35240-275fa324-5fd2-459f-9e03-83e79e461424"
+        },
+        {
+          "name": "types",
+          "item": [
+            {
+              "name": "{reportTypeId}",
+              "item": [
+                {
+                  "name": "Retrieve a report type",
+                  "id": "943e10cf-e1a3-4d0c-bc5e-42d3c7fa6def",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/types/:reportTypeId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        "types",
+                        ":reportTypeId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "519430b9-f751-456f-97ee-fe1baab97c5e",
+                          "key": "reportTypeId",
+                          "value": "<string>",
+                          "description": "(Required) The type of the report"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve information about a specific report type identified by {reportId}."
+                  },
+                  "response": [
+                    {
+                      "id": "9b37847e-c10b-4c45-8166-c91931dc7875",
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reports/types/:reportTypeId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reports",
+                            "types",
+                            ":reportTypeId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "reportTypeId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"count\": \"<integer>\",\n  \"filters\": \"<array>\",\n  \"data\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"filters\": [\n        {\n          \"name\": \"<string>\",\n          \"type\": \"<string>\",\n          \"required\": \"<boolean>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"type\": \"<string>\",\n          \"required\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"filters\": [\n        {\n          \"name\": \"<string>\",\n          \"type\": \"<string>\",\n          \"required\": \"<boolean>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"type\": \"<string>\",\n          \"required\": \"<boolean>\"\n        }\n      ]\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:24:21.000Z",
+                      "updatedAt": "2026-10-22T02:24:21.000Z",
+                      "uid": "35240-9b37847e-c10b-4c45-8166-c91931dc7875"
+                    },
+                    {
+                      "id": "4ff460f3-4ecf-4bbe-969a-f820cfa872a7",
+                      "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reports/types/:reportTypeId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reports",
+                            "types",
+                            ":reportTypeId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "reportTypeId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"unsupported-accept\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-credentials\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:24:21.000Z",
+                      "updatedAt": "2026-10-22T02:24:21.000Z",
+                      "uid": "35240-4ff460f3-4ecf-4bbe-969a-f820cfa872a7"
+                    },
+                    {
+                      "id": "b02733ba-8746-4f5a-9905-968ceaf4db21",
+                      "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reports/types/:reportTypeId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reports",
+                            "types",
+                            ":reportTypeId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "reportTypeId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"access-denied\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"no-production-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"aliqua ea culpa\"\n}",
+                      "createdAt": "2026-10-22T02:24:21.000Z",
+                      "updatedAt": "2026-10-22T02:24:21.000Z",
+                      "uid": "35240-b02733ba-8746-4f5a-9905-968ceaf4db21"
+                    },
+                    {
+                      "id": "8a4d7c0d-d181-4b5c-8400-cd6b69ff18a0",
+                      "name": "Returns error indicating that server can't find requested resource.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reports/types/:reportTypeId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reports",
+                            "types",
+                            ":reportTypeId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "reportTypeId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": -31498804.09842658\n}",
+                      "createdAt": "2026-10-22T02:24:21.000Z",
+                      "updatedAt": "2026-10-22T02:24:21.000Z",
+                      "uid": "35240-8a4d7c0d-d181-4b5c-8400-cd6b69ff18a0"
+                    },
+                    {
+                      "id": "cf7279c3-9db4-406a-80ac-478aa1fb1471",
+                      "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/reports/types/:reportTypeId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "reports",
+                            "types",
+                            ":reportTypeId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "reportTypeId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": 37032893\n}",
+                      "createdAt": "2026-10-22T02:24:21.000Z",
+                      "updatedAt": "2026-10-22T02:24:21.000Z",
+                      "uid": "35240-cf7279c3-9db4-406a-80ac-478aa1fb1471"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:24:21.000Z",
+                  "updatedAt": "2026-10-22T02:24:21.000Z",
+                  "uid": "35240-943e10cf-e1a3-4d0c-bc5e-42d3c7fa6def"
+                }
+              ],
+              "id": "b3aea371-8817-49c4-ad6d-5a7c683e6453",
+              "createdAt": "2026-10-22T02:24:21.000Z",
+              "updatedAt": "2026-10-22T02:24:21.000Z",
+              "uid": "35240-b3aea371-8817-49c4-ad6d-5a7c683e6453"
+            },
+            {
+              "name": "List report types",
+              "id": "e3d00273-f1b7-4475-9043-faf9f51a293e",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports/types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports",
+                    "types"
+                  ]
+                },
+                "description": "Use this endpoint to retrieve a list of supported reports. This identifies the complete list of supported reports, which can be used to create reports on."
+              },
+              "response": [
+                {
+                  "id": "43c7cf73-18c7-4347-9e37-62563c9afbe3",
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/types",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        "types"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"id\": \"<string>\",\n  \"name\": \"<string>\",\n  \"type\": \"<string>\",\n  \"description\": \"<string>\",\n  \"count\": \"<integer>\",\n  \"filters\": \"<array>\",\n  \"data\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"filters\": [\n        {\n          \"name\": \"<string>\",\n          \"type\": \"<string>\",\n          \"required\": \"<boolean>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"type\": \"<string>\",\n          \"required\": \"<boolean>\"\n        }\n      ]\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"filters\": [\n        {\n          \"name\": \"<string>\",\n          \"type\": \"<string>\",\n          \"required\": \"<boolean>\"\n        },\n        {\n          \"name\": \"<string>\",\n          \"type\": \"<string>\",\n          \"required\": \"<boolean>\"\n        }\n      ]\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:24:21.000Z",
+                  "updatedAt": "2026-10-22T02:24:21.000Z",
+                  "uid": "35240-43c7cf73-18c7-4347-9e37-62563c9afbe3"
+                },
+                {
+                  "id": "83eb8dd6-4bd7-4c60-a20a-30870ef4eaaa",
+                  "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/types",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        "types"
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"unsupported-accept\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-credentials\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:24:21.000Z",
+                  "updatedAt": "2026-10-22T02:24:21.000Z",
+                  "uid": "35240-83eb8dd6-4bd7-4c60-a20a-30870ef4eaaa"
+                },
+                {
+                  "id": "fbfee64b-7788-485d-b56c-258913e23ac4",
+                  "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/types",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        "types"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"access-denied\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"no-production-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"aliqua ea culpa\"\n}",
+                  "createdAt": "2026-10-22T02:24:21.000Z",
+                  "updatedAt": "2026-10-22T02:24:21.000Z",
+                  "uid": "35240-fbfee64b-7788-485d-b56c-258913e23ac4"
+                },
+                {
+                  "id": "9e941e0c-4157-48d3-b0c1-a06025befcba",
+                  "name": "Returns error indicating that server can't find requested resource.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/types",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        "types"
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": -31498804.09842658\n}",
+                  "createdAt": "2026-10-22T02:24:21.000Z",
+                  "updatedAt": "2026-10-22T02:24:21.000Z",
+                  "uid": "35240-9e941e0c-4157-48d3-b0c1-a06025befcba"
+                },
+                {
+                  "id": "e113b617-cd2f-486b-9441-9695482073d2",
+                  "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/reports/types",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "reports",
+                        "types"
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": 37032893\n}",
+                  "createdAt": "2026-10-22T02:24:21.000Z",
+                  "updatedAt": "2026-10-22T02:24:21.000Z",
+                  "uid": "35240-e113b617-cd2f-486b-9441-9695482073d2"
+                }
+              ],
+              "createdAt": "2026-10-22T02:24:21.000Z",
+              "updatedAt": "2026-10-22T02:24:21.000Z",
+              "uid": "35240-e3d00273-f1b7-4475-9043-faf9f51a293e"
+            }
+          ],
+          "id": "2b5a91c4-4d5d-4d53-9e2e-9a5644a96a5d",
+          "createdAt": "2026-10-22T02:24:21.000Z",
+          "updatedAt": "2026-10-22T02:24:21.000Z",
+          "uid": "35240-2b5a91c4-4d5d-4d53-9e2e-9a5644a96a5d"
+        },
+        {
+          "name": "Create a report",
+          "id": "ed5995e1-d43b-47cc-80fc-86c056bc2bc8",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"reportType\": \"<string>\",\n  \"title\": \"<string>\",\n  \"filters\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<date>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<date>\"\n    }\n  ]\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/reports",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reports"
+              ]
+            },
+            "description": "Use this endpoint to create a new report. Report creation is an asynchronous task, meaning a job will be returned to let you know the progress of the report generation.\nYou can poll the job to know when the report has been generated. You can create any supported report (see reportTypes for a list of supported reports). Ensure you provide the necessary filters when generating a report.\nAll created reports, will store a copy of the data as a snapshot - this ensures that you have access to the raw data that was used to create the report.\nThis API allows generating reports with various filters. The `filters` field in the report request enables you to specify parameters for customizing the report content.\n> \ud83d\udcd8 Note: The report title cannot be longer than 50 characters.\n\n> \ud83d\udcd8 **Reminder:** When Enrich data is updated, the transactions' Enrich results won\u2019t automatically reflect these updates. To ensure your report reflects the latest Enrich data, purge and refresh connections before generating a new report.\n\n### Filters\nFilters are used to narrow down the data included in the report. The available filters are:\n- `fromDate`: Specifies the start date for the report data (format: YYYY-MM-DD).\n- `toDate`: Specifies the end date for the report data (format: YYYY-MM-DD).\n- `accounts`: List of account IDs to include in the report.\n- `users`: List of user IDs to include in the report.\n- `includeMetrics`: List of metric codes to include in the report. Supported values are specific to the report type. Rules for `includeMetrics`:\n- If the array is empty (`\"value\": []`), all metrics will be shown.\n- If no filter is provided, all metrics will be shown.\n- If an array of codes is provided, only these specific metrics will be shown.\n- If the value is `null`, no metrics will be shown.\n\n- `includeGroups`: List of group codes to include in the report. Supported values are specific to the report type. Rules for `includeGroups`:\n- If the array is empty (`\"value\": []`), all groups will be shown.\n- If no filter is provided, all groups will be shown.\n- If an array of codes is provided, only these specific groups will be shown.\n- If the value is `null`, no groups will be shown."
+          },
+          "response": [
+            {
+              "id": "710f8b38-cf8a-4019-b866-fe324da0c971",
+              "name": "The server will return link to a job endpoint which can be polled to track the progress of the report creation.\n",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reportType\": \"<string>\",\n  \"title\": \"<string>\",\n  \"filters\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<date>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<date>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "Accepted",
+              "code": 202,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"<string>\",\n  \"id\": \"<string>\",\n  \"links\": {\n    \"self\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-10-22T02:24:21.000Z",
+              "updatedAt": "2026-10-22T02:24:21.000Z",
+              "uid": "35240-710f8b38-cf8a-4019-b866-fe324da0c971"
+            },
+            {
+              "id": "771ce119-adb8-4b3b-8264-9d5c1b7aca1f",
+              "name": "Returns an error indicating that the server cannot or will not process the request due to something that is perceived to be a client error.\n",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reportType\": \"<string>\",\n  \"title\": \"<string>\",\n  \"filters\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<date>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<date>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"unsupported-accept\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-credentials\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T02:24:21.000Z",
+              "updatedAt": "2026-10-22T02:24:21.000Z",
+              "uid": "35240-771ce119-adb8-4b3b-8264-9d5c1b7aca1f"
+            },
+            {
+              "id": "e6b3ad61-b69a-452a-b3d1-62addcdd23c2",
+              "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reportType\": \"<string>\",\n  \"title\": \"<string>\",\n  \"filters\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<date>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<date>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"access-denied\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"no-production-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"aliqua ea culpa\"\n}",
+              "createdAt": "2026-10-22T02:24:21.000Z",
+              "updatedAt": "2026-10-22T02:24:21.000Z",
+              "uid": "35240-e6b3ad61-b69a-452a-b3d1-62addcdd23c2"
+            },
+            {
+              "id": "2dfc377f-6d72-401d-9d55-e30b5699fbb1",
+              "name": "Returns error indicating that server can't find requested resource.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reportType\": \"<string>\",\n  \"title\": \"<string>\",\n  \"filters\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<date>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<date>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": -31498804.09842658\n}",
+              "createdAt": "2026-10-22T02:24:21.000Z",
+              "updatedAt": "2026-10-22T02:24:21.000Z",
+              "uid": "35240-2dfc377f-6d72-401d-9d55-e30b5699fbb1"
+            },
+            {
+              "id": "254c8781-fd6a-442c-8f80-cd1822da6eb2",
+              "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"reportType\": \"<string>\",\n  \"title\": \"<string>\",\n  \"filters\": [\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<date>\"\n    },\n    {\n      \"name\": \"<string>\",\n      \"value\": \"<date>\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": 37032893\n}",
+              "createdAt": "2026-10-22T02:24:21.000Z",
+              "updatedAt": "2026-10-22T02:24:21.000Z",
+              "uid": "35240-254c8781-fd6a-442c-8f80-cd1822da6eb2"
+            }
+          ],
+          "createdAt": "2026-10-22T02:24:21.000Z",
+          "updatedAt": "2026-10-22T02:24:21.000Z",
+          "uid": "35240-ed5995e1-d43b-47cc-80fc-86c056bc2bc8"
+        },
+        {
+          "name": "List all reports",
+          "id": "41484477-3184-497f-9f2a-733bcf8d1f31",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/reports",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "reports"
+              ]
+            },
+            "description": "Use this endpoint to retrieve a list of created reports. Every created report is saved as a snapshot and can be retrieved up to 24 hours after creation.You can call the reports/types endpoint to see the list of supported reports. reports."
+          },
+          "response": [
+            {
+              "id": "f117d999-c3dc-4137-96b2-910b8ab17b1e",
+              "name": "Success",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"<string>\",\n  \"count\": \"<integer>\",\n  \"size\": \"<integer>\",\n  \"data\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"title\": \"<string>\",\n      \"reportType\": \"<string>\",\n      \"createdDate\": \"<string>\",\n      \"expiresAt\": \"<string>\",\n      \"createdBy\": \"<string>\",\n      \"filters\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": {\n            \"esse_a\": \"<string>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": {\n            \"pariatur4\": \"<string>\",\n            \"dolor_ce\": \"<string>\",\n            \"esse_03\": \"<string>\"\n          }\n        }\n      ],\n      \"links\": {\n        \"self\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"title\": \"<string>\",\n      \"reportType\": \"<string>\",\n      \"createdDate\": \"<string>\",\n      \"expiresAt\": \"<string>\",\n      \"createdBy\": \"<string>\",\n      \"filters\": [\n        {\n          \"name\": \"<string>\",\n          \"value\": {\n            \"ipsum_5e\": \"<string>\"\n          }\n        },\n        {\n          \"name\": \"<string>\",\n          \"value\": {\n            \"dolore_\": \"<string>\",\n            \"irure_8\": \"<string>\",\n            \"anim_a\": \"<string>\"\n          }\n        }\n      ],\n      \"links\": {\n        \"self\": \"<string>\"\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": \"<string>\",\n    \"next\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-10-22T02:24:21.000Z",
+              "updatedAt": "2026-10-22T02:24:21.000Z",
+              "uid": "35240-f117d999-c3dc-4137-96b2-910b8ab17b1e"
+            },
+            {
+              "id": "86da550a-036b-4211-80ce-78ae6ee3045d",
+              "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"<string>\",\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"code\": \"invalid-content\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"code\": \"institution-not-supported\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-10-22T02:24:21.000Z",
+              "updatedAt": "2026-10-22T02:24:21.000Z",
+              "uid": "35240-86da550a-036b-4211-80ce-78ae6ee3045d"
+            },
+            {
+              "id": "9f59d4bc-adca-425b-a046-4f4dcf8fbde4",
+              "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"<string>\",\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"code\": \"invalid-content\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"code\": \"institution-not-supported\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-10-22T02:24:21.000Z",
+              "updatedAt": "2026-10-22T02:24:21.000Z",
+              "uid": "35240-9f59d4bc-adca-425b-a046-4f4dcf8fbde4"
+            },
+            {
+              "id": "8a15a1c4-6af3-4a0e-90b3-03d4f17d3060",
+              "name": "Returns error indicating that server can't find requested resource.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"<string>\",\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"code\": \"invalid-content\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"code\": \"institution-not-supported\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-10-22T02:24:21.000Z",
+              "updatedAt": "2026-10-22T02:24:21.000Z",
+              "uid": "35240-8a15a1c4-6af3-4a0e-90b3-03d4f17d3060"
+            },
+            {
+              "id": "667b5883-bafa-45a5-b6b0-d1d010d9c81d",
+              "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/reports",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "reports"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"<string>\",\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"code\": \"invalid-content\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"code\": \"institution-not-supported\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-10-22T02:24:21.000Z",
+              "updatedAt": "2026-10-22T02:24:21.000Z",
+              "uid": "35240-667b5883-bafa-45a5-b6b0-d1d010d9c81d"
+            }
+          ],
+          "createdAt": "2026-10-22T02:24:21.000Z",
+          "updatedAt": "2026-10-22T02:24:21.000Z",
+          "uid": "35240-41484477-3184-497f-9f2a-733bcf8d1f31"
+        }
+      ],
+      "id": "16d99842-40c5-448e-9230-2864721f7c48",
+      "createdAt": "2026-10-22T02:24:21.000Z",
+      "updatedAt": "2026-10-22T02:24:21.000Z",
+      "uid": "35240-16d99842-40c5-448e-9230-2864721f7c48"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://au-api.basiq.io"
+    }
+  ]
+}

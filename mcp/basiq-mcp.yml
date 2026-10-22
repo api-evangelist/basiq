@@ -1,44 +1,168 @@
-generated: '2026-09-11'
+name: Basiq API MCP Server
+type: MCPServer
+generated: '2026-10-21'
 method: probed
-source: https://api.basiq.io/mcp
+source: https://api.basiq.io/docs/mcp-server
 status: published
 server:
-  name: basiq
-  transport: http
+  name: Basiq API
+  version: '3.0'
+  transport: streamable-http
   url: https://api.basiq.io/mcp
+  protocolVersion: '2025-03-26'
 deployment:
   mode: remote
   endpoint: https://api.basiq.io/mcp
+  auth: unknown
   verified: probed
-  probe: live
-  checked: '2026-09-11'
-  source: docs-check 2026-09-11 (endpoint found in the provider's own documentation, then probed)
-tools_count: 7
+  checked: '2026-10-21'
+  auth_note: 'Docs: "If your APIs require authentication, you can pass in headers via query parameters or however
+    headers are configured in your MCP client." initialize and tools/list answered without credentials.'
+  probe:
+    initialize: '200 text/event-stream, serverInfo {name: Basiq API, version: 3.0}'
+    tools/list: 200, 5 tools
+documentation: https://api.basiq.io/docs/mcp-server
+documented_install: 'mcpServers config {"basiq": {"url": "https://api.basiq.io/mcp"}} for Cursor, Windsurf, VS Code,
+  Claude Desktop'
+tools_count: 5
 tools:
 - name: list-endpoints
-  description: Lists all API paths and their HTTP methods with summaries, organized by path. Results can
-    be passed directly into 'get-endpoint'.
+  description: Lists all API paths and their HTTP methods with summaries, organized by path. Results can be passed
+    directly into 'get-endpoint'.
+  inputSchema:
+    type: object
+    $schema: https://json-schema.org/draft/2020-12/schema
+    properties:
+      title:
+        type: string
+        description: Title of the OpenAPI spec. Use tool 'list-specs' or 'search-endpoints' to see available specs.
+    required:
+    - title
 - name: get-endpoint
-  description: Gets detailed information about a specific API endpoint, including security schemes and
-    servers
+  description: Gets detailed information about a specific API endpoint, including security schemes and servers
+  inputSchema:
+    type: object
+    $schema: https://json-schema.org/draft/2020-12/schema
+    properties:
+      path:
+        type: string
+        description: The API endpoint path (e.g. /api/v1/users).
+      method:
+        type: string
+        description: The HTTP method (e.g. GET, POST, PUT, DELETE).
+      title:
+        type: string
+        description: Title of the OpenAPI spec. Use tool 'list-specs' or 'search-endpoints' to see available specs.
+    required:
+    - path
+    - method
+    - title
 - name: search-endpoints
-  description: Performs a deep search through paths, operations, and parameters to discover relevant API
-    endpoints. Use this tool to find specific API capabilities, required parameters, or data models based
-    on search keywords. Results can be passed direct
+  description: Performs a deep search through paths, operations, and parameters to discover relevant API endpoints.
+    Use this tool to find specific API capabilities, required parameters, or data models based on search keywords.
+    Results can be passed directly into 'get-endpoint'.
+  inputSchema:
+    type: object
+    $schema: https://json-schema.org/draft/2020-12/schema
+    properties:
+      pattern:
+        type: string
+        description: Search pattern (case-insensitive)
+    required:
+    - pattern
 - name: list-specs
   description: Lists all available OpenAPI specs. Use the title to select a spec.
+  inputSchema:
+    type: object
+    properties: {}
 - name: execute-request
   description: Executes an API request with a given HAR request object.
-- name: search
-  description: Searches through documentation with the given search query, returning a list of results
-    with ID, title, and URL.
-- name: fetch
-  description: Gets detailed content for documentation by ID returned from the `search` tool.
-tools_source: live tools/list via initialize handshake, 2026-09-11 (signals/audit_mcp_authorship.py --probe)
+  inputSchema:
+    type: object
+    $schema: https://json-schema.org/draft/2020-12/schema
+    properties:
+      harRequest:
+        type: object
+        properties:
+          method:
+            type: string
+            description: options, get, head, patch, post, put, delete
+          url:
+            type: string
+            format: uri
+            description: full url to call
+          headers:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+              required:
+              - name
+              - value
+          postData:
+            anyOf:
+            - type: object
+              properties:
+                mimeType:
+                  type: string
+                  description: e.g. application/json, text/plain
+                text:
+                  type: string
+                  description: Raw request body as a string
+              required:
+              - mimeType
+              - text
+            - type: object
+              properties:
+                mimeType:
+                  type: string
+                  description: e.g. multipart/form-data, application/x-www-form-urlencoded. Use multipart/form-data
+                    for form submissions.
+                params:
+                  type: array
+                  items:
+                    type: object
+                    properties:
+                      name:
+                        type: string
+                      value:
+                        type: string
+                    required:
+                    - name
+                  description: Form parameters. Use this instead of text for multipart/form-data and url-encoded
+                    requests.
+              required:
+              - mimeType
+              - params
+          queryString:
+            type: array
+            items:
+              type: object
+              properties:
+                name:
+                  type: string
+                value:
+                  type: string
+              required:
+              - name
+              - value
+        required:
+        - method
+        - url
+        description: HAR request object
+      title:
+        type: string
+        description: Title of the OpenAPI spec. Use tool 'list-specs' or 'search-endpoints' to see available specs.
+    required:
+    - harRequest
+    - title
+tools_source: live tools/list after initialize handshake, 2026-10-21
+changes_since_last_probe: 2026-09-11 tools/list returned 7 tools including search and fetch (documentation search);
+  on 2026-10-21 only 5 were returned.
 authorship: platform
-authorship_note: 'PLATFORM-AUTHORED: this tool shape is shared with at least one other provider in the
-  catalog, so it is a platform default appearing under this provider''s domain rather than an interface
-  this provider designed. Shared shape: (''execute_request'', ''fetch'', ''get_endpoint'', ''list_*'',
-  ''list_specs'', ''search'', ''search_*'')'
-descriptions_source: live tools/list (authorship probe or saved capture); filled by backfill-tools-from-authorship.py
-  --descriptions, 2026-09-28
+authorship_note: ReadMe-hosted docs MCP (api.basiq.io is a ReadMe developer hub). The tools are generic spec-navigation
+  and HAR execution tools, not Basiq-designed domain tools.

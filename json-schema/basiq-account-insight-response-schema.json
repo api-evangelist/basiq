@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/main/json-schema/basiq-account-insight-response-schema.json",
+  "title": "AccountInsightResponse",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/_original/basiq-insights-openapi.json#/components/schemas/AccountInsightResponse",
+  "type": "object",
+  "required": [
+    "type",
+    "id",
+    "created",
+    "insightType",
+    "data",
+    "links"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "insight"
+      ],
+      "description": "The type of response object"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this insight"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Timestamp when the insight was created"
+    },
+    "insightType": {
+      "type": "string",
+      "enum": [
+        "account"
+      ],
+      "description": "The type of insight"
+    },
+    "data": {
+      "type": "array",
+      "description": "Array of account insight data",
+      "items": {
+        "$ref": "#/$defs/AccountInsightData"
+      }
+    },
+    "links": {
+      "type": "object",
+      "required": [
+        "self"
+      ],
+      "properties": {
+        "self": {
+          "type": "string",
+          "format": "uri",
+          "description": "Self-referencing link to this insight"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "AccountInsightData": {
+      "type": "object",
+      "required": [
+        "accountId",
+        "accountNumber"
+      ],
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "Unique identifier for the account"
+        },
+        "accountNumber": {
+          "$ref": "#/$defs/AccountNumberMatch"
+        },
+        "accountType": {
+          "$ref": "#/$defs/AccountTypeMatch"
+        }
+      }
+    },
+    "AccountNumberMatch": {
+      "type": "object",
+      "required": [
+        "input",
+        "match",
+        "confidence"
+      ],
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "The original account number input"
+        },
+        "match": {
+          "type": "boolean",
+          "description": "Whether the account number matches"
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Confidence score for the match (0.0 to 1.0)"
+        }
+      }
+    },
+    "AccountTypeMatch": {
+      "type": "object",
+      "required": [
+        "input",
+        "match",
+        "confidence"
+      ],
+      "properties": {
+        "input": {
+          "type": "string",
+          "description": "The original account type input"
+        },
+        "match": {
+          "type": "boolean",
+          "description": "Whether the account type matches"
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Confidence score for the match (0.0 to 1.0)"
+        }
+      }
+    }
+  }
+}

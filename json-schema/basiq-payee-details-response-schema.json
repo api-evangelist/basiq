@@ -1,0 +1,234 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/main/json-schema/basiq-payee-details-response-schema.json",
+  "title": "PayeeDetailsResponse",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/_original/basiq-payees-openapi.json#/components/schemas/PayeeDetailsResponse",
+  "type": "object",
+  "required": [
+    "type",
+    "id",
+    "payeeType",
+    "links"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Always 'payee'."
+    },
+    "id": {
+      "type": "string",
+      "description": "The unique identifier for the payee."
+    },
+    "nickname": {
+      "type": "string",
+      "description": "A user-defined nickname for the payee."
+    },
+    "description": {
+      "type": "string",
+      "description": "A description of the payee."
+    },
+    "payeeType": {
+      "type": "string",
+      "description": "The type of payee.",
+      "enum": [
+        "domestic",
+        "biller",
+        "international",
+        "digitalWallet"
+      ]
+    },
+    "connectionId": {
+      "type": "string",
+      "description": "The connection ID associated with this payee."
+    },
+    "createdDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "The date and time when the payee was created."
+    },
+    "domestic": {
+      "$ref": "#/$defs/DomesticPayeeDetails"
+    },
+    "biller": {
+      "$ref": "#/$defs/BillerPayeeDetails"
+    },
+    "international": {
+      "$ref": "#/$defs/InternationalPayeeDetails"
+    },
+    "digitalWallet": {
+      "$ref": "#/$defs/DigitalWalletPayeeDetails"
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string",
+          "description": "A link to the payee details."
+        }
+      }
+    }
+  },
+  "$defs": {
+    "BillerPayeeDetails": {
+      "type": "object",
+      "description": "Details specific to biller payees.",
+      "properties": {
+        "billerCode": {
+          "type": "string",
+          "description": "The BPAY biller code."
+        },
+        "crn": {
+          "type": "string",
+          "description": "The Customer Reference Number for the biller."
+        },
+        "billerName": {
+          "type": "string",
+          "description": "The name of the biller."
+        }
+      }
+    },
+    "DigitalWalletPayeeDetails": {
+      "type": "object",
+      "description": "Details specific to digital wallet payees.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name associated with the digital wallet."
+        },
+        "identifier": {
+          "type": "string",
+          "description": "The identifier for the digital wallet (email, phone, etc.)."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of identifier.",
+          "enum": [
+            "EMAIL",
+            "PHONE",
+            "CONTACT_NAME"
+          ]
+        },
+        "provider": {
+          "type": "string",
+          "description": "The digital wallet provider.",
+          "enum": [
+            "PayPal",
+            "Venmo",
+            "GooglePay",
+            "ApplePay",
+            "Other"
+          ]
+        }
+      }
+    },
+    "DomesticPayeeDetails": {
+      "type": "object",
+      "description": "Details specific to domestic payees.",
+      "properties": {
+        "payeeAccountUType": {
+          "type": "string",
+          "description": "The type of domestic payee account.",
+          "enum": [
+            "account",
+            "payId"
+          ]
+        },
+        "account": {
+          "type": "object",
+          "description": "Bank account details for domestic payee.",
+          "properties": {
+            "bsb": {
+              "type": "string",
+              "description": "The BSB number of the account."
+            },
+            "accountNumber": {
+              "type": "string",
+              "description": "The account number."
+            },
+            "accountName": {
+              "type": "string",
+              "description": "The name of the account holder."
+            }
+          }
+        },
+        "payId": {
+          "type": "object",
+          "description": "PayID details for domestic payee.",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name associated with the PayID."
+            },
+            "identifier": {
+              "type": "string",
+              "description": "The PayID identifier (email, phone, ABN, etc.)."
+            },
+            "type": {
+              "type": "string",
+              "description": "The type of PayID identifier.",
+              "enum": [
+                "EMAIL",
+                "PHONE",
+                "ABN",
+                "ORG_ID"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "InternationalPayeeDetails": {
+      "type": "object",
+      "description": "Details specific to international payees.",
+      "properties": {
+        "beneficiaryDetails": {
+          "type": "object",
+          "description": "Details about the beneficiary.",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "The name of the beneficiary."
+            },
+            "country": {
+              "type": "string",
+              "description": "The country of the beneficiary (ISO 3166-1 alpha-2)."
+            },
+            "message": {
+              "type": "string",
+              "description": "An optional message for the beneficiary."
+            }
+          }
+        },
+        "bankDetails": {
+          "type": "object",
+          "description": "Details about the beneficiary's bank.",
+          "properties": {
+            "country": {
+              "type": "string",
+              "description": "The country of the bank (ISO 3166-1 alpha-2)."
+            },
+            "accountNumber": {
+              "type": "string",
+              "description": "The account number or IBAN."
+            },
+            "beneficiaryBankBIC": {
+              "type": "string",
+              "description": "The BIC/SWIFT code of the beneficiary's bank."
+            },
+            "routingNumber": {
+              "type": "string",
+              "description": "The routing number (if applicable)."
+            },
+            "bankAddress": {
+              "type": "string",
+              "description": "The address of the bank."
+            }
+          }
+        }
+      }
+    }
+  }
+}

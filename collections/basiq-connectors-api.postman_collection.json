@@ -1,0 +1,677 @@
+{
+  "info": {
+    "_postman_id": "4688eae8-79d5-48af-a84c-ff0825386555",
+    "name": "Platform Connectors API",
+    "description": "All included utility endpoints for Basiq partners",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:23:27.000Z",
+    "updatedAt": "2026-10-22T02:23:27.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-4688eae8-79d5-48af-a84c-ff0825386555"
+  },
+  "item": [
+    {
+      "name": "connectors",
+      "item": [
+        {
+          "name": "{connectorId}",
+          "item": [
+            {
+              "name": "{method}",
+              "item": [
+                {
+                  "name": "Retrieve a connector",
+                  "id": "e3157380-1414-4cf1-b42e-c36677a303ba",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/connectors/:connectorId/:method",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "connectors",
+                        ":connectorId",
+                        ":method"
+                      ],
+                      "variable": [
+                        {
+                          "id": "fc59406c-7567-4a76-a42e-013b59d10272",
+                          "key": "connectorId",
+                          "value": "SA10590",
+                          "description": "(Required) Connector ID"
+                        },
+                        {
+                          "id": "573e290d-8b47-4dea-a893-9b2d1da29453",
+                          "key": "method",
+                          "value": "<string>",
+                          "description": "(Required) Connector method"
+                        }
+                      ]
+                    },
+                    "description": "NOTE: This end point requires authentication."
+                  },
+                  "response": [
+                    {
+                      "id": "360d342d-58e7-4c08-9fb6-7c66945a7f6e",
+                      "name": "Returns data of single connector.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/connectors/:connectorId/:method",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "connectors",
+                            ":connectorId",
+                            ":method"
+                          ],
+                          "variable": [
+                            {
+                              "key": "connectorId"
+                            },
+                            {
+                              "key": "method"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"connector\",\n  \"id\": \"CI69365\",\n  \"institution\": {\n    \"type\": \"Bank\",\n    \"name\": \"<string>\",\n    \"shortName\": \"<string>\",\n    \"tier\": \"1\",\n    \"country\": \"<string>\",\n    \"logo\": {\n      \"links\": {\n        \"full\": \"<string>\",\n        \"square\": \"<string>\"\n      },\n      \"type\": \"image\",\n      \"colors\": {\n        \"primary\": \"<string>\"\n      }\n    },\n    \"cdrFAQ\": \"<string>\",\n    \"cdrEmail\": \"<string>\",\n    \"cdrPolicy\": \"<string>\",\n    \"cdrProviderNumber\": \"<string>\",\n    \"abn\": \"<string>\",\n    \"acn\": \"<string>\"\n  },\n  \"method\": \"open-banking\",\n  \"stage\": \"<string>\",\n  \"stats\": {\n    \"averageDurationMs\": {\n      \"retrieveAccounts\": \"<long>\",\n      \"retrieveMeta\": \"<long>\",\n      \"retrieveTransactions\": \"<long>\",\n      \"total\": \"<long>\",\n      \"verifyCredentials\": \"<long>\"\n    }\n  },\n  \"status\": \"<string>\",\n  \"scopes\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"authorization\": {\n    \"type\": \"user\",\n    \"meta\": {\n      \"forgotten_password_url\": \"<string>\",\n      \"login_id_caption\": \"<string>\",\n      \"password_caption\": \"<string>\",\n      \"secondary_login_id_caption\": \"<string>\",\n      \"security_code_caption\": \"<string>\"\n    }\n  },\n  \"links\": {\n    \"self\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T02:23:28.000Z",
+                      "updatedAt": "2026-10-22T02:23:28.000Z",
+                      "uid": "35240-360d342d-58e7-4c08-9fb6-7c66945a7f6e"
+                    },
+                    {
+                      "id": "f30493b0-8c75-454e-8808-aca3a641557e",
+                      "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/connectors/:connectorId/:method",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "connectors",
+                            ":connectorId",
+                            ":method"
+                          ],
+                          "variable": [
+                            {
+                              "key": "connectorId"
+                            },
+                            {
+                              "key": "method"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"unsupported-accept\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"parameter-not-valid\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:28.000Z",
+                      "updatedAt": "2026-10-22T02:23:28.000Z",
+                      "uid": "35240-f30493b0-8c75-454e-8808-aca3a641557e"
+                    },
+                    {
+                      "id": "4bc03ead-2870-48a6-a488-0687370810fa",
+                      "name": "Returns error that indicates unauthorized access.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/connectors/:connectorId/:method",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "connectors",
+                            ":connectorId",
+                            ":method"
+                          ],
+                          "variable": [
+                            {
+                              "key": "connectorId"
+                            },
+                            {
+                              "key": "method"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"invalid-authorization-token\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-authorization-token\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:28.000Z",
+                      "updatedAt": "2026-10-22T02:23:28.000Z",
+                      "uid": "35240-4bc03ead-2870-48a6-a488-0687370810fa"
+                    },
+                    {
+                      "id": "ed935ef5-dbda-4c00-a814-47d8fa1ce77c",
+                      "name": "Returns error indicating that server cannot find requested resource.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/connectors/:connectorId/:method",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "connectors",
+                            ":connectorId",
+                            ":method"
+                          ],
+                          "variable": [
+                            {
+                              "key": "connectorId"
+                            },
+                            {
+                              "key": "method"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:28.000Z",
+                      "updatedAt": "2026-10-22T02:23:28.000Z",
+                      "uid": "35240-ed935ef5-dbda-4c00-a814-47d8fa1ce77c"
+                    },
+                    {
+                      "id": "539bde75-a1ee-4ac3-aa01-57d9a23950db",
+                      "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/connectors/:connectorId/:method",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "connectors",
+                            ":connectorId",
+                            ":method"
+                          ],
+                          "variable": [
+                            {
+                              "key": "connectorId"
+                            },
+                            {
+                              "key": "method"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:28.000Z",
+                      "updatedAt": "2026-10-22T02:23:28.000Z",
+                      "uid": "35240-539bde75-a1ee-4ac3-aa01-57d9a23950db"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:23:28.000Z",
+                  "updatedAt": "2026-10-22T02:23:28.000Z",
+                  "uid": "35240-e3157380-1414-4cf1-b42e-c36677a303ba"
+                }
+              ],
+              "id": "6489f448-d34b-45d7-90db-4523445c1e1d",
+              "createdAt": "2026-10-22T02:23:28.000Z",
+              "updatedAt": "2026-10-22T02:23:28.000Z",
+              "uid": "35240-6489f448-d34b-45d7-90db-4523445c1e1d"
+            }
+          ],
+          "id": "6879d129-20b5-44ed-89d0-b323b91f9b4c",
+          "createdAt": "2026-10-22T02:23:28.000Z",
+          "updatedAt": "2026-10-22T02:23:28.000Z",
+          "uid": "35240-6879d129-20b5-44ed-89d0-b323b91f9b4c"
+        },
+        {
+          "name": "Retrieve connectors",
+          "id": "6a7608e8-5195-445e-8eb7-c36ce14f9af3",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/connectors?filter=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "connectors"
+              ],
+              "query": [
+                {
+                  "description": "Filter parameter can be used to filter connector list by connector property. This parameter should contain a comma-separated list of filter statements.</br>\nA filter statement is composed of the entity name (in this case, it is always 'connector'), the property name (e.g., 'stage'), the filter operator (e.g., 'eq'), and the quoted string value in parentheses (e.g., \"('live')\").</br>\nThe following list of regular expressions describes acceptable filter statements:</br>\n\u2022 (connector).(id).(eq)\\(('[A-Z][A-Z][0-9]{5}')\\)</br>\n\u2022 (connector).(method).(eq)\\(('web'||'open-banking'|'pdf'|'csv')\\)</br>\n\u2022 (connector).(status).(eq|ne)\\(('operational'|'degraded-performance'|'partial-outage'|'major-outage'|'under-maintenance')\\)</br>\n\u2022 (connector).(status).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(stage).(eq|ne)\\(('live'|'beta'|'alpha')\\)</br>\n\u2022 (connector).(stage).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(scopes).(in|eq|ne)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(institution).(country).(eq|ne)\\(('Australia'|'New Zealand')\\)</br>\n\u2022 (connector).(institution).(country).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(institution).(tier).(eq|ne)\\(('1'|'2'|'3'|'4')\\)</br>\n\u2022 (connector).(institution).(tier).(in)\\(([\\W\\d]+)\\)</br>\n\u2022 (connector).(institution).(type).(eq|ne)\\(('Bank'|'Bank (Foreign)'|'Test Bank'|'Credit Union'|'Financial Services'|'Superannuation')\\)</br>\n\u2022 (connector).(authorization).(type).(eq|ne)\\(('user'|'user-mfa'|'user-mfa-intermittent'|'other'|'token')\\)</br>\n\u2022 (connector).(authorization).(type).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(connectorEngine).(eq|ne)\\(('chrome'|'node')\\)</br>\nMultiple filter definitions should be separated with a comma (,).</br>\nFor example, this filter statement will keep only live tier 1 and tier 2 institutions: filter=connector.stage.eq('live'),connector.institution.tier.in('1','2')</br>",
+                  "key": "filter",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "NOTE: This end point requires authentication."
+          },
+          "response": [
+            {
+              "id": "50918fd6-18ef-4217-9873-0b68dac7fdd7",
+              "name": "Returns data of single connector.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/connectors?filter=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "connectors"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter parameter can be used to filter connector list by connector property. This parameter should contain a comma-separated list of filter statements.</br>\nA filter statement is composed of the entity name (in this case, it is always 'connector'), the property name (e.g., 'stage'), the filter operator (e.g., 'eq'), and the quoted string value in parentheses (e.g., \"('live')\").</br>\nThe following list of regular expressions describes acceptable filter statements:</br>\n\u2022 (connector).(id).(eq)\\(('[A-Z][A-Z][0-9]{5}')\\)</br>\n\u2022 (connector).(method).(eq)\\(('web'||'open-banking'|'pdf'|'csv')\\)</br>\n\u2022 (connector).(status).(eq|ne)\\(('operational'|'degraded-performance'|'partial-outage'|'major-outage'|'under-maintenance')\\)</br>\n\u2022 (connector).(status).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(stage).(eq|ne)\\(('live'|'beta'|'alpha')\\)</br>\n\u2022 (connector).(stage).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(scopes).(in|eq|ne)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(institution).(country).(eq|ne)\\(('Australia'|'New Zealand')\\)</br>\n\u2022 (connector).(institution).(country).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(institution).(tier).(eq|ne)\\(('1'|'2'|'3'|'4')\\)</br>\n\u2022 (connector).(institution).(tier).(in)\\(([\\W\\d]+)\\)</br>\n\u2022 (connector).(institution).(type).(eq|ne)\\(('Bank'|'Bank (Foreign)'|'Test Bank'|'Credit Union'|'Financial Services'|'Superannuation')\\)</br>\n\u2022 (connector).(authorization).(type).(eq|ne)\\(('user'|'user-mfa'|'user-mfa-intermittent'|'other'|'token')\\)</br>\n\u2022 (connector).(authorization).(type).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(connectorEngine).(eq|ne)\\(('chrome'|'node')\\)</br>\nMultiple filter definitions should be separated with a comma (,).</br>\nFor example, this filter statement will keep only live tier 1 and tier 2 institutions: filter=connector.stage.eq('live'),connector.institution.tier.in('1','2')</br>",
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"<string>\",\n  \"totalCount\": \"<long>\",\n  \"data\": [\n    {\n      \"type\": \"connector\",\n      \"id\": \"NA00185\",\n      \"institution\": {\n        \"type\": \"Building Society\",\n        \"name\": \"<string>\",\n        \"shortName\": \"<string>\",\n        \"tier\": \"4\",\n        \"country\": \"<string>\",\n        \"logo\": {\n          \"links\": {\n            \"full\": \"<string>\",\n            \"square\": \"<string>\"\n          },\n          \"type\": \"image\",\n          \"colors\": {\n            \"primary\": \"<string>\"\n          }\n        },\n        \"cdrFAQ\": \"<string>\",\n        \"cdrEmail\": \"<string>\",\n        \"cdrPolicy\": \"<string>\",\n        \"cdrProviderNumber\": \"<string>\",\n        \"abn\": \"<string>\",\n        \"acn\": \"<string>\"\n      },\n      \"method\": \"open-banking\",\n      \"stage\": \"<string>\",\n      \"stats\": {\n        \"averageDurationMs\": {\n          \"retrieveAccounts\": \"<long>\",\n          \"retrieveMeta\": \"<long>\",\n          \"retrieveTransactions\": \"<long>\",\n          \"total\": \"<long>\",\n          \"verifyCredentials\": \"<long>\"\n        }\n      },\n      \"status\": \"<string>\",\n      \"scopes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"authorization\": {\n        \"type\": \"user\",\n        \"meta\": {\n          \"forgotten_password_url\": \"<string>\",\n          \"login_id_caption\": \"<string>\",\n          \"password_caption\": \"<string>\",\n          \"secondary_login_id_caption\": \"<string>\",\n          \"security_code_caption\": \"<string>\"\n        }\n      },\n      \"links\": {\n        \"self\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"connector\",\n      \"id\": \"YY45609\",\n      \"institution\": {\n        \"type\": \"Financial Services\",\n        \"name\": \"<string>\",\n        \"shortName\": \"<string>\",\n        \"tier\": \"3\",\n        \"country\": \"<string>\",\n        \"logo\": {\n          \"links\": {\n            \"full\": \"<string>\",\n            \"square\": \"<string>\"\n          },\n          \"type\": \"image\",\n          \"colors\": {\n            \"primary\": \"<string>\"\n          }\n        },\n        \"cdrFAQ\": \"<string>\",\n        \"cdrEmail\": \"<string>\",\n        \"cdrPolicy\": \"<string>\",\n        \"cdrProviderNumber\": \"<string>\",\n        \"abn\": \"<string>\",\n        \"acn\": \"<string>\"\n      },\n      \"method\": \"open-banking\",\n      \"stage\": \"<string>\",\n      \"stats\": {\n        \"averageDurationMs\": {\n          \"retrieveAccounts\": \"<long>\",\n          \"retrieveMeta\": \"<long>\",\n          \"retrieveTransactions\": \"<long>\",\n          \"total\": \"<long>\",\n          \"verifyCredentials\": \"<long>\"\n        }\n      },\n      \"status\": \"<string>\",\n      \"scopes\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"authorization\": {\n        \"type\": \"user-mfa-intermittent\",\n        \"meta\": {\n          \"forgotten_password_url\": \"<string>\",\n          \"login_id_caption\": \"<string>\",\n          \"password_caption\": \"<string>\",\n          \"secondary_login_id_caption\": \"<string>\",\n          \"security_code_caption\": \"<string>\"\n        }\n      },\n      \"links\": {\n        \"self\": \"<string>\"\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-10-22T02:23:28.000Z",
+              "updatedAt": "2026-10-22T02:23:28.000Z",
+              "uid": "35240-50918fd6-18ef-4217-9873-0b68dac7fdd7"
+            },
+            {
+              "id": "0579946e-3e77-45fc-9ca1-877f13da3bb4",
+              "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/connectors?filter=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "connectors"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter parameter can be used to filter connector list by connector property. This parameter should contain a comma-separated list of filter statements.</br>\nA filter statement is composed of the entity name (in this case, it is always 'connector'), the property name (e.g., 'stage'), the filter operator (e.g., 'eq'), and the quoted string value in parentheses (e.g., \"('live')\").</br>\nThe following list of regular expressions describes acceptable filter statements:</br>\n\u2022 (connector).(id).(eq)\\(('[A-Z][A-Z][0-9]{5}')\\)</br>\n\u2022 (connector).(method).(eq)\\(('web'||'open-banking'|'pdf'|'csv')\\)</br>\n\u2022 (connector).(status).(eq|ne)\\(('operational'|'degraded-performance'|'partial-outage'|'major-outage'|'under-maintenance')\\)</br>\n\u2022 (connector).(status).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(stage).(eq|ne)\\(('live'|'beta'|'alpha')\\)</br>\n\u2022 (connector).(stage).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(scopes).(in|eq|ne)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(institution).(country).(eq|ne)\\(('Australia'|'New Zealand')\\)</br>\n\u2022 (connector).(institution).(country).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(institution).(tier).(eq|ne)\\(('1'|'2'|'3'|'4')\\)</br>\n\u2022 (connector).(institution).(tier).(in)\\(([\\W\\d]+)\\)</br>\n\u2022 (connector).(institution).(type).(eq|ne)\\(('Bank'|'Bank (Foreign)'|'Test Bank'|'Credit Union'|'Financial Services'|'Superannuation')\\)</br>\n\u2022 (connector).(authorization).(type).(eq|ne)\\(('user'|'user-mfa'|'user-mfa-intermittent'|'other'|'token')\\)</br>\n\u2022 (connector).(authorization).(type).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(connectorEngine).(eq|ne)\\(('chrome'|'node')\\)</br>\nMultiple filter definitions should be separated with a comma (,).</br>\nFor example, this filter statement will keep only live tier 1 and tier 2 institutions: filter=connector.stage.eq('live'),connector.institution.tier.in('1','2')</br>",
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"unsupported-accept\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"parameter-not-valid\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T02:23:28.000Z",
+              "updatedAt": "2026-10-22T02:23:28.000Z",
+              "uid": "35240-0579946e-3e77-45fc-9ca1-877f13da3bb4"
+            },
+            {
+              "id": "7824690e-5531-419c-b536-020ca8fdfb5a",
+              "name": "Returns error that indicates unauthorized access.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/connectors?filter=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "connectors"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter parameter can be used to filter connector list by connector property. This parameter should contain a comma-separated list of filter statements.</br>\nA filter statement is composed of the entity name (in this case, it is always 'connector'), the property name (e.g., 'stage'), the filter operator (e.g., 'eq'), and the quoted string value in parentheses (e.g., \"('live')\").</br>\nThe following list of regular expressions describes acceptable filter statements:</br>\n\u2022 (connector).(id).(eq)\\(('[A-Z][A-Z][0-9]{5}')\\)</br>\n\u2022 (connector).(method).(eq)\\(('web'||'open-banking'|'pdf'|'csv')\\)</br>\n\u2022 (connector).(status).(eq|ne)\\(('operational'|'degraded-performance'|'partial-outage'|'major-outage'|'under-maintenance')\\)</br>\n\u2022 (connector).(status).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(stage).(eq|ne)\\(('live'|'beta'|'alpha')\\)</br>\n\u2022 (connector).(stage).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(scopes).(in|eq|ne)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(institution).(country).(eq|ne)\\(('Australia'|'New Zealand')\\)</br>\n\u2022 (connector).(institution).(country).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(institution).(tier).(eq|ne)\\(('1'|'2'|'3'|'4')\\)</br>\n\u2022 (connector).(institution).(tier).(in)\\(([\\W\\d]+)\\)</br>\n\u2022 (connector).(institution).(type).(eq|ne)\\(('Bank'|'Bank (Foreign)'|'Test Bank'|'Credit Union'|'Financial Services'|'Superannuation')\\)</br>\n\u2022 (connector).(authorization).(type).(eq|ne)\\(('user'|'user-mfa'|'user-mfa-intermittent'|'other'|'token')\\)</br>\n\u2022 (connector).(authorization).(type).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(connectorEngine).(eq|ne)\\(('chrome'|'node')\\)</br>\nMultiple filter definitions should be separated with a comma (,).</br>\nFor example, this filter statement will keep only live tier 1 and tier 2 institutions: filter=connector.stage.eq('live'),connector.institution.tier.in('1','2')</br>",
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"invalid-authorization-token\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-authorization-token\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T02:23:28.000Z",
+              "updatedAt": "2026-10-22T02:23:28.000Z",
+              "uid": "35240-7824690e-5531-419c-b536-020ca8fdfb5a"
+            },
+            {
+              "id": "6094c2b0-3d43-4e2d-9e49-03230c62544e",
+              "name": "Returns error indicating that server cannot find requested resource.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/connectors?filter=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "connectors"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter parameter can be used to filter connector list by connector property. This parameter should contain a comma-separated list of filter statements.</br>\nA filter statement is composed of the entity name (in this case, it is always 'connector'), the property name (e.g., 'stage'), the filter operator (e.g., 'eq'), and the quoted string value in parentheses (e.g., \"('live')\").</br>\nThe following list of regular expressions describes acceptable filter statements:</br>\n\u2022 (connector).(id).(eq)\\(('[A-Z][A-Z][0-9]{5}')\\)</br>\n\u2022 (connector).(method).(eq)\\(('web'||'open-banking'|'pdf'|'csv')\\)</br>\n\u2022 (connector).(status).(eq|ne)\\(('operational'|'degraded-performance'|'partial-outage'|'major-outage'|'under-maintenance')\\)</br>\n\u2022 (connector).(status).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(stage).(eq|ne)\\(('live'|'beta'|'alpha')\\)</br>\n\u2022 (connector).(stage).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(scopes).(in|eq|ne)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(institution).(country).(eq|ne)\\(('Australia'|'New Zealand')\\)</br>\n\u2022 (connector).(institution).(country).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(institution).(tier).(eq|ne)\\(('1'|'2'|'3'|'4')\\)</br>\n\u2022 (connector).(institution).(tier).(in)\\(([\\W\\d]+)\\)</br>\n\u2022 (connector).(institution).(type).(eq|ne)\\(('Bank'|'Bank (Foreign)'|'Test Bank'|'Credit Union'|'Financial Services'|'Superannuation')\\)</br>\n\u2022 (connector).(authorization).(type).(eq|ne)\\(('user'|'user-mfa'|'user-mfa-intermittent'|'other'|'token')\\)</br>\n\u2022 (connector).(authorization).(type).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(connectorEngine).(eq|ne)\\(('chrome'|'node')\\)</br>\nMultiple filter definitions should be separated with a comma (,).</br>\nFor example, this filter statement will keep only live tier 1 and tier 2 institutions: filter=connector.stage.eq('live'),connector.institution.tier.in('1','2')</br>",
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T02:23:28.000Z",
+              "updatedAt": "2026-10-22T02:23:28.000Z",
+              "uid": "35240-6094c2b0-3d43-4e2d-9e49-03230c62544e"
+            },
+            {
+              "id": "de5b735c-6330-4ed0-9e85-0ccca0c0d5bf",
+              "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/connectors?filter=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "connectors"
+                  ],
+                  "query": [
+                    {
+                      "description": "Filter parameter can be used to filter connector list by connector property. This parameter should contain a comma-separated list of filter statements.</br>\nA filter statement is composed of the entity name (in this case, it is always 'connector'), the property name (e.g., 'stage'), the filter operator (e.g., 'eq'), and the quoted string value in parentheses (e.g., \"('live')\").</br>\nThe following list of regular expressions describes acceptable filter statements:</br>\n\u2022 (connector).(id).(eq)\\(('[A-Z][A-Z][0-9]{5}')\\)</br>\n\u2022 (connector).(method).(eq)\\(('web'||'open-banking'|'pdf'|'csv')\\)</br>\n\u2022 (connector).(status).(eq|ne)\\(('operational'|'degraded-performance'|'partial-outage'|'major-outage'|'under-maintenance')\\)</br>\n\u2022 (connector).(status).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(stage).(eq|ne)\\(('live'|'beta'|'alpha')\\)</br>\n\u2022 (connector).(stage).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(scopes).(in|eq|ne)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(institution).(country).(eq|ne)\\(('Australia'|'New Zealand')\\)</br>\n\u2022 (connector).(institution).(country).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(institution).(tier).(eq|ne)\\(('1'|'2'|'3'|'4')\\)</br>\n\u2022 (connector).(institution).(tier).(in)\\(([\\W\\d]+)\\)</br>\n\u2022 (connector).(institution).(type).(eq|ne)\\(('Bank'|'Bank (Foreign)'|'Test Bank'|'Credit Union'|'Financial Services'|'Superannuation')\\)</br>\n\u2022 (connector).(authorization).(type).(eq|ne)\\(('user'|'user-mfa'|'user-mfa-intermittent'|'other'|'token')\\)</br>\n\u2022 (connector).(authorization).(type).(in)\\(([\\w\\W]+)\\)</br>\n\u2022 (connector).(connectorEngine).(eq|ne)\\(('chrome'|'node')\\)</br>\nMultiple filter definitions should be separated with a comma (,).</br>\nFor example, this filter statement will keep only live tier 1 and tier 2 institutions: filter=connector.stage.eq('live'),connector.institution.tier.in('1','2')</br>",
+                      "key": "filter",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T02:23:28.000Z",
+              "updatedAt": "2026-10-22T02:23:28.000Z",
+              "uid": "35240-de5b735c-6330-4ed0-9e85-0ccca0c0d5bf"
+            }
+          ],
+          "createdAt": "2026-10-22T02:23:28.000Z",
+          "updatedAt": "2026-10-22T02:23:28.000Z",
+          "uid": "35240-6a7608e8-5195-445e-8eb7-c36ce14f9af3"
+        }
+      ],
+      "id": "52e3108d-8807-45b3-9a96-d284ec074d75",
+      "createdAt": "2026-10-22T02:23:28.000Z",
+      "updatedAt": "2026-10-22T02:23:28.000Z",
+      "uid": "35240-52e3108d-8807-45b3-9a96-d284ec074d75"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://au-api.basiq.io"
+    }
+  ]
+}

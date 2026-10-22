@@ -1,0 +1,48 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/main/json-schema/basiq-merchant-details-schema.json",
+  "title": "MerchantDetails",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/_original/basiq-enrich-openapi.json#/components/schemas/MerchantDetails",
+  "type": "object",
+  "properties": {
+    "merchantName": {
+      "type": "string",
+      "description": "The name of the merchant."
+    },
+    "merchantId": {
+      "type": "string",
+      "description": "Unique identifier for the merchant."
+    },
+    "matchScore": {
+      "type": "number",
+      "format": "float",
+      "description": "Confidence score of the match."
+    },
+    "suburb": {
+      "type": [
+        "string",
+        "null"
+      ],
+      "description": "The suburb of the merchant location, or null if not available."
+    },
+    "state": {
+      "type": "string",
+      "description": "The state of the merchant location."
+    },
+    "country": {
+      "type": "string",
+      "description": "The country of the merchant location."
+    },
+    "abn": {
+      "type": "string",
+      "description": "The Australian Business Number (ABN) of the merchant."
+    },
+    "entityType": {
+      "type": "string",
+      "description": "The type of the merchant entity."
+    }
+  }
+}

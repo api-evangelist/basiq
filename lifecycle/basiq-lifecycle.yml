@@ -1,0 +1,34 @@
+generated: '2026-10-21'
+method: searched
+source: https://api.basiq.io/docs/security
+versioning:
+  scheme: header
+  header: basiq-version
+  current: '3.0'
+  versions:
+  - version: '2.0'
+    note: '"Version 2 exclusively supports Digital Data Capture (DDC)"'
+  - version: '3.0'
+    note: '"Version 3 supports both DDC and the Consumer Data Right (CDR)"; required for Open Banking enablement (https://api.basiq.io/docs/cdr-compliance)'
+  evidence: basiq-version is a required header parameter (example "3.0") on operations in the OpenAPI (e.g. postToken).
+deprecation:
+  policy: No published API deprecation/sunset policy or Sunset/Deprecation (RFC 8594) headers found.
+  notices:
+  - date: '2026-04-02'
+    subject: ANZ New Zealand connector (NZ00101) - End of Support
+    text: The connector will remain available in its current state, however it is no longer under active maintenance and will not receive updates or fixes going forward.
+    url: https://api.basiq.io/changelog/anz-new-zealand-nz00101-end-of-support
+sla: null
+status_page: https://status.basiq.io/
+deprecated_operations:
+- {operationId: getAffordabilityList, method: GET, path: '/users/{userId}/affordability', source: openapi/_original/basiq-affordability-openapi.json}
+- {operationId: postAffordability, method: POST, path: '/users/{userId}/affordability', source: openapi/_original/basiq-affordability-openapi.json}
+- {operationId: getAffordability, method: GET, path: '/users/{userId}/affordability/{snapshotId}', source: openapi/_original/basiq-affordability-openapi.json}
+- {operationId: getAffordabilitySnapshotTransactions, method: GET, path: '/users/{userId}/affordability/{snapshotId}/transactions', source: openapi/_original/basiq-affordability-openapi.json}
+- {operationId: postExpenses, method: POST, path: '/users/{userId}/expenses', source: openapi/_original/basiq-affordability-openapi.json}
+- {operationId: getExpenses, method: GET, path: '/users/{userId}/expenses/{snapshotId}', source: openapi/_original/basiq-affordability-openapi.json}
+- {operationId: postIncome, method: POST, path: '/users/{userId}/income', source: openapi/_original/basiq-affordability-openapi.json}
+- {operationId: getIncome, method: GET, path: '/users/{userId}/income/{snapshotId}', source: openapi/_original/basiq-affordability-openapi.json}
+deprecated_products:
+- name: Affordability (legacy)
+  evidence: The docs index lists the reference section as "affordability-legacy" (https://api.basiq.io/reference/affordability-legacy/llms.txt) and all its operations are marked deprecated in the OpenAPI.

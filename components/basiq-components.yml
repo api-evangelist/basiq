@@ -1,0 +1,24 @@
+generated: '2026-10-21'
+method: searched
+source: https://api.basiq.io/docs/consent-ui-customisation
+families:
+- family: Consent UI (hosted)
+  kind: hosted-prebuilt
+  docs: https://api.basiq.io/docs/consent-ui-customisation
+  description: Hosted consent and connection flow, "easily embeddable into applications via URL redirect", customised in the Dashboard Customizer.
+  entry_url: https://consent.basiq.io/home?token={{client_token_bound_to_userId}}&action=connect
+  actions: [connect, extend, manage, reauthorise]
+  loader: URL redirect with a CLIENT_ACCESS token bound to a userId
+- family: Connect UI components (npm)
+  kind: client-side
+  loaders:
+  - name: '@basiq/connect-auth'
+    language: JavaScript (React)
+    version: 1.1.44
+    published: '2026-09-28'
+    note: ReactJS UI component for the Basiq Connect auth flow.
+  - name: '@basiq/basiq-connect-control'
+    version: 1.0.72
+    published: '2022-04-29'
+    note: Legacy; source repo archived in github.com/basiqio.
+  see: packages/basiq-packages.yml

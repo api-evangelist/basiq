@@ -1,325 +1,1487 @@
 {
+  "info": {
+    "_postman_id": "7e892f60-bfff-4062-b4b7-fae892a6cbb8",
+    "name": "Affordability API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:23:09.000Z",
+    "updatedAt": "2026-10-22T02:23:10.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-7e892f60-bfff-4062-b4b7-fae892a6cbb8"
+  },
   "item": [
     {
-      "id": "f9f85083-4e49-4d41-ac87-3eeda742cf44",
-      "name": "Affordability",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "users",
       "item": [
         {
-          "id": "30bc348f-ee60-49fc-b36b-2280223066b9",
-          "name": "Get Income Verification",
-          "request": {
-            "name": "Get Income Verification",
-            "description": {
-              "content": "Get income verification data derived from transaction analysis.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users",
-                ":userId",
-                "income"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "userId",
-                  "description": "(Required) Basiq user ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{userId}",
+          "item": [
             {
-              "id": "fb603bb1-1a75-4fca-9dfe-a0a5d9cff46b",
-              "name": "Income verification report",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId",
-                    "income"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) Basiq user ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "affordability",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{snapshotId}",
+                  "item": [
+                    {
+                      "name": "transactions",
+                      "item": [
+                        {
+                          "name": "List affordability summary transactions",
+                          "id": "cb68decd-ba51-442d-bc4d-f05927aad4cb",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/affordability/:snapshotId/transactions?limit=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "affordability",
+                                ":snapshotId",
+                                "transactions"
+                              ],
+                              "query": [
+                                {
+                                  "description": "This represents the maximum number of transactions that may be included in the response (maximum of 500). Note that by default 500 transactions are returned if this value is not specified.",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "8db16283-a2fc-4be0-a235-b78be0cb6558",
+                                  "key": "userId",
+                                  "value": "<string>",
+                                  "description": "(Required) The identifier of the user."
+                                },
+                                {
+                                  "id": "1320023f-fee6-499d-bb63-dbebf9b7ac70",
+                                  "key": "snapshotId",
+                                  "value": "<string>",
+                                  "description": "(Required) The identifier of the affordability summary to be retrieved."
+                                }
+                              ]
+                            },
+                            "description": "Use this endpoint to retrieve a paginated list of transactions associated with an affordability summary."
+                          },
+                          "response": [
+                            {
+                              "id": "51b610dd-e387-44e3-aa75-78f0fdc3198f",
+                              "name": "Returns a affordability resource transactions JSON or CSV file, if the operation succeeded.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/users/:userId/affordability/:snapshotId/transactions?limit=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "users",
+                                    ":userId",
+                                    "affordability",
+                                    ":snapshotId",
+                                    "transactions"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "This represents the maximum number of transactions that may be included in the response (maximum of 500). Note that by default 500 transactions are returned if this value is not specified.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    },
+                                    {
+                                      "key": "snapshotId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"count\": \"<long>\",\n  \"data\": [\n    {\n      \"account\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"balance\": \"<string>\",\n      \"class\": \"loan-interest\",\n      \"description\": \"<string>\",\n      \"direction\": \"credit\",\n      \"id\": \"<string>\",\n      \"institution\": \"<string>\",\n      \"links\": {\n        \"account\": \"<string>\",\n        \"institution\": \"<string>\"\n      },\n      \"postDate\": \"<string>\",\n      \"status\": \"pending\",\n      \"transactionDate\": \"<string>\",\n      \"type\": \"<string>\",\n      \"subClass\": {\n        \"title\": \"<string>\",\n        \"Code\": \"<integer>\"\n      }\n    },\n    {\n      \"account\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"balance\": \"<string>\",\n      \"class\": \"cash-withdrawal\",\n      \"description\": \"<string>\",\n      \"direction\": \"debit\",\n      \"id\": \"<string>\",\n      \"institution\": \"<string>\",\n      \"links\": {\n        \"account\": \"<string>\",\n        \"institution\": \"<string>\"\n      },\n      \"postDate\": \"<string>\",\n      \"status\": \"posted\",\n      \"transactionDate\": \"<string>\",\n      \"type\": \"<string>\",\n      \"subClass\": {\n        \"title\": \"<string>\",\n        \"Code\": \"<integer>\"\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": \"<string>\",\n    \"next\": \"<string>\"\n  },\n  \"size\": \"<long>\",\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:23:10.000Z",
+                              "updatedAt": "2026-10-22T02:23:10.000Z",
+                              "uid": "35240-51b610dd-e387-44e3-aa75-78f0fdc3198f"
+                            },
+                            {
+                              "id": "a8d35f22-7b9f-406c-96be-207319448263",
+                              "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/users/:userId/affordability/:snapshotId/transactions?limit=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "users",
+                                    ":userId",
+                                    "affordability",
+                                    ":snapshotId",
+                                    "transactions"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "This represents the maximum number of transactions that may be included in the response (maximum of 500). Note that by default 500 transactions are returned if this value is not specified.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    },
+                                    {
+                                      "key": "snapshotId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"invalid-content\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-content\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:23:10.000Z",
+                              "updatedAt": "2026-10-22T02:23:10.000Z",
+                              "uid": "35240-a8d35f22-7b9f-406c-96be-207319448263"
+                            },
+                            {
+                              "id": "d84db262-ad27-4f4c-8f5c-d6ff23a56bb8",
+                              "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/users/:userId/affordability/:snapshotId/transactions?limit=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "users",
+                                    ":userId",
+                                    "affordability",
+                                    ":snapshotId",
+                                    "transactions"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "This represents the maximum number of transactions that may be included in the response (maximum of 500). Note that by default 500 transactions are returned if this value is not specified.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    },
+                                    {
+                                      "key": "snapshotId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"forbidden-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"no-production-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:23:10.000Z",
+                              "updatedAt": "2026-10-22T02:23:10.000Z",
+                              "uid": "35240-d84db262-ad27-4f4c-8f5c-d6ff23a56bb8"
+                            },
+                            {
+                              "id": "71c3b2ee-435f-4eb0-9c1c-e22c56b94c51",
+                              "name": "Returns error indicating that server can't find requested resource.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/users/:userId/affordability/:snapshotId/transactions?limit=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "users",
+                                    ":userId",
+                                    "affordability",
+                                    ":snapshotId",
+                                    "transactions"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "This represents the maximum number of transactions that may be included in the response (maximum of 500). Note that by default 500 transactions are returned if this value is not specified.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    },
+                                    {
+                                      "key": "snapshotId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:23:10.000Z",
+                              "updatedAt": "2026-10-22T02:23:10.000Z",
+                              "uid": "35240-71c3b2ee-435f-4eb0-9c1c-e22c56b94c51"
+                            },
+                            {
+                              "id": "48c810ef-c03a-4270-8c34-f2deb9fcb7f5",
+                              "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/users/:userId/affordability/:snapshotId/transactions?limit=<integer>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "users",
+                                    ":userId",
+                                    "affordability",
+                                    ":snapshotId",
+                                    "transactions"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "This represents the maximum number of transactions that may be included in the response (maximum of 500). Note that by default 500 transactions are returned if this value is not specified.",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    },
+                                    {
+                                      "key": "snapshotId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:23:10.000Z",
+                              "updatedAt": "2026-10-22T02:23:10.000Z",
+                              "uid": "35240-48c810ef-c03a-4270-8c34-f2deb9fcb7f5"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:23:10.000Z",
+                          "updatedAt": "2026-10-22T02:23:10.000Z",
+                          "uid": "35240-cb68decd-ba51-442d-bc4d-f05927aad4cb"
+                        }
+                      ],
+                      "id": "45e70fae-c2bb-4174-a666-761d1a540276",
+                      "createdAt": "2026-10-22T02:23:10.000Z",
+                      "updatedAt": "2026-10-22T02:23:10.000Z",
+                      "uid": "35240-45e70fae-c2bb-4174-a666-761d1a540276"
+                    },
+                    {
+                      "name": "Retrieve an affordability summary",
+                      "id": "c2a326bb-c4de-4a64-84af-914464f64319",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/affordability/:snapshotId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "affordability",
+                            ":snapshotId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "8bf41a3a-39a1-448e-a719-00d153625372",
+                              "key": "userId",
+                              "value": "<string>",
+                              "description": "(Required) The identifier of the user."
+                            },
+                            {
+                              "id": "11f16850-3c42-48f8-af3e-ba52a705c180",
+                              "key": "snapshotId",
+                              "value": "<string>",
+                              "description": "(Required) The identifier of the affordability summaries to be retrieved."
+                            }
+                          ]
+                        },
+                        "description": "Retrieves a specific, pre existing affordability summaries"
+                      },
+                      "response": [
+                        {
+                          "id": "1a674870-5312-4663-a104-65fcae2790fe",
+                          "name": "Returns a saved affordability resource JSON or PDF summary file, if the operation succeeded.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/affordability/:snapshotId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "affordability",
+                                ":snapshotId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "snapshotId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"assets\": [\n    {\n      \"account\": {\n        \"product\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"availableFunds\": \"<string>\",\n      \"balance\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"institution\": \"<string>\",\n      \"previous6Months\": {\n        \"maxBalance\": \"<string,null>\",\n        \"minBalance\": \"<string,null>\"\n      },\n      \"type\": \"<string>\"\n    },\n    {\n      \"account\": {\n        \"product\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"availableFunds\": \"<string>\",\n      \"balance\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"institution\": \"<string>\",\n      \"previous6Months\": {\n        \"maxBalance\": \"<string,null>\",\n        \"minBalance\": \"<string,null>\"\n      },\n      \"type\": \"<string>\"\n    }\n  ],\n  \"external\": [\n    {\n      \"changeHistory\": [\n        {\n          \"amount\": \"<string>\",\n          \"date\": \"<date>\",\n          \"source\": \"<string>\"\n        },\n        {\n          \"amount\": \"<string>\",\n          \"date\": \"<date>\",\n          \"source\": \"<string>\"\n        }\n      ],\n      \"payments\": [\n        {\n          \"amountAvg\": \"<string>\",\n          \"amountAvgMonthly\": \"<string>\",\n          \"first\": \"<date>\",\n          \"last\": \"<date>\",\n          \"noOccurrences\": \"<long>\",\n          \"total\": \"<string>\"\n        },\n        {\n          \"amountAvg\": \"<string>\",\n          \"amountAvgMonthly\": \"<string>\",\n          \"first\": \"<date>\",\n          \"last\": \"<date>\",\n          \"noOccurrences\": \"<long>\",\n          \"total\": \"<string>\"\n        }\n      ],\n      \"source\": \"<string>\"\n    },\n    {\n      \"changeHistory\": [\n        {\n          \"amount\": \"<string>\",\n          \"date\": \"<date>\",\n          \"source\": \"<string>\"\n        },\n        {\n          \"amount\": \"<string>\",\n          \"date\": \"<date>\",\n          \"source\": \"<string>\"\n        }\n      ],\n      \"payments\": [\n        {\n          \"amountAvg\": \"<string>\",\n          \"amountAvgMonthly\": \"<string>\",\n          \"first\": \"<date>\",\n          \"last\": \"<date>\",\n          \"noOccurrences\": \"<long>\",\n          \"total\": \"<string>\"\n        },\n        {\n          \"amountAvg\": \"<string>\",\n          \"amountAvgMonthly\": \"<string>\",\n          \"first\": \"<date>\",\n          \"last\": \"<date>\",\n          \"noOccurrences\": \"<long>\",\n          \"total\": \"<string>\"\n        }\n      ],\n      \"source\": \"<string>\"\n    }\n  ],\n  \"fromMonth\": \"<string>\",\n  \"generatedDate\": \"<string>\",\n  \"id\": \"<string>\",\n  \"liabilities\": {\n    \"credit\": [\n      {\n        \"account\": {\n          \"product\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"availableFunds\": \"<string,null>\",\n        \"balance\": \"<string,null>\",\n        \"creditLimit\": \"<string,null>\",\n        \"currency\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"previous6Months\": {\n          \"cashAdvances\": \"<string>\"\n        },\n        \"previousMonth\": {\n          \"maxBalance\": \"<string>\",\n          \"minBalance\": \"<string>\",\n          \"totalCredits\": \"<string>\",\n          \"totalDebits\": \"<string>\"\n        }\n      },\n      {\n        \"account\": {\n          \"product\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"availableFunds\": \"<string,null>\",\n        \"balance\": \"<string,null>\",\n        \"creditLimit\": \"<string,null>\",\n        \"currency\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"previous6Months\": {\n          \"cashAdvances\": \"<string>\"\n        },\n        \"previousMonth\": {\n          \"maxBalance\": \"<string>\",\n          \"minBalance\": \"<string>\",\n          \"totalCredits\": \"<string>\",\n          \"totalDebits\": \"<string>\"\n        }\n      }\n    ],\n    \"loan\": [\n      {\n        \"account\": {\n          \"product\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"availableFunds\": \"<string,null>\",\n        \"balance\": \"<string,null>\",\n        \"changeHistory\": [\n          {\n            \"amount\": \"<string>\",\n            \"date\": \"<date>\",\n            \"direction\": \"credit\",\n            \"source\": \"<string>\"\n          },\n          {\n            \"amount\": \"<string>\",\n            \"date\": \"<date>\",\n            \"direction\": \"debit\",\n            \"source\": \"<string>\"\n          }\n        ],\n        \"currency\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"previous6Months\": {\n          \"arrears\": \"<string,null>\"\n        },\n        \"previousMonth\": {\n          \"totalCredits\": \"<string>\",\n          \"totalDebits\": \"<string>\",\n          \"totalInterestCharged\": \"<string>\",\n          \"totalRepayments\": \"<string>\"\n        }\n      },\n      {\n        \"account\": {\n          \"product\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"availableFunds\": \"<string,null>\",\n        \"balance\": \"<string,null>\",\n        \"changeHistory\": [\n          {\n            \"amount\": \"<string>\",\n            \"date\": \"<date>\",\n            \"direction\": \"debit\",\n            \"source\": \"<string>\"\n          },\n          {\n            \"amount\": \"<string>\",\n            \"date\": \"<date>\",\n            \"direction\": \"credit\",\n            \"source\": \"<string>\"\n          }\n        ],\n        \"currency\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"previous6Months\": {\n          \"arrears\": \"<string,null>\"\n        },\n        \"previousMonth\": {\n          \"totalCredits\": \"<string>\",\n          \"totalDebits\": \"<string>\",\n          \"totalInterestCharged\": \"<string>\",\n          \"totalRepayments\": \"<string>\"\n        }\n      }\n    ]\n  },\n  \"links\": {\n    \"accounts\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"expenses\": \"<string>\",\n    \"income\": \"<string>\",\n    \"self\": \"<string>\"\n  },\n  \"summary\": {\n    \"assets\": \"<string,null>\",\n    \"creditLimit\": \"<string,null>\",\n    \"expenses\": \"<string>\",\n    \"liabilities\": \"<string,null>\",\n    \"loanRepaymentMonthly\": \"<string,null>\",\n    \"netPosition\": \"<string,null>\",\n    \"potentialLiabilitiesMonthly\": \"<string,null>\",\n    \"regularIncome\": {\n      \"previous3Months\": {\n        \"avgMonthly\": \"<string,null>\"\n      }\n    },\n    \"savings\": \"<string,null>\"\n  },\n  \"toMonth\": \"<string>\",\n  \"type\": \"<string>\",\n  \"coverageDays\": \"<long>\"\n}",
+                          "createdAt": "2026-10-22T02:23:10.000Z",
+                          "updatedAt": "2026-10-22T02:23:10.000Z",
+                          "uid": "35240-1a674870-5312-4663-a104-65fcae2790fe"
+                        },
+                        {
+                          "id": "4bf74801-4f54-4d6a-8cb4-89586de10adf",
+                          "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/affordability/:snapshotId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "affordability",
+                                ":snapshotId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "snapshotId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"invalid-content\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-content\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:23:10.000Z",
+                          "updatedAt": "2026-10-22T02:23:10.000Z",
+                          "uid": "35240-4bf74801-4f54-4d6a-8cb4-89586de10adf"
+                        },
+                        {
+                          "id": "c2f6eae7-6e18-4ce2-a2c1-ee5c7de8de82",
+                          "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/affordability/:snapshotId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "affordability",
+                                ":snapshotId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "snapshotId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"forbidden-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"no-production-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:23:10.000Z",
+                          "updatedAt": "2026-10-22T02:23:10.000Z",
+                          "uid": "35240-c2f6eae7-6e18-4ce2-a2c1-ee5c7de8de82"
+                        },
+                        {
+                          "id": "40ffeeaa-7f13-4c6e-8791-85bfb061b747",
+                          "name": "Returns error indicating that server can't find requested resource.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/affordability/:snapshotId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "affordability",
+                                ":snapshotId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "snapshotId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:23:10.000Z",
+                          "updatedAt": "2026-10-22T02:23:10.000Z",
+                          "uid": "35240-40ffeeaa-7f13-4c6e-8791-85bfb061b747"
+                        },
+                        {
+                          "id": "cf4860dd-8f58-4a0f-ac4b-67a92d37ecf2",
+                          "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/affordability/:snapshotId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "affordability",
+                                ":snapshotId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "snapshotId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:23:10.000Z",
+                          "updatedAt": "2026-10-22T02:23:10.000Z",
+                          "uid": "35240-cf4860dd-8f58-4a0f-ac4b-67a92d37ecf2"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:23:10.000Z",
+                      "updatedAt": "2026-10-22T02:23:10.000Z",
+                      "uid": "35240-c2a326bb-c4de-4a64-84af-914464f64319"
+                    }
+                  ],
+                  "id": "8a3dc17a-97d7-46b3-b89a-a72ab101d135",
+                  "createdAt": "2026-10-22T02:23:10.000Z",
+                  "updatedAt": "2026-10-22T02:23:10.000Z",
+                  "uid": "35240-8a3dc17a-97d7-46b3-b89a-a72ab101d135"
+                },
+                {
+                  "name": "List affordability summaries",
+                  "id": "abf59833-4a3e-4e84-a9ca-9528c50fabe2",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId/affordability",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId",
+                        "affordability"
+                      ],
+                      "variable": [
+                        {
+                          "id": "de0d303f-28ee-41ad-a143-cc6c98601499",
+                          "key": "userId",
+                          "value": "<string>",
+                          "description": "(Required) The identifier of the user."
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of affordability summaries that have been generated for a specific user."
+                  },
+                  "response": [
+                    {
+                      "id": "9ebf0ca3-7717-4ec8-a14a-b02532fbbb5f",
+                      "name": "Returns a list with a data property that contains an array of affordability resources.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/affordability",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "affordability"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"fromMonth\": \"<string>\",\n      \"generatedDate\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"expenses\": \"<string>\",\n        \"income\": \"<string>\",\n        \"self\": \"<string>\"\n      },\n      \"toMonth\": \"<string>\",\n      \"type\": \"<string>\",\n      \"coverageDays\": \"<long>\",\n      \"institutions\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"fromMonth\": \"<string>\",\n      \"generatedDate\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"expenses\": \"<string>\",\n        \"income\": \"<string>\",\n        \"self\": \"<string>\"\n      },\n      \"toMonth\": \"<string>\",\n      \"type\": \"<string>\",\n      \"coverageDays\": \"<long>\",\n      \"institutions\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"links\": {\n    \"self\": \"<string>\"\n  },\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:10.000Z",
+                      "updatedAt": "2026-10-22T02:23:10.000Z",
+                      "uid": "35240-9ebf0ca3-7717-4ec8-a14a-b02532fbbb5f"
+                    },
+                    {
+                      "id": "e5261ac4-032b-45cd-8be4-3c6dad773c4b",
+                      "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/affordability",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "affordability"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"invalid-content\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-content\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:10.000Z",
+                      "updatedAt": "2026-10-22T02:23:10.000Z",
+                      "uid": "35240-e5261ac4-032b-45cd-8be4-3c6dad773c4b"
+                    },
+                    {
+                      "id": "b3d6667b-d3af-4327-b939-0e35c8652803",
+                      "name": "Returns error indicating that server can't find requested resource.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/affordability",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "affordability"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:10.000Z",
+                      "updatedAt": "2026-10-22T02:23:10.000Z",
+                      "uid": "35240-b3d6667b-d3af-4327-b939-0e35c8652803"
+                    },
+                    {
+                      "id": "10030c81-c0be-4cb3-bd24-5e5ac378ec9a",
+                      "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/affordability",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "affordability"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:10.000Z",
+                      "updatedAt": "2026-10-22T02:23:10.000Z",
+                      "uid": "35240-10030c81-c0be-4cb3-bd24-5e5ac378ec9a"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:23:10.000Z",
+                  "updatedAt": "2026-10-22T02:23:10.000Z",
+                  "uid": "35240-abf59833-4a3e-4e84-a9ca-9528c50fabe2"
+                },
+                {
+                  "name": "Create an affordability summaries",
+                  "id": "33bafaff-74b2-4632-9b65-f77d2bcf593d",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"accounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fromMonth\": \"<string>\",\n  \"toMonth\": \"<string>\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId/affordability",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId",
+                        "affordability"
+                      ],
+                      "variable": [
+                        {
+                          "id": "907f6c60-ee7e-4d32-977a-006396c0531c",
+                          "key": "userId",
+                          "value": "<string>",
+                          "description": "(Required) The identifier of the user."
+                        }
+                      ]
+                    },
+                    "description": "Create an affordability summaries for a user"
+                  },
+                  "response": [
+                    {
+                      "id": "42853330-9de0-4958-9191-1bc1a7dce167",
+                      "name": "Returns a created affordability resource, if the operation succeeded.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"accounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fromMonth\": \"<string>\",\n  \"toMonth\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/affordability",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "affordability"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"assets\": [\n    {\n      \"account\": {\n        \"product\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"availableFunds\": \"<string>\",\n      \"balance\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"institution\": \"<string>\",\n      \"previous6Months\": {\n        \"maxBalance\": \"<string,null>\",\n        \"minBalance\": \"<string,null>\"\n      },\n      \"type\": \"<string>\"\n    },\n    {\n      \"account\": {\n        \"product\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      \"availableFunds\": \"<string>\",\n      \"balance\": \"<string>\",\n      \"currency\": \"<string>\",\n      \"institution\": \"<string>\",\n      \"previous6Months\": {\n        \"maxBalance\": \"<string,null>\",\n        \"minBalance\": \"<string,null>\"\n      },\n      \"type\": \"<string>\"\n    }\n  ],\n  \"external\": [\n    {\n      \"changeHistory\": [\n        {\n          \"amount\": \"<string>\",\n          \"date\": \"<date>\",\n          \"source\": \"<string>\"\n        },\n        {\n          \"amount\": \"<string>\",\n          \"date\": \"<date>\",\n          \"source\": \"<string>\"\n        }\n      ],\n      \"payments\": [\n        {\n          \"amountAvg\": \"<string>\",\n          \"amountAvgMonthly\": \"<string>\",\n          \"first\": \"<date>\",\n          \"last\": \"<date>\",\n          \"noOccurrences\": \"<long>\",\n          \"total\": \"<string>\"\n        },\n        {\n          \"amountAvg\": \"<string>\",\n          \"amountAvgMonthly\": \"<string>\",\n          \"first\": \"<date>\",\n          \"last\": \"<date>\",\n          \"noOccurrences\": \"<long>\",\n          \"total\": \"<string>\"\n        }\n      ],\n      \"source\": \"<string>\"\n    },\n    {\n      \"changeHistory\": [\n        {\n          \"amount\": \"<string>\",\n          \"date\": \"<date>\",\n          \"source\": \"<string>\"\n        },\n        {\n          \"amount\": \"<string>\",\n          \"date\": \"<date>\",\n          \"source\": \"<string>\"\n        }\n      ],\n      \"payments\": [\n        {\n          \"amountAvg\": \"<string>\",\n          \"amountAvgMonthly\": \"<string>\",\n          \"first\": \"<date>\",\n          \"last\": \"<date>\",\n          \"noOccurrences\": \"<long>\",\n          \"total\": \"<string>\"\n        },\n        {\n          \"amountAvg\": \"<string>\",\n          \"amountAvgMonthly\": \"<string>\",\n          \"first\": \"<date>\",\n          \"last\": \"<date>\",\n          \"noOccurrences\": \"<long>\",\n          \"total\": \"<string>\"\n        }\n      ],\n      \"source\": \"<string>\"\n    }\n  ],\n  \"fromMonth\": \"<string>\",\n  \"generatedDate\": \"<string>\",\n  \"id\": \"<string>\",\n  \"liabilities\": {\n    \"credit\": [\n      {\n        \"account\": {\n          \"product\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"availableFunds\": \"<string,null>\",\n        \"balance\": \"<string,null>\",\n        \"creditLimit\": \"<string,null>\",\n        \"currency\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"previous6Months\": {\n          \"cashAdvances\": \"<string>\"\n        },\n        \"previousMonth\": {\n          \"maxBalance\": \"<string>\",\n          \"minBalance\": \"<string>\",\n          \"totalCredits\": \"<string>\",\n          \"totalDebits\": \"<string>\"\n        }\n      },\n      {\n        \"account\": {\n          \"product\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"availableFunds\": \"<string,null>\",\n        \"balance\": \"<string,null>\",\n        \"creditLimit\": \"<string,null>\",\n        \"currency\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"previous6Months\": {\n          \"cashAdvances\": \"<string>\"\n        },\n        \"previousMonth\": {\n          \"maxBalance\": \"<string>\",\n          \"minBalance\": \"<string>\",\n          \"totalCredits\": \"<string>\",\n          \"totalDebits\": \"<string>\"\n        }\n      }\n    ],\n    \"loan\": [\n      {\n        \"account\": {\n          \"product\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"availableFunds\": \"<string,null>\",\n        \"balance\": \"<string,null>\",\n        \"changeHistory\": [\n          {\n            \"amount\": \"<string>\",\n            \"date\": \"<date>\",\n            \"direction\": \"credit\",\n            \"source\": \"<string>\"\n          },\n          {\n            \"amount\": \"<string>\",\n            \"date\": \"<date>\",\n            \"direction\": \"debit\",\n            \"source\": \"<string>\"\n          }\n        ],\n        \"currency\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"previous6Months\": {\n          \"arrears\": \"<string,null>\"\n        },\n        \"previousMonth\": {\n          \"totalCredits\": \"<string>\",\n          \"totalDebits\": \"<string>\",\n          \"totalInterestCharged\": \"<string>\",\n          \"totalRepayments\": \"<string>\"\n        }\n      },\n      {\n        \"account\": {\n          \"product\": \"<string>\",\n          \"type\": \"<string>\"\n        },\n        \"availableFunds\": \"<string,null>\",\n        \"balance\": \"<string,null>\",\n        \"changeHistory\": [\n          {\n            \"amount\": \"<string>\",\n            \"date\": \"<date>\",\n            \"direction\": \"debit\",\n            \"source\": \"<string>\"\n          },\n          {\n            \"amount\": \"<string>\",\n            \"date\": \"<date>\",\n            \"direction\": \"credit\",\n            \"source\": \"<string>\"\n          }\n        ],\n        \"currency\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"previous6Months\": {\n          \"arrears\": \"<string,null>\"\n        },\n        \"previousMonth\": {\n          \"totalCredits\": \"<string>\",\n          \"totalDebits\": \"<string>\",\n          \"totalInterestCharged\": \"<string>\",\n          \"totalRepayments\": \"<string>\"\n        }\n      }\n    ]\n  },\n  \"links\": {\n    \"accounts\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"expenses\": \"<string>\",\n    \"income\": \"<string>\",\n    \"self\": \"<string>\"\n  },\n  \"summary\": {\n    \"assets\": \"<string,null>\",\n    \"creditLimit\": \"<string,null>\",\n    \"expenses\": \"<string>\",\n    \"liabilities\": \"<string,null>\",\n    \"loanRepaymentMonthly\": \"<string,null>\",\n    \"netPosition\": \"<string,null>\",\n    \"potentialLiabilitiesMonthly\": \"<string,null>\",\n    \"regularIncome\": {\n      \"previous3Months\": {\n        \"avgMonthly\": \"<string,null>\"\n      }\n    },\n    \"savings\": \"<string,null>\"\n  },\n  \"toMonth\": \"<string>\",\n  \"type\": \"<string>\",\n  \"coverageDays\": \"<long>\"\n}",
+                      "createdAt": "2026-10-22T02:23:10.000Z",
+                      "updatedAt": "2026-10-22T02:23:10.000Z",
+                      "uid": "35240-42853330-9de0-4958-9191-1bc1a7dce167"
+                    },
+                    {
+                      "id": "4c1aa55a-b48c-4175-ae85-a14cc14bc23c",
+                      "name": "Returns a created affordability PDF Report, if the operation succeeded.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"accounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fromMonth\": \"<string>\",\n  \"toMonth\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/affordability",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "affordability"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Created",
+                      "code": 201,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:23:10.000Z",
+                      "updatedAt": "2026-10-22T02:23:10.000Z",
+                      "uid": "35240-4c1aa55a-b48c-4175-ae85-a14cc14bc23c"
+                    },
+                    {
+                      "id": "c394e3aa-491b-435b-ad7d-ce1d9794192a",
+                      "name": "Returns no content if there are none transactions for the requested period.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"accounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fromMonth\": \"<string>\",\n  \"toMonth\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/affordability",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "affordability"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "No Content",
+                      "code": 204,
+                      "_postman_previewlanguage": "text",
+                      "header": [],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": null,
+                      "createdAt": "2026-10-22T02:23:10.000Z",
+                      "updatedAt": "2026-10-22T02:23:10.000Z",
+                      "uid": "35240-c394e3aa-491b-435b-ad7d-ce1d9794192a"
+                    },
+                    {
+                      "id": "6ebe5955-c545-47a4-aabb-5c0ea5b7bb12",
+                      "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"accounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fromMonth\": \"<string>\",\n  \"toMonth\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/affordability",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "affordability"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"invalid-content\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-content\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:10.000Z",
+                      "updatedAt": "2026-10-22T02:23:10.000Z",
+                      "uid": "35240-6ebe5955-c545-47a4-aabb-5c0ea5b7bb12"
+                    },
+                    {
+                      "id": "0eed9b89-d665-4128-a1da-b629ee9fc750",
+                      "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"accounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fromMonth\": \"<string>\",\n  \"toMonth\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/affordability",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "affordability"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"forbidden-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"no-production-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:10.000Z",
+                      "updatedAt": "2026-10-22T02:23:10.000Z",
+                      "uid": "35240-0eed9b89-d665-4128-a1da-b629ee9fc750"
+                    },
+                    {
+                      "id": "08ce98b6-8609-4792-9834-69020e682e6f",
+                      "name": "Returns error indicating that server can't find requested resource.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"accounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fromMonth\": \"<string>\",\n  \"toMonth\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/affordability",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "affordability"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:10.000Z",
+                      "updatedAt": "2026-10-22T02:23:10.000Z",
+                      "uid": "35240-08ce98b6-8609-4792-9834-69020e682e6f"
+                    },
+                    {
+                      "id": "e5ddfc17-ae7e-40ed-a8e2-0809537bba1e",
+                      "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"accounts\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"fromMonth\": \"<string>\",\n  \"toMonth\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/affordability",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "affordability"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:10.000Z",
+                      "updatedAt": "2026-10-22T02:23:10.000Z",
+                      "uid": "35240-e5ddfc17-ae7e-40ed-a8e2-0809537bba1e"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:23:10.000Z",
+                  "updatedAt": "2026-10-22T02:23:10.000Z",
+                  "uid": "35240-33bafaff-74b2-4632-9b65-f77d2bcf593d"
                 }
               ],
-              "body": "{\n  \"userId\": \"string\",\n  \"summary\": {\n    \"regular\": {\n      \"monthly\": 9427.344398912664,\n      \"annual\": 7319.5421662364815\n    },\n    \"irregular\": {\n      \"monthly\": 497.10331648280425\n    }\n  },\n  \"incomeStreams\": [\n    {\n      \"source\": \"string\",\n      \"amount\": 3972.612685831308,\n      \"frequency\": \"string\"\n    },\n    {\n      \"source\": \"string\",\n      \"amount\": 5071.31483966782,\n      \"frequency\": \"string\"\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "8a45e1fa-44cc-4efe-9bc1-2634cf52c14b",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId",
-                    "income"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) Basiq user ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"code\": \"string\",\n  \"detail\": \"string\",\n  \"source\": {}\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "e59265f2-ea60-42cb-bf46-98f6aae9f505",
+              "createdAt": "2026-10-22T02:23:10.000Z",
+              "updatedAt": "2026-10-22T02:23:10.000Z",
+              "uid": "35240-e59265f2-ea60-42cb-bf46-98f6aae9f505"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "1eef5d11-e9dd-4965-97fc-69e88317238a",
-          "name": "Get Expenses",
-          "request": {
-            "name": "Get Expenses",
-            "description": {
-              "content": "Get categorized expense data derived from transaction analysis.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users",
-                ":userId",
-                "expenses"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "userId",
-                  "description": "(Required) Basiq user ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "caac1666-004e-4ff5-9bba-6cca23a377f1",
-              "name": "Expense report",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId",
-                    "expenses"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) Basiq user ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"userId\": \"string\",\n  \"summary\": {\n    \"totalMonthly\": 2247.5307893481067\n  },\n  \"categories\": [\n    {\n      \"category\": \"string\",\n      \"amount\": 7170.626675275026,\n      \"percentage\": 7307.359218263055\n    },\n    {\n      \"category\": \"string\",\n      \"amount\": 4963.480076649507,\n      \"percentage\": 5841.069254487877\n    }\n  ]\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "466ff130-1a66-4b0c-9c7b-d5318abbdeea",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId",
-                    "expenses"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) Basiq user ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"code\": \"string\",\n  \"detail\": \"string\",\n  \"source\": {}\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "d5fac1c7-046d-42a2-9631-411f61de08e4",
+          "createdAt": "2026-10-22T02:23:10.000Z",
+          "updatedAt": "2026-10-22T02:23:10.000Z",
+          "uid": "35240-d5fac1c7-046d-42a2-9631-411f61de08e4"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://au-api.basiq.io",
-      "key": "baseUrl"
+      "id": "9db545de-08eb-42f6-8179-57a5ed7e9504",
+      "createdAt": "2026-10-22T02:23:10.000Z",
+      "updatedAt": "2026-10-22T02:23:10.000Z",
+      "uid": "35240-9db545de-08eb-42f6-8179-57a5ed7e9504"
     }
   ],
   "auth": {
@@ -327,17 +1489,15 @@
     "bearer": [
       {
         "key": "token",
-        "value": "{{bearerToken}}"
+        "value": "{{bearerToken}}",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "dd8923c1-b8cf-4038-a0c1-3a44c40e6336",
-    "name": "Basiq Accounts Affordability API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Basiq API is an open banking and financial data platform providing unified access to Australian and New Zealand bank account data. It enables financial applications to retrieve account balances, transactions, income verification, and expense categorization via consumer-consented bank connections using CDR (Consumer Data Right) and third-party open banking standards.\n\nContact Support:\n Name: Basiq Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://au-api.basiq.io"
     }
-  }
+  ]
 }

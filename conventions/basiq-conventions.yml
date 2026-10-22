@@ -1,0 +1,64 @@
+generated: '2026-10-21'
+method: searched
+source: https://api.basiq.io/docs/errors
+authentication:
+  style: API key exchanged for a 60-minute bearer token via POST /token
+  see: authentication/basiq-authentication.yml
+idempotency:
+  coverage: none
+  mechanism: null
+  header: null
+  note: No Idempotency-Key header or replay protection is documented or declared in any OpenAPI file. Webhook deliveries carry a stable webhook-id that "remains the same if the same webhook is resent", which supports consumer-side de-duplication of inbound events only.
+  docs: https://api.basiq.io/docs/webhooks-security
+reversibility:
+  grade: documented
+  docs: https://api.basiq.io/docs/user-management
+  note: >-
+    Basiq is read-only toward end-user money ("All access is read-only ... unable to perform any actions on behalf
+    of the user", https://api.basiq.io/docs/security). The write surface creates platform objects (users,
+    connections, consents, auth links, reports, webhooks, insights). Compensating deletes exist for most of them,
+    but the docs state no window, and they state that user deletion itself is final ("This action cannot be
+    undone."). Graded documented, not verified; no window is asserted.
+  write_surfaces:
+  - {action: Create user, operation: createUser, reversal: deleteUser, window: null, note: 'Deleting a user "will permanently remove all associated data, including connections and aggregated financial information. This action cannot be undone."'}
+  - {action: Delete user, operation: deleteUser, reversal: none, irreversible: true, docs: 'https://api.basiq.io/docs/user-management'}
+  - {action: Create auth link, operation: postAuthLink, reversal: deleteAuthLink, window: null, note: 'Auth links expire automatically after 30 days or once the disclosure flow completes (https://api.basiq.io/changelog/mar26-new-updates); that is an expiry, not a reversal window.'}
+  - {action: Connection (via consent flow), operation: deleteConnection, reversal: none documented}
+  - {action: Purge connection data, operation: purgeConnectionData, reversal: none documented}
+  - {action: Revoke consent, operation: deleteConsent, reversal: none documented, note: Users re-consent through the Consent UI.}
+  - {action: Create report, operation: createreport, reversal: deleteReport, window: null}
+  - {action: Create webhook, operation: addWebhook, reversal: deleteWebhook, window: null}
+dry_run:
+  supported: false
+  note: No dry-run/validate-only mode documented; the free sandbox is the rehearsal environment.
+pagination:
+  style: cursor via links.next
+  params: [limit, filter]
+  response_fields: [links.next, size]
+  evidence: limit (1-500) on Payees list (https://api.basiq.io/changelog/jan26-new-apis-improvement); `next` link declared in openapi/_original/basiq-openapi.json list responses.
+filtering:
+  param: filter
+  note: A `filter` query parameter is declared on 11 operations across the OpenAPI files.
+versioning:
+  style: header
+  header: basiq-version
+  current: '3.0'
+  see: lifecycle/basiq-lifecycle.yml
+error_envelope:
+  format: application/json list envelope
+  shape: '{"type":"list","correlationId":"...","data":[{"type":"error","code":"...","title":"...","detail":"...","source":{"pointer":"...","parameter":"..."}}]}'
+  multiple_errors: true
+  see: errors/basiq-problem-types.yml
+request_tracing:
+  field: correlationId
+  location: error response body
+  note: '"a unique identifier for this particular occurrence of the problem." No request-id response header is documented.'
+async_jobs:
+  note: Connection creation/refresh returns a job; poll GET /jobs/{jobId} and inspect steps[].result for bank-returned errors.
+rate_limit_signaling:
+  status_codes: [429, 403]
+  headers: []
+  note: No rate-limit headers documented.
+  see: rate-limits/basiq-rate-limits.yml
+metadata: null
+field_expansion: null

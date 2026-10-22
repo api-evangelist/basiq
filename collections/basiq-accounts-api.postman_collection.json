@@ -1,367 +1,779 @@
 {
+  "info": {
+    "_postman_id": "3d9301bd-1ad6-48a4-8749-76c621fef7eb",
+    "name": "Connect Accounts API",
+    "description": "All included utility endpoints for Basiq partners",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:22:21.000Z",
+    "updatedAt": "2026-10-22T02:22:21.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-3d9301bd-1ad6-48a4-8749-76c621fef7eb"
+  },
   "item": [
     {
-      "id": "2161b406-586f-4d32-8227-aad4e69a8d6d",
-      "name": "Accounts",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "users",
       "item": [
         {
-          "id": "f05155a1-c091-455a-be1c-ea5dfe724273",
-          "name": "List Accounts",
-          "request": {
-            "name": "List Accounts",
-            "description": {
-              "content": "List all bank accounts for a user across all connections.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users",
-                ":userId",
-                "accounts"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "userId",
-                  "description": "(Required) Basiq user ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{userId}",
+          "item": [
             {
-              "id": "845c5038-2149-47db-b71b-22a190ed9b03",
-              "name": "List of accounts",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId",
-                    "accounts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) Basiq user ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "accounts",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{accountId}",
+                  "item": [
+                    {
+                      "name": "Retrieve an account",
+                      "id": "16eba390-de08-4abf-8152-7a63672d3845",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/accounts/:accountId?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "accounts",
+                            ":accountId"
+                          ],
+                          "query": [
+                            {
+                              "description": "Account filters; account.id, connection.id, institution.id, Only equals (eq) operation is currently supported.",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "id": "67bfdb36-1ca3-47ad-b067-d4b552fb6f18",
+                              "key": "userId",
+                              "value": "<string>",
+                              "description": "(Required) User identifier"
+                            },
+                            {
+                              "id": "5c54ec17-e249-47f6-a8df-2592bf15ccba",
+                              "key": "accountId",
+                              "value": "<string>",
+                              "description": "(Required) Account identifier"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve a specific account belonging to a user"
+                      },
+                      "response": [
+                        {
+                          "id": "e17c7879-dcea-4b17-adff-5294039c18a3",
+                          "name": "Returns a account with details.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/accounts/:accountId?filter=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "accounts",
+                                ":accountId"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Account filters; account.id, connection.id, institution.id, Only equals (eq) operation is currently supported.",
+                                  "key": "filter",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "accountId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"id\": \"<string>\",\n  \"displayName\": \"<string>\",\n  \"lastUpdated\": \"<string>\",\n  \"status\": \"unavailable\",\n  \"name\": \"<string>\",\n  \"accountNo\": \"<string>\",\n  \"accountHolder\": \"<string,null>\",\n  \"isOwned\": \"<boolean>\",\n  \"accountOwnership\": \"MANY_PARTY\",\n  \"balance\": \"<string,null>\",\n  \"availableFunds\": \"<string,null>\",\n  \"creditLimit\": \"<string,null>\",\n  \"currency\": \"<string>\",\n  \"class\": {\n    \"type\": \"<string>\",\n    \"product\": \"<string>\"\n  },\n  \"connection\": \"<string>\",\n  \"institution\": \"<string>\",\n  \"transactionIntervals\": [\n    {\n      \"from\": \"<string>\",\n      \"to\": \"<string>\"\n    },\n    {\n      \"from\": \"<string>\",\n      \"to\": \"<string>\"\n    }\n  ],\n  \"depositRate\": \"<string>\",\n  \"lendingRate\": \"<string>\",\n  \"bsb\": \"<string>\",\n  \"unmaskedAccNum\": \"<string>\",\n  \"creationDate\": \"<string>\",\n  \"maskedNumber\": \"<string>\",\n  \"amortisedLimit\": \"<string>\",\n  \"bundleName\": \"<string>\",\n  \"purses\": [\n    {\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\"\n    },\n    {\n      \"amount\": \"<string>\",\n      \"currency\": \"<string>\"\n    }\n  ],\n  \"meta\": {\n    \"fees\": \"<array,null>\",\n    \"depositRates\": \"<array,null>\",\n    \"lendingRates\": \"<array,null>\",\n    \"termDeposit\": [\n      {\n        \"lodgementDate\": \"<string>\",\n        \"maturityDate\": \"<string>\",\n        \"maturityInstructions\": \"HOLD_ON_MATURITY\",\n        \"maturityAmount\": \"<string>\",\n        \"maturityCurrency\": \"<string>\"\n      },\n      {\n        \"lodgementDate\": \"<string>\",\n        \"maturityDate\": \"<string>\",\n        \"maturityInstructions\": \"HOLD_ON_MATURITY\",\n        \"maturityAmount\": \"<string>\",\n        \"maturityCurrency\": \"<string>\"\n      }\n    ],\n    \"loan\": {\n      \"startDate\": \"<string>\",\n      \"endDate\": \"<string>\",\n      \"repaymentType\": \"PRINCIPAL_AND_INTEREST\",\n      \"originalLoanAmount\": \"<string>\",\n      \"originalLoanCurrency\": \"<string>\",\n      \"minInstalmentAmount\": \"<string>\",\n      \"nextInstalmentDate\": \"<string>\",\n      \"minInstalmentCurrency\": \"<string>\",\n      \"maxRedraw\": \"<string>\",\n      \"maxRedrawCurrency\": \"<string>\",\n      \"minRedraw\": \"<string>\",\n      \"minRedrawCurrency\": \"<string>\",\n      \"repaymentFrequency\": \"<string>\",\n      \"offsetAccountIds\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"offsetAccountEnabled\": \"<boolean>\"\n    },\n    \"creditCard\": {\n      \"minPaymentAmount\": \"<string>\",\n      \"paymentDueAmount\": \"<string>\",\n      \"paymentDueDate\": \"<string>\",\n      \"paymentCurrency\": \"<string>\"\n    },\n    \"features\": \"<array,null>\",\n    \"addresses\": \"<array,null>\"\n  }\n}",
+                          "createdAt": "2026-10-22T02:22:22.000Z",
+                          "updatedAt": "2026-10-22T02:22:22.000Z",
+                          "uid": "35240-e17c7879-dcea-4b17-adff-5294039c18a3"
+                        },
+                        {
+                          "id": "7e26800d-5022-4685-9ff3-21747341439b",
+                          "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/accounts/:accountId?filter=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "accounts",
+                                ":accountId"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Account filters; account.id, connection.id, institution.id, Only equals (eq) operation is currently supported.",
+                                  "key": "filter",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "accountId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"unsupported-accept\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"unsupported-accept\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:22.000Z",
+                          "updatedAt": "2026-10-22T02:22:22.000Z",
+                          "uid": "35240-7e26800d-5022-4685-9ff3-21747341439b"
+                        },
+                        {
+                          "id": "fc55bda0-fda5-4cd7-8889-f3e136b9201f",
+                          "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/accounts/:accountId?filter=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "accounts",
+                                ":accountId"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Account filters; account.id, connection.id, institution.id, Only equals (eq) operation is currently supported.",
+                                  "key": "filter",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "accountId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"no-production-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"no-production-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:22.000Z",
+                          "updatedAt": "2026-10-22T02:22:22.000Z",
+                          "uid": "35240-fc55bda0-fda5-4cd7-8889-f3e136b9201f"
+                        },
+                        {
+                          "id": "c6d3dae1-e4b6-451c-b654-6eb3467b901d",
+                          "name": "Returns error indicating that server can't find requested resource.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/accounts/:accountId?filter=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "accounts",
+                                ":accountId"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Account filters; account.id, connection.id, institution.id, Only equals (eq) operation is currently supported.",
+                                  "key": "filter",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "accountId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:22.000Z",
+                          "updatedAt": "2026-10-22T02:22:22.000Z",
+                          "uid": "35240-c6d3dae1-e4b6-451c-b654-6eb3467b901d"
+                        },
+                        {
+                          "id": "97aa4e9f-cd7c-410a-a0a7-6b7cd3624ef3",
+                          "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/accounts/:accountId?filter=<string>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "accounts",
+                                ":accountId"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Account filters; account.id, connection.id, institution.id, Only equals (eq) operation is currently supported.",
+                                  "key": "filter",
+                                  "value": "<string>"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "accountId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:22.000Z",
+                          "updatedAt": "2026-10-22T02:22:22.000Z",
+                          "uid": "35240-97aa4e9f-cd7c-410a-a0a7-6b7cd3624ef3"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:22:22.000Z",
+                      "updatedAt": "2026-10-22T02:22:22.000Z",
+                      "uid": "35240-16eba390-de08-4abf-8152-7a63672d3845"
+                    }
+                  ],
+                  "id": "10f675e1-5f38-4c8c-a389-746b2735bb6e",
+                  "createdAt": "2026-10-22T02:22:22.000Z",
+                  "updatedAt": "2026-10-22T02:22:22.000Z",
+                  "uid": "35240-10f675e1-5f38-4c8c-a389-746b2735bb6e"
+                },
+                {
+                  "name": "List all accounts",
+                  "id": "2c39b7a1-0f64-4d44-9f0c-85bf47ab4a67",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId/accounts?filter=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId",
+                        "accounts"
+                      ],
+                      "query": [
+                        {
+                          "description": "Account filters: account.id, connection.id, institution.id. Only the equals (eq) operation is currently supported.",
+                          "key": "filter",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "8710d743-5772-4310-8edd-d2fe2389e76c",
+                          "key": "userId",
+                          "value": "<string>",
+                          "description": "(Required) User identifier"
+                        }
+                      ]
+                    },
+                    "description": "List all accounts belonging to a user"
+                  },
+                  "response": [
+                    {
+                      "id": "690861a8-bdb1-4926-bc49-2d9040c9a9b0",
+                      "name": "Returns a account with details.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/accounts?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "accounts"
+                          ],
+                          "query": [
+                            {
+                              "description": "Account filters: account.id, connection.id, institution.id. Only the equals (eq) operation is currently supported.",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"lastUpdated\": \"<string>\",\n      \"status\": \"unavailable\",\n      \"name\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"accountNo\": \"<string>\",\n      \"accountHolder\": \"<string,null>\",\n      \"isOwned\": \"<boolean>\",\n      \"accountOwnership\": \"OTHER\",\n      \"balance\": \"<string,null>\",\n      \"availableFunds\": \"<string,null>\",\n      \"creditLimit\": \"<string,null>\",\n      \"currency\": \"<string>\",\n      \"class\": {\n        \"type\": \"transaction\",\n        \"product\": \"<string>\"\n      },\n      \"connection\": \"<string>\",\n      \"institution\": \"<string>\",\n      \"transactionIntervals\": [\n        {\n          \"from\": \"<string>\",\n          \"to\": \"<string>\"\n        },\n        {\n          \"from\": \"<string>\",\n          \"to\": \"<string>\"\n        }\n      ],\n      \"depositRate\": \"<string>\",\n      \"lendingRate\": \"<string>\",\n      \"bsb\": \"<string>\",\n      \"unmaskedAccNum\": \"<string>\",\n      \"creationDate\": \"<string>\",\n      \"maskedNumber\": \"<string>\",\n      \"amortisedLimit\": \"<string>\",\n      \"bundleName\": \"<string>\",\n      \"purses\": [\n        {\n          \"amount\": \"<string>\",\n          \"currency\": \"<string>\"\n        },\n        {\n          \"amount\": \"<string>\",\n          \"currency\": \"<string>\"\n        }\n      ],\n      \"meta\": {\n        \"fees\": \"<array,null>\",\n        \"depositRates\": \"<array,null>\",\n        \"lendingRates\": \"<array,null>\",\n        \"termDeposit\": [\n          {\n            \"lodgementDate\": \"<string>\",\n            \"maturityDate\": \"<string>\",\n            \"maturityInstructions\": \"HOLD_ON_MATURITY\",\n            \"maturityAmount\": \"<string>\",\n            \"maturityCurrency\": \"<string>\"\n          },\n          {\n            \"lodgementDate\": \"<string>\",\n            \"maturityDate\": \"<string>\",\n            \"maturityInstructions\": \"PAID_OUT_AT_MATURITY\",\n            \"maturityAmount\": \"<string>\",\n            \"maturityCurrency\": \"<string>\"\n          }\n        ],\n        \"loan\": {\n          \"startDate\": \"<string>\",\n          \"endDate\": \"<string>\",\n          \"repaymentType\": \"PRINCIPAL_AND_INTEREST\",\n          \"originalLoanAmount\": \"<string>\",\n          \"originalLoanCurrency\": \"<string>\",\n          \"minInstalmentAmount\": \"<string>\",\n          \"nextInstalmentDate\": \"<string>\",\n          \"minInstalmentCurrency\": \"<string>\",\n          \"maxRedraw\": \"<string>\",\n          \"maxRedrawCurrency\": \"<string>\",\n          \"minRedraw\": \"<string>\",\n          \"minRedrawCurrency\": \"<string>\",\n          \"repaymentFrequency\": \"<string>\",\n          \"offsetAccountIds\": [\n            \"<string>\",\n            \"<string>\"\n          ],\n          \"offsetAccountEnabled\": \"<boolean>\"\n        },\n        \"creditCard\": {\n          \"minPaymentAmount\": \"<string>\",\n          \"paymentDueAmount\": \"<string>\",\n          \"paymentDueDate\": \"<string>\",\n          \"paymentCurrency\": \"<string>\"\n        },\n        \"features\": \"<array,null>\",\n        \"addresses\": \"<array,null>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"lastUpdated\": \"<string>\",\n      \"status\": \"available\",\n      \"name\": \"<string>\",\n      \"displayName\": \"<string>\",\n      \"accountNo\": \"<string>\",\n      \"accountHolder\": \"<string,null>\",\n      \"isOwned\": \"<boolean>\",\n      \"accountOwnership\": \"ONE_PARTY\",\n      \"balance\": \"<string,null>\",\n      \"availableFunds\": \"<string,null>\",\n      \"creditLimit\": \"<string,null>\",\n      \"currency\": \"<string>\",\n      \"class\": {\n        \"type\": \"unknown\",\n        \"product\": \"<string>\"\n      },\n      \"connection\": \"<string>\",\n      \"institution\": \"<string>\",\n      \"transactionIntervals\": [\n        {\n          \"from\": \"<string>\",\n          \"to\": \"<string>\"\n        },\n        {\n          \"from\": \"<string>\",\n          \"to\": \"<string>\"\n        }\n      ],\n      \"depositRate\": \"<string>\",\n      \"lendingRate\": \"<string>\",\n      \"bsb\": \"<string>\",\n      \"unmaskedAccNum\": \"<string>\",\n      \"creationDate\": \"<string>\",\n      \"maskedNumber\": \"<string>\",\n      \"amortisedLimit\": \"<string>\",\n      \"bundleName\": \"<string>\",\n      \"purses\": [\n        {\n          \"amount\": \"<string>\",\n          \"currency\": \"<string>\"\n        },\n        {\n          \"amount\": \"<string>\",\n          \"currency\": \"<string>\"\n        }\n      ],\n      \"meta\": {\n        \"fees\": \"<array,null>\",\n        \"depositRates\": \"<array,null>\",\n        \"lendingRates\": \"<array,null>\",\n        \"termDeposit\": [\n          {\n            \"lodgementDate\": \"<string>\",\n            \"maturityDate\": \"<string>\",\n            \"maturityInstructions\": \"ROLLED_OVER\",\n            \"maturityAmount\": \"<string>\",\n            \"maturityCurrency\": \"<string>\"\n          },\n          {\n            \"lodgementDate\": \"<string>\",\n            \"maturityDate\": \"<string>\",\n            \"maturityInstructions\": \"HOLD_ON_MATURITY\",\n            \"maturityAmount\": \"<string>\",\n            \"maturityCurrency\": \"<string>\"\n          }\n        ],\n        \"loan\": null,\n        \"creditCard\": {\n          \"minPaymentAmount\": \"<string>\",\n          \"paymentDueAmount\": \"<string>\",\n          \"paymentDueDate\": \"<string>\",\n          \"paymentCurrency\": \"<string>\"\n        },\n        \"features\": \"<array,null>\",\n        \"addresses\": \"<array,null>\"\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": \"<string>\",\n    \"transactions\": \"<string>\",\n    \"connection\": \"<string>\",\n    \"institution\": \"<string>\",\n    \"statements\": \"<string>\"\n  },\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:22:22.000Z",
+                      "updatedAt": "2026-10-22T02:22:22.000Z",
+                      "uid": "35240-690861a8-bdb1-4926-bc49-2d9040c9a9b0"
+                    },
+                    {
+                      "id": "2c26ed93-b96c-4c5b-937c-0cb29809f304",
+                      "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/accounts?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "accounts"
+                          ],
+                          "query": [
+                            {
+                              "description": "Account filters: account.id, connection.id, institution.id. Only the equals (eq) operation is currently supported.",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"unsupported-accept\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"unsupported-accept\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:22:22.000Z",
+                      "updatedAt": "2026-10-22T02:22:22.000Z",
+                      "uid": "35240-2c26ed93-b96c-4c5b-937c-0cb29809f304"
+                    },
+                    {
+                      "id": "49d6c14b-bd2d-4a9f-bfc6-7d5aea21853e",
+                      "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/accounts?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "accounts"
+                          ],
+                          "query": [
+                            {
+                              "description": "Account filters: account.id, connection.id, institution.id. Only the equals (eq) operation is currently supported.",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"no-production-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"no-production-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:22:22.000Z",
+                      "updatedAt": "2026-10-22T02:22:22.000Z",
+                      "uid": "35240-49d6c14b-bd2d-4a9f-bfc6-7d5aea21853e"
+                    },
+                    {
+                      "id": "0ae9c012-314f-44fa-8dac-1bd064f90035",
+                      "name": "Returns error indicating that server can't find requested resource.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/accounts?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "accounts"
+                          ],
+                          "query": [
+                            {
+                              "description": "Account filters: account.id, connection.id, institution.id. Only the equals (eq) operation is currently supported.",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:22:22.000Z",
+                      "updatedAt": "2026-10-22T02:22:22.000Z",
+                      "uid": "35240-0ae9c012-314f-44fa-8dac-1bd064f90035"
+                    },
+                    {
+                      "id": "7e04b1b7-d22f-4538-92f2-b1a1bbecc148",
+                      "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/accounts?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "accounts"
+                          ],
+                          "query": [
+                            {
+                              "description": "Account filters: account.id, connection.id, institution.id. Only the equals (eq) operation is currently supported.",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:22:22.000Z",
+                      "updatedAt": "2026-10-22T02:22:22.000Z",
+                      "uid": "35240-7e04b1b7-d22f-4538-92f2-b1a1bbecc148"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:22:22.000Z",
+                  "updatedAt": "2026-10-22T02:22:22.000Z",
+                  "uid": "35240-2c39b7a1-0f64-4d44-9f0c-85bf47ab4a67"
                 }
               ],
-              "body": "{\n  \"type\": \"list\",\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"accountNo\": \"string\",\n      \"currency\": \"string\",\n      \"balance\": 7151.048978189259,\n      \"availableFunds\": 7397.869772206669,\n      \"accountType\": \"savings\",\n      \"status\": \"available\"\n    },\n    {\n      \"id\": \"string\",\n      \"name\": \"string\",\n      \"accountNo\": \"string\",\n      \"currency\": \"string\",\n      \"balance\": 5271.470454441944,\n      \"availableFunds\": 5900.813809373765,\n      \"accountType\": \"transaction\",\n      \"status\": \"available\"\n    }\n  ],\n  \"size\": 9305\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f5da2a32-df4e-4804-8847-53eeec179207",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId",
-                    "accounts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) Basiq user ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"code\": \"string\",\n  \"detail\": \"string\",\n  \"source\": {}\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "09d34a9b-1dd8-4d61-82ad-d09ae8091614",
+              "createdAt": "2026-10-22T02:22:22.000Z",
+              "updatedAt": "2026-10-22T02:22:22.000Z",
+              "uid": "35240-09d34a9b-1dd8-4d61-82ad-d09ae8091614"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "2c2ecefa-623f-4f3d-8e83-6509912549a3",
-          "name": "Get Account",
-          "request": {
-            "name": "Get Account",
-            "description": {
-              "content": "Retrieve a specific bank account with balance information.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users",
-                ":userId",
-                "accounts",
-                ":accountId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "userId",
-                  "description": "(Required) Basiq user ID"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "accountId",
-                  "description": "(Required) Basiq account ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "21d630e7-9f20-4747-b67e-dd9d624654fb",
-              "name": "Account record",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId",
-                    "accounts",
-                    ":accountId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) Basiq user ID"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "accountId",
-                      "description": "(Required) Basiq account ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"name\": \"string\",\n  \"accountNo\": \"string\",\n  \"currency\": \"string\",\n  \"balance\": 7240.9730454559085,\n  \"availableFunds\": 5747.8241247829765,\n  \"accountType\": \"loan\",\n  \"status\": \"unavailable\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7820a114-76f6-4090-bc1b-ab5cd3fecf87",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId",
-                    "accounts",
-                    ":accountId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) Basiq user ID"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "accountId",
-                      "description": "(Required) Basiq account ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"code\": \"string\",\n  \"detail\": \"string\",\n  \"source\": {}\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "4d774b01-250a-422b-b745-27c7faa100b0",
+          "createdAt": "2026-10-22T02:22:22.000Z",
+          "updatedAt": "2026-10-22T02:22:22.000Z",
+          "uid": "35240-4d774b01-250a-422b-b745-27c7faa100b0"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://au-api.basiq.io",
-      "key": "baseUrl"
+      "id": "186b3242-98da-4636-9eed-dbfad10396f0",
+      "createdAt": "2026-10-22T02:22:22.000Z",
+      "updatedAt": "2026-10-22T02:22:22.000Z",
+      "uid": "35240-186b3242-98da-4636-9eed-dbfad10396f0"
     }
   ],
   "auth": {
-    "type": "bearer",
-    "bearer": [
+    "type": "apikey",
+    "apikey": [
       {
-        "key": "token",
-        "value": "{{bearerToken}}"
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "b9083bcb-eec1-452b-ac4b-4445e937f7a8",
-    "name": "Basiq Accounts API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Basiq API is an open banking and financial data platform providing unified access to Australian and New Zealand bank account data. It enables financial applications to retrieve account balances, transactions, income verification, and expense categorization via consumer-consented bank connections using CDR (Consumer Data Right) and third-party open banking standards.\n\nContact Support:\n Name: Basiq Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://au-api.basiq.io"
     }
-  }
+  ]
 }

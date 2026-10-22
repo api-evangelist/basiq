@@ -1,0 +1,184 @@
+generated: '2026-10-21'
+method: derived
+source: the pre-flight dossier, apis.yml pointers, spec servers, well-known, vendors -- nothing fetched here
+generator: derive-hosts.py
+summary:
+  hosts: 12
+  own: 11
+  other_domain: 0
+  platform: 1
+  roles:
+  - identity
+  - legal
+  - marketing
+  - other
+  - portal
+  - source
+  - status
+  - website
+hosts:
+- host: api.basiq.io
+  found_by:
+  - pointer
+  - apis[]
+  - probed
+  - site-links
+  - docs-index
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types:
+  - DeveloperPortal
+  - Documentation
+  - APIReference
+  - GettingStarted
+  - ChangeLog
+  - LlmsText
+  serves:
+  - docs
+  - cdn
+  - documentation
+  vendor: cloudflare
+  registrable_domain: basiq.io
+  role: portal
+  relation: own
+- host: au-api.basiq.io
+  found_by:
+  - apis[]
+  - probed
+  - contract-discovery
+  - well-known
+  - vendor-detect
+  types: []
+  serves:
+  - api
+  - api-gateway
+  - cdn
+  vendor: aws-api-gateway
+  registrable_domain: basiq.io
+  role: other
+  relation: own
+- host: basiq.io
+  found_by:
+  - probed
+  - contract-discovery
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: basiq.io
+  role: other
+  relation: own
+- host: blog.basiq.io
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  types:
+  - Blog
+  serves: []
+  registrable_domain: basiq.io
+  role: marketing
+  relation: own
+- host: dashboard.basiq.io
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - contract-discovery
+  - well-known
+  types:
+  - SignUp
+  - Login
+  - Dashboard
+  serves: []
+  registrable_domain: basiq.io
+  role: identity
+  relation: own
+- host: demo.basiq.io
+  found_by:
+  - probed
+  - site-links
+  - well-known
+  types: []
+  serves: []
+  registrable_domain: basiq.io
+  role: other
+  relation: own
+- host: docs.basiq.io
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - namespace-probe
+  - docs-index
+  - well-known
+  types:
+  - HelpCenter
+  - Compliance
+  - TermsOfService
+  - PrivacyPolicy
+  serves:
+  - docs
+  title: Home | Basiq Help Center
+  status: 200
+  registrable_domain: basiq.io
+  role: legal
+  relation: own
+- host: github.com
+  found_by:
+  - pointer
+  types:
+  - GitHubOrganization
+  serves: []
+  registrable_domain: github.com
+  role: source
+  relation: platform
+- host: select.basiq.io
+  found_by:
+  - probed
+  - site-links
+  - well-known
+  types: []
+  serves: []
+  platform: api.qwilr.com
+  registrable_domain: basiq.io
+  role: other
+  relation: own
+- host: status.basiq.io
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  - well-known
+  types:
+  - StatusPage
+  serves: []
+  registrable_domain: basiq.io
+  role: status
+  relation: own
+- host: svix.basiq.io
+  found_by:
+  - probed
+  - site-links
+  types: []
+  serves: []
+  registrable_domain: basiq.io
+  role: other
+  relation: own
+- host: www.basiq.io
+  found_by:
+  - pointer
+  - probed
+  - site-links
+  types:
+  - Website
+  - Pricing
+  - Security
+  - About
+  - Contact
+  serves: []
+  registrable_domain: basiq.io
+  role: website
+  relation: own

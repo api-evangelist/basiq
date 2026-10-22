@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/main/json-schema/basiq-connection-analytics-response-schema.json",
+  "title": "ConnectionAnalyticsResponse",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/_original/basiq-analytics-openapi.json#/components/schemas/ConnectionAnalyticsResponse",
+  "type": "object",
+  "properties": {
+    "interval": {
+      "type": "string"
+    },
+    "fromDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "toDate": {
+      "type": "string",
+      "format": "date"
+    },
+    "meta": {
+      "type": "object",
+      "properties": {
+        "totalRecords": {
+          "type": "integer"
+        },
+        "page": {
+          "type": "integer"
+        },
+        "pageSize": {
+          "type": "integer"
+        }
+      }
+    },
+    "initial": {
+      "type": "object",
+      "properties": {
+        "created": {
+          "type": "object",
+          "properties": {
+            "count": {
+              "type": "integer"
+            },
+            "methodDistribution": {
+              "$ref": "#/$defs/MethodDistribution"
+            }
+          }
+        }
+      }
+    },
+    "data": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "date": {
+            "type": "string"
+          },
+          "disruptionRate": {
+            "type": "string"
+          },
+          "created": {
+            "type": "object",
+            "properties": {
+              "count": {
+                "type": "integer"
+              },
+              "methodDistribution": {
+                "$ref": "#/$defs/MethodDistribution"
+              }
+            }
+          },
+          "nonDeleted": {
+            "type": "object",
+            "properties": {
+              "count": {
+                "type": "integer"
+              },
+              "statusDistribution": {
+                "type": "object",
+                "properties": {
+                  "successful": {
+                    "type": "integer"
+                  },
+                  "pending": {
+                    "type": "integer"
+                  },
+                  "failed": {
+                    "type": "integer"
+                  }
+                }
+              },
+              "methodDistribution": {
+                "type": "object",
+                "properties": {
+                  "CDR": {
+                    "$ref": "#/$defs/StatusDistribution"
+                  },
+                  "CSV": {
+                    "$ref": "#/$defs/StatusDistribution"
+                  },
+                  "PDF": {
+                    "$ref": "#/$defs/StatusDistribution"
+                  },
+                  "WEB": {
+                    "$ref": "#/$defs/StatusDistribution"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "MethodDistribution": {
+      "type": "object",
+      "properties": {
+        "CDR": {
+          "type": "integer"
+        },
+        "CSV": {
+          "type": "integer"
+        },
+        "PDF": {
+          "type": "integer"
+        },
+        "WEB": {
+          "type": "integer"
+        }
+      }
+    },
+    "StatusDistribution": {
+      "type": "object",
+      "properties": {
+        "successful": {
+          "type": "integer"
+        },
+        "pending": {
+          "type": "integer"
+        },
+        "failed": {
+          "type": "integer"
+        }
+      }
+    }
+  }
+}

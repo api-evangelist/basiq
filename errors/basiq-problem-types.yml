@@ -1,0 +1,91 @@
+generated: '2026-10-21'
+method: searched
+source: https://api.basiq.io/docs/errors
+docs:
+- https://api.basiq.io/docs/errors
+- https://api.basiq.io/docs/codes
+- https://api.basiq.io/docs/http-errors-per-endpoint
+format: basiq-json-error-list
+rfc9457: false
+envelope:
+  content_type: application/json
+  shape: '{"type":"list","correlationId":..., "data":[{"type":"error","code","title","detail","source":{"pointer","parameter"}}]}'
+  fields:
+    correlationId: a unique identifier for this particular occurrence of the problem.
+    code: an application-specific error code, expressed as a string value.
+    title: a short, human-readable summary of the problem.
+    detail: a human-readable explanation specific to this occurrence of the problem.
+    source: an object containing references to the source of the error (pointer, parameter).
+  multiple_errors: true
+problems:
+- status: 400
+  title: Invalid request content
+  type: null
+  codes:
+  - invalid-content
+  - parameter-not-supplied
+  - parameter-not-valid
+  - path-parameter-not-valid
+  - resource-not-found
+  - unsupported-accept
+  description: Documented Basiq error codes for this status.
+  remediation: 'Fix the request: supply/validate the parameter named in source.parameter or source.pointer.'
+- status: 401
+  title: access-denied
+  type: null
+  codes:
+  - Invalid authorization token
+  - access-denied
+  - invalid-authorization-token
+  - unauthorised-access
+  description: Documented Basiq error codes for this status.
+  remediation: Generate a new token via POST /token (tokens expire every 60 minutes) and retry.
+- status: 403
+  title: access-denied
+  type: null
+  codes:
+  - Forbidden access
+  - access-denied
+  - forbidden-access
+  - request-not-valid
+  description: Documented Basiq error codes for this status.
+  remediation: Check the token has not expired and the account/API key is enabled; may also signal platform limits being exceeded.
+- status: 404
+  title: We have encountered an error
+  type: null
+  codes:
+  - parameter-not-valid
+  - resource-not-found
+  description: Documented Basiq error codes for this status.
+  remediation: Check the referenced user/consent/job/report id exists.
+- status: 415
+  title: Request content type is not supported
+  type: null
+  codes:
+  - unsupported-content-type
+  description: Documented Basiq error codes for this status.
+  remediation: Send a supported Content-Type.
+- status: 429
+  title: Too Many Requests
+  type: null
+  codes:
+  - too-many-requests
+  description: Documented Basiq error codes for this status.
+  remediation: Back off; you have exceeded a platform limit (https://api.basiq.io/docs/api-rate-limiting).
+- status: 500
+  title: We have encountered an error
+  type: null
+  codes:
+  - Internal server error
+  - parameter-not-valid
+  description: Documented Basiq error codes for this status.
+  remediation: Retry later; contact support with the correlationId if persistent.
+- status: 503
+  title: service-unavailable
+  type: null
+  codes:
+  - Service unavailable
+  - service-unavailable
+  description: Documented Basiq error codes for this status.
+  remediation: Service unavailable; retry later.
+see_also: errors/basiq-error-codes.yml

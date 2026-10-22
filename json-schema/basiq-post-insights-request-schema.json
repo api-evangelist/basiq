@@ -1,0 +1,147 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/main/json-schema/basiq-post-insights-request-schema.json",
+  "title": "PostInsightsRequest",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/_original/basiq-insights-openapi.json#/components/schemas/PostInsightsRequest",
+  "type": "object",
+  "required": [
+    "users",
+    "type",
+    "data"
+  ],
+  "properties": {
+    "users": {
+      "type": "array",
+      "description": "Array of user IDs to generate the insight for. Minimum 1, maximum 10 users.",
+      "minItems": 1,
+      "maxItems": 10,
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "type": {
+      "type": "string",
+      "description": "The type of insight to generate.",
+      "enum": [
+        "EXPENSE_RATIO_VERIFICATION",
+        "BALANCE_VERIFICATION",
+        "ACCOUNT_VERIFICATION",
+        "IDENTITY_VERIFICATION",
+        "INCOME_VERIFICATION"
+      ]
+    },
+    "data": {
+      "type": "object",
+      "description": "Input data for the insight. The required fields vary by `type`.",
+      "oneOf": [
+        {
+          "title": "ExpenseRatioData",
+          "description": "Required when type is EXPENSE_RATIO_VERIFICATION.",
+          "required": [
+            "expense"
+          ],
+          "properties": {
+            "expense": {
+              "type": "string",
+              "description": "The expense value (as a numeric string) to calculate the ratio against income (ME040 Average Monthly Credit). Must be a positive numeric string."
+            }
+          }
+        },
+        {
+          "title": "BalanceVerificationData",
+          "description": "Required when type is BALANCE_VERIFICATION.",
+          "required": [
+            "balance"
+          ],
+          "properties": {
+            "balance": {
+              "type": "object",
+              "required": [
+                "min"
+              ],
+              "properties": {
+                "min": {
+                  "type": "string",
+                  "description": "Minimum balance threshold as a numeric string."
+                },
+                "max": {
+                  "type": "string",
+                  "description": "Maximum balance threshold as a numeric string. Optional."
+                }
+              }
+            }
+          }
+        },
+        {
+          "title": "AccountVerificationData",
+          "description": "Required when type is ACCOUNT_VERIFICATION.",
+          "required": [
+            "accountNumber"
+          ],
+          "properties": {
+            "accountNumber": {
+              "type": "string",
+              "description": "The account number to verify."
+            },
+            "accountType": {
+              "type": "string",
+              "description": "The account type to verify. Optional."
+            }
+          }
+        },
+        {
+          "title": "IdentityVerificationData",
+          "description": "Required when type is IDENTITY_VERIFICATION. At least one field must be provided.",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "Full name to verify."
+            },
+            "email": {
+              "type": "string",
+              "format": "email",
+              "description": "Email address to verify."
+            },
+            "phone": {
+              "type": "string",
+              "description": "Phone number to verify (E.164 format recommended)."
+            },
+            "address": {
+              "type": "string",
+              "description": "Address to verify."
+            }
+          }
+        },
+        {
+          "title": "IncomeVerificationData",
+          "description": "Required when type is INCOME_VERIFICATION.",
+          "required": [
+            "income"
+          ],
+          "properties": {
+            "income": {
+              "type": "object",
+              "required": [
+                "min"
+              ],
+              "properties": {
+                "min": {
+                  "type": "string",
+                  "description": "Minimum income threshold as a numeric string."
+                },
+                "max": {
+                  "type": "string",
+                  "description": "Maximum income threshold as a numeric string. Optional."
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

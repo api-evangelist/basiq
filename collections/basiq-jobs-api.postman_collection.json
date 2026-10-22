@@ -1,0 +1,1269 @@
+{
+  "info": {
+    "_postman_id": "46a1b762-42d2-4242-8914-34c13d0105f5",
+    "name": "Connect Jobs API",
+    "description": "All included utility endpoints for Basiq partners",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:23:02.000Z",
+    "updatedAt": "2026-10-22T02:23:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-46a1b762-42d2-4242-8914-34c13d0105f5"
+  },
+  "item": [
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "{userId}",
+          "item": [
+            {
+              "name": "jobs",
+              "item": [
+                {
+                  "name": "Get user jobs",
+                  "id": "c0dffcd4-ce4a-4061-91dd-b5026740dc90",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId/jobs?filter=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId",
+                        "jobs"
+                      ],
+                      "query": [
+                        {
+                          "description": "Connection identification filter. e.g. connection.id.eq('ab63cd')",
+                          "key": "filter",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "46df5615-d63a-4acb-8e23-d9b6bba5f806",
+                          "key": "userId",
+                          "value": "<string>",
+                          "description": "(Required) User identifier"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves the details of all existing and previous jobs associated with a user.\n\n**Note:** This endpoint only returns jobs that are less than 7 days old."
+                  },
+                  "response": [
+                    {
+                      "id": "f37428ad-8103-453a-a1e0-854dc54ea019",
+                      "name": "Returns a list of jobs with details.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/jobs?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "jobs"
+                          ],
+                          "query": [
+                            {
+                              "description": "Connection identification filter. e.g. connection.id.eq('ab63cd')",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"data\": [\n    {\n      \"created\": \"<string>\",\n      \"id\": \"<string>\",\n      \"institution\": {\n        \"id\": \"<string>\",\n        \"links\": {\n          \"self\": \"<string>\",\n          \"source\": \"<string>\"\n        },\n        \"type\": \"<string>\"\n      },\n      \"steps\": [\n        {\n          \"result\": {\n            \"code\": \"invalid-csv-row\",\n            \"details\": \"<string>\",\n            \"title\": \"<string>\",\n            \"type\": \"<string>\",\n            \"url\": \"<string>\"\n          },\n          \"status\": \"in-progress\",\n          \"title\": \"verify-credentials\"\n        },\n        {\n          \"result\": {\n            \"code\": \"bank-statement-not-supported\",\n            \"details\": \"<string>\",\n            \"title\": \"<string>\",\n            \"type\": \"<string>\",\n            \"url\": \"<string>\"\n          },\n          \"status\": \"pending\",\n          \"title\": \"retrieve-statements\"\n        }\n      ],\n      \"updated\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\",\n        \"source\": \"<string>\"\n      }\n    },\n    {\n      \"created\": \"<string>\",\n      \"id\": \"<string>\",\n      \"institution\": {\n        \"id\": \"<string>\",\n        \"links\": {\n          \"self\": \"<string>\",\n          \"source\": \"<string>\"\n        },\n        \"type\": \"<string>\"\n      },\n      \"steps\": [\n        {\n          \"result\": {\n            \"code\": \"missing-required-field-value\",\n            \"details\": \"<string>\",\n            \"title\": \"<string>\",\n            \"type\": \"<string>\",\n            \"url\": \"<string>\"\n          },\n          \"status\": \"pending\",\n          \"title\": \"retrieve-statements\"\n        },\n        {\n          \"result\": {\n            \"code\": \"invalid-connection\",\n            \"details\": \"<string>\",\n            \"title\": \"<string>\",\n            \"type\": \"<string>\",\n            \"url\": \"<string>\"\n          },\n          \"status\": \"in-progress\",\n          \"title\": \"verify-credentials\"\n        }\n      ],\n      \"updated\": \"<string>\",\n      \"type\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\",\n        \"source\": \"<string>\"\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": \"<string>\"\n  },\n  \"size\": \"<long>\",\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:03.000Z",
+                      "updatedAt": "2026-10-22T02:23:03.000Z",
+                      "uid": "35240-f37428ad-8103-453a-a1e0-854dc54ea019"
+                    },
+                    {
+                      "id": "b93540b8-467f-421b-8d5b-1c75120036ef",
+                      "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/jobs?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "jobs"
+                          ],
+                          "query": [
+                            {
+                              "description": "Connection identification filter. e.g. connection.id.eq('ab63cd')",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"invalid-content\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"parameter-not-supplied\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:03.000Z",
+                      "updatedAt": "2026-10-22T02:23:03.000Z",
+                      "uid": "35240-b93540b8-467f-421b-8d5b-1c75120036ef"
+                    },
+                    {
+                      "id": "0056d9d9-2d42-4d9c-8ff1-7fae64798b36",
+                      "name": "Error status response code indicates that the request has not been applied because it lacks valid authentication credentials for the target resource.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/jobs?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "jobs"
+                          ],
+                          "query": [
+                            {
+                              "description": "Connection identification filter. e.g. connection.id.eq('ab63cd')",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"unauthorized-access\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-authorization-token\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:03.000Z",
+                      "updatedAt": "2026-10-22T02:23:03.000Z",
+                      "uid": "35240-0056d9d9-2d42-4d9c-8ff1-7fae64798b36"
+                    },
+                    {
+                      "id": "f785a790-0c87-4eb9-ba31-baafcd4bbe97",
+                      "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/jobs?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "jobs"
+                          ],
+                          "query": [
+                            {
+                              "description": "Connection identification filter. e.g. connection.id.eq('ab63cd')",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"forbidden-access\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"access-denied\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:03.000Z",
+                      "updatedAt": "2026-10-22T02:23:03.000Z",
+                      "uid": "35240-f785a790-0c87-4eb9-ba31-baafcd4bbe97"
+                    },
+                    {
+                      "id": "706fc319-e2c9-4690-b0e1-cda86da850b8",
+                      "name": "Returns error indicating that server can't find requested resource.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/jobs?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "jobs"
+                          ],
+                          "query": [
+                            {
+                              "description": "Connection identification filter. e.g. connection.id.eq('ab63cd')",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:03.000Z",
+                      "updatedAt": "2026-10-22T02:23:03.000Z",
+                      "uid": "35240-706fc319-e2c9-4690-b0e1-cda86da850b8"
+                    },
+                    {
+                      "id": "6be0f180-20e6-49a6-807c-955c023f0404",
+                      "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/jobs?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "jobs"
+                          ],
+                          "query": [
+                            {
+                              "description": "Connection identification filter. e.g. connection.id.eq('ab63cd')",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:03.000Z",
+                      "updatedAt": "2026-10-22T02:23:03.000Z",
+                      "uid": "35240-6be0f180-20e6-49a6-807c-955c023f0404"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:23:03.000Z",
+                  "updatedAt": "2026-10-22T02:23:03.000Z",
+                  "uid": "35240-c0dffcd4-ce4a-4061-91dd-b5026740dc90"
+                }
+              ],
+              "id": "da256e7d-ba99-4208-b279-fb7924eff32e",
+              "createdAt": "2026-10-22T02:23:03.000Z",
+              "updatedAt": "2026-10-22T02:23:03.000Z",
+              "uid": "35240-da256e7d-ba99-4208-b279-fb7924eff32e"
+            }
+          ],
+          "id": "d28c84c3-f00a-4e0e-b87b-46f56c831dcc",
+          "createdAt": "2026-10-22T02:23:03.000Z",
+          "updatedAt": "2026-10-22T02:23:03.000Z",
+          "uid": "35240-d28c84c3-f00a-4e0e-b87b-46f56c831dcc"
+        }
+      ],
+      "id": "2df05071-9c86-4497-83d5-64c9701550dd",
+      "createdAt": "2026-10-22T02:23:03.000Z",
+      "updatedAt": "2026-10-22T02:23:03.000Z",
+      "uid": "35240-2df05071-9c86-4497-83d5-64c9701550dd"
+    },
+    {
+      "name": "jobs",
+      "item": [
+        {
+          "name": "{jobId}",
+          "item": [
+            {
+              "name": "mfa",
+              "item": [
+                {
+                  "name": "Create MFA response",
+                  "id": "fc1a4327-1725-426b-9ccc-1fa9974de84f",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"mfa-response\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:jobId/mfa",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":jobId",
+                        "mfa"
+                      ],
+                      "variable": [
+                        {
+                          "id": "09ad2f09-858c-4974-aedb-1f66c73d4d07",
+                          "key": "jobId",
+                          "value": "<string>",
+                          "description": "(Required) The identifier of the job."
+                        }
+                      ]
+                    },
+                    "description": "Ensure that you generate an authentication token with\nscope = CLIENT_ACCESS and basiq-version = 3.0 to create this resource"
+                  },
+                  "response": [
+                    {
+                      "id": "11487ae2-4774-4d6a-85d9-90d35a70f1f7",
+                      "name": "Returns a job if MFA response was correct. Returns an error otherwise.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"mfa-response\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:jobId/mfa",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":jobId",
+                            "mfa"
+                          ],
+                          "variable": [
+                            {
+                              "key": "jobId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"id\": \"<string>\",\n  \"links\": {\n    \"self\": \"<string>\"\n  },\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:03.000Z",
+                      "updatedAt": "2026-10-22T02:23:03.000Z",
+                      "uid": "35240-11487ae2-4774-4d6a-85d9-90d35a70f1f7"
+                    },
+                    {
+                      "id": "f7930e34-5180-4207-b007-56106ab8837b",
+                      "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"mfa-response\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:jobId/mfa",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":jobId",
+                            "mfa"
+                          ],
+                          "variable": [
+                            {
+                              "key": "jobId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"invalid-content\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"parameter-not-supplied\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:03.000Z",
+                      "updatedAt": "2026-10-22T02:23:03.000Z",
+                      "uid": "35240-f7930e34-5180-4207-b007-56106ab8837b"
+                    },
+                    {
+                      "id": "68eb06a5-d67c-4b15-ba42-e55372a420df",
+                      "name": "Error status response code indicates that the request has not been applied because it lacks valid authentication credentials for the target resource.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"mfa-response\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:jobId/mfa",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":jobId",
+                            "mfa"
+                          ],
+                          "variable": [
+                            {
+                              "key": "jobId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"unauthorized-access\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-authorization-token\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:03.000Z",
+                      "updatedAt": "2026-10-22T02:23:03.000Z",
+                      "uid": "35240-68eb06a5-d67c-4b15-ba42-e55372a420df"
+                    },
+                    {
+                      "id": "22001ccf-1027-4230-ba63-40bf07334c35",
+                      "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"mfa-response\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:jobId/mfa",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":jobId",
+                            "mfa"
+                          ],
+                          "variable": [
+                            {
+                              "key": "jobId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"forbidden-access\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"access-denied\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:03.000Z",
+                      "updatedAt": "2026-10-22T02:23:03.000Z",
+                      "uid": "35240-22001ccf-1027-4230-ba63-40bf07334c35"
+                    },
+                    {
+                      "id": "015ce13c-7b70-4510-9f99-d5703edf30c4",
+                      "name": "Returns error indicating that server can't find requested resource.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"mfa-response\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:jobId/mfa",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":jobId",
+                            "mfa"
+                          ],
+                          "variable": [
+                            {
+                              "key": "jobId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:03.000Z",
+                      "updatedAt": "2026-10-22T02:23:03.000Z",
+                      "uid": "35240-015ce13c-7b70-4510-9f99-d5703edf30c4"
+                    },
+                    {
+                      "id": "c562ade1-851f-4b84-a830-cd16fcbe33b7",
+                      "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"mfa-response\": [\n    \"<string>\",\n    \"<string>\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/jobs/:jobId/mfa",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "jobs",
+                            ":jobId",
+                            "mfa"
+                          ],
+                          "variable": [
+                            {
+                              "key": "jobId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:03.000Z",
+                      "updatedAt": "2026-10-22T02:23:03.000Z",
+                      "uid": "35240-c562ade1-851f-4b84-a830-cd16fcbe33b7"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:23:03.000Z",
+                  "updatedAt": "2026-10-22T02:23:03.000Z",
+                  "uid": "35240-fc1a4327-1725-426b-9ccc-1fa9974de84f"
+                }
+              ],
+              "id": "421cf89e-1484-4596-a9c2-7a05af864ed3",
+              "createdAt": "2026-10-22T02:23:03.000Z",
+              "updatedAt": "2026-10-22T02:23:03.000Z",
+              "uid": "35240-421cf89e-1484-4596-a9c2-7a05af864ed3"
+            },
+            {
+              "name": "Retrieve a job",
+              "id": "707e6b8a-d9cb-4fd9-adb9-682c9b287890",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/jobs/:jobId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "jobs",
+                    ":jobId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "789f5f66-c276-45fe-9f39-85f112ac72c2",
+                      "key": "jobId",
+                      "value": "<string>",
+                      "description": "(Required) The identifier of the job to be retrieved."
+                    }
+                  ]
+                },
+                "description": "Retrieves the details of an existing job. You need only supply the unique job identifier that was returned upon job creation."
+              },
+              "response": [
+                {
+                  "id": "0d0e75ad-33f2-4336-bde2-6cfa35196ed1",
+                  "name": "Returns a job details if a valid job ID was provided.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:jobId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":jobId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "jobId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"<string>\",\n  \"id\": \"<string>\",\n  \"partnerId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"jobType\": \"<string>\",\n  \"applicationId\": \"<string>\",\n  \"created\": \"<dateTime>\",\n  \"updated\": \"<dateTime>\",\n  \"steps\": [\n    {\n      \"title\": \"<string>\",\n      \"status\": \"<string>\",\n      \"result\": {\n        \"type\": \"<string>\",\n        \"url\": \"<string>\",\n        \"code\": \"<string>\",\n        \"title\": \"<string>\",\n        \"detail\": \"<string>\"\n      }\n    },\n    {\n      \"title\": \"<string>\",\n      \"status\": \"<string>\",\n      \"result\": null\n    }\n  ],\n  \"links\": {\n    \"link\": \"<string>\",\n    \"self\": \"<string>\",\n    \"source\": \"<string>\"\n  }\n}",
+                  "createdAt": "2026-10-22T02:23:03.000Z",
+                  "updatedAt": "2026-10-22T02:23:03.000Z",
+                  "uid": "35240-0d0e75ad-33f2-4336-bde2-6cfa35196ed1"
+                },
+                {
+                  "id": "d661ec0b-8dd5-4eeb-8938-15327316b619",
+                  "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:jobId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":jobId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "jobId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"maintenance-error\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"job-invalidated\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:23:03.000Z",
+                  "updatedAt": "2026-10-22T02:23:03.000Z",
+                  "uid": "35240-d661ec0b-8dd5-4eeb-8938-15327316b619"
+                },
+                {
+                  "id": "4abfab45-8009-401b-a37d-c7c541a3b8c2",
+                  "name": "Error status response code indicates that the request has not been applied because it lacks valid authentication credentials for the target resource.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:jobId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":jobId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "jobId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"unauthorized-access\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-authorization-token\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:23:03.000Z",
+                  "updatedAt": "2026-10-22T02:23:03.000Z",
+                  "uid": "35240-4abfab45-8009-401b-a37d-c7c541a3b8c2"
+                },
+                {
+                  "id": "d72c03e2-1d39-48bf-86ca-26e2ad80c12b",
+                  "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:jobId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":jobId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "jobId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"forbidden-access\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"access-denied\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:23:03.000Z",
+                  "updatedAt": "2026-10-22T02:23:03.000Z",
+                  "uid": "35240-d72c03e2-1d39-48bf-86ca-26e2ad80c12b"
+                },
+                {
+                  "id": "1f7a95d8-db09-4548-a1ee-0e19492117a7",
+                  "name": "Returns error indicating that server can't find requested resource.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:jobId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":jobId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "jobId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:23:03.000Z",
+                  "updatedAt": "2026-10-22T02:23:03.000Z",
+                  "uid": "35240-1f7a95d8-db09-4548-a1ee-0e19492117a7"
+                },
+                {
+                  "id": "a34ba883-185a-479c-b588-093f9a5423c3",
+                  "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/jobs/:jobId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "jobs",
+                        ":jobId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "jobId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:23:03.000Z",
+                  "updatedAt": "2026-10-22T02:23:03.000Z",
+                  "uid": "35240-a34ba883-185a-479c-b588-093f9a5423c3"
+                }
+              ],
+              "createdAt": "2026-10-22T02:23:03.000Z",
+              "updatedAt": "2026-10-22T02:23:03.000Z",
+              "uid": "35240-707e6b8a-d9cb-4fd9-adb9-682c9b287890"
+            }
+          ],
+          "id": "4b1cc0cd-6cfe-44af-a5ba-662369687dae",
+          "createdAt": "2026-10-22T02:23:03.000Z",
+          "updatedAt": "2026-10-22T02:23:03.000Z",
+          "uid": "35240-4b1cc0cd-6cfe-44af-a5ba-662369687dae"
+        }
+      ],
+      "id": "0195e033-eaed-4a9b-af54-2246046d0be7",
+      "createdAt": "2026-10-22T02:23:03.000Z",
+      "updatedAt": "2026-10-22T02:23:03.000Z",
+      "uid": "35240-0195e033-eaed-4a9b-af54-2246046d0be7"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://au-api.basiq.io"
+    }
+  ]
+}

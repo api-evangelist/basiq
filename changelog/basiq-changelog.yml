@@ -1,0 +1,70 @@
+generated: '2026-10-21'
+method: searched
+source: https://api.basiq.io/changelog
+url: https://api.basiq.io/changelog
+docs: https://api.basiq.io/changelog/llms.txt
+scheme: dated monthly product updates (ReadMe changelog, tagged Added/Improved/Deprecated); API major version selected via basiq-version header
+current_version: '3.0'
+note: Dates are the post timestamps on the ReadMe changelog listing (page 1 of 7).
+entries:
+- version: null
+  date: '2026-09-30'
+  title: Sep '26 - Basiq Product Updates
+  breaking: false
+  highlights: ['More reliable PDF reports: if a PDF cannot be generated due to report size, partners can still retrieve the underlying report data', 'New institution: Revolut']
+  url: https://api.basiq.io/changelog/sep-26-basiq-improvement
+- version: null
+  date: '2026-07-31'
+  title: July '26 - Basiq Connect Improvements
+  breaking: false
+  highlights: ['CDR Insights consent purposes now derived automatically from selected insights; partners can no longer customise them', 'Retain consumer data option for TAviaPRM applications in Customizer', 'New data holder connectors (AFG Home Loans, NRMA Home Loans, Connective Select)']
+  url: https://api.basiq.io/changelog/july-26-basiq-improvements
+- version: null
+  date: '2026-06-02'
+  title: Jun'26 - Open Banking Sandbox
+  breaking: false
+  highlights: ['Open Banking sandbox institution Hooli OB (AU00000) with mock Data Holder consent flow']
+  url: https://api.basiq.io/changelog/jun26-open-banking-sandbox
+- version: null
+  date: '2026-05-25'
+  title: "May'26 - AI Tools: llms.txt, MCP Server, and OpenAPI"
+  breaking: false
+  highlights: ['llms.txt documentation index', 'MCP server at https://api.basiq.io/mcp', 'OpenAPI specs for Connect, Enrich, Insights, Identity, Reporting, Webhooks, Platform and Affordability']
+  url: https://api.basiq.io/changelog/may26-ai-tools-llmstxt-mcp-server-and-openapi
+- version: null
+  date: '2026-05-14'
+  title: May'26 - Basiq Consent UI Improvement
+  breaking: false
+  highlights: ['Customizer option "Skip error screen" redirects users to the partner app on connection failure']
+  url: https://api.basiq.io/changelog/may26-basiq-platform-improvement
+- version: null
+  date: '2026-05-06'
+  title: May'26 - CDR Insights API Updates
+  breaking: true
+  highlights: ['New POST /insights endpoint (single or 1-10 users)', 'static reference data for Insight types', 'breaking fix to the Balance Verification response structure']
+  url: https://api.basiq.io/changelog/may26-insights
+- version: null
+  date: '2026-04-29'
+  title: April'26 - Improved validation errors in Customise UI
+  breaking: false
+  highlights: ['Improved validation errors in Customise UI (Dashboard)']
+  url: https://api.basiq.io/changelog/april26-improved-validation-errors-in-customise-ui
+- version: null
+  date: '2026-04-02'
+  title: ANZ New Zealand (NZ00101) - End of Support
+  breaking: false
+  deprecation: true
+  highlights: ['ANZ NZ connector remains available but is no longer maintained; no break/fix work']
+  url: https://api.basiq.io/changelog/anz-new-zealand-nz00101-end-of-support
+- version: null
+  date: '2026-03-26'
+  title: Mar'26 - New Updates
+  breaking: false
+  highlights: ['Auth Links now valid for 30 days', 'New webhook stats endpoint GET /notifications/webhooks/{webhookId}/stats', 'granular permissions configuration']
+  url: https://api.basiq.io/changelog/mar26-new-updates
+- version: null
+  date: '2026-01-27'
+  title: Jan'26 - New API's & Improvement
+  breaking: false
+  highlights: ['Payees API (GET /users/{userId}/payees, GET /users/{userId}/payees/{payeeId}; limit 1-500)', 'Expense Ratio Insights']
+  url: https://api.basiq.io/changelog/jan26-new-apis-improvement

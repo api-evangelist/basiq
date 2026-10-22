@@ -1,0 +1,636 @@
+{
+  "info": {
+    "_postman_id": "0bbac82a-ea1b-4b2c-bcf1-ecf03d54f0fd",
+    "name": "Identity Identities API",
+    "description": "All included utility endpoints for Basiq partners",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:23:50.000Z",
+    "updatedAt": "2026-10-22T02:23:50.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0bbac82a-ea1b-4b2c-bcf1-ecf03d54f0fd"
+  },
+  "item": [
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "{userId}",
+          "item": [
+            {
+              "name": "identities",
+              "item": [
+                {
+                  "name": "{identityId}",
+                  "item": [
+                    {
+                      "name": "Retrieve an identity",
+                      "id": "d0f34517-5387-4dc6-a6e0-e0efdb13dacc",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/identities/:identityId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "identities",
+                            ":identityId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "b7f5df80-7e4a-49eb-916b-6a92ccc2204a",
+                              "key": "userId",
+                              "value": "<string>",
+                              "description": "(Required) User identifier."
+                            },
+                            {
+                              "id": "5f46e8ec-834b-47e8-ad0c-163bf67b1d4f",
+                              "key": "identityId",
+                              "value": "<string>",
+                              "description": "(Required) Identity identifier."
+                            }
+                          ]
+                        },
+                        "description": "Returns a specific identity object."
+                      },
+                      "response": [
+                        {
+                          "id": "28c18540-9c01-431e-910a-43898dcd44bf",
+                          "name": "Returns identity.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/identities/:identityId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "identities",
+                                ":identityId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "identityId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"created\": \"<string>\",\n  \"id\": \"<string>\",\n  \"links\": {\n    \"job\": \"<string>\",\n    \"self\": \"<string>\"\n  },\n  \"type\": \"<string>\",\n  \"updated\": \"<string>\",\n  \"connectionID\": \"<string>\",\n  \"institutionID\": \"<string>\",\n  \"source\": \"<string>\",\n  \"fullName\": \"<string>\",\n  \"firstName\": \"<string>\",\n  \"lastName\": \"<string>\",\n  \"middleName\": \"<string>\",\n  \"title\": \"<string>\",\n  \"DOB\": \"<string>\",\n  \"occupationCode\": \"<string>\",\n  \"occupationCodeVersion\": \"<string>\",\n  \"phoneNumbers\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"emailAddresses\": [\n    \"<string>\",\n    \"<string>\"\n  ],\n  \"physicalAddresses\": [\n    {\n      \"type\": \"<string>\",\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine3\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"formattedAddress\": \"<string>\",\n      \"paf\": {\n        \"dpid\": \"<string>\",\n        \"thoroughfareNumber1\": \"<integer>\",\n        \"thoroughfareNumber1Suffix\": \"<string>\",\n        \"thoroughfareNumber2\": \"<integer>\",\n        \"thoroughfareNumber2Suffix\": \"<string>\",\n        \"flatUnitType\": \"<string>\",\n        \"flatUnitNumber\": \"<string>\",\n        \"floorLevelType\": \"<string>\",\n        \"floorLevelNumber\": \"<string>\",\n        \"lotNumber\": \"<string>\",\n        \"buildingName1\": \"<string>\",\n        \"buildingName2\": \"<string>\",\n        \"streetName\": \"<string>\",\n        \"streetType\": \"<string>\",\n        \"streetSuffix\": \"<string>\",\n        \"postalDeliveryType\": \"<string>\",\n        \"postalDeliveryNumber\": \"<integer>\",\n        \"postalDeliveryNumberPrefix\": \"<string>\",\n        \"localityName\": \"<string>\",\n        \"postcode\": \"<string>\",\n        \"state\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"<string>\",\n      \"addressLine1\": \"<string>\",\n      \"addressLine2\": \"<string>\",\n      \"addressLine3\": \"<string>\",\n      \"postcode\": \"<string>\",\n      \"city\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"countryCode\": \"<string>\",\n      \"formattedAddress\": \"<string>\",\n      \"paf\": {\n        \"dpid\": \"<string>\",\n        \"thoroughfareNumber1\": \"<integer>\",\n        \"thoroughfareNumber1Suffix\": \"<string>\",\n        \"thoroughfareNumber2\": \"<integer>\",\n        \"thoroughfareNumber2Suffix\": \"<string>\",\n        \"flatUnitType\": \"<string>\",\n        \"flatUnitNumber\": \"<string>\",\n        \"floorLevelType\": \"<string>\",\n        \"floorLevelNumber\": \"<string>\",\n        \"lotNumber\": \"<string>\",\n        \"buildingName1\": \"<string>\",\n        \"buildingName2\": \"<string>\",\n        \"streetName\": \"<string>\",\n        \"streetType\": \"<string>\",\n        \"streetSuffix\": \"<string>\",\n        \"postalDeliveryType\": \"<string>\",\n        \"postalDeliveryNumber\": \"<integer>\",\n        \"postalDeliveryNumberPrefix\": \"<string>\",\n        \"localityName\": \"<string>\",\n        \"postcode\": \"<string>\",\n        \"state\": \"<string>\"\n      }\n    }\n  ],\n  \"organisation\": {\n    \"agentFirstName\": \"<string>\",\n    \"agentLastName\": \"<string>\",\n    \"agentRole\": \"<string>\",\n    \"businessName\": \"<string>\",\n    \"legalName\": \"<string>\",\n    \"shortName\": \"<string>\",\n    \"abn\": \"<string>\",\n    \"acn\": \"<string>\",\n    \"isACNCRegistered\": \"<boolean>\",\n    \"industryCode\": \"<string>\",\n    \"industryCodeVersion\": \"<string>\",\n    \"organisationType\": \"<string>\",\n    \"registeredCountry\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T02:23:50.000Z",
+                          "updatedAt": "2026-10-22T02:23:50.000Z",
+                          "uid": "35240-28c18540-9c01-431e-910a-43898dcd44bf"
+                        },
+                        {
+                          "id": "c4d842c6-e4e7-4918-b88e-bb44e271a20a",
+                          "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/identities/:identityId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "identities",
+                                ":identityId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "identityId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"invalid-content\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"institution-not-supported\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:23:50.000Z",
+                          "updatedAt": "2026-10-22T02:23:50.000Z",
+                          "uid": "35240-c4d842c6-e4e7-4918-b88e-bb44e271a20a"
+                        },
+                        {
+                          "id": "4302559f-0dfe-4f5b-9177-148691c637d1",
+                          "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/identities/:identityId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "identities",
+                                ":identityId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "identityId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"forbidden-access\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"forbidden-access\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:23:50.000Z",
+                          "updatedAt": "2026-10-22T02:23:50.000Z",
+                          "uid": "35240-4302559f-0dfe-4f5b-9177-148691c637d1"
+                        },
+                        {
+                          "id": "4cfe6515-c615-4171-be9f-6d1d148c8151",
+                          "name": "Returns error indicating that server can't find requested resource.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/identities/:identityId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "identities",
+                                ":identityId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "identityId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:23:50.000Z",
+                          "updatedAt": "2026-10-22T02:23:50.000Z",
+                          "uid": "35240-4cfe6515-c615-4171-be9f-6d1d148c8151"
+                        },
+                        {
+                          "id": "0926e9ae-3063-4efe-8d80-25261c41c6da",
+                          "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/identities/:identityId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "identities",
+                                ":identityId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "identityId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:23:50.000Z",
+                          "updatedAt": "2026-10-22T02:23:50.000Z",
+                          "uid": "35240-0926e9ae-3063-4efe-8d80-25261c41c6da"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:23:50.000Z",
+                      "updatedAt": "2026-10-22T02:23:50.000Z",
+                      "uid": "35240-d0f34517-5387-4dc6-a6e0-e0efdb13dacc"
+                    }
+                  ],
+                  "id": "d816c149-abef-4462-9561-6978bfed353e",
+                  "createdAt": "2026-10-22T02:23:50.000Z",
+                  "updatedAt": "2026-10-22T02:23:50.000Z",
+                  "uid": "35240-d816c149-abef-4462-9561-6978bfed353e"
+                },
+                {
+                  "name": "Retrieve identities",
+                  "id": "3e0164fe-8b8c-4381-927d-e5ffb32cec23",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId/identities",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId",
+                        "identities"
+                      ],
+                      "variable": [
+                        {
+                          "id": "61a4583a-8711-4968-af6f-cff5e484fc14",
+                          "key": "userId",
+                          "value": "<string>",
+                          "description": "(Required) User identifier."
+                        }
+                      ]
+                    },
+                    "description": "Returns a list with a data property that contains an array of user identities. Each entry in the array is a separate object. If no data is returned, the resulting array will be empty."
+                  },
+                  "response": [
+                    {
+                      "id": "b905184f-a4a4-48fd-b511-3fa923c1a684",
+                      "name": "Returns list of identities.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/identities",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "identities"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"count\": \"<long>\",\n  \"data\": [\n    {\n      \"created\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"job\": \"<string>\",\n        \"self\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"updated\": \"<string>\",\n      \"connectionID\": \"<string>\",\n      \"institutionID\": \"<string>\",\n      \"source\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"middleName\": \"<string>\",\n      \"title\": \"<string>\",\n      \"DOB\": \"<string>\",\n      \"occupationCode\": \"<string>\",\n      \"occupationCodeVersion\": \"<string>\",\n      \"phoneNumbers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"emailAddresses\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"physicalAddresses\": [\n        {\n          \"type\": \"<string>\",\n          \"addressLine1\": \"<string>\",\n          \"addressLine2\": \"<string>\",\n          \"addressLine3\": \"<string>\",\n          \"postcode\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"country\": \"<string>\",\n          \"countryCode\": \"<string>\",\n          \"formattedAddress\": \"<string>\",\n          \"paf\": {\n            \"dpid\": \"<string>\",\n            \"thoroughfareNumber1\": \"<integer>\",\n            \"thoroughfareNumber1Suffix\": \"<string>\",\n            \"thoroughfareNumber2\": \"<integer>\",\n            \"thoroughfareNumber2Suffix\": \"<string>\",\n            \"flatUnitType\": \"<string>\",\n            \"flatUnitNumber\": \"<string>\",\n            \"floorLevelType\": \"<string>\",\n            \"floorLevelNumber\": \"<string>\",\n            \"lotNumber\": \"<string>\",\n            \"buildingName1\": \"<string>\",\n            \"buildingName2\": \"<string>\",\n            \"streetName\": \"<string>\",\n            \"streetType\": \"<string>\",\n            \"streetSuffix\": \"<string>\",\n            \"postalDeliveryType\": \"<string>\",\n            \"postalDeliveryNumber\": \"<integer>\",\n            \"postalDeliveryNumberPrefix\": \"<string>\",\n            \"localityName\": \"<string>\",\n            \"postcode\": \"<string>\",\n            \"state\": \"<string>\"\n          }\n        },\n        {\n          \"type\": \"<string>\",\n          \"addressLine1\": \"<string>\",\n          \"addressLine2\": \"<string>\",\n          \"addressLine3\": \"<string>\",\n          \"postcode\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"country\": \"<string>\",\n          \"countryCode\": \"<string>\",\n          \"formattedAddress\": \"<string>\",\n          \"paf\": {\n            \"dpid\": \"<string>\",\n            \"thoroughfareNumber1\": \"<integer>\",\n            \"thoroughfareNumber1Suffix\": \"<string>\",\n            \"thoroughfareNumber2\": \"<integer>\",\n            \"thoroughfareNumber2Suffix\": \"<string>\",\n            \"flatUnitType\": \"<string>\",\n            \"flatUnitNumber\": \"<string>\",\n            \"floorLevelType\": \"<string>\",\n            \"floorLevelNumber\": \"<string>\",\n            \"lotNumber\": \"<string>\",\n            \"buildingName1\": \"<string>\",\n            \"buildingName2\": \"<string>\",\n            \"streetName\": \"<string>\",\n            \"streetType\": \"<string>\",\n            \"streetSuffix\": \"<string>\",\n            \"postalDeliveryType\": \"<string>\",\n            \"postalDeliveryNumber\": \"<integer>\",\n            \"postalDeliveryNumberPrefix\": \"<string>\",\n            \"localityName\": \"<string>\",\n            \"postcode\": \"<string>\",\n            \"state\": \"<string>\"\n          }\n        }\n      ],\n      \"organisation\": {\n        \"agentFirstName\": \"<string>\",\n        \"agentLastName\": \"<string>\",\n        \"agentRole\": \"<string>\",\n        \"businessName\": \"<string>\",\n        \"legalName\": \"<string>\",\n        \"shortName\": \"<string>\",\n        \"abn\": \"<string>\",\n        \"acn\": \"<string>\",\n        \"isACNCRegistered\": \"<boolean>\",\n        \"industryCode\": \"<string>\",\n        \"industryCodeVersion\": \"<string>\",\n        \"organisationType\": \"<string>\",\n        \"registeredCountry\": \"<string>\"\n      }\n    },\n    {\n      \"created\": \"<string>\",\n      \"id\": \"<string>\",\n      \"links\": {\n        \"job\": \"<string>\",\n        \"self\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"updated\": \"<string>\",\n      \"connectionID\": \"<string>\",\n      \"institutionID\": \"<string>\",\n      \"source\": \"<string>\",\n      \"fullName\": \"<string>\",\n      \"firstName\": \"<string>\",\n      \"lastName\": \"<string>\",\n      \"middleName\": \"<string>\",\n      \"title\": \"<string>\",\n      \"DOB\": \"<string>\",\n      \"occupationCode\": \"<string>\",\n      \"occupationCodeVersion\": \"<string>\",\n      \"phoneNumbers\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"emailAddresses\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"physicalAddresses\": [\n        {\n          \"type\": \"<string>\",\n          \"addressLine1\": \"<string>\",\n          \"addressLine2\": \"<string>\",\n          \"addressLine3\": \"<string>\",\n          \"postcode\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"country\": \"<string>\",\n          \"countryCode\": \"<string>\",\n          \"formattedAddress\": \"<string>\",\n          \"paf\": {\n            \"dpid\": \"<string>\",\n            \"thoroughfareNumber1\": \"<integer>\",\n            \"thoroughfareNumber1Suffix\": \"<string>\",\n            \"thoroughfareNumber2\": \"<integer>\",\n            \"thoroughfareNumber2Suffix\": \"<string>\",\n            \"flatUnitType\": \"<string>\",\n            \"flatUnitNumber\": \"<string>\",\n            \"floorLevelType\": \"<string>\",\n            \"floorLevelNumber\": \"<string>\",\n            \"lotNumber\": \"<string>\",\n            \"buildingName1\": \"<string>\",\n            \"buildingName2\": \"<string>\",\n            \"streetName\": \"<string>\",\n            \"streetType\": \"<string>\",\n            \"streetSuffix\": \"<string>\",\n            \"postalDeliveryType\": \"<string>\",\n            \"postalDeliveryNumber\": \"<integer>\",\n            \"postalDeliveryNumberPrefix\": \"<string>\",\n            \"localityName\": \"<string>\",\n            \"postcode\": \"<string>\",\n            \"state\": \"<string>\"\n          }\n        },\n        {\n          \"type\": \"<string>\",\n          \"addressLine1\": \"<string>\",\n          \"addressLine2\": \"<string>\",\n          \"addressLine3\": \"<string>\",\n          \"postcode\": \"<string>\",\n          \"city\": \"<string>\",\n          \"state\": \"<string>\",\n          \"country\": \"<string>\",\n          \"countryCode\": \"<string>\",\n          \"formattedAddress\": \"<string>\",\n          \"paf\": {\n            \"dpid\": \"<string>\",\n            \"thoroughfareNumber1\": \"<integer>\",\n            \"thoroughfareNumber1Suffix\": \"<string>\",\n            \"thoroughfareNumber2\": \"<integer>\",\n            \"thoroughfareNumber2Suffix\": \"<string>\",\n            \"flatUnitType\": \"<string>\",\n            \"flatUnitNumber\": \"<string>\",\n            \"floorLevelType\": \"<string>\",\n            \"floorLevelNumber\": \"<string>\",\n            \"lotNumber\": \"<string>\",\n            \"buildingName1\": \"<string>\",\n            \"buildingName2\": \"<string>\",\n            \"streetName\": \"<string>\",\n            \"streetType\": \"<string>\",\n            \"streetSuffix\": \"<string>\",\n            \"postalDeliveryType\": \"<string>\",\n            \"postalDeliveryNumber\": \"<integer>\",\n            \"postalDeliveryNumberPrefix\": \"<string>\",\n            \"localityName\": \"<string>\",\n            \"postcode\": \"<string>\",\n            \"state\": \"<string>\"\n          }\n        }\n      ],\n      \"organisation\": {\n        \"agentFirstName\": \"<string>\",\n        \"agentLastName\": \"<string>\",\n        \"agentRole\": \"<string>\",\n        \"businessName\": \"<string>\",\n        \"legalName\": \"<string>\",\n        \"shortName\": \"<string>\",\n        \"abn\": \"<string>\",\n        \"acn\": \"<string>\",\n        \"isACNCRegistered\": \"<boolean>\",\n        \"industryCode\": \"<string>\",\n        \"industryCodeVersion\": \"<string>\",\n        \"organisationType\": \"<string>\",\n        \"registeredCountry\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:50.000Z",
+                      "updatedAt": "2026-10-22T02:23:50.000Z",
+                      "uid": "35240-b905184f-a4a4-48fd-b511-3fa923c1a684"
+                    },
+                    {
+                      "id": "ac6b8e20-f23d-4469-826d-0423256ee947",
+                      "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/identities",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "identities"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"invalid-content\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"institution-not-supported\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:50.000Z",
+                      "updatedAt": "2026-10-22T02:23:50.000Z",
+                      "uid": "35240-ac6b8e20-f23d-4469-826d-0423256ee947"
+                    },
+                    {
+                      "id": "ff154ccf-e981-4a72-b9fb-4d9ded5461eb",
+                      "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/identities",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "identities"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"forbidden-access\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"forbidden-access\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:50.000Z",
+                      "updatedAt": "2026-10-22T02:23:50.000Z",
+                      "uid": "35240-ff154ccf-e981-4a72-b9fb-4d9ded5461eb"
+                    },
+                    {
+                      "id": "05865174-d9c2-42dc-830b-e36c82726394",
+                      "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/identities",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "identities"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:23:50.000Z",
+                      "updatedAt": "2026-10-22T02:23:50.000Z",
+                      "uid": "35240-05865174-d9c2-42dc-830b-e36c82726394"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:23:50.000Z",
+                  "updatedAt": "2026-10-22T02:23:50.000Z",
+                  "uid": "35240-3e0164fe-8b8c-4381-927d-e5ffb32cec23"
+                }
+              ],
+              "id": "b86b4807-d309-45ed-b2f8-03769e962e1f",
+              "createdAt": "2026-10-22T02:23:50.000Z",
+              "updatedAt": "2026-10-22T02:23:50.000Z",
+              "uid": "35240-b86b4807-d309-45ed-b2f8-03769e962e1f"
+            }
+          ],
+          "id": "6217121a-e3be-49a6-a8ba-2ad56d4459da",
+          "createdAt": "2026-10-22T02:23:50.000Z",
+          "updatedAt": "2026-10-22T02:23:50.000Z",
+          "uid": "35240-6217121a-e3be-49a6-a8ba-2ad56d4459da"
+        }
+      ],
+      "id": "09e80b78-09f3-482c-a12c-04bcd29274ed",
+      "createdAt": "2026-10-22T02:23:50.000Z",
+      "updatedAt": "2026-10-22T02:23:50.000Z",
+      "uid": "35240-09e80b78-09f3-482c-a12c-04bcd29274ed"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://au-api.basiq.io"
+    }
+  ]
+}

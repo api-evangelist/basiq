@@ -1,0 +1,188 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/main/json-schema/basiq-single-merchant-response-schema.json",
+  "title": "SingleMerchantResponse",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/_original/basiq-enrich-openapi.json#/components/schemas/SingleMerchantResponse",
+  "type": "object",
+  "properties": {
+    "source": {
+      "type": "string"
+    },
+    "merchant": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The merchant id."
+        },
+        "businessName": {
+          "type": "string",
+          "description": "The merchant business name."
+        },
+        "website": {
+          "type": "string",
+          "description": "The merchant website."
+        },
+        "abn": {
+          "type": "string",
+          "description": "Provides the Australian Business Number."
+        },
+        "phoneNumber": {
+          "type": "object",
+          "description": "Provides the local and international telephone numbers of the merchant.",
+          "properties": {
+            "local": {
+              "type": "string"
+            },
+            "international": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "category": {
+      "type": "object",
+      "properties": {
+        "matchType": {
+          "type": "string",
+          "description": "Indicates the method used to match a payment transaction with a merchant or business classification code.",
+          "enum": [
+            "merchantFull",
+            "merchantPartial",
+            "mcc",
+            "ml"
+          ]
+        },
+        "matchScore": {
+          "type": "number",
+          "format": "float",
+          "description": "The confidence score for the matchType which is a float value between 0 and 1."
+        },
+        "anzsic": {
+          "type": "object",
+          "properties": {
+            "division": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            },
+            "subdivision": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            },
+            "group": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            },
+            "class": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            },
+            "subclass": {
+              "type": "object",
+              "properties": {
+                "code": {
+                  "type": "string"
+                },
+                "title": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "location": {
+      "type": "object",
+      "properties": {
+        "routeNo": {
+          "type": "string"
+        },
+        "route": {
+          "type": "string"
+        },
+        "postalCode": {
+          "type": "string"
+        },
+        "suburb": {
+          "type": "string"
+        },
+        "state": {
+          "type": "string"
+        },
+        "country": {
+          "type": "string"
+        },
+        "formattedAddress": {
+          "type": "string"
+        },
+        "geometry": {
+          "type": "object",
+          "properties": {
+            "lat": {
+              "type": "string"
+            },
+            "lng": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "links": {
+      "type": "object",
+      "properties": {
+        "self": {
+          "type": "string",
+          "description": "Provides a reference link to the original query."
+        },
+        "logo-master": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Provides link to master logo. Where null no merchant logo is available."
+        },
+        "logo-thumb": {
+          "type": [
+            "string",
+            "null"
+          ],
+          "description": "Provides link to thumb logo. Where null no merchant logo is available."
+        }
+      }
+    }
+  }
+}

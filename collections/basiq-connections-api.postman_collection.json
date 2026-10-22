@@ -1,718 +1,2352 @@
 {
+  "info": {
+    "_postman_id": "663dabf1-d3e0-46f1-a93f-3bf754ab6cea",
+    "name": "Connections API",
+    "description": "All included utility endpoints for Basiq partners",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:22:35.000Z",
+    "updatedAt": "2026-10-22T02:22:35.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-663dabf1-d3e0-46f1-a93f-3bf754ab6cea"
+  },
   "item": [
     {
-      "id": "8654831e-e128-4b8e-a555-29c8f1399c34",
-      "name": "Connections",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "users",
       "item": [
         {
-          "id": "7db1d73d-dff7-47ba-9209-f5745d18609a",
-          "name": "List Connections",
-          "request": {
-            "name": "List Connections",
-            "description": {
-              "content": "List all bank connections for a user.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users",
-                ":userId",
-                "connections"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "userId",
-                  "description": "(Required) Basiq user ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{userId}",
+          "item": [
             {
-              "id": "c36f35ef-aa24-40c3-9d27-2fa5481d8b01",
-              "name": "List of connections",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId",
-                    "connections"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) Basiq user ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "connections",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "refresh",
+                  "item": [
+                    {
+                      "name": "Refresh all connections",
+                      "id": "793c7e84-f887-485f-bb23-e361fec985df",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/connections/refresh",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "connections",
+                            "refresh"
+                          ],
+                          "variable": [
+                            {
+                              "id": "0667f6a4-1dd6-4bac-b86d-105ec08c2bde",
+                              "key": "userId",
+                              "value": "<string>",
+                              "description": "(Required) The identifier of the user."
+                            }
+                          ]
+                        },
+                        "description": "Use this to refresh all connections belonging to the specified user."
+                      },
+                      "response": [
+                        {
+                          "id": "d92c33c9-487c-408e-8a20-0c7f887517e6",
+                          "name": "Returns a created jobs resource, if the operation succeeded.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/connections/refresh",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "connections",
+                                "refresh"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Accepted",
+                          "code": 202,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"type\": \"<string>\"\n    },\n    {\n      \"id\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"type\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:35.000Z",
+                          "updatedAt": "2026-10-22T02:22:35.000Z",
+                          "uid": "35240-d92c33c9-487c-408e-8a20-0c7f887517e6"
+                        },
+                        {
+                          "id": "3d900f0d-9749-4fad-8547-444b2ea3fda9",
+                          "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/connections/refresh",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "connections",
+                                "refresh"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"institution-not-supported\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-credentials\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:35.000Z",
+                          "updatedAt": "2026-10-22T02:22:35.000Z",
+                          "uid": "35240-3d900f0d-9749-4fad-8547-444b2ea3fda9"
+                        },
+                        {
+                          "id": "e20175f7-93a6-4c0e-9105-feba701ace75",
+                          "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/connections/refresh",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "connections",
+                                "refresh"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"no-production-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"forbidden-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:35.000Z",
+                          "updatedAt": "2026-10-22T02:22:35.000Z",
+                          "uid": "35240-e20175f7-93a6-4c0e-9105-feba701ace75"
+                        },
+                        {
+                          "id": "96ab0f7a-3509-4237-82e0-1b8c7330078b",
+                          "name": "Returns error indicating that server can't find requested resource.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/connections/refresh",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "connections",
+                                "refresh"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:35.000Z",
+                          "updatedAt": "2026-10-22T02:22:35.000Z",
+                          "uid": "35240-96ab0f7a-3509-4237-82e0-1b8c7330078b"
+                        },
+                        {
+                          "id": "9ac01ad2-008e-4287-b61e-82e8195767ae",
+                          "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/connections/refresh",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "connections",
+                                "refresh"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:35.000Z",
+                          "updatedAt": "2026-10-22T02:22:35.000Z",
+                          "uid": "35240-9ac01ad2-008e-4287-b61e-82e8195767ae"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:22:35.000Z",
+                      "updatedAt": "2026-10-22T02:22:35.000Z",
+                      "uid": "35240-793c7e84-f887-485f-bb23-e361fec985df"
+                    }
+                  ],
+                  "id": "81c21f2d-0b3e-4a62-a5f1-f3828be9c8b9",
+                  "createdAt": "2026-10-22T02:22:35.000Z",
+                  "updatedAt": "2026-10-22T02:22:35.000Z",
+                  "uid": "35240-81c21f2d-0b3e-4a62-a5f1-f3828be9c8b9"
+                },
+                {
+                  "name": "{connectionId}",
+                  "item": [
+                    {
+                      "name": "refresh",
+                      "item": [
+                        {
+                          "name": "Refresh a connection",
+                          "id": "97e99833-7324-447f-8904-534898e6ff9f",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/connections/:connectionId/refresh",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "connections",
+                                ":connectionId",
+                                "refresh"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "fc15b5d0-dc92-44cb-86b9-f9a20a05e3a5",
+                                  "key": "userId",
+                                  "value": "<string>",
+                                  "description": "(Required) The identifier of the user."
+                                },
+                                {
+                                  "id": "f0f6e7de-f775-4947-acb9-88b3c48de715",
+                                  "key": "connectionId",
+                                  "value": "<string>",
+                                  "description": "(Required) The identifier of the connection."
+                                }
+                              ]
+                            },
+                            "description": "Use this to refresh an existing connection. This will not return a new connection. Instead will return a job resource which is resonsible for refreshing the connection and fetching data asynchronously. Use this job resource to track the connections progress."
+                          },
+                          "response": [
+                            {
+                              "id": "f0084735-f6e8-4e7a-bc97-754fb6a21f6c",
+                              "name": "Returns a created job resource, if the operation succeeded.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/users/:userId/connections/:connectionId/refresh",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "users",
+                                    ":userId",
+                                    "connections",
+                                    ":connectionId",
+                                    "refresh"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    },
+                                    {
+                                      "key": "connectionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Accepted",
+                              "code": 202,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"id\": \"<string>\",\n  \"links\": {\n    \"self\": \"<string>\"\n  },\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:22:35.000Z",
+                              "updatedAt": "2026-10-22T02:22:35.000Z",
+                              "uid": "35240-f0084735-f6e8-4e7a-bc97-754fb6a21f6c"
+                            },
+                            {
+                              "id": "598dd87d-f686-447f-ba02-bc395e432e56",
+                              "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/users/:userId/connections/:connectionId/refresh",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "users",
+                                    ":userId",
+                                    "connections",
+                                    ":connectionId",
+                                    "refresh"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    },
+                                    {
+                                      "key": "connectionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"institution-not-supported\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-credentials\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:22:35.000Z",
+                              "updatedAt": "2026-10-22T02:22:35.000Z",
+                              "uid": "35240-598dd87d-f686-447f-ba02-bc395e432e56"
+                            },
+                            {
+                              "id": "bc73b8fc-c508-41ed-81f5-e1e942ccc4cc",
+                              "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/users/:userId/connections/:connectionId/refresh",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "users",
+                                    ":userId",
+                                    "connections",
+                                    ":connectionId",
+                                    "refresh"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    },
+                                    {
+                                      "key": "connectionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"no-production-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"forbidden-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:22:35.000Z",
+                              "updatedAt": "2026-10-22T02:22:35.000Z",
+                              "uid": "35240-bc73b8fc-c508-41ed-81f5-e1e942ccc4cc"
+                            },
+                            {
+                              "id": "6a8da948-0635-4438-9c0f-a252432fa5b1",
+                              "name": "Returns error indicating that server can't find requested resource.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/users/:userId/connections/:connectionId/refresh",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "users",
+                                    ":userId",
+                                    "connections",
+                                    ":connectionId",
+                                    "refresh"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    },
+                                    {
+                                      "key": "connectionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:22:35.000Z",
+                              "updatedAt": "2026-10-22T02:22:35.000Z",
+                              "uid": "35240-6a8da948-0635-4438-9c0f-a252432fa5b1"
+                            },
+                            {
+                              "id": "f6872925-ce67-48e5-b096-fe90b5d2fbb6",
+                              "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/users/:userId/connections/:connectionId/refresh",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "users",
+                                    ":userId",
+                                    "connections",
+                                    ":connectionId",
+                                    "refresh"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    },
+                                    {
+                                      "key": "connectionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:22:35.000Z",
+                              "updatedAt": "2026-10-22T02:22:35.000Z",
+                              "uid": "35240-f6872925-ce67-48e5-b096-fe90b5d2fbb6"
+                            },
+                            {
+                              "id": "4d4ade6a-9c04-4006-8d67-3e8f46873499",
+                              "name": "Returns error response code indicates that the server is not ready to handle the request.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/users/:userId/connections/:connectionId/refresh",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "users",
+                                    ":userId",
+                                    "connections",
+                                    ":connectionId",
+                                    "refresh"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    },
+                                    {
+                                      "key": "connectionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Service Unavailable",
+                              "code": 503,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": {},\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": {},\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:22:35.000Z",
+                              "updatedAt": "2026-10-22T02:22:35.000Z",
+                              "uid": "35240-4d4ade6a-9c04-4006-8d67-3e8f46873499"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:22:35.000Z",
+                          "updatedAt": "2026-10-22T02:22:35.000Z",
+                          "uid": "35240-97e99833-7324-447f-8904-534898e6ff9f"
+                        }
+                      ],
+                      "id": "28a8e8b9-6013-4dea-a6b9-b5f3091ab58f",
+                      "createdAt": "2026-10-22T02:22:35.000Z",
+                      "updatedAt": "2026-10-22T02:22:35.000Z",
+                      "uid": "35240-28a8e8b9-6013-4dea-a6b9-b5f3091ab58f"
+                    },
+                    {
+                      "name": "purge",
+                      "item": [
+                        {
+                          "name": "Purge connection data",
+                          "id": "45e7a59e-fd8f-48a3-a90c-b2564e290902",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "auth": {
+                              "type": "bearer",
+                              "bearer": [
+                                {
+                                  "key": "token",
+                                  "value": "{{bearerToken}}",
+                                  "type": "string"
+                                }
+                              ]
+                            },
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/connections/:connectionId/purge",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "connections",
+                                ":connectionId",
+                                "purge"
+                              ],
+                              "variable": [
+                                {
+                                  "id": "d22f6889-793e-407b-b2ad-2d4eac543c88",
+                                  "key": "userId",
+                                  "value": "<string>",
+                                  "description": "(Required) The identifier of the user."
+                                },
+                                {
+                                  "id": "401d350c-3968-4af6-98af-344d4be82902",
+                                  "key": "connectionId",
+                                  "value": "<string>",
+                                  "description": "(Required) The identifier of the connection."
+                                }
+                              ]
+                            },
+                            "description": "Use this endpoint to remove all user data related to a specific institution. Purging is only applicable for active user connections.\n\nWhen Enrich data is updated, the Enrich results under transactions won\u2019t automatically reflect these updates. To ensure the latest Enrich results are available, partners should first purge and then refresh connections. Without this step, any new insight reports generated will not include the latest enriched data.\n\n> \ud83d\udcd8 **Note:** Remember to purge and refresh connections to keep Enrich insights current."
+                          },
+                          "response": [
+                            {
+                              "id": "4bf42f8f-ae5b-4408-b3ac-12be910e21b6",
+                              "name": "Returns an empty body if the delete succeeded.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/users/:userId/connections/:connectionId/purge",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "users",
+                                    ":userId",
+                                    "connections",
+                                    ":connectionId",
+                                    "purge"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    },
+                                    {
+                                      "key": "connectionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "No Content",
+                              "code": 204,
+                              "_postman_previewlanguage": "text",
+                              "header": [],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": null,
+                              "createdAt": "2026-10-22T02:22:35.000Z",
+                              "updatedAt": "2026-10-22T02:22:35.000Z",
+                              "uid": "35240-4bf42f8f-ae5b-4408-b3ac-12be910e21b6"
+                            },
+                            {
+                              "id": "398ea057-fcdc-4f2b-8534-6b5f0f55d8c3",
+                              "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/users/:userId/connections/:connectionId/purge",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "users",
+                                    ":userId",
+                                    "connections",
+                                    ":connectionId",
+                                    "purge"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    },
+                                    {
+                                      "key": "connectionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"institution-not-supported\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-credentials\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:22:35.000Z",
+                              "updatedAt": "2026-10-22T02:22:35.000Z",
+                              "uid": "35240-398ea057-fcdc-4f2b-8534-6b5f0f55d8c3"
+                            },
+                            {
+                              "id": "e5807ad2-9c90-44e3-8e76-2469318cafae",
+                              "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/users/:userId/connections/:connectionId/purge",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "users",
+                                    ":userId",
+                                    "connections",
+                                    ":connectionId",
+                                    "purge"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    },
+                                    {
+                                      "key": "connectionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"no-production-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"forbidden-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:22:35.000Z",
+                              "updatedAt": "2026-10-22T02:22:35.000Z",
+                              "uid": "35240-e5807ad2-9c90-44e3-8e76-2469318cafae"
+                            },
+                            {
+                              "id": "1d75e922-b343-4d52-8c33-a119049f3928",
+                              "name": "Returns error indicating that server can't find requested resource.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/users/:userId/connections/:connectionId/purge",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "users",
+                                    ":userId",
+                                    "connections",
+                                    ":connectionId",
+                                    "purge"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    },
+                                    {
+                                      "key": "connectionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:22:35.000Z",
+                              "updatedAt": "2026-10-22T02:22:35.000Z",
+                              "uid": "35240-1d75e922-b343-4d52-8c33-a119049f3928"
+                            },
+                            {
+                              "id": "531a5cb4-f91e-4d15-b381-a5da482eccaf",
+                              "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/users/:userId/connections/:connectionId/purge",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "users",
+                                    ":userId",
+                                    "connections",
+                                    ":connectionId",
+                                    "purge"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    },
+                                    {
+                                      "key": "connectionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Internal Server Error",
+                              "code": 500,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:22:35.000Z",
+                              "updatedAt": "2026-10-22T02:22:35.000Z",
+                              "uid": "35240-531a5cb4-f91e-4d15-b381-a5da482eccaf"
+                            },
+                            {
+                              "id": "733ebacd-f1e9-449a-801b-9ce5c55534a4",
+                              "name": "Returns error response code indicates that the server is not ready to handle the request.",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "description": "Added as a part of security scheme: bearer",
+                                    "key": "Authorization",
+                                    "value": "Bearer <token>"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/users/:userId/connections/:connectionId/purge",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "users",
+                                    ":userId",
+                                    "connections",
+                                    ":connectionId",
+                                    "purge"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "userId"
+                                    },
+                                    {
+                                      "key": "connectionId"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Service Unavailable",
+                              "code": 503,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": {},\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": {},\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                              "createdAt": "2026-10-22T02:22:35.000Z",
+                              "updatedAt": "2026-10-22T02:22:35.000Z",
+                              "uid": "35240-733ebacd-f1e9-449a-801b-9ce5c55534a4"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T02:22:35.000Z",
+                          "updatedAt": "2026-10-22T02:22:35.000Z",
+                          "uid": "35240-45e7a59e-fd8f-48a3-a90c-b2564e290902"
+                        }
+                      ],
+                      "id": "4ac2a1de-35a1-4564-8de1-568e0d3934d7",
+                      "createdAt": "2026-10-22T02:22:35.000Z",
+                      "updatedAt": "2026-10-22T02:22:35.000Z",
+                      "uid": "35240-4ac2a1de-35a1-4564-8de1-568e0d3934d7"
+                    },
+                    {
+                      "name": "Retrieve a connection",
+                      "id": "cd956501-7970-4b13-a0c9-c8515ec201f3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/connections/:connectionId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "connections",
+                            ":connectionId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "301549bd-3c3e-4c9b-8e91-7f967e3177c0",
+                              "key": "userId",
+                              "value": "<string>",
+                              "description": "(Required) The identifier of the user."
+                            },
+                            {
+                              "id": "5dcadfc3-03b4-49fe-87e9-07fd604185c5",
+                              "key": "connectionId",
+                              "value": "<string>",
+                              "description": "(Required) The identifier of the connection."
+                            }
+                          ]
+                        },
+                        "description": "Use this to retrieve details of a specific connection. Note that due to security the loginId, password, securityCode are never returned."
+                      },
+                      "response": [
+                        {
+                          "id": "57d8eca3-d34c-4854-a902-19e8f5ab390b",
+                          "name": "Returns details of a connection.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/connections/:connectionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "connections",
+                                ":connectionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "connectionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"createdDate\": \"<string>\",\n  \"expiryDate\": \"<string>\",\n  \"method\": \"<string>\",\n  \"id\": \"<string>\",\n  \"institution\": {\n    \"id\": \"<string>\",\n    \"links\": {\n      \"self\": \"<string>\"\n    },\n    \"type\": \"<string>\"\n  },\n  \"links\": {\n    \"self\": \"<string>\",\n    \"user\": \"<string>\",\n    \"accounts\": \"<string>\",\n    \"transactions\": \"<string>\"\n  },\n  \"type\": \"<string>\",\n  \"lastUsed\": \"<string>\",\n  \"accounts\": {\n    \"data\": [\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"lastUpdated\": \"<string>\",\n        \"accountNo\": \"<string>\",\n        \"availableFunds\": \"<string,null>\",\n        \"balance\": \"<string,null>\",\n        \"class\": {\n          \"type\": \"<string>\",\n          \"product\": \"<string>\"\n        },\n        \"currency\": \"<string>\",\n        \"links\": {\n          \"self\": \"<string>\",\n          \"transactions\": \"<string>\"\n        },\n        \"name\": \"<string>\",\n        \"status\": \"unavailable\"\n      },\n      {\n        \"type\": \"<string>\",\n        \"id\": \"<string>\",\n        \"lastUpdated\": \"<string>\",\n        \"accountNo\": \"<string>\",\n        \"availableFunds\": \"<string,null>\",\n        \"balance\": \"<string,null>\",\n        \"class\": {\n          \"type\": \"<string>\",\n          \"product\": \"<string>\"\n        },\n        \"currency\": \"<string>\",\n        \"links\": {\n          \"self\": \"<string>\",\n          \"transactions\": \"<string>\"\n        },\n        \"name\": \"<string>\",\n        \"status\": \"available\"\n      }\n    ],\n    \"type\": \"<string>\"\n  },\n  \"profile\": {\n    \"emailAddresses\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"firstName\": \"<string>\",\n    \"fullName\": \"<string>\",\n    \"lastName\": \"<string>\",\n    \"middleName\": \"<string>\",\n    \"phoneNumbers\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"physicalAddresses\": [\n      {\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string,null>\",\n        \"addressLine3\": \"<string,null>\",\n        \"city\": \"<string>\",\n        \"countryCode\": \"<string>\",\n        \"formattedAddress\": \"<string>\",\n        \"postcode\": \"<string>\",\n        \"state\": \"<string>\",\n        \"country\": \"<string>\"\n      },\n      {\n        \"addressLine1\": \"<string>\",\n        \"addressLine2\": \"<string,null>\",\n        \"addressLine3\": \"<string,null>\",\n        \"city\": \"<string>\",\n        \"countryCode\": \"<string>\",\n        \"formattedAddress\": \"<string>\",\n        \"postcode\": \"<string>\",\n        \"state\": \"<string>\",\n        \"country\": \"<string>\"\n      }\n    ]\n  },\n  \"status\": \"invalid\"\n}",
+                          "createdAt": "2026-10-22T02:22:35.000Z",
+                          "updatedAt": "2026-10-22T02:22:35.000Z",
+                          "uid": "35240-57d8eca3-d34c-4854-a902-19e8f5ab390b"
+                        },
+                        {
+                          "id": "1cd4d31b-9257-42a9-9cb8-b63446856100",
+                          "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/connections/:connectionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "connections",
+                                ":connectionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "connectionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"institution-not-supported\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-credentials\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:35.000Z",
+                          "updatedAt": "2026-10-22T02:22:35.000Z",
+                          "uid": "35240-1cd4d31b-9257-42a9-9cb8-b63446856100"
+                        },
+                        {
+                          "id": "ce3e98d5-03da-4048-8d43-768d13e93dd0",
+                          "name": "Error status response code indicates that the request has not been applied because it lacks valid authentication credentials for the target resource.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/connections/:connectionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "connections",
+                                ":connectionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "connectionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"unauthorized-access\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-authorization-token\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:35.000Z",
+                          "updatedAt": "2026-10-22T02:22:35.000Z",
+                          "uid": "35240-ce3e98d5-03da-4048-8d43-768d13e93dd0"
+                        },
+                        {
+                          "id": "b89c7581-e7f0-4515-9bab-b1e1f9a32af4",
+                          "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/connections/:connectionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "connections",
+                                ":connectionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "connectionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"no-production-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"forbidden-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:35.000Z",
+                          "updatedAt": "2026-10-22T02:22:35.000Z",
+                          "uid": "35240-b89c7581-e7f0-4515-9bab-b1e1f9a32af4"
+                        },
+                        {
+                          "id": "7ed131c6-a03b-4056-a3c0-923bd38de970",
+                          "name": "Returns error indicating that server can't find requested resource.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/connections/:connectionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "connections",
+                                ":connectionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "connectionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:35.000Z",
+                          "updatedAt": "2026-10-22T02:22:35.000Z",
+                          "uid": "35240-7ed131c6-a03b-4056-a3c0-923bd38de970"
+                        },
+                        {
+                          "id": "b88a27ce-3378-45a4-bd9d-24f73e0b14bd",
+                          "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/connections/:connectionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "connections",
+                                ":connectionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "connectionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:35.000Z",
+                          "updatedAt": "2026-10-22T02:22:35.000Z",
+                          "uid": "35240-b88a27ce-3378-45a4-bd9d-24f73e0b14bd"
+                        },
+                        {
+                          "id": "3c237e74-001c-4fbb-9254-5d538c57cf09",
+                          "name": "Returns error response code indicates that the server is not ready to handle the request.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/connections/:connectionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "connections",
+                                ":connectionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "connectionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Service Unavailable",
+                          "code": 503,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": {},\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": {},\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:35.000Z",
+                          "updatedAt": "2026-10-22T02:22:35.000Z",
+                          "uid": "35240-3c237e74-001c-4fbb-9254-5d538c57cf09"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:22:35.000Z",
+                      "updatedAt": "2026-10-22T02:22:35.000Z",
+                      "uid": "35240-cd956501-7970-4b13-a0c9-c8515ec201f3"
+                    },
+                    {
+                      "name": "Delete a connection",
+                      "id": "c463ad9f-70ca-4f0d-a9a8-f296c34eed62",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/connections/:connectionId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "connections",
+                            ":connectionId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "22a0aa8c-7c39-4ee0-8a1c-8eb381c09c44",
+                              "key": "userId",
+                              "value": "<string>",
+                              "description": "(Required) The identifier of the user."
+                            },
+                            {
+                              "id": "d1d30a49-4a36-44eb-9d08-14e5078304ba",
+                              "key": "connectionId",
+                              "value": "<string>",
+                              "description": "(Required) The identifier of the connection."
+                            }
+                          ]
+                        },
+                        "description": "Permanently deletes a connection."
+                      },
+                      "response": [
+                        {
+                          "id": "a55bd4bd-428f-47d7-a1c9-11eebcdc4472",
+                          "name": "Returns an empty body if the delete succeeded.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/connections/:connectionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "connections",
+                                ":connectionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "connectionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-10-22T02:22:35.000Z",
+                          "updatedAt": "2026-10-22T02:22:35.000Z",
+                          "uid": "35240-a55bd4bd-428f-47d7-a1c9-11eebcdc4472"
+                        },
+                        {
+                          "id": "a3af5a98-4c98-4885-bd15-9228fdaeeae1",
+                          "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/connections/:connectionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "connections",
+                                ":connectionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "connectionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"institution-not-supported\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-credentials\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:35.000Z",
+                          "updatedAt": "2026-10-22T02:22:35.000Z",
+                          "uid": "35240-a3af5a98-4c98-4885-bd15-9228fdaeeae1"
+                        },
+                        {
+                          "id": "852421e7-e415-4975-8025-c04263d351ea",
+                          "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/connections/:connectionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "connections",
+                                ":connectionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "connectionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"no-production-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"forbidden-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:35.000Z",
+                          "updatedAt": "2026-10-22T02:22:35.000Z",
+                          "uid": "35240-852421e7-e415-4975-8025-c04263d351ea"
+                        },
+                        {
+                          "id": "5f963ed9-0464-4a76-81cc-ea5ce29a580f",
+                          "name": "Returns error indicating that server can't find requested resource.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/connections/:connectionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "connections",
+                                ":connectionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "connectionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:35.000Z",
+                          "updatedAt": "2026-10-22T02:22:35.000Z",
+                          "uid": "35240-5f963ed9-0464-4a76-81cc-ea5ce29a580f"
+                        },
+                        {
+                          "id": "b81eb065-bdd3-4701-9e38-6a83f1f5af99",
+                          "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/connections/:connectionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "connections",
+                                ":connectionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "connectionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:35.000Z",
+                          "updatedAt": "2026-10-22T02:22:35.000Z",
+                          "uid": "35240-b81eb065-bdd3-4701-9e38-6a83f1f5af99"
+                        },
+                        {
+                          "id": "d21e93ed-554e-418d-906c-56c806c77ad6",
+                          "name": "Returns error response code indicates that the server is not ready to handle the request.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/connections/:connectionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "connections",
+                                ":connectionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "connectionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Service Unavailable",
+                          "code": 503,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": {},\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": {},\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:35.000Z",
+                          "updatedAt": "2026-10-22T02:22:35.000Z",
+                          "uid": "35240-d21e93ed-554e-418d-906c-56c806c77ad6"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:22:35.000Z",
+                      "updatedAt": "2026-10-22T02:22:35.000Z",
+                      "uid": "35240-c463ad9f-70ca-4f0d-a9a8-f296c34eed62"
+                    }
+                  ],
+                  "id": "c59cf33c-f6aa-4c54-982f-57dfbc124855",
+                  "createdAt": "2026-10-22T02:22:35.000Z",
+                  "updatedAt": "2026-10-22T02:22:35.000Z",
+                  "uid": "35240-c59cf33c-f6aa-4c54-982f-57dfbc124855"
+                },
+                {
+                  "name": "List all connections",
+                  "id": "3345ffa8-709f-48f9-8614-eade4fc0912a",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId/connections?filter=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId",
+                        "connections"
+                      ],
+                      "query": [
+                        {
+                          "description": "Connections filters, id, status, institution.id. e.g institution.id.eq('AU00000')",
+                          "key": "filter",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "4e18132b-43a4-4c20-8c62-51e49efdde2a",
+                          "key": "userId",
+                          "value": "<string>",
+                          "description": "(Required) User identifier."
+                        }
+                      ]
+                    },
+                    "description": "Returns a list of connections belonging to this user. Each entry in the array is a separate object. If no data is returned, the resulting array will be empty."
+                  },
+                  "response": [
+                    {
+                      "id": "ee158068-9387-4b7b-80d1-22cc8a477166",
+                      "name": "Returns details of connections.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/connections?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "connections"
+                          ],
+                          "query": [
+                            {
+                              "description": "Connections filters, id, status, institution.id. e.g institution.id.eq('AU00000')",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"<string>\",\n  \"data\": [\n    {\n      \"createdDate\": \"<string>\",\n      \"expiryDate\": \"<string>\",\n      \"id\": \"<string>\",\n      \"method\": \"<string>\",\n      \"institution\": {\n        \"id\": \"<string>\",\n        \"links\": {\n          \"self\": \"<string>\"\n        },\n        \"type\": \"<string>\"\n      },\n      \"links\": {\n        \"institution\": \"<string>\",\n        \"self\": \"<string>\",\n        \"accounts\": \"<string>\",\n        \"transactions\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"status\": \"pre-init\",\n      \"lastUsed\": \"<string>\"\n    },\n    {\n      \"createdDate\": \"<string>\",\n      \"expiryDate\": \"<string>\",\n      \"id\": \"<string>\",\n      \"method\": \"<string>\",\n      \"institution\": {\n        \"id\": \"<string>\",\n        \"links\": {\n          \"self\": \"<string>\"\n        },\n        \"type\": \"<string>\"\n      },\n      \"links\": {\n        \"institution\": \"<string>\",\n        \"self\": \"<string>\",\n        \"accounts\": \"<string>\",\n        \"transactions\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"status\": \"invalid\",\n      \"lastUsed\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"self\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T02:22:35.000Z",
+                      "updatedAt": "2026-10-22T02:22:35.000Z",
+                      "uid": "35240-ee158068-9387-4b7b-80d1-22cc8a477166"
+                    },
+                    {
+                      "id": "7bf46164-eb4c-4db2-9ba3-f7ff821057b0",
+                      "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/connections?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "connections"
+                          ],
+                          "query": [
+                            {
+                              "description": "Connections filters, id, status, institution.id. e.g institution.id.eq('AU00000')",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"institution-not-supported\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-credentials\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:22:35.000Z",
+                      "updatedAt": "2026-10-22T02:22:35.000Z",
+                      "uid": "35240-7bf46164-eb4c-4db2-9ba3-f7ff821057b0"
+                    },
+                    {
+                      "id": "98580419-5d89-4e50-b7fd-cdd4e6b2a0fe",
+                      "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/connections?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "connections"
+                          ],
+                          "query": [
+                            {
+                              "description": "Connections filters, id, status, institution.id. e.g institution.id.eq('AU00000')",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"no-production-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"forbidden-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:22:35.000Z",
+                      "updatedAt": "2026-10-22T02:22:35.000Z",
+                      "uid": "35240-98580419-5d89-4e50-b7fd-cdd4e6b2a0fe"
+                    },
+                    {
+                      "id": "af306584-e744-4880-9916-b30baaea5306",
+                      "name": "Returns error indicating that server can't find requested resource.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/connections?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "connections"
+                          ],
+                          "query": [
+                            {
+                              "description": "Connections filters, id, status, institution.id. e.g institution.id.eq('AU00000')",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:22:35.000Z",
+                      "updatedAt": "2026-10-22T02:22:35.000Z",
+                      "uid": "35240-af306584-e744-4880-9916-b30baaea5306"
+                    },
+                    {
+                      "id": "eafe9414-0c94-4a19-91b5-e95390783a9a",
+                      "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/connections?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "connections"
+                          ],
+                          "query": [
+                            {
+                              "description": "Connections filters, id, status, institution.id. e.g institution.id.eq('AU00000')",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:22:35.000Z",
+                      "updatedAt": "2026-10-22T02:22:35.000Z",
+                      "uid": "35240-eafe9414-0c94-4a19-91b5-e95390783a9a"
+                    },
+                    {
+                      "id": "216f937f-8a61-44d1-8403-8aacd7e150c8",
+                      "name": "Returns error response code indicates that the server is not ready to handle the request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/connections?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "connections"
+                          ],
+                          "query": [
+                            {
+                              "description": "Connections filters, id, status, institution.id. e.g institution.id.eq('AU00000')",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": {},\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": {},\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:22:35.000Z",
+                      "updatedAt": "2026-10-22T02:22:35.000Z",
+                      "uid": "35240-216f937f-8a61-44d1-8403-8aacd7e150c8"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:22:35.000Z",
+                  "updatedAt": "2026-10-22T02:22:35.000Z",
+                  "uid": "35240-3345ffa8-709f-48f9-8614-eade4fc0912a"
                 }
               ],
-              "body": "{\n  \"type\": \"list\",\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"active\",\n      \"institution\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"lastUpdated\": \"1974-11-04T21:19:48.651Z\"\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"disconnected\",\n      \"institution\": {\n        \"id\": \"string\",\n        \"name\": \"string\"\n      },\n      \"lastUpdated\": \"1971-12-02T07:26:11.685Z\"\n    }\n  ],\n  \"size\": 7321\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "14447398-ebb3-459c-9364-3ea4bdd7fe1e",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId",
-                    "connections"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) Basiq user ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"code\": \"string\",\n  \"detail\": \"string\",\n  \"source\": {}\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "539a8aa6-b4db-45bf-a628-a6d63b703f5a",
+              "createdAt": "2026-10-22T02:22:35.000Z",
+              "updatedAt": "2026-10-22T02:22:35.000Z",
+              "uid": "35240-539a8aa6-b4db-45bf-a628-a6d63b703f5a"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "ac8cf050-3dcf-4bf4-bc2a-2904fd4d1870",
-          "name": "Create Connection",
-          "request": {
-            "name": "Create Connection",
-            "description": {
-              "content": "Create a new bank connection for a user.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users",
-                ":userId",
-                "connections"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "userId",
-                  "description": "(Required) Basiq user ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"institutionId\": \"<string>\",\n  \"loginId\": \"<string>\",\n  \"password\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "127c28a7-bbc4-4662-be22-edbe262b6bb3",
-              "name": "Connection created",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId",
-                    "connections"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) Basiq user ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"institutionId\": \"<string>\",\n  \"loginId\": \"<string>\",\n  \"password\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"status\": \"disconnected\",\n  \"institution\": {\n    \"id\": \"string\",\n    \"name\": \"string\"\n  },\n  \"lastUpdated\": \"2017-06-19T14:52:43.274Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "6f6c189a-3031-43ac-aed4-e584d13e099c",
-              "name": "Invalid request parameters",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId",
-                    "connections"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) Basiq user ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"institutionId\": \"<string>\",\n  \"loginId\": \"<string>\",\n  \"password\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"code\": \"string\",\n  \"detail\": \"string\",\n  \"source\": {}\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "135821f0-b03b-48e5-919c-366bd240426e",
-          "name": "Get Connection",
-          "request": {
-            "name": "Get Connection",
-            "description": {
-              "content": "Retrieve a specific bank connection.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users",
-                ":userId",
-                "connections",
-                ":connectionId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "userId",
-                  "description": "(Required) Basiq user ID"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "connectionId",
-                  "description": "(Required) Basiq connection ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "60119122-1421-4a65-914f-72094a16d7c5",
-              "name": "Connection record",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId",
-                    "connections",
-                    ":connectionId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) Basiq user ID"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connectionId",
-                      "description": "(Required) Basiq connection ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"status\": \"disconnected\",\n  \"institution\": {\n    \"id\": \"string\",\n    \"name\": \"string\"\n  },\n  \"lastUpdated\": \"2017-06-19T14:52:43.274Z\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d5329174-4072-4282-84fc-46a2a1aa9cc6",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId",
-                    "connections",
-                    ":connectionId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) Basiq user ID"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connectionId",
-                      "description": "(Required) Basiq connection ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"code\": \"string\",\n  \"detail\": \"string\",\n  \"source\": {}\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "619ef1e7-2f25-4737-b187-f21c1ab5b0bd",
-          "name": "Delete Connection",
-          "request": {
-            "name": "Delete Connection",
-            "description": {
-              "content": "Remove a bank connection and revoke consent.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users",
-                ":userId",
-                "connections",
-                ":connectionId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "userId",
-                  "description": "(Required) Basiq user ID"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "connectionId",
-                  "description": "(Required) Basiq connection ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "84ad3c55-3c1e-4f59-84b2-3abe9d37a733",
-              "name": "Connection deleted",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId",
-                    "connections",
-                    ":connectionId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) Basiq user ID"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connectionId",
-                      "description": "(Required) Basiq connection ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "No Content",
-              "code": 204,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "text/plain"
-                }
-              ],
-              "body": "",
-              "cookie": [],
-              "_postman_previewlanguage": "text"
-            },
-            {
-              "id": "512d2aeb-bbce-4c16-b050-447167feed81",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId",
-                    "connections",
-                    ":connectionId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) Basiq user ID"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "connectionId",
-                      "description": "(Required) Basiq connection ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"code\": \"string\",\n  \"detail\": \"string\",\n  \"source\": {}\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "851d64ad-3eba-4517-b1e3-f1aa0dcb3c2b",
+          "createdAt": "2026-10-22T02:22:35.000Z",
+          "updatedAt": "2026-10-22T02:22:35.000Z",
+          "uid": "35240-851d64ad-3eba-4517-b1e3-f1aa0dcb3c2b"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://au-api.basiq.io",
-      "key": "baseUrl"
+      "id": "7063f708-b1d2-49b6-8701-e540d81dfcca",
+      "createdAt": "2026-10-22T02:22:35.000Z",
+      "updatedAt": "2026-10-22T02:22:35.000Z",
+      "uid": "35240-7063f708-b1d2-49b6-8701-e540d81dfcca"
     }
   ],
   "auth": {
-    "type": "bearer",
-    "bearer": [
+    "type": "apikey",
+    "apikey": [
       {
-        "key": "token",
-        "value": "{{bearerToken}}"
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "89a7ac93-f92b-4518-8b3d-b003f7333a7f",
-    "name": "Basiq Accounts Connections API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Basiq API is an open banking and financial data platform providing unified access to Australian and New Zealand bank account data. It enables financial applications to retrieve account balances, transactions, income verification, and expense categorization via consumer-consented bank connections using CDR (Consumer Data Right) and third-party open banking standards.\n\nContact Support:\n Name: Basiq Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://au-api.basiq.io"
     }
-  }
+  ]
 }

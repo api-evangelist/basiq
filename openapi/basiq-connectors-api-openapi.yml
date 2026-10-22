@@ -1,0 +1,1157 @@
+openapi: 3.2.0
+info:
+  title: Platform Connectors API
+  description: All included utility endpoints for Basiq partners
+  version: 3.0.0
+  termsOfService: https://docs.basiq.io/en/collections/440849-privacy-terms-and-common-questions
+  license:
+    name: Commercial
+    url: https://basiq.io
+servers:
+- url: https://au-api.basiq.io
+security:
+- api_key: []
+- services_token: []
+tags:
+- name: Connectors
+paths:
+  /connectors:
+    get:
+      tags:
+      - Connectors
+      summary: Retrieve connectors
+      description: 'NOTE: This end point requires authentication.'
+      operationId: getConnectors
+      parameters:
+      - name: filter
+        in: query
+        description: 'Filter parameter can be used to filter connector list by connector property. This parameter should contain a comma-separated list of filter statements.</br>
+
+          A filter statement is composed of the entity name (in this case, it is always ''connector''), the property name (e.g., ''stage''), the filter operator (e.g., ''eq''), and the quoted string value in parentheses (e.g., "(''live'')").</br>
+
+          The following list of regular expressions describes acceptable filter statements:</br>
+
+          • (connector).(id).(eq)\((''[A-Z][A-Z][0-9]{5}'')\)</br>
+
+          • (connector).(method).(eq)\((''web''||''open-banking''|''pdf''|''csv'')\)</br>
+
+          • (connector).(status).(eq|ne)\((''operational''|''degraded-performance''|''partial-outage''|''major-outage''|''under-maintenance'')\)</br>
+
+          • (connector).(status).(in)\(([\w\W]+)\)</br>
+
+          • (connector).(stage).(eq|ne)\((''live''|''beta''|''alpha'')\)</br>
+
+          • (connector).(stage).(in)\(([\w\W]+)\)</br>
+
+          • (connector).(scopes).(in|eq|ne)\(([\w\W]+)\)</br>
+
+          • (connector).(institution).(country).(eq|ne)\((''Australia''|''New Zealand'')\)</br>
+
+          • (connector).(institution).(country).(in)\(([\w\W]+)\)</br>
+
+          • (connector).(institution).(tier).(eq|ne)\((''1''|''2''|''3''|''4'')\)</br>
+
+          • (connector).(institution).(tier).(in)\(([\W\d]+)\)</br>
+
+          • (connector).(institution).(type).(eq|ne)\((''Bank''|''Bank (Foreign)''|''Test Bank''|''Credit Union''|''Financial Services''|''Superannuation'')\)</br>
+
+          • (connector).(authorization).(type).(eq|ne)\((''user''|''user-mfa''|''user-mfa-intermittent''|''other''|''token'')\)</br>
+
+          • (connector).(authorization).(type).(in)\(([\w\W]+)\)</br>
+
+          • (connector).(connectorEngine).(eq|ne)\((''chrome''|''node'')\)</br>
+
+          Multiple filter definitions should be separated with a comma (,).</br>
+
+          For example, this filter statement will keep only live tier 1 and tier 2 institutions: filter=connector.stage.eq(''live''),connector.institution.tier.in(''1'',''2'')</br>'
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns data of single connector.
+          content:
+            application/json:
+              schema:
+                required:
+                - type
+                - totalCount
+                - data
+                - links
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Type identifies response data format
+                    example: list
+                    x-readme-ref-name: ResponseFormat
+                  totalCount:
+                    type: integer
+                    description: TotalCount contains total count of connectors
+                    format: int64
+                    example: 328
+                  data:
+                    type: array
+                    description: Data contains list of connectors
+                    items:
+                      required:
+                      - type
+                      - id
+                      - institution
+                      - method
+                      - stage
+                      - stats
+                      - status
+                      - scopes
+                      - authorization
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          description: 'Resource type identifier. It is always "connector" for this model.
+
+                            connector ConnectorEntityType'
+                          example: connector
+                          enum:
+                          - connector
+                        id:
+                          maxLength: 7
+                          minLength: 7
+                          pattern: ^[A-Z]{2}[0-9]{5}$
+                          type: string
+                          description: Institution ID
+                          example: AU00000
+                        method:
+                          type: string
+                          description: Current Connector method
+                          example: web
+                          enum:
+                          - web
+                          - open-banking
+                          - csv
+                          - pdf
+                        stage:
+                          type: string
+                          description: Current Connector stage
+                          example: beta
+                        status:
+                          type: string
+                          description: FeatureCondition type that describes an feature status for institution
+                          x-readme-ref-name: FeatureCondition
+                        institution:
+                          required:
+                          - type
+                          - name
+                          - shortName
+                          - tier
+                          - country
+                          - logo
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                              description: 'Institution type identifier
+
+                                Bank BankInstitutionType  BankInstitutionType institution type identifier for Banks
+
+                                Bank (Foreign) BankForeignInstitutionType BankForeignInstitutionType institution type identifier for Foreign banks
+
+                                Test Bank TestBankInstitutionType  TestBankInstitutionType institution type identifier for Test banks
+
+                                Credit Union CreditUnionInstitutionType  CreditUnionInstitutionType institution type identifier for Credit union institutions
+
+                                Financial Services FinancialServicesInstitutionType FinancialServicesInstitutionType institution type identifier for Financial service institutions
+
+                                Superannuation SuperannuationInstitutionType SuperannuationInstitutionType institution type identifier for Superannuation institutions
+
+                                Building Society BuildingSociety  BuildingSociety institution type identifier for Building Society institutions
+
+                                Government Government  Government institution type identifier for Government institutions'
+                              example: Bank
+                              enum:
+                              - Bank
+                              - Bank (Foreign)
+                              - Test Bank
+                              - Credit Union
+                              - Financial Services
+                              - Superannuation
+                              - Building Society
+                              - Government
+                            name:
+                              type: string
+                              description: Institution name
+                              example: Hooli Bank
+                            shortName:
+                              type: string
+                              description: Institution short name
+                              example: Hooli
+                            tier:
+                              type: string
+                              description: 'Institution tier identifier
+
+                                1 TierOne  TierOne tier identifier for tier1 institution
+
+                                2 TierTwo  TierTwo tier identifier for tier2 institution
+
+                                3 TierThree  TierThree tier identifier for tier3 institution
+
+                                4 TierFour  TierFour tier identifier for tier4 institution'
+                              example: '1'
+                              enum:
+                              - '1'
+                              - '2'
+                              - '3'
+                              - '4'
+                            country:
+                              type: string
+                              description: Institution country name
+                              example: Australia
+                            cdrFAQ:
+                              type: string
+                              description: 'A link for Data Holder (where available) to a page explaining CDR data sharing process.
+
+                                '
+                              example: https://example.com/banking/help-support/open-banking.html
+                            cdrEmail:
+                              type: string
+                              description: The email address for CDR-related inquiries.
+                              example: openbanking.dataholdersupport@example.com.au
+                            cdrPolicy:
+                              type: string
+                              description: The URL to the CDR policy document detailing the institution's data practices and consumer rights.
+                              example: https://www.example.com.au/CDRpolicy
+                            cdrProviderNumber:
+                              type: string
+                              description: A unique identifier assigned to the CDR institution by the CDR program.
+                              example: DHBNK000111
+                            abn:
+                              type: string
+                              description: ABN for the Data Holder ( only available in openbanking ).
+                              example: '87087651111'
+                            acn:
+                              type: string
+                              description: ACN for the Data Holder ( only available in openbanking ).
+                              example: 087651111
+                            logo:
+                              required:
+                              - links
+                              - type
+                              type: object
+                              properties:
+                                colors:
+                                  type: object
+                                  properties:
+                                    primary:
+                                      type: string
+                                      description: Primary primary institution color
+                                  description: Colors contains institution colors type
+                                  x-readme-ref-name: Colors
+                                links:
+                                  required:
+                                  - full
+                                  - square
+                                  type: object
+                                  properties:
+                                    full:
+                                      type: string
+                                      description: URL to full size logo
+                                      example: https://example.com/AU00000-full.svg
+                                    square:
+                                      type: string
+                                      description: Square formatted logo URL
+                                      example: https://example.com/AU00000.svg
+                                  description: institution logo resource links
+                                  x-readme-ref-name: LogoResourceLinks
+                                type:
+                                  type: string
+                                  description: 'Resource type identifier.
+
+                                    image ImageResourceType'
+                                  example: image
+                                  enum:
+                                  - image
+                              description: Institution logo resource type
+                              x-readme-ref-name: InstitutionLogoResource
+                          description: ConnectorInstitutionResource connector Institution  resource type
+                          x-readme-ref-name: ConnectorInstitutionResource
+                        scopes:
+                          type: array
+                          description: Connector scopes array
+                          items:
+                            type: string
+                            example: customer.person.basic
+                        authorization:
+                          required:
+                          - type
+                          type: object
+                          properties:
+                            type:
+                              type: string
+                              description: 'Authorization type identifier
+
+                                user AuthorizationUser  AuthorizationUser "User" authorization type identifier
+
+                                token AuthorizationToken AuthorizationToken "Token" authorization type identifier
+
+                                other AuthorizationOther  AuthorizationOther "Other" authorization type identifier
+
+                                user-mfa AuthorizationUserMfa  AuthorizationUserMfa "UserMfa" authorization type identifier
+
+                                user-mfa-intermittent AuthorizationUserMfaIntermittent AuthorizationUserMfaIntermittent "UserMfaIntermittent" authorization type identifier'
+                              example: user
+                              enum:
+                              - user
+                              - token
+                              - other
+                              - user-mfa
+                              - user-mfa-intermittent
+                            meta:
+                              type: object
+                              properties:
+                                forgotten_password_url:
+                                  type: string
+                                  description: URL to institution forgotten password page
+                                  example: https://example.com/forgotten-password
+                                login_id_caption:
+                                  type: string
+                                  description: Login ID field caption that should be shown on UI
+                                  example: User name
+                                password_caption:
+                                  type: string
+                                  description: Password field caption that should be shown on UI
+                                  example: Password
+                                secondary_login_id_caption:
+                                  type: string
+                                  description: Secondary loginID caption that should be shown on UI
+                                  example: Secondary login id
+                                security_code_caption:
+                                  type: string
+                                  description: Security code caption that should be shown on UI
+                                  example: Security code
+                              x-readme-ref-name: ConnectorAuthorizationMeta
+                          x-readme-ref-name: ConnectorAuthorization
+                        stats:
+                          type: object
+                          properties:
+                            averageDurationMs:
+                              type: object
+                              properties:
+                                retrieveAccounts:
+                                  type: integer
+                                  description: Connector average duration in milliseconds of <b>fetch accounts</b> step for institution
+                                  format: int64
+                                retrieveMeta:
+                                  type: integer
+                                  description: Connector average duration in milliseconds of <b>fetch metadata</b> step for institution
+                                  format: int64
+                                retrieveTransactions:
+                                  type: integer
+                                  description: Connector average duration in milliseconds of <b>fetch transactions</b> step for institution
+                                  format: int64
+                                total:
+                                  type: integer
+                                  description: Total connector average duration in milliseconds
+                                  format: int64
+                                verifyCredentials:
+                                  type: integer
+                                  description: Connector average duration in milliseconds of <b>verifiy credentials</b> step for institution
+                                  format: int64
+                              description: 'AverageDurationMs average connector duration in milliseconds per segments.
+
+                                When durations are not known for institution this field will be `null`.'
+                          description: InstitutionPerformanceStats response type for institution performance stats
+                          x-readme-ref-name: InstitutionPerformanceStats
+                        links:
+                          required:
+                          - self
+                          type: object
+                          properties:
+                            self:
+                              type: string
+                              description: URL to resource itself
+                          description: ResourceLinks contains resource links
+                          x-readme-ref-name: ResourceLinks
+                      description: Connector contains connector data.
+                      x-readme-ref-name: Connector
+                  links:
+                    required:
+                    - self
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        description: URL to resource itself
+                    description: ResourceLinks contains resource links
+                    x-readme-ref-name: ResourceLinks
+                description: ConnectorsList contains list of connectors data.
+                x-readme-ref-name: ConnectorsList
+        '400':
+          description: Returns error that server cannot or will not process the request due to something that is perceived to be a client error.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: parameter-not-valid
+                          enum:
+                          - parameter-not-supplied
+                          - parameter-not-valid
+                          - unsupported-accept
+                          - invalid-content
+                          - institution-not-supported
+                          - invalid-credentials
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: The provided filter parameter is in invalid format or unsupported.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Parameter not valid.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                x-readme-ref-name: BadRequestError
+              examples:
+                Invalid Filters:
+                  value:
+                    type: list
+                    correlationId: ac5ah55
+                    data:
+                    - type: error
+                      code: parameter-not-valid
+                      title: Parameter value is not valid
+                      detail: The provided filter parameter is in invalid format or unsupported
+                      source:
+                        parameter: filter
+        '401':
+          description: Returns error that indicates unauthorized access.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: unauthorized-access
+                          enum:
+                          - unauthorized-access
+                          - invalid-authorization-token
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: You are not authorized to access this resource
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Unauthorized Access
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: UnauthorizedError
+        '404':
+          description: Returns error indicating that server cannot find requested resource.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: resource-not-found
+                          enum:
+                          - resource-not-found
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Resource not found.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Requested resource is not found.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: NotFoundError
+        '500':
+          description: Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: internal-server-error
+                          enum:
+                          - internal-server-error
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Internal Server error. Contact support.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Internal Server error.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: InternalServerError
+      security:
+      - services_token: []
+  /connectors/{connectorId}/{method}:
+    get:
+      tags:
+      - Connectors
+      summary: Retrieve a connector
+      description: 'NOTE: This end point requires authentication.'
+      operationId: getConnector
+      parameters:
+      - name: connectorId
+        in: path
+        description: Connector ID
+        required: true
+        schema:
+          pattern: ^[A-Z]{2}[0-9]{5}$
+          type: string
+      - name: method
+        in: path
+        description: Connector method
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Returns data of single connector.
+          content:
+            application/json:
+              schema:
+                required:
+                - type
+                - id
+                - institution
+                - method
+                - stage
+                - stats
+                - status
+                - scopes
+                - authorization
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: 'Resource type identifier. It is always "connector" for this model.
+
+                      connector ConnectorEntityType'
+                    example: connector
+                    enum:
+                    - connector
+                  id:
+                    maxLength: 7
+                    minLength: 7
+                    pattern: ^[A-Z]{2}[0-9]{5}$
+                    type: string
+                    description: Institution ID
+                    example: AU00000
+                  method:
+                    type: string
+                    description: Current Connector method
+                    example: web
+                    enum:
+                    - web
+                    - open-banking
+                    - csv
+                    - pdf
+                  stage:
+                    type: string
+                    description: Current Connector stage
+                    example: beta
+                  status:
+                    type: string
+                    description: FeatureCondition type that describes an feature status for institution
+                    x-readme-ref-name: FeatureCondition
+                  institution:
+                    required:
+                    - type
+                    - name
+                    - shortName
+                    - tier
+                    - country
+                    - logo
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        description: 'Institution type identifier
+
+                          Bank BankInstitutionType  BankInstitutionType institution type identifier for Banks
+
+                          Bank (Foreign) BankForeignInstitutionType BankForeignInstitutionType institution type identifier for Foreign banks
+
+                          Test Bank TestBankInstitutionType  TestBankInstitutionType institution type identifier for Test banks
+
+                          Credit Union CreditUnionInstitutionType  CreditUnionInstitutionType institution type identifier for Credit union institutions
+
+                          Financial Services FinancialServicesInstitutionType FinancialServicesInstitutionType institution type identifier for Financial service institutions
+
+                          Superannuation SuperannuationInstitutionType SuperannuationInstitutionType institution type identifier for Superannuation institutions
+
+                          Building Society BuildingSociety  BuildingSociety institution type identifier for Building Society institutions
+
+                          Government Government  Government institution type identifier for Government institutions'
+                        example: Bank
+                        enum:
+                        - Bank
+                        - Bank (Foreign)
+                        - Test Bank
+                        - Credit Union
+                        - Financial Services
+                        - Superannuation
+                        - Building Society
+                        - Government
+                      name:
+                        type: string
+                        description: Institution name
+                        example: Hooli Bank
+                      shortName:
+                        type: string
+                        description: Institution short name
+                        example: Hooli
+                      tier:
+                        type: string
+                        description: 'Institution tier identifier
+
+                          1 TierOne  TierOne tier identifier for tier1 institution
+
+                          2 TierTwo  TierTwo tier identifier for tier2 institution
+
+                          3 TierThree  TierThree tier identifier for tier3 institution
+
+                          4 TierFour  TierFour tier identifier for tier4 institution'
+                        example: '1'
+                        enum:
+                        - '1'
+                        - '2'
+                        - '3'
+                        - '4'
+                      country:
+                        type: string
+                        description: Institution country name
+                        example: Australia
+                      cdrFAQ:
+                        type: string
+                        description: 'A link for Data Holder (where available) to a page explaining CDR data sharing process.
+
+                          '
+                        example: https://example.com/banking/help-support/open-banking.html
+                      cdrEmail:
+                        type: string
+                        description: The email address for CDR-related inquiries.
+                        example: openbanking.dataholdersupport@example.com.au
+                      cdrPolicy:
+                        type: string
+                        description: The URL to the CDR policy document detailing the institution's data practices and consumer rights.
+                        example: https://www.example.com.au/CDRpolicy
+                      cdrProviderNumber:
+                        type: string
+                        description: A unique identifier assigned to the CDR institution by the CDR program.
+                        example: DHBNK000111
+                      abn:
+                        type: string
+                        description: ABN for the Data Holder ( only available in openbanking ).
+                        example: '87087651111'
+                      acn:
+                        type: string
+                        description: ACN for the Data Holder ( only available in openbanking ).
+                        example: 087651111
+                      logo:
+                        required:
+                        - links
+                        - type
+                        type: object
+                        properties:
+                          colors:
+                            type: object
+                            properties:
+                              primary:
+                                type: string
+                                description: Primary primary institution color
+                            description: Colors contains institution colors type
+                            x-readme-ref-name: Colors
+                          links:
+                            required:
+                            - full
+                            - square
+                            type: object
+                            properties:
+                              full:
+                                type: string
+                                description: URL to full size logo
+                                example: https://example.com/AU00000-full.svg
+                              square:
+                                type: string
+                                description: Square formatted logo URL
+                                example: https://example.com/AU00000.svg
+                            description: institution logo resource links
+                            x-readme-ref-name: LogoResourceLinks
+                          type:
+                            type: string
+                            description: 'Resource type identifier.
+
+                              image ImageResourceType'
+                            example: image
+                            enum:
+                            - image
+                        description: Institution logo resource type
+                        x-readme-ref-name: InstitutionLogoResource
+                    description: ConnectorInstitutionResource connector Institution  resource type
+                    x-readme-ref-name: ConnectorInstitutionResource
+                  scopes:
+                    type: array
+                    description: Connector scopes array
+                    items:
+                      type: string
+                      example: customer.person.basic
+                  authorization:
+                    required:
+                    - type
+                    type: object
+                    properties:
+                      type:
+                        type: string
+                        description: 'Authorization type identifier
+
+                          user AuthorizationUser  AuthorizationUser "User" authorization type identifier
+
+                          token AuthorizationToken AuthorizationToken "Token" authorization type identifier
+
+                          other AuthorizationOther  AuthorizationOther "Other" authorization type identifier
+
+                          user-mfa AuthorizationUserMfa  AuthorizationUserMfa "UserMfa" authorization type identifier
+
+                          user-mfa-intermittent AuthorizationUserMfaIntermittent AuthorizationUserMfaIntermittent "UserMfaIntermittent" authorization type identifier'
+                        example: user
+                        enum:
+                        - user
+                        - token
+                        - other
+                        - user-mfa
+                        - user-mfa-intermittent
+                      meta:
+                        type: object
+                        properties:
+                          forgotten_password_url:
+                            type: string
+                            description: URL to institution forgotten password page
+                            example: https://example.com/forgotten-password
+                          login_id_caption:
+                            type: string
+                            description: Login ID field caption that should be shown on UI
+                            example: User name
+                          password_caption:
+                            type: string
+                            description: Password field caption that should be shown on UI
+                            example: Password
+                          secondary_login_id_caption:
+                            type: string
+                            description: Secondary loginID caption that should be shown on UI
+                            example: Secondary login id
+                          security_code_caption:
+                            type: string
+                            description: Security code caption that should be shown on UI
+                            example: Security code
+                        x-readme-ref-name: ConnectorAuthorizationMeta
+                    x-readme-ref-name: ConnectorAuthorization
+                  stats:
+                    type: object
+                    properties:
+                      averageDurationMs:
+                        type: object
+                        properties:
+                          retrieveAccounts:
+                            type: integer
+                            description: Connector average duration in milliseconds of <b>fetch accounts</b> step for institution
+                            format: int64
+                          retrieveMeta:
+                            type: integer
+                            description: Connector average duration in milliseconds of <b>fetch metadata</b> step for institution
+                            format: int64
+                          retrieveTransactions:
+                            type: integer
+                            description: Connector average duration in milliseconds of <b>fetch transactions</b> step for institution
+                            format: int64
+                          total:
+                            type: integer
+                            description: Total connector average duration in milliseconds
+                            format: int64
+                          verifyCredentials:
+                            type: integer
+                            description: Connector average duration in milliseconds of <b>verifiy credentials</b> step for institution
+                            format: int64
+                        description: 'AverageDurationMs average connector duration in milliseconds per segments.
+
+                          When durations are not known for institution this field will be `null`.'
+                    description: InstitutionPerformanceStats response type for institution performance stats
+                    x-readme-ref-name: InstitutionPerformanceStats
+                  links:
+                    required:
+                    - self
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        description: URL to resource itself
+                    description: ResourceLinks contains resource links
+                    x-readme-ref-name: ResourceLinks
+                description: Connector contains connector data.
+                x-readme-ref-name: Connector
+        '400':
+          description: Returns error that server cannot or will not process the request due to something that is perceived to be a client error.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: parameter-not-valid
+                          enum:
+                          - parameter-not-supplied
+                          - parameter-not-valid
+                          - unsupported-accept
+                          - invalid-content
+                          - institution-not-supported
+                          - invalid-credentials
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: The provided filter parameter is in invalid format or unsupported.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Parameter not valid.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                x-readme-ref-name: BadRequestError
+              examples:
+                Invalid Filters:
+                  value:
+                    type: list
+                    correlationId: ac5ah55
+                    data:
+                    - type: error
+                      code: parameter-not-valid
+                      title: Parameter value is not valid
+                      detail: The provided filter parameter is in invalid format or unsupported
+                      source:
+                        parameter: filter
+        '401':
+          description: Returns error that indicates unauthorized access.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: unauthorized-access
+                          enum:
+                          - unauthorized-access
+                          - invalid-authorization-token
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: You are not authorized to access this resource
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Unauthorized Access
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: UnauthorizedError
+        '404':
+          description: Returns error indicating that server cannot find requested resource.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: resource-not-found
+                          enum:
+                          - resource-not-found
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Resource not found.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Requested resource is not found.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: NotFoundError
+        '500':
+          description: Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: internal-server-error
+                          enum:
+                          - internal-server-error
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Internal Server error. Contact support.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Internal Server error.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: InternalServerError
+      security:
+      - services_token: []
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-default: Basic NjMxMjNmMWMtZjYxMy00ZjMyLWFiYzUtYzBhZDdhYTY2YmU1OjQ3NWYwMzhkLTBlZmItNGM1ZS1iMzQ0LTAzMzYxOTkyYTRlMw==
+    services_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true
+  samples-languages:
+  - curl
+  - node
+  - ruby
+  - javascript
+  - python

@@ -1,0 +1,285 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/main/json-schema/basiq-post-insights-response-schema.json",
+  "title": "PostInsightsResponse",
+  "description": "Response for an insight created via POST /insights. Includes a `users` array reflecting the users from the request.",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/_original/basiq-insights-openapi.json#/components/schemas/PostInsightsResponse",
+  "type": "object",
+  "required": [
+    "type",
+    "id",
+    "created",
+    "users",
+    "insightType",
+    "data",
+    "links"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "insight"
+      ],
+      "description": "Resource type indicator"
+    },
+    "id": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Unique identifier for this insight"
+    },
+    "created": {
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 timestamp of when the insight was created"
+    },
+    "users": {
+      "type": "array",
+      "description": "Array of user IDs for whom the insight was generated. Mirrors the `users` field from the request.",
+      "items": {
+        "type": "string",
+        "format": "uuid"
+      }
+    },
+    "insightType": {
+      "type": "string",
+      "enum": [
+        "expense-ratio",
+        "balance",
+        "account",
+        "identity",
+        "income"
+      ],
+      "description": "Type of insight returned"
+    },
+    "data": {
+      "type": "array",
+      "description": "Array containing the insight result. Shape varies by insightType.",
+      "items": {
+        "oneOf": [
+          {
+            "$ref": "#/$defs/ExpenseRatioInsightDataItem"
+          },
+          {
+            "$ref": "#/$defs/AccountInsightDataItem"
+          },
+          {
+            "$ref": "#/$defs/BalanceInsightDataItem"
+          },
+          {
+            "$ref": "#/$defs/IdentityInsightDataItem"
+          }
+        ]
+      }
+    },
+    "links": {
+      "type": "object",
+      "required": [
+        "self"
+      ],
+      "description": "For multi-user insights the self link uses the first userId from the users array.",
+      "properties": {
+        "self": {
+          "type": "string",
+          "format": "uri",
+          "description": "Self link pointing to /users/{firstUserId}/insights/{insightId}"
+        }
+      }
+    }
+  },
+  "$defs": {
+    "AccountInsightDataItem": {
+      "type": "object",
+      "required": [
+        "accountId"
+      ],
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The account identifier being verified"
+        },
+        "accountNumber": {
+          "$ref": "#/$defs/VerificationResult",
+          "description": "Account number verification result"
+        },
+        "accountType": {
+          "$ref": "#/$defs/VerificationResult",
+          "description": "Account type verification result"
+        }
+      }
+    },
+    "BalanceInsightDataItem": {
+      "type": "object",
+      "required": [
+        "accountId"
+      ],
+      "properties": {
+        "accountId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The account identifier being verified"
+        },
+        "balance": {
+          "type": "object",
+          "description": "Balance verification result",
+          "properties": {
+            "input": {
+              "type": "object",
+              "properties": {
+                "min": {
+                  "type": "string",
+                  "description": "Minimum balance value"
+                },
+                "max": {
+                  "type": "string",
+                  "description": "Maximum balance value"
+                }
+              },
+              "required": [
+                "min",
+                "max"
+              ]
+            },
+            "match": {
+              "type": [
+                "boolean",
+                "null"
+              ],
+              "description": "Whether the balance falls within the specified range"
+            },
+            "confidence": {
+              "type": "number",
+              "format": "float",
+              "minimum": 0,
+              "maximum": 1,
+              "description": "Confidence score of the match (0.0 to 1.0)"
+            }
+          },
+          "required": [
+            "input",
+            "match",
+            "confidence"
+          ]
+        }
+      }
+    },
+    "ExpenseRatioInsightDataItem": {
+      "type": "object",
+      "required": [
+        "input",
+        "result"
+      ],
+      "properties": {
+        "input": {
+          "type": "object",
+          "required": [
+            "expense"
+          ],
+          "properties": {
+            "expense": {
+              "type": "string",
+              "description": "Echo of the expense value from request"
+            }
+          },
+          "description": "Echo of the input parameters"
+        },
+        "result": {
+          "type": "object",
+          "required": [
+            "range"
+          ],
+          "properties": {
+            "range": {
+              "type": "string",
+              "enum": [
+                "0% to 10%",
+                "10% to 20%",
+                "20% to 30%",
+                "30% to 40%",
+                "40% to 50%",
+                "50% to 60%",
+                "60% to 70%",
+                "70% to 80%",
+                "80% to 90%",
+                "90% to 100%",
+                "Income Exceeded"
+              ],
+              "description": "Expense-to-income ratio range. Calculated as: expense / ME040 (Average Monthly Credit). 'Income Exceeded' indicates ratio greater than 100%."
+            }
+          },
+          "description": "Result containing the expense ratio range"
+        }
+      }
+    },
+    "IdentityInsightDataItem": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/$defs/VerificationResult",
+          "description": "Name verification result"
+        },
+        "phones": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/VerificationResult"
+          },
+          "description": "Array of phone number verification results"
+        },
+        "emails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/VerificationResult"
+          },
+          "description": "Array of email verification results"
+        },
+        "addresses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/VerificationResult"
+          },
+          "description": "Array of address verification results"
+        }
+      }
+    },
+    "VerificationResult": {
+      "type": "object",
+      "required": [
+        "input"
+      ],
+      "properties": {
+        "input": {
+          "oneOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "object"
+            }
+          ],
+          "description": "The input value being verified"
+        },
+        "match": {
+          "type": [
+            "boolean",
+            "null"
+          ],
+          "description": "Whether the input matched the source data. Null if verification could not be completed."
+        },
+        "confidence": {
+          "type": "number",
+          "format": "float",
+          "minimum": 0,
+          "maximum": 1,
+          "description": "Confidence score of the match (0.0 to 1.0)"
+        },
+        "error": {
+          "type": "string",
+          "description": "Error message if verification could not be completed"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/main/json-schema/basiq-webhook-stats-schema.json",
+  "title": "WebhookStats",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/_original/basiq-webhooks-openapi.json#/components/schemas/WebhookStats",
+  "type": "object",
+  "properties": {
+    "type": {
+      "type": "string",
+      "description": "Type of the response object."
+    },
+    "applicationId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "unique identifier in the form of uuid for the application."
+    },
+    "webhookId": {
+      "type": "string",
+      "format": "uuid",
+      "description": "unique identifier in the form of uuid for the webhook."
+    },
+    "success": {
+      "type": "integer",
+      "description": "Number of successfully delivered messages."
+    },
+    "pending": {
+      "type": "integer",
+      "description": "Number of messages pending delivery."
+    },
+    "sending": {
+      "type": "integer",
+      "description": "Number of messages currently being sent."
+    },
+    "fail": {
+      "type": "integer",
+      "description": "Number of failed message deliveries."
+    }
+  },
+  "x-readme-ref-name": "WebhookStats"
+}

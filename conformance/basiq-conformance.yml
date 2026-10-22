@@ -1,0 +1,50 @@
+generated: '2026-10-21'
+method: searched
+source: https://api.basiq.io/docs/cdr-compliance
+standards:
+- id: au-cdr
+  name: Australian Consumer Data Right (CDR) - Accredited Data Recipient
+  conforms: true
+  kind: claimed
+  evidence: '"As an Accredited Data Recipient under the Consumer Data Right (CDR), BASIQ ensures compliance with Open Banking regulations" (https://api.basiq.io/docs/security)'
+- id: au-cdr-data-standards-scopes
+  name: CDR Data Standards authorisation scopes (domain-standard signature in the contract)
+  conforms: true
+  kind: domain-standard
+  evidence:
+    contract: openapi/_original/basiq-insights-openapi.json
+    location: paths./insights.post.responses.403 example insufficientScopes (also /users/{userId}/insights/expense-ratio POST 403)
+    text: 'Required scopes: bank:accounts.basic:read, bank:accounts.detail:read, bank:transactions:read'
+    docs: https://api.basiq.io/docs/consent-scopes
+    note: The docs map consent scopes to CDR scope ids common:customer.basic:read, common:customer.detail:read, bank:accounts.basic:read, bank:accounts.detail:read,
+      bank:transactions:read, bank:payees:read.
+- id: standard-webhooks
+  name: Standard Webhooks signing scheme
+  conforms: true
+  kind: observed-shape
+  evidence: Webhooks carry webhook-id, webhook-timestamp and webhook-signature headers; signed content is `${webhook_id}.${webhook_timestamp}.${payload}`
+    with HMAC-SHA256 and a whsec_-prefixed secret; 5-minute timestamp tolerance (https://api.basiq.io/docs/webhooks-security). The docs do not
+    name the Standard Webhooks spec; this is a shape match.
+- id: hosting-certifications
+  name: ISO 27001 / SOC 1 / SOC 2 / PCI Level 1 (data centre)
+  conforms: inherited
+  kind: claimed
+  evidence: '"Our infrastructure is hosted and managed in an ISO 27001, SOC 1 & SOC 2, PCI Level 1, FISMA Moderate and SOX certified data centre"
+    (https://api.basiq.io/docs/security). The claim is about the hosting data centre, not a Basiq certification.'
+- id: rfc9457
+  conforms: false
+  evidence: Errors use a Basiq JSON list envelope {type:list, correlationId, data[{type:error, code, title, detail, source}]} served as application/json,
+    not application/problem+json (https://api.basiq.io/docs/errors).
+- id: oauth2
+  conforms: false
+  evidence: 'API consumers authenticate with an API key passed verbatim as `Authorization: Basic <key>` to POST /token, receiving a 60-minute
+    bearer token; no oauth2 securityScheme is declared (https://api.basiq.io/reference/posttoken).'
+- id: openapi-3.2
+  conforms: true
+  evidence: the document declares 3.2.0
+- id: idempotency
+  conforms: false
+  evidence: no idempotency key parameter on mutating operations
+- id: pagination
+  conforms: true
+  evidence: list operations take limit

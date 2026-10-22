@@ -1,0 +1,810 @@
+{
+  "info": {
+    "_postman_id": "b45405db-286c-433d-b663-38e26067ca93",
+    "name": "Platform Payees API",
+    "description": "All included utility endpoints for Basiq partners",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:24:09.000Z",
+    "updatedAt": "2026-10-22T02:24:09.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-b45405db-286c-433d-b663-38e26067ca93"
+  },
+  "item": [
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "{userId}",
+          "item": [
+            {
+              "name": "payees",
+              "item": [
+                {
+                  "name": "{payeeId}",
+                  "item": [
+                    {
+                      "name": "Get Payee Details",
+                      "id": "49e096c6-95d7-4563-a6c6-c418689498a3",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/payees/:payeeId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "payees",
+                            ":payeeId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "b35448b6-1a8d-439d-a759-5beff6710328",
+                              "key": "userId",
+                              "value": "<uuid>",
+                              "description": "(Required) The unique identifier of the user."
+                            },
+                            {
+                              "id": "8807ec90-b001-454d-91fb-4093c9c25eca",
+                              "key": "payeeId",
+                              "value": "<uuid>",
+                              "description": "(Required) The unique identifier of the payee."
+                            }
+                          ]
+                        },
+                        "description": "Retrieves detailed information for a specific payee. The response includes type-specific details based on the payee type (domestic, biller, international, or digitalWallet)."
+                      },
+                      "response": [
+                        {
+                          "id": "20917450-f27f-4928-8cc3-a6f2cb9ac5f7",
+                          "name": "Successful response with payee details. The response structure varies based on the payee type.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/payees/:payeeId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "payees",
+                                ":payeeId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "payeeId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"<string>\",\n  \"id\": \"<string>\",\n  \"payeeType\": \"domestic\",\n  \"links\": {\n    \"self\": \"<string>\"\n  },\n  \"nickname\": \"<string>\",\n  \"description\": \"<string>\",\n  \"connectionId\": \"<string>\",\n  \"createdDate\": \"<dateTime>\",\n  \"domestic\": {\n    \"payeeAccountUType\": \"account\",\n    \"account\": {\n      \"bsb\": \"<string>\",\n      \"accountNumber\": \"<string>\",\n      \"accountName\": \"<string>\"\n    },\n    \"payId\": {\n      \"name\": \"<string>\",\n      \"identifier\": \"<string>\",\n      \"type\": \"EMAIL\"\n    }\n  },\n  \"biller\": {\n    \"billerCode\": \"<string>\",\n    \"crn\": \"<string>\",\n    \"billerName\": \"<string>\"\n  },\n  \"international\": {\n    \"beneficiaryDetails\": {\n      \"name\": \"<string>\",\n      \"country\": \"<string>\",\n      \"message\": \"<string>\"\n    },\n    \"bankDetails\": {\n      \"country\": \"<string>\",\n      \"accountNumber\": \"<string>\",\n      \"beneficiaryBankBIC\": \"<string>\",\n      \"routingNumber\": \"<string>\",\n      \"bankAddress\": \"<string>\"\n    }\n  },\n  \"digitalWallet\": {\n    \"name\": \"<string>\",\n    \"identifier\": \"<string>\",\n    \"type\": \"PHONE\",\n    \"provider\": \"Venmo\"\n  }\n}",
+                          "createdAt": "2026-10-22T02:24:10.000Z",
+                          "updatedAt": "2026-10-22T02:24:10.000Z",
+                          "uid": "35240-20917450-f27f-4928-8cc3-a6f2cb9ac5f7"
+                        },
+                        {
+                          "id": "bae0c22b-58d1-4992-981d-3eba9a370452",
+                          "name": "Invalid payee ID format.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/payees/:payeeId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "payees",
+                                ":payeeId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "payeeId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"parameter-not-supplied\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"parameter-not-supplied\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:24:10.000Z",
+                          "updatedAt": "2026-10-22T02:24:10.000Z",
+                          "uid": "35240-bae0c22b-58d1-4992-981d-3eba9a370452"
+                        },
+                        {
+                          "id": "0feac756-d781-4c2d-94f7-1add0da59e24",
+                          "name": "Authentication credentials are missing or invalid.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/payees/:payeeId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "payees",
+                                ":payeeId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "payeeId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"invalid-token\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-token\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:24:10.000Z",
+                          "updatedAt": "2026-10-22T02:24:10.000Z",
+                          "uid": "35240-0feac756-d781-4c2d-94f7-1add0da59e24"
+                        },
+                        {
+                          "id": "45fe09f0-c6a7-46c6-a2ab-01ad63813c2a",
+                          "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/payees/:payeeId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "payees",
+                                ":payeeId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "payeeId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"access-denied\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"no-production-access\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:24:10.000Z",
+                          "updatedAt": "2026-10-22T02:24:10.000Z",
+                          "uid": "35240-45fe09f0-c6a7-46c6-a2ab-01ad63813c2a"
+                        },
+                        {
+                          "id": "ce622303-1cde-4171-b00d-888e939df692",
+                          "name": "Payee not found.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/payees/:payeeId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "payees",
+                                ":payeeId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "payeeId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:24:10.000Z",
+                          "updatedAt": "2026-10-22T02:24:10.000Z",
+                          "uid": "35240-ce622303-1cde-4171-b00d-888e939df692"
+                        },
+                        {
+                          "id": "e4019465-b5cc-40f3-b196-76dd0281c9da",
+                          "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/payees/:payeeId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "payees",
+                                ":payeeId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "payeeId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:24:10.000Z",
+                          "updatedAt": "2026-10-22T02:24:10.000Z",
+                          "uid": "35240-e4019465-b5cc-40f3-b196-76dd0281c9da"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:24:10.000Z",
+                      "updatedAt": "2026-10-22T02:24:10.000Z",
+                      "uid": "35240-49e096c6-95d7-4563-a6c6-c418689498a3"
+                    }
+                  ],
+                  "id": "4a7bf2a1-cc5e-4c36-9c3a-4da72ea0f20d",
+                  "createdAt": "2026-10-22T02:24:10.000Z",
+                  "updatedAt": "2026-10-22T02:24:10.000Z",
+                  "uid": "35240-4a7bf2a1-cc5e-4c36-9c3a-4da72ea0f20d"
+                },
+                {
+                  "name": "List Payees",
+                  "id": "6dd3424a-4e22-4e38-90cc-38b7ef92f0ea",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId/payees?limit=25&filter=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId",
+                        "payees"
+                      ],
+                      "query": [
+                        {
+                          "description": "The maximum number of payees to return per page. Valid values are 1-500. Default is 25.",
+                          "key": "limit",
+                          "value": "25"
+                        },
+                        {
+                          "description": "Filter expression to narrow down results. Supports the following filters:\n- `type.eq('value')` - Filter by payee type (domestic, biller, international, digitalWallet)\n- `connectionId.eq('value')` - Filter by connection ID\n- `created.bt('startDate','endDate')` - Filter by creation date range\n- `created.gt('date')` - Filter by creation date greater than\n- `created.gteq('date')` - Filter by creation date greater than or equal\n- `created.lt('date')` - Filter by creation date less than\n- `created.lteq('date')` - Filter by creation date less than or equal\n- `created.eq('date')` - Filter by creation date equal to",
+                          "key": "filter",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "e9649233-8097-4490-9bac-8e448ab66cd8",
+                          "key": "userId",
+                          "value": "<uuid>",
+                          "description": "(Required) The unique identifier of the user."
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a paginated list of payees for a specific user. Supports filtering by payee type, connection ID, and creation date."
+                  },
+                  "response": [
+                    {
+                      "id": "efa2748b-78f3-4c2a-8dfb-df8c81e686db",
+                      "name": "Successful response with a list of payees.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/payees?limit=25&filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "payees"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of payees to return per page. Valid values are 1-500. Default is 25.",
+                              "key": "limit",
+                              "value": "25"
+                            },
+                            {
+                              "description": "Filter expression to narrow down results. Supports the following filters:\n- `type.eq('value')` - Filter by payee type (domestic, biller, international, digitalWallet)\n- `connectionId.eq('value')` - Filter by connection ID\n- `created.bt('startDate','endDate')` - Filter by creation date range\n- `created.gt('date')` - Filter by creation date greater than\n- `created.gteq('date')` - Filter by creation date greater than or equal\n- `created.lt('date')` - Filter by creation date less than\n- `created.lteq('date')` - Filter by creation date less than or equal\n- `created.eq('date')` - Filter by creation date equal to",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"<string>\",\n  \"data\": [\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"payeeType\": \"domestic\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"nickname\": \"<string>\",\n      \"description\": \"<string>\",\n      \"connectionId\": \"<string>\",\n      \"createdDate\": \"<dateTime>\"\n    },\n    {\n      \"type\": \"<string>\",\n      \"id\": \"<string>\",\n      \"payeeType\": \"biller\",\n      \"links\": {\n        \"self\": \"<string>\"\n      },\n      \"nickname\": \"<string>\",\n      \"description\": \"<string>\",\n      \"connectionId\": \"<string>\",\n      \"createdDate\": \"<dateTime>\"\n    }\n  ],\n  \"links\": {\n    \"self\": \"<string>\",\n    \"next\": \"<string>\"\n  },\n  \"count\": \"<integer>\",\n  \"size\": \"<integer>\"\n}",
+                      "createdAt": "2026-10-22T02:24:10.000Z",
+                      "updatedAt": "2026-10-22T02:24:10.000Z",
+                      "uid": "35240-efa2748b-78f3-4c2a-8dfb-df8c81e686db"
+                    },
+                    {
+                      "id": "5075089c-4b2d-4812-8c8d-9626be53c2d2",
+                      "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/payees?limit=25&filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "payees"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of payees to return per page. Valid values are 1-500. Default is 25.",
+                              "key": "limit",
+                              "value": "25"
+                            },
+                            {
+                              "description": "Filter expression to narrow down results. Supports the following filters:\n- `type.eq('value')` - Filter by payee type (domestic, biller, international, digitalWallet)\n- `connectionId.eq('value')` - Filter by connection ID\n- `created.bt('startDate','endDate')` - Filter by creation date range\n- `created.gt('date')` - Filter by creation date greater than\n- `created.gteq('date')` - Filter by creation date greater than or equal\n- `created.lt('date')` - Filter by creation date less than\n- `created.lteq('date')` - Filter by creation date less than or equal\n- `created.eq('date')` - Filter by creation date equal to",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"parameter-not-supplied\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"parameter-not-supplied\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:24:10.000Z",
+                      "updatedAt": "2026-10-22T02:24:10.000Z",
+                      "uid": "35240-5075089c-4b2d-4812-8c8d-9626be53c2d2"
+                    },
+                    {
+                      "id": "b6b9dfff-8283-4f37-be3e-cac9a2b30006",
+                      "name": "Authentication credentials are missing or invalid.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/payees?limit=25&filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "payees"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of payees to return per page. Valid values are 1-500. Default is 25.",
+                              "key": "limit",
+                              "value": "25"
+                            },
+                            {
+                              "description": "Filter expression to narrow down results. Supports the following filters:\n- `type.eq('value')` - Filter by payee type (domestic, biller, international, digitalWallet)\n- `connectionId.eq('value')` - Filter by connection ID\n- `created.bt('startDate','endDate')` - Filter by creation date range\n- `created.gt('date')` - Filter by creation date greater than\n- `created.gteq('date')` - Filter by creation date greater than or equal\n- `created.lt('date')` - Filter by creation date less than\n- `created.lteq('date')` - Filter by creation date less than or equal\n- `created.eq('date')` - Filter by creation date equal to",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"invalid-token\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-token\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:24:10.000Z",
+                      "updatedAt": "2026-10-22T02:24:10.000Z",
+                      "uid": "35240-b6b9dfff-8283-4f37-be3e-cac9a2b30006"
+                    },
+                    {
+                      "id": "45a64126-6663-490d-a898-434c614ec442",
+                      "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/payees?limit=25&filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "payees"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of payees to return per page. Valid values are 1-500. Default is 25.",
+                              "key": "limit",
+                              "value": "25"
+                            },
+                            {
+                              "description": "Filter expression to narrow down results. Supports the following filters:\n- `type.eq('value')` - Filter by payee type (domestic, biller, international, digitalWallet)\n- `connectionId.eq('value')` - Filter by connection ID\n- `created.bt('startDate','endDate')` - Filter by creation date range\n- `created.gt('date')` - Filter by creation date greater than\n- `created.gteq('date')` - Filter by creation date greater than or equal\n- `created.lt('date')` - Filter by creation date less than\n- `created.lteq('date')` - Filter by creation date less than or equal\n- `created.eq('date')` - Filter by creation date equal to",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"access-denied\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"no-production-access\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:24:10.000Z",
+                      "updatedAt": "2026-10-22T02:24:10.000Z",
+                      "uid": "35240-45a64126-6663-490d-a898-434c614ec442"
+                    },
+                    {
+                      "id": "69d212db-1ffe-42b4-8f4c-c9912d964f08",
+                      "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/payees?limit=25&filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "payees"
+                          ],
+                          "query": [
+                            {
+                              "description": "The maximum number of payees to return per page. Valid values are 1-500. Default is 25.",
+                              "key": "limit",
+                              "value": "25"
+                            },
+                            {
+                              "description": "Filter expression to narrow down results. Supports the following filters:\n- `type.eq('value')` - Filter by payee type (domestic, biller, international, digitalWallet)\n- `connectionId.eq('value')` - Filter by connection ID\n- `created.bt('startDate','endDate')` - Filter by creation date range\n- `created.gt('date')` - Filter by creation date greater than\n- `created.gteq('date')` - Filter by creation date greater than or equal\n- `created.lt('date')` - Filter by creation date less than\n- `created.lteq('date')` - Filter by creation date less than or equal\n- `created.eq('date')` - Filter by creation date equal to",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:24:10.000Z",
+                      "updatedAt": "2026-10-22T02:24:10.000Z",
+                      "uid": "35240-69d212db-1ffe-42b4-8f4c-c9912d964f08"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:24:10.000Z",
+                  "updatedAt": "2026-10-22T02:24:10.000Z",
+                  "uid": "35240-6dd3424a-4e22-4e38-90cc-38b7ef92f0ea"
+                }
+              ],
+              "id": "52274b0a-1dbe-44c0-8035-0ebd09dea7a1",
+              "createdAt": "2026-10-22T02:24:10.000Z",
+              "updatedAt": "2026-10-22T02:24:10.000Z",
+              "uid": "35240-52274b0a-1dbe-44c0-8035-0ebd09dea7a1"
+            }
+          ],
+          "id": "b19b7ce0-4a57-4a4b-b9cf-10df4fd495e1",
+          "createdAt": "2026-10-22T02:24:10.000Z",
+          "updatedAt": "2026-10-22T02:24:10.000Z",
+          "uid": "35240-b19b7ce0-4a57-4a4b-b9cf-10df4fd495e1"
+        }
+      ],
+      "id": "ebf9bfaa-8740-43aa-8bc3-c7499981fa56",
+      "createdAt": "2026-10-22T02:24:10.000Z",
+      "updatedAt": "2026-10-22T02:24:10.000Z",
+      "uid": "35240-ebf9bfaa-8740-43aa-8bc3-c7499981fa56"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://au-api.basiq.io"
+    }
+  ]
+}

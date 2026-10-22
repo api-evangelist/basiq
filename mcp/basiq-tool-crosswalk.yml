@@ -1,0 +1,100 @@
+name: Basiq MCP tool crosswalk
+type: ToolCrosswalk
+generated: '2026-10-21'
+method: derived
+source: https://api.basiq.io/mcp (tools/list probed 2026-10-21) + openapi/*.yml
+surfaces:
+  openapi:
+  - openapi/basiq-accounts-api-openapi.yml
+  - openapi/basiq-authentication-api-openapi.yml
+  - openapi/basiq-connections-api-openapi.yml
+  - openapi/basiq-consents-api-openapi.yml
+  - openapi/basiq-jobs-api-openapi.yml
+  - openapi/basiq-transactions-api-openapi.yml
+  - openapi/basiq-users-api-openapi.yml
+  graphql: null
+  mcp:
+    url: https://api.basiq.io/mcp
+    gated: false
+    note: tools/list ungated; execute-request calls to au-api.basiq.io need Basiq credentials
+crosswalk: []
+meta_tools:
+- tool: list-endpoints
+  reason: Lists paths/methods of a spec; navigation over the OpenAPI, invokes nothing
+- tool: get-endpoint
+  reason: Returns one operation definition; navigation, invokes nothing
+- tool: search-endpoints
+  reason: Searches paths/operations/parameters; navigation, invokes nothing
+- tool: list-specs
+  reason: Lists the OpenAPI specs loaded in the docs hub; invokes nothing
+- tool: execute-request
+  reason: 'Generic HAR request executor: can reach any REST operation, so it binds to none specifically'
+rest_only:
+- operationId: getAccounts
+  method: GET
+  path: /users/{userId}/accounts
+- operationId: getAccount
+  method: GET
+  path: /users/{userId}/accounts/{accountId}
+- operationId: postToken
+  method: POST
+  path: /token
+- operationId: getConnections
+  method: GET
+  path: /users/{userId}/connections
+- operationId: refreshConnections
+  method: POST
+  path: /users/{userId}/connections/refresh
+- operationId: getConnection
+  method: GET
+  path: /users/{userId}/connections/{connectionId}
+- operationId: deleteConnection
+  method: DELETE
+  path: /users/{userId}/connections/{connectionId}
+- operationId: refreshConnection
+  method: POST
+  path: /users/{userId}/connections/{connectionId}/refresh
+- operationId: purgeConnectionData
+  method: POST
+  path: /users/{userId}/connections/{connectionId}/purge
+- operationId: getConsents
+  method: GET
+  path: /users/{userId}/consents
+- operationId: deleteConsent
+  method: DELETE
+  path: /users/{userId}/consents/{consentId}
+- operationId: getUserJobs
+  method: GET
+  path: /users/{userId}/jobs
+- operationId: getJobs
+  method: GET
+  path: /jobs/{jobId}
+- operationId: postJobMfa
+  method: POST
+  path: /jobs/{jobId}/mfa
+- operationId: getTransactions
+  method: GET
+  path: /users/{userId}/transactions
+- operationId: getTransaction
+  method: GET
+  path: /users/{userId}/transactions/{transactionId}
+- operationId: createUser
+  method: POST
+  path: /users
+- operationId: getUser
+  method: GET
+  path: /users/{userId}
+- operationId: updateUser
+  method: POST
+  path: /users/{userId}
+- operationId: deleteUser
+  method: DELETE
+  path: /users/{userId}
+coverage:
+  mcp_tools: 5
+  rest_operations: 20
+  bound_tools: 0
+  meta_tools: 5
+  rest_only: 20
+note: No MCP tool is bound to a specific REST operation; every operation is reachable only through the generic execute-request
+  tool.

@@ -1,0 +1,54 @@
+generated: '2026-10-21'
+method: derived
+generator: derive-vocabulary.py
+source:
+- openapi/basiq-accounts-api-openapi.yml
+- openapi/basiq-authentication-api-openapi.yml
+- openapi/basiq-connections-api-openapi.yml
+- openapi/basiq-consents-api-openapi.yml
+- openapi/basiq-jobs-api-openapi.yml
+vocabulary:
+  name: Basiq Domain Vocabulary
+  description: 'Terms declared by Basiq''s own API contract: its resource groups, objects and enumerations, with the contract''s definitions.
+    Derived, not authored.'
+  version: '2026-10-21'
+  terms:
+  - term: Accounts
+    definition: 'Resource group in the contract; its operation GET /users/{userId}/accounts: List all accounts belonging to a user'
+    tags:
+    - Resource Group
+    source: openapi/basiq-accounts-api-openapi.yml
+  - term: Authentication
+    definition: 'Resource group in the contract; its operation POST /token: Use this endpoint to retrieve a token that will be passed as authorization
+      header for Basiq API'
+    tags:
+    - Resource Group
+    source: openapi/basiq-authentication-api-openapi.yml
+  - term: Connections
+    definition: 'Resource group in the contract; its operation GET /users/{userId}/connections: Returns a list of connections belonging to this
+      user.'
+    tags:
+    - Resource Group
+    source: openapi/basiq-connections-api-openapi.yml
+  - term: Consents
+    definition: 'Resource group in the contract; its operation GET /users/{userId}/consents: Retrieves a list of the user consents'
+    tags:
+    - Resource Group
+    source: openapi/basiq-consents-api-openapi.yml
+  - term: Jobs
+    definition: 'Resource group in the contract; its operation GET /users/{userId}/jobs: Retrieves the details of all existing and previous jobs
+      associated with a user.'
+    tags:
+    - Resource Group
+    source: openapi/basiq-jobs-api-openapi.yml
+  - term: Transactions
+    definition: 'Resource group in the contract; its operation GET /users/{userId}/transactions: List all transactions belonging to a specified
+      user'
+    tags:
+    - Resource Group
+    source: openapi/basiq-transactions-api-openapi.yml
+  - term: Users
+    definition: 'Resource group in the contract; its operation POST /users: Creates a new Basiq user object'
+    tags:
+    - Resource Group
+    source: openapi/basiq-users-api-openapi.yml

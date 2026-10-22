@@ -1,13 +1,40 @@
-generated: '2026-07-11'
-method: derived
-source: openapi/basiq-api-openapi.yml
+generated: '2026-10-21'
+method: searched
+source: https://api.basiq.io/reference/posttoken
+docs: https://api.basiq.io/reference/posttoken
+see_also:
+- https://api.basiq.io/docs/api-key-management
+- https://api.basiq.io/docs/getting-started
 summary:
-  types:
-  - http
+  types: [apiKey, http]
+  flow: API key -> POST /token -> bearer access token (expires every 60 minutes)
 schemes:
-- name: BearerAuth
+- name: api_key
+  type: apiKey
+  in: header
+  header: Authorization
+  used_by: [postToken]
+  format: 'Authorization: Basic <your-api-key-as-issued>'
+  note: '"Unlike standard HTTP Basic Auth, the Basiq API key is passed verbatim as the header value." Base64-encoding the key produces a 400 error.'
+  sources: [openapi/_original/basiq-openapi.json]
+- name: services_token
   type: http
   scheme: bearer
-  bearerFormat: JWT
-  sources:
-  - openapi/basiq-api-openapi.yml
+  note: Access token from POST /token; "They expire every 60 minutes, so we recommend you store it globally and refresh 2-3 times an hour."
+  token_scopes:
+  - name: SERVER_ACCESS
+    description: Server-side token (example value of the token response `scope`).
+  - name: CLIENT_ACCESS
+    description: Client-side token, requested with a userId (example value of the token response `scope`).
+  sources: [openapi/_original/basiq-openapi.json, openapi/_original/basiq-identity-openapi.json, openapi/_original/basiq-webhooks-openapi.json]
+headers:
+- name: basiq-version
+  required: true
+  example: '3.0'
+key_management:
+  rotation: '"It is advised that API keys are rotated every 90 days" (https://api.basiq.io/docs/api-key-management)'
+  issuance: API keys are generated and revoked in the Dashboard 'API Keys' section.
+webhook_verification:
+  scheme: HMAC-SHA256
+  headers: [webhook-id, webhook-timestamp, webhook-signature]
+  docs: https://api.basiq.io/docs/webhooks-security

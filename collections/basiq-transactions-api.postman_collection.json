@@ -1,410 +1,820 @@
 {
+  "info": {
+    "_postman_id": "f131bf38-4974-4b9f-9fb2-81551e83569e",
+    "name": "Connect Transactions API",
+    "description": "All included utility endpoints for Basiq partners",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:22:42.000Z",
+    "updatedAt": "2026-10-22T02:22:43.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f131bf38-4974-4b9f-9fb2-81551e83569e"
+  },
   "item": [
     {
-      "id": "b427a9c3-1983-434c-b02d-a6bebbbdf1dd",
-      "name": "Transactions",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "users",
       "item": [
         {
-          "id": "baac05d0-6e44-4c76-8660-5af992c43e82",
-          "name": "List Transactions",
-          "request": {
-            "name": "List Transactions",
-            "description": {
-              "content": "List all transactions for a user across all accounts with optional filtering.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users",
-                ":userId",
-                "transactions"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "filter",
-                  "value": "<string>",
-                  "description": "Filter transactions by date range, account, or category"
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "500"
-                },
-                {
-                  "disabled": false,
-                  "key": "offset",
-                  "value": "0"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "userId",
-                  "description": "(Required) Basiq user ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "{userId}",
+          "item": [
             {
-              "id": "3999f5ce-edde-4fca-86ed-16c9a5e4eaa8",
-              "name": "List of transactions",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId",
-                    "transactions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "filter",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "500"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) Basiq user ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "transactions",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "{transactionId}",
+                  "item": [
+                    {
+                      "name": "Retrieve a transaction",
+                      "id": "71604d01-8d64-4a48-870d-6423e72166cf",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/transactions/:transactionId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "transactions",
+                            ":transactionId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "1dd4d607-6c6d-4ef5-b9c8-6340f04e600f",
+                              "key": "userId",
+                              "value": "<string>",
+                              "description": "(Required) The identifier of the user."
+                            },
+                            {
+                              "id": "f82e75cb-10ad-4059-a7fb-1b6c24ace284",
+                              "key": "transactionId",
+                              "value": "<string>",
+                              "description": "(Required) The identifier of the transaction."
+                            }
+                          ]
+                        },
+                        "description": "Retrieve an existing transaction"
+                      },
+                      "response": [
+                        {
+                          "id": "e259943f-c61e-41eb-9490-46d2bef25759",
+                          "name": "Returns a transaction if a valid transaction ID was provided.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/transactions/:transactionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "transactions",
+                                ":transactionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "transactionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"id\": \"<string>\",\n  \"status\": \"pending\",\n  \"description\": \"<string>\",\n  \"reference\": \"<string>\",\n  \"account\": \"<string>\",\n  \"amount\": \"<string>\",\n  \"currency\": \"USD\",\n  \"class\": \"loan-interest\",\n  \"subClass\": {\n    \"code\": \"<string>\",\n    \"title\": \"<string>\"\n  },\n  \"connection\": \"<string>\",\n  \"direction\": \"credit\",\n  \"enrich\": {\n    \"cleanDescription\": \"<string>\",\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ],\n    \"category\": {\n      \"matchType\": \"merchantFull\",\n      \"matchScore\": \"<string>\",\n      \"mcc\": {\n        \"code\": \"<string>\",\n        \"title\": \"<string>\"\n      },\n      \"anzsic\": {\n        \"division\": {\n          \"title\": \"<string>\",\n          \"code\": \"<string>\"\n        },\n        \"subdivision\": {\n          \"code\": \"<string>\",\n          \"title\": \"<string>\"\n        },\n        \"group\": {\n          \"code\": \"<string>\",\n          \"title\": \"<string>\"\n        },\n        \"class\": {\n          \"title\": \"<string>\",\n          \"code\": \"<string>\"\n        },\n        \"subclass\": {\n          \"title\": \"<string>\",\n          \"code\": \"<string>\"\n        }\n      }\n    },\n    \"location\": {\n      \"country\": \"<string>\",\n      \"formattedAddress\": \"<string>\",\n      \"geometry\": {\n        \"lat\": \"<string>\",\n        \"lng\": \"<string>\"\n      },\n      \"postalCode\": \"<string>\",\n      \"route\": \"<string>\",\n      \"routeNo\": \"<string>\",\n      \"state\": \"<string>\",\n      \"suburb\": \"<string>\"\n    },\n    \"merchant\": {\n      \"id\": \"<string>\",\n      \"businessName\": \"<string>\",\n      \"ABN\": \"<string>\",\n      \"website\": \"<string>\",\n      \"logoMaster\": \"<string>\",\n      \"logoThumb\": \"<string>\",\n      \"phoneNumber\": {\n        \"international\": \"<string>\",\n        \"local\": \"<string>\"\n      }\n    }\n  },\n  \"institution\": \"<string>\",\n  \"links\": {\n    \"account\": \"<string>\",\n    \"institution\": \"<string>\",\n    \"self\": \"<string>\",\n    \"connection\": false\n  },\n  \"postDate\": \"<string>\",\n  \"transactionDate\": \"<string>\",\n  \"type\": \"<string>\",\n  \"balance\": \"<string>\",\n  \"paymentDetails\": null\n}",
+                          "createdAt": "2026-10-22T02:22:43.000Z",
+                          "updatedAt": "2026-10-22T02:22:43.000Z",
+                          "uid": "35240-e259943f-c61e-41eb-9490-46d2bef25759"
+                        },
+                        {
+                          "id": "578f9e61-a9fc-4d8f-b7f8-6ecb88097b96",
+                          "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/transactions/:transactionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "transactions",
+                                ":transactionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "transactionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"invalid-content\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"parameter-not-supplied\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:43.000Z",
+                          "updatedAt": "2026-10-22T02:22:43.000Z",
+                          "uid": "35240-578f9e61-a9fc-4d8f-b7f8-6ecb88097b96"
+                        },
+                        {
+                          "id": "a9b05944-1d6f-410d-b735-4559a13cedb8",
+                          "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/transactions/:transactionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "transactions",
+                                ":transactionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "transactionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"access-denied\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"access-denied\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:43.000Z",
+                          "updatedAt": "2026-10-22T02:22:43.000Z",
+                          "uid": "35240-a9b05944-1d6f-410d-b735-4559a13cedb8"
+                        },
+                        {
+                          "id": "ac224d99-85cc-4a0b-9661-7541167e60cd",
+                          "name": "Returns error indicating that server can't find requested resource.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/transactions/:transactionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "transactions",
+                                ":transactionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "transactionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:43.000Z",
+                          "updatedAt": "2026-10-22T02:22:43.000Z",
+                          "uid": "35240-ac224d99-85cc-4a0b-9661-7541167e60cd"
+                        },
+                        {
+                          "id": "73c10227-6f50-4de4-865b-f6d0be19a9b1",
+                          "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/transactions/:transactionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "transactions",
+                                ":transactionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "transactionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:43.000Z",
+                          "updatedAt": "2026-10-22T02:22:43.000Z",
+                          "uid": "35240-73c10227-6f50-4de4-865b-f6d0be19a9b1"
+                        },
+                        {
+                          "id": "ae82e068-10cf-4fef-8e5a-15d0d57dc2cc",
+                          "name": "Returns error response code indicates that the server is not ready to handle the request.",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/transactions/:transactionId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "transactions",
+                                ":transactionId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "transactionId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Service Unavailable",
+                          "code": 503,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": {},\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": {},\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:43.000Z",
+                          "updatedAt": "2026-10-22T02:22:43.000Z",
+                          "uid": "35240-ae82e068-10cf-4fef-8e5a-15d0d57dc2cc"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:22:43.000Z",
+                      "updatedAt": "2026-10-22T02:22:43.000Z",
+                      "uid": "35240-71604d01-8d64-4a48-870d-6423e72166cf"
+                    }
+                  ],
+                  "id": "9ec47a69-6b7b-4fc8-941e-8c9842cfa35c",
+                  "createdAt": "2026-10-22T02:22:43.000Z",
+                  "updatedAt": "2026-10-22T02:22:43.000Z",
+                  "uid": "35240-9ec47a69-6b7b-4fc8-941e-8c9842cfa35c"
+                },
+                {
+                  "name": "List all transactions",
+                  "id": "2ea8b3fd-cd08-413e-9efc-c8d460ce280c",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId/transactions?limit=500&filter=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId",
+                        "transactions"
+                      ],
+                      "query": [
+                        {
+                          "description": "This represents the maximum number of items that may be included in the response (maximum of 500). Note that by default 500 items are returned if this value is not specified.",
+                          "key": "limit",
+                          "value": "500"
+                        },
+                        {
+                          "description": "Transaction filters; connection.id, account.id, transaction.postDate, transaction.status, institution.id, transaction.direction, transaction.class",
+                          "key": "filter",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "d19005e0-cf7a-48b2-b8a0-6b413a5a046e",
+                          "key": "userId",
+                          "value": "<string>",
+                          "description": "(Required) User identifier."
+                        }
+                      ]
+                    },
+                    "description": "List all transactions belonging to a specified user"
+                  },
+                  "response": [
+                    {
+                      "id": "af54e429-9302-46d3-a2fb-5fb9bc06fbf4",
+                      "name": "Returns a paginated list with a data property that contains an array of transactions. Each entry in the array is a separate object. If no data is returned, the resulting array will be empty. ",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/transactions?limit=500&filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "transactions"
+                          ],
+                          "query": [
+                            {
+                              "description": "This represents the maximum number of items that may be included in the response (maximum of 500). Note that by default 500 items are returned if this value is not specified.",
+                              "key": "limit",
+                              "value": "500"
+                            },
+                            {
+                              "description": "Transaction filters; connection.id, account.id, transaction.postDate, transaction.status, institution.id, transaction.direction, transaction.class",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"count\": \"<long>\",\n  \"data\": [\n    {\n      \"id\": \"<string>\",\n      \"status\": \"posted\",\n      \"description\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"account\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"currency\": \"USD\",\n      \"class\": \"direct-credit\",\n      \"subClass\": {\n        \"code\": \"<string>\",\n        \"title\": \"<string>\"\n      },\n      \"connection\": \"<string>\",\n      \"direction\": \"debit\",\n      \"enrich\": {\n        \"cleanDescription\": \"<string>\",\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"category\": {\n          \"matchType\": \"merchantFull\",\n          \"matchScore\": \"<string>\",\n          \"mcc\": {\n            \"code\": \"<string>\",\n            \"title\": \"<string>\"\n          },\n          \"anzsic\": {\n            \"division\": {\n              \"title\": \"<string>\",\n              \"code\": \"<string>\"\n            },\n            \"subdivision\": {\n              \"code\": \"<string>\",\n              \"title\": \"<string>\"\n            },\n            \"group\": {\n              \"code\": \"<string>\",\n              \"title\": \"<string>\"\n            },\n            \"class\": {\n              \"title\": \"<string>\",\n              \"code\": \"<string>\"\n            },\n            \"subclass\": {\n              \"title\": \"<string>\",\n              \"code\": \"<string>\"\n            }\n          }\n        },\n        \"location\": {\n          \"country\": \"<string>\",\n          \"formattedAddress\": \"<string>\",\n          \"geometry\": {\n            \"lat\": \"<string>\",\n            \"lng\": \"<string>\"\n          },\n          \"postalCode\": \"<string>\",\n          \"route\": \"<string>\",\n          \"routeNo\": \"<string>\",\n          \"state\": \"<string>\",\n          \"suburb\": \"<string>\"\n        },\n        \"merchant\": {\n          \"id\": \"<string>\",\n          \"businessName\": \"<string>\",\n          \"ABN\": \"<string>\",\n          \"website\": \"<string>\",\n          \"logoMaster\": \"<string>\",\n          \"logoThumb\": \"<string>\",\n          \"phoneNumber\": {\n            \"international\": \"<string>\",\n            \"local\": \"<string>\"\n          }\n        }\n      },\n      \"institution\": \"<string>\",\n      \"links\": {\n        \"account\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"self\": \"<string>\",\n        \"connection\": false\n      },\n      \"postDate\": \"<string>\",\n      \"transactionDate\": \"<string>\",\n      \"type\": \"<string>\",\n      \"balance\": \"<string>\",\n      \"paymentDetails\": null\n    },\n    {\n      \"id\": \"<string>\",\n      \"status\": \"posted\",\n      \"description\": \"<string>\",\n      \"reference\": \"<string>\",\n      \"account\": \"<string>\",\n      \"amount\": \"<string>\",\n      \"currency\": \"GBP\",\n      \"class\": \"bank-fee\",\n      \"subClass\": {\n        \"code\": \"<string>\",\n        \"title\": \"<string>\"\n      },\n      \"connection\": \"<string>\",\n      \"direction\": \"credit\",\n      \"enrich\": {\n        \"cleanDescription\": \"<string>\",\n        \"tags\": [\n          \"<string>\",\n          \"<string>\"\n        ],\n        \"category\": {\n          \"matchType\": \"none\",\n          \"matchScore\": \"<string>\",\n          \"mcc\": {\n            \"code\": \"<string>\",\n            \"title\": \"<string>\"\n          },\n          \"anzsic\": {\n            \"division\": {\n              \"title\": \"<string>\",\n              \"code\": \"<string>\"\n            },\n            \"subdivision\": {\n              \"code\": \"<string>\",\n              \"title\": \"<string>\"\n            },\n            \"group\": {\n              \"code\": \"<string>\",\n              \"title\": \"<string>\"\n            },\n            \"class\": {\n              \"title\": \"<string>\",\n              \"code\": \"<string>\"\n            },\n            \"subclass\": {\n              \"title\": \"<string>\",\n              \"code\": \"<string>\"\n            }\n          }\n        },\n        \"location\": null,\n        \"merchant\": {\n          \"id\": \"<string>\",\n          \"businessName\": \"<string>\",\n          \"ABN\": \"<string>\",\n          \"website\": \"<string>\",\n          \"logoMaster\": \"<string>\",\n          \"logoThumb\": \"<string>\",\n          \"phoneNumber\": {\n            \"international\": \"<string>\",\n            \"local\": \"<string>\"\n          }\n        }\n      },\n      \"institution\": \"<string>\",\n      \"links\": {\n        \"account\": \"<string>\",\n        \"institution\": \"<string>\",\n        \"self\": \"<string>\",\n        \"connection\": \"Excepteur officia nostrud consectetur\"\n      },\n      \"postDate\": \"<string>\",\n      \"transactionDate\": \"<string>\",\n      \"type\": \"<string>\",\n      \"balance\": \"<string>\",\n      \"paymentDetails\": null\n    }\n  ],\n  \"size\": \"<long>\",\n  \"type\": \"<string>\",\n  \"links\": {\n    \"self\": \"<string>\",\n    \"next\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T02:22:43.000Z",
+                      "updatedAt": "2026-10-22T02:22:43.000Z",
+                      "uid": "35240-af54e429-9302-46d3-a2fb-5fb9bc06fbf4"
+                    },
+                    {
+                      "id": "889961ef-32b3-4c3d-9724-64e001197eba",
+                      "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/transactions?limit=500&filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "transactions"
+                          ],
+                          "query": [
+                            {
+                              "description": "This represents the maximum number of items that may be included in the response (maximum of 500). Note that by default 500 items are returned if this value is not specified.",
+                              "key": "limit",
+                              "value": "500"
+                            },
+                            {
+                              "description": "Transaction filters; connection.id, account.id, transaction.postDate, transaction.status, institution.id, transaction.direction, transaction.class",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"invalid-content\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"parameter-not-supplied\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:22:43.000Z",
+                      "updatedAt": "2026-10-22T02:22:43.000Z",
+                      "uid": "35240-889961ef-32b3-4c3d-9724-64e001197eba"
+                    },
+                    {
+                      "id": "19ad70d7-79f0-40ce-8396-d11ea4853ad2",
+                      "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/transactions?limit=500&filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "transactions"
+                          ],
+                          "query": [
+                            {
+                              "description": "This represents the maximum number of items that may be included in the response (maximum of 500). Note that by default 500 items are returned if this value is not specified.",
+                              "key": "limit",
+                              "value": "500"
+                            },
+                            {
+                              "description": "Transaction filters; connection.id, account.id, transaction.postDate, transaction.status, institution.id, transaction.direction, transaction.class",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"access-denied\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"access-denied\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:22:43.000Z",
+                      "updatedAt": "2026-10-22T02:22:43.000Z",
+                      "uid": "35240-19ad70d7-79f0-40ce-8396-d11ea4853ad2"
+                    },
+                    {
+                      "id": "e4d2e45f-5288-478f-a0cf-9603c22b278f",
+                      "name": "Returns error indicating that server can't find requested resource.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/transactions?limit=500&filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "transactions"
+                          ],
+                          "query": [
+                            {
+                              "description": "This represents the maximum number of items that may be included in the response (maximum of 500). Note that by default 500 items are returned if this value is not specified.",
+                              "key": "limit",
+                              "value": "500"
+                            },
+                            {
+                              "description": "Transaction filters; connection.id, account.id, transaction.postDate, transaction.status, institution.id, transaction.direction, transaction.class",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:22:43.000Z",
+                      "updatedAt": "2026-10-22T02:22:43.000Z",
+                      "uid": "35240-e4d2e45f-5288-478f-a0cf-9603c22b278f"
+                    },
+                    {
+                      "id": "7cbe1c6c-c228-4ebe-979b-db33372fa52d",
+                      "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/transactions?limit=500&filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "transactions"
+                          ],
+                          "query": [
+                            {
+                              "description": "This represents the maximum number of items that may be included in the response (maximum of 500). Note that by default 500 items are returned if this value is not specified.",
+                              "key": "limit",
+                              "value": "500"
+                            },
+                            {
+                              "description": "Transaction filters; connection.id, account.id, transaction.postDate, transaction.status, institution.id, transaction.direction, transaction.class",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:22:43.000Z",
+                      "updatedAt": "2026-10-22T02:22:43.000Z",
+                      "uid": "35240-7cbe1c6c-c228-4ebe-979b-db33372fa52d"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:22:43.000Z",
+                  "updatedAt": "2026-10-22T02:22:43.000Z",
+                  "uid": "35240-2ea8b3fd-cd08-413e-9efc-c8d460ce280c"
                 }
               ],
-              "body": "{\n  \"type\": \"list\",\n  \"data\": [\n    {\n      \"id\": \"string\",\n      \"status\": \"posted\",\n      \"description\": \"string\",\n      \"amount\": 7531.277936499871,\n      \"balance\": 9149.302758505522,\n      \"direction\": \"credit\",\n      \"class\": \"string\",\n      \"subClass\": {\n        \"title\": \"string\",\n        \"code\": \"string\"\n      },\n      \"transactionDate\": \"2024-05-03\",\n      \"postDate\": \"1986-02-14\"\n    },\n    {\n      \"id\": \"string\",\n      \"status\": \"posted\",\n      \"description\": \"string\",\n      \"amount\": 9875.150722341252,\n      \"balance\": 2688.4269641855294,\n      \"direction\": \"credit\",\n      \"class\": \"string\",\n      \"subClass\": {\n        \"title\": \"string\",\n        \"code\": \"string\"\n      },\n      \"transactionDate\": \"1978-07-25\",\n      \"postDate\": \"2016-07-06\"\n    }\n  ],\n  \"size\": 7086,\n  \"totalCount\": 1151\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "a37c7b0f-3829-438f-8ace-8982d41842b0",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId",
-                    "transactions"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "filter",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "500"
-                    },
-                    {
-                      "key": "offset",
-                      "value": "0"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) Basiq user ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"code\": \"string\",\n  \"detail\": \"string\",\n  \"source\": {}\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "e1d7a914-0272-4ac9-b6ff-3a7f6d558969",
+              "createdAt": "2026-10-22T02:22:43.000Z",
+              "updatedAt": "2026-10-22T02:22:43.000Z",
+              "uid": "35240-e1d7a914-0272-4ac9-b6ff-3a7f6d558969"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "dcc464d2-0867-47b3-87ff-45596fbd6e96",
-          "name": "Get Transaction",
-          "request": {
-            "name": "Get Transaction",
-            "description": {
-              "content": "Retrieve a specific transaction by ID.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "users",
-                ":userId",
-                "transactions",
-                ":transactionId"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "userId",
-                  "description": "(Required) Basiq user ID"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<string>",
-                  "key": "transactionId",
-                  "description": "(Required) "
-                }
-              ]
-            },
-            "header": [
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "32bfbdb4-e997-4da0-8523-82a5a7af40a0",
-              "name": "Transaction record",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId",
-                    "transactions",
-                    ":transactionId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) Basiq user ID"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "transactionId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"id\": \"string\",\n  \"status\": \"posted\",\n  \"description\": \"string\",\n  \"amount\": 4760.251254136932,\n  \"balance\": 6547.746179317384,\n  \"direction\": \"credit\",\n  \"class\": \"string\",\n  \"subClass\": {\n    \"title\": \"string\",\n    \"code\": \"string\"\n  },\n  \"transactionDate\": \"2013-04-27\",\n  \"postDate\": \"2000-09-28\"\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "71b76ca5-c8d3-4eb1-9ca5-26ad720bfe1e",
-              "name": "Resource not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "users",
-                    ":userId",
-                    "transactions",
-                    ":transactionId"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "userId",
-                      "description": "(Required) Basiq user ID"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<string>",
-                      "key": "transactionId",
-                      "description": "(Required) "
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"code\": \"string\",\n  \"detail\": \"string\",\n  \"source\": {}\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "583bc621-a9c4-47d0-b5ff-5fb299718ae0",
+          "createdAt": "2026-10-22T02:22:43.000Z",
+          "updatedAt": "2026-10-22T02:22:43.000Z",
+          "uid": "35240-583bc621-a9c4-47d0-b5ff-5fb299718ae0"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://au-api.basiq.io",
-      "key": "baseUrl"
+      "id": "331ba51c-8c97-4169-90d5-a20a0508d654",
+      "createdAt": "2026-10-22T02:22:43.000Z",
+      "updatedAt": "2026-10-22T02:22:43.000Z",
+      "uid": "35240-331ba51c-8c97-4169-90d5-a20a0508d654"
     }
   ],
   "auth": {
-    "type": "bearer",
-    "bearer": [
+    "type": "apikey",
+    "apikey": [
       {
-        "key": "token",
-        "value": "{{bearerToken}}"
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "4295ad2c-9c45-4141-b7cd-dbdbbea3c91d",
-    "name": "Basiq Accounts Transactions API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Basiq API is an open banking and financial data platform providing unified access to Australian and New Zealand bank account data. It enables financial applications to retrieve account balances, transactions, income verification, and expense categorization via consumer-consented bank connections using CDR (Consumer Data Right) and third-party open banking standards.\n\nContact Support:\n Name: Basiq Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://au-api.basiq.io"
     }
-  }
+  ]
 }

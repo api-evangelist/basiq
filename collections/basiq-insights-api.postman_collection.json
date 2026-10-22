@@ -1,0 +1,3419 @@
+{
+  "info": {
+    "_postman_id": "9936de2f-5688-4fba-8af9-9b3a214504a6",
+    "name": "Insights API",
+    "description": "All included utility endpoints for Basiq partners",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:24:02.000Z",
+    "updatedAt": "2026-10-22T02:24:02.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-9936de2f-5688-4fba-8af9-9b3a214504a6"
+  },
+  "item": [
+    {
+      "name": "insights",
+      "item": [
+        {
+          "name": "types",
+          "item": [
+            {
+              "name": "{typeId}",
+              "item": [
+                {
+                  "name": "Retrieve Insight Type",
+                  "id": "8710087e-8fcd-4468-af25-958e39b5d67b",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/insights/types/:typeId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "insights",
+                        "types",
+                        ":typeId"
+                      ],
+                      "variable": [
+                        {
+                          "id": "5e107a5c-b39e-4c30-8806-039a32f5aac4",
+                          "key": "typeId",
+                          "value": "EXPENSE_RATIO_VERIFICATION",
+                          "description": "(Required) The Insight type identifier. Must be one of the supported enum values."
+                        }
+                      ]
+                    },
+                    "description": "Returns the definition of a single supported CDR Insight type identified by `{typeId}`."
+                  },
+                  "response": [
+                    {
+                      "id": "83c0bb7a-a6bb-410b-8737-42da5539470a",
+                      "name": "Successfully retrieved Insight type definition",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/insights/types/:typeId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "insights",
+                            "types",
+                            ":typeId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "typeId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"insightType\",\n  \"id\": \"INCOME_VERIFICATION\",\n  \"supportMultipleUsers\": \"<boolean>\",\n  \"name\": \"<string>\",\n  \"description\": \"<string>\",\n  \"dataSchema\": {\n    \"reprehenderit26\": 87724534\n  }\n}",
+                      "createdAt": "2026-10-22T02:24:03.000Z",
+                      "updatedAt": "2026-10-22T02:24:03.000Z",
+                      "uid": "35240-83c0bb7a-a6bb-410b-8737-42da5539470a"
+                    },
+                    {
+                      "id": "a80045d9-40bd-42ab-bd26-2a1554e17095",
+                      "name": "Unauthorized \u2013 missing or invalid token",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/insights/types/:typeId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "insights",
+                            "types",
+                            ":typeId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "typeId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:24:03.000Z",
+                      "updatedAt": "2026-10-22T02:24:03.000Z",
+                      "uid": "35240-a80045d9-40bd-42ab-bd26-2a1554e17095"
+                    },
+                    {
+                      "id": "1059e8a7-defe-4163-8a0c-99b0926bff87",
+                      "name": "Forbidden \u2013 insufficient permissions",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/insights/types/:typeId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "insights",
+                            "types",
+                            ":typeId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "typeId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:24:03.000Z",
+                      "updatedAt": "2026-10-22T02:24:03.000Z",
+                      "uid": "35240-1059e8a7-defe-4163-8a0c-99b0926bff87"
+                    },
+                    {
+                      "id": "fc3fd75e-02c3-4198-8f04-0c825bddee49",
+                      "name": "Not Found \u2013 the specified `typeId` does not match a known Insight type",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/insights/types/:typeId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "insights",
+                            "types",
+                            ":typeId"
+                          ],
+                          "variable": [
+                            {
+                              "key": "typeId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:24:03.000Z",
+                      "updatedAt": "2026-10-22T02:24:03.000Z",
+                      "uid": "35240-fc3fd75e-02c3-4198-8f04-0c825bddee49"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:24:02.000Z",
+                  "updatedAt": "2026-10-22T02:24:02.000Z",
+                  "uid": "35240-8710087e-8fcd-4468-af25-958e39b5d67b"
+                }
+              ],
+              "id": "cbb3682d-b08e-4145-b78e-0ca13559b42d",
+              "createdAt": "2026-10-22T02:24:02.000Z",
+              "updatedAt": "2026-10-22T02:24:02.000Z",
+              "uid": "35240-cbb3682d-b08e-4145-b78e-0ca13559b42d"
+            },
+            {
+              "name": "List Insight Types",
+              "id": "b195b510-dad9-450f-90d8-2ec43ec99be1",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/insights/types",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "insights",
+                    "types"
+                  ]
+                },
+                "description": "Returns the list of supported CDR Insight types and the Insight-specific input schema (`data`) each type expects."
+              },
+              "response": [
+                {
+                  "id": "1b8d285e-79db-449a-9cdc-1f2f2281fb57",
+                  "name": "Successfully retrieved list of supported Insight types",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/insights/types",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "insights",
+                        "types"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"list\",\n  \"count\": \"<integer>\",\n  \"data\": [\n    {\n      \"type\": \"insightType\",\n      \"id\": \"ACCOUNT_VERIFICATION\",\n      \"supportMultipleUsers\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"dataSchema\": {\n        \"anim_78b\": false\n      }\n    },\n    {\n      \"type\": \"insightType\",\n      \"id\": \"ACCOUNT_VERIFICATION\",\n      \"supportMultipleUsers\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"description\": \"<string>\",\n      \"dataSchema\": {\n        \"est_fb_\": \"cu\",\n        \"eiusmodbe5\": \"aliquip id ut\",\n        \"in78\": \"velit eu\",\n        \"deserunt_3\": 26833435,\n        \"veniam4\": \"Lorem n\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:24:03.000Z",
+                  "updatedAt": "2026-10-22T02:24:03.000Z",
+                  "uid": "35240-1b8d285e-79db-449a-9cdc-1f2f2281fb57"
+                },
+                {
+                  "id": "2ea38683-a366-43c5-a1d8-5f7c6aaca4df",
+                  "name": "Unauthorized \u2013 missing or invalid token",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/insights/types",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "insights",
+                        "types"
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:24:03.000Z",
+                  "updatedAt": "2026-10-22T02:24:03.000Z",
+                  "uid": "35240-2ea38683-a366-43c5-a1d8-5f7c6aaca4df"
+                },
+                {
+                  "id": "13046a46-4fb4-4521-9dac-b714d873115d",
+                  "name": "Forbidden \u2013 insufficient permissions",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/insights/types",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "insights",
+                        "types"
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:24:03.000Z",
+                  "updatedAt": "2026-10-22T02:24:03.000Z",
+                  "uid": "35240-13046a46-4fb4-4521-9dac-b714d873115d"
+                }
+              ],
+              "createdAt": "2026-10-22T02:24:02.000Z",
+              "updatedAt": "2026-10-22T02:24:02.000Z",
+              "uid": "35240-b195b510-dad9-450f-90d8-2ec43ec99be1"
+            }
+          ],
+          "id": "e0cddc3e-6539-445e-95eb-ab7d177f719a",
+          "createdAt": "2026-10-22T02:24:02.000Z",
+          "updatedAt": "2026-10-22T02:24:02.000Z",
+          "uid": "35240-e0cddc3e-6539-445e-95eb-ab7d177f719a"
+        },
+        {
+          "name": "Create an Insight",
+          "id": "15977d10-6ecc-4b6b-824c-3a6e2aa3dd56",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"users\": [\n    \"<uuid>\"\n  ],\n  \"type\": \"EXPENSE_RATIO_VERIFICATION\",\n  \"data\": {\n    \"expense\": \"<string>\"\n  }\n}",
+              "options": {
+                "raw": {
+                  "headerFamily": "json",
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/insights",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "insights"
+              ]
+            },
+            "description": "Creates a new insight for one or more users. Supported insight types are EXPENSE_RATIO_VERIFICATION, BALANCE_VERIFICATION, ACCOUNT_VERIFICATION, IDENTITY_VERIFICATION, and INCOME_VERIFICATION. Multi-user requests (1\u201310 users) are currently supported only for EXPENSE_RATIO_VERIFICATION.A single insight object is created referencing all users. The self link in the response uses the first userId from the users array."
+          },
+          "response": [
+            {
+              "id": "b09d67df-179b-4c47-a18f-d3629c62833b",
+              "name": "Successfully created insight",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    \"<uuid>\"\n  ],\n  \"type\": \"EXPENSE_RATIO_VERIFICATION\",\n  \"data\": {\n    \"expense\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/insights",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "insights"
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"insight\",\n  \"id\": \"<uuid>\",\n  \"created\": \"<dateTime>\",\n  \"users\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ],\n  \"insightType\": \"identity\",\n  \"data\": [\n    {\n      \"input\": {\n        \"expense\": \"<string>\"\n      },\n      \"result\": {\n        \"range\": \"10% to 20%\"\n      }\n    },\n    {\n      \"input\": {\n        \"expense\": \"<string>\"\n      },\n      \"result\": {\n        \"range\": \"70% to 80%\"\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": \"<uri>\"\n  }\n}",
+              "createdAt": "2026-10-22T02:24:03.000Z",
+              "updatedAt": "2026-10-22T02:24:03.000Z",
+              "uid": "35240-b09d67df-179b-4c47-a18f-d3629c62833b"
+            },
+            {
+              "id": "dd14b4ec-7aa2-4ffd-a19e-47e1bfacced5",
+              "name": "Bad Request - Invalid request parameters",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    \"<uuid>\"\n  ],\n  \"type\": \"EXPENSE_RATIO_VERIFICATION\",\n  \"data\": {\n    \"expense\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/insights",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "insights"
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-10-22T02:24:03.000Z",
+              "updatedAt": "2026-10-22T02:24:03.000Z",
+              "uid": "35240-dd14b4ec-7aa2-4ffd-a19e-47e1bfacced5"
+            },
+            {
+              "id": "93b956cb-e106-477e-89dd-516d4f5c6cb2",
+              "name": "Unauthorized - Invalid or missing authentication token",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    \"<uuid>\"\n  ],\n  \"type\": \"EXPENSE_RATIO_VERIFICATION\",\n  \"data\": {\n    \"expense\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/insights",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "insights"
+                  ]
+                }
+              },
+              "status": "Unauthorized",
+              "code": 401,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-10-22T02:24:03.000Z",
+              "updatedAt": "2026-10-22T02:24:03.000Z",
+              "uid": "35240-93b956cb-e106-477e-89dd-516d4f5c6cb2"
+            },
+            {
+              "id": "ae5398aa-ccac-4d33-b8d3-2bfad8640d67",
+              "name": "Forbidden - Insufficient authorization scopes",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    \"<uuid>\"\n  ],\n  \"type\": \"EXPENSE_RATIO_VERIFICATION\",\n  \"data\": {\n    \"expense\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/insights",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "insights"
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-10-22T02:24:03.000Z",
+              "updatedAt": "2026-10-22T02:24:03.000Z",
+              "uid": "35240-ae5398aa-ccac-4d33-b8d3-2bfad8640d67"
+            },
+            {
+              "id": "ccbef302-4b58-4f31-ac89-d156afd6acf5",
+              "name": "One or more users not found or no active consent",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    \"<uuid>\"\n  ],\n  \"type\": \"EXPENSE_RATIO_VERIFICATION\",\n  \"data\": {\n    \"expense\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/insights",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "insights"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-10-22T02:24:03.000Z",
+              "updatedAt": "2026-10-22T02:24:03.000Z",
+              "uid": "35240-ccbef302-4b58-4f31-ac89-d156afd6acf5"
+            },
+            {
+              "id": "371e402a-adcd-4ee2-bff5-07f62e3f4524",
+              "name": "Internal Server Error",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"users\": [\n    \"<uuid>\"\n  ],\n  \"type\": \"EXPENSE_RATIO_VERIFICATION\",\n  \"data\": {\n    \"expense\": \"<string>\"\n  }\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/insights",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "insights"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+              "createdAt": "2026-10-22T02:24:03.000Z",
+              "updatedAt": "2026-10-22T02:24:03.000Z",
+              "uid": "35240-371e402a-adcd-4ee2-bff5-07f62e3f4524"
+            }
+          ],
+          "createdAt": "2026-10-22T02:24:02.000Z",
+          "updatedAt": "2026-10-22T02:24:02.000Z",
+          "uid": "35240-15977d10-6ecc-4b6b-824c-3a6e2aa3dd56"
+        }
+      ],
+      "id": "7603bfca-ce5b-481e-bb17-0eddbac90abc",
+      "createdAt": "2026-10-22T02:24:02.000Z",
+      "updatedAt": "2026-10-22T02:24:02.000Z",
+      "uid": "35240-7603bfca-ce5b-481e-bb17-0eddbac90abc"
+    },
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "{userId}",
+          "item": [
+            {
+              "name": "insights",
+              "item": [
+                {
+                  "name": "{insightId}",
+                  "item": [
+                    {
+                      "name": "Retrieve an Insight",
+                      "id": "598ddafb-80af-478b-96be-7cb08eafbac6",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/insights/:insightId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "insights",
+                            ":insightId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "94513da1-f35d-4a46-89e0-22ecc2cb01d4",
+                              "key": "userId",
+                              "value": "<uuid>",
+                              "description": "(Required) The unique identifier of the user"
+                            },
+                            {
+                              "id": "de3ccbfb-e07d-4bbd-b256-76d26e60a5b9",
+                              "key": "insightId",
+                              "value": "<uuid>",
+                              "description": "(Required) The unique identifier of the insight (must be valid UUID format)"
+                            }
+                          ]
+                        },
+                        "description": "Returns detailed information for a specific insight by ID"
+                      },
+                      "response": [
+                        {
+                          "id": "abfe6674-cab8-4c6f-a112-ef2aebfe0834",
+                          "name": "Successful response with insight details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/:insightId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                ":insightId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "insightId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"insight\",\n  \"id\": \"<uuid>\",\n  \"created\": \"<dateTime>\",\n  \"insightType\": \"income\",\n  \"data\": [\n    {\n      \"accountId\": \"<uuid>\",\n      \"accountNumber\": {\n        \"input\": \"<string>\",\n        \"match\": \"<boolean,null>\",\n        \"confidence\": \"<float>\",\n        \"error\": \"<string>\"\n      },\n      \"accountType\": {\n        \"input\": \"<string>\",\n        \"match\": \"<boolean,null>\",\n        \"confidence\": \"<float>\",\n        \"error\": \"<string>\"\n      }\n    },\n    {\n      \"accountId\": \"<uuid>\",\n      \"accountNumber\": {\n        \"input\": \"<string>\",\n        \"match\": \"<boolean,null>\",\n        \"confidence\": \"<float>\",\n        \"error\": \"<string>\"\n      },\n      \"accountType\": {\n        \"input\": \"<string>\",\n        \"match\": \"<boolean,null>\",\n        \"confidence\": \"<float>\",\n        \"error\": \"<string>\"\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": \"<uri>\"\n  },\n  \"users\": [\n    \"<uuid>\",\n    \"<uuid>\"\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-abfe6674-cab8-4c6f-a112-ef2aebfe0834"
+                        },
+                        {
+                          "id": "f999db7a-c508-4df3-8140-0b74d0bc86da",
+                          "name": "Bad Request - Invalid insight ID format",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/:insightId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                ":insightId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "insightId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-f999db7a-c508-4df3-8140-0b74d0bc86da"
+                        },
+                        {
+                          "id": "ad559bb2-c771-4478-9800-221043dcee2e",
+                          "name": "Unauthorized - Invalid or missing authentication token",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/:insightId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                ":insightId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "insightId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-ad559bb2-c771-4478-9800-221043dcee2e"
+                        },
+                        {
+                          "id": "9809841e-7bc5-44c9-8c8d-9127c971c9f5",
+                          "name": "User or insight not found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/:insightId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                ":insightId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "insightId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-9809841e-7bc5-44c9-8c8d-9127c971c9f5"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:24:02.000Z",
+                      "updatedAt": "2026-10-22T02:24:02.000Z",
+                      "uid": "35240-598ddafb-80af-478b-96be-7cb08eafbac6"
+                    }
+                  ],
+                  "id": "36791949-adfc-4740-9c2f-2743dd8609b3",
+                  "createdAt": "2026-10-22T02:24:02.000Z",
+                  "updatedAt": "2026-10-22T02:24:02.000Z",
+                  "uid": "35240-36791949-adfc-4740-9c2f-2743dd8609b3"
+                },
+                {
+                  "name": "account",
+                  "item": [
+                    {
+                      "name": "Account Insights",
+                      "id": "9dfe5c0c-b3a0-4019-ace7-8f393e7622af",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"accountNumber\": \"<string>\",\n  \"accountType\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/insights/account",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "insights",
+                            "account"
+                          ],
+                          "variable": [
+                            {
+                              "id": "887255ec-969a-4e83-b49e-76a05aa68de4",
+                              "key": "userId",
+                              "value": "<uuid>",
+                              "description": "(Required) The unique identifier for the user"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve account insights for a specific user based on account number"
+                      },
+                      "response": [
+                        {
+                          "id": "7a6692db-bc59-4bd5-9bef-a3f44a2cfb83",
+                          "name": "Successfully retrieved account insights",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"accountNumber\": \"<string>\",\n  \"accountType\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/account",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "account"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"insight\",\n  \"id\": \"<uuid>\",\n  \"created\": \"<dateTime>\",\n  \"insightType\": \"account\",\n  \"data\": [\n    {\n      \"accountId\": \"<uuid>\",\n      \"accountNumber\": {\n        \"input\": \"<string>\",\n        \"match\": \"<boolean>\",\n        \"confidence\": \"<float>\"\n      },\n      \"accountType\": {\n        \"input\": \"<string>\",\n        \"match\": \"<boolean>\",\n        \"confidence\": \"<float>\"\n      }\n    },\n    {\n      \"accountId\": \"<uuid>\",\n      \"accountNumber\": {\n        \"input\": \"<string>\",\n        \"match\": \"<boolean>\",\n        \"confidence\": \"<float>\"\n      },\n      \"accountType\": {\n        \"input\": \"<string>\",\n        \"match\": \"<boolean>\",\n        \"confidence\": \"<float>\"\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": \"<uri>\"\n  }\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-7a6692db-bc59-4bd5-9bef-a3f44a2cfb83"
+                        },
+                        {
+                          "id": "4095d8a8-dbe4-45a2-9edd-28b66925238d",
+                          "name": "Bad request - invalid input parameters",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"accountNumber\": \"<string>\",\n  \"accountType\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/account",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "account"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-4095d8a8-dbe4-45a2-9edd-28b66925238d"
+                        },
+                        {
+                          "id": "944b0416-d375-45e3-92d0-a32b4ea7fe11",
+                          "name": "Unauthorized - invalid or missing authentication",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"accountNumber\": \"<string>\",\n  \"accountType\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/account",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "account"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-944b0416-d375-45e3-92d0-a32b4ea7fe11"
+                        },
+                        {
+                          "id": "fb3a8359-bc17-42c1-aec9-a3e3ca58fd1a",
+                          "name": "User not found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"accountNumber\": \"<string>\",\n  \"accountType\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/account",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "account"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-fb3a8359-bc17-42c1-aec9-a3e3ca58fd1a"
+                        },
+                        {
+                          "id": "067fa65c-c235-41cf-9fd9-71abd0004952",
+                          "name": "Internal server error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"accountNumber\": \"<string>\",\n  \"accountType\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/account",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "account"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-067fa65c-c235-41cf-9fd9-71abd0004952"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:24:02.000Z",
+                      "updatedAt": "2026-10-22T02:24:02.000Z",
+                      "uid": "35240-9dfe5c0c-b3a0-4019-ace7-8f393e7622af"
+                    }
+                  ],
+                  "id": "e2e6074b-0cc3-4d95-94a4-e143c6a13190",
+                  "createdAt": "2026-10-22T02:24:02.000Z",
+                  "updatedAt": "2026-10-22T02:24:02.000Z",
+                  "uid": "35240-e2e6074b-0cc3-4d95-94a4-e143c6a13190"
+                },
+                {
+                  "name": "balance",
+                  "item": [
+                    {
+                      "name": "Account Balance Insights",
+                      "id": "45532b77-9ab8-410e-9a22-86ae0f4bbb9f",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"balance\": {\n    \"min\": \"<string>\",\n    \"max\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/insights/balance",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "insights",
+                            "balance"
+                          ],
+                          "variable": [
+                            {
+                              "id": "8b5bd0b1-2709-448f-9b73-fb6a4775bfe5",
+                              "key": "userId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier for the user"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve balance insights for a user's accounts based on specified minimum and maximum balance criteria"
+                      },
+                      "response": [
+                        {
+                          "id": "47a0b395-0b2a-4cb6-8032-b0d8bf73b58d",
+                          "name": "Successfully retrieved balance insights",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"balance\": {\n    \"min\": \"<string>\",\n    \"max\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/balance",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "balance"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"insight\",\n  \"id\": \"<uuid>\",\n  \"created\": \"<dateTime>\",\n  \"insightType\": \"balance\",\n  \"data\": [\n    {\n      \"accountId\": \"<uuid>\",\n      \"balance\": {\n        \"input\": {\n          \"min\": \"<string>\",\n          \"max\": \"<string>\"\n        },\n        \"match\": \"<boolean>\",\n        \"confidence\": \"<float>\"\n      }\n    },\n    {\n      \"accountId\": \"<uuid>\",\n      \"balance\": {\n        \"input\": {\n          \"min\": \"<string>\",\n          \"max\": \"<string>\"\n        },\n        \"match\": \"<boolean>\",\n        \"confidence\": \"<float>\"\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": \"<uri>\"\n  }\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-47a0b395-0b2a-4cb6-8032-b0d8bf73b58d"
+                        },
+                        {
+                          "id": "299b214c-f511-4033-b05f-9305f8107f42",
+                          "name": "Bad Request - Invalid input parameters",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"balance\": {\n    \"min\": \"<string>\",\n    \"max\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/balance",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "balance"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-299b214c-f511-4033-b05f-9305f8107f42"
+                        },
+                        {
+                          "id": "104eaa9c-e691-4733-a8ce-44f04f6d4b2b",
+                          "name": "Unauthorized - invalid or missing authentication",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"balance\": {\n    \"min\": \"<string>\",\n    \"max\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/balance",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "balance"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-104eaa9c-e691-4733-a8ce-44f04f6d4b2b"
+                        },
+                        {
+                          "id": "901a0915-802f-40e5-b2d6-69beeb3704aa",
+                          "name": "User not found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"balance\": {\n    \"min\": \"<string>\",\n    \"max\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/balance",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "balance"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-901a0915-802f-40e5-b2d6-69beeb3704aa"
+                        },
+                        {
+                          "id": "7742160b-82fe-4118-b900-20dad15c3b80",
+                          "name": "Internal server error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"balance\": {\n    \"min\": \"<string>\",\n    \"max\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/balance",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "balance"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-7742160b-82fe-4118-b900-20dad15c3b80"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:24:02.000Z",
+                      "updatedAt": "2026-10-22T02:24:02.000Z",
+                      "uid": "35240-45532b77-9ab8-410e-9a22-86ae0f4bbb9f"
+                    }
+                  ],
+                  "id": "52dc4378-5bbb-4a36-819d-ba13bd7c592c",
+                  "createdAt": "2026-10-22T02:24:02.000Z",
+                  "updatedAt": "2026-10-22T02:24:02.000Z",
+                  "uid": "35240-52dc4378-5bbb-4a36-819d-ba13bd7c592c"
+                },
+                {
+                  "name": "identity",
+                  "item": [
+                    {
+                      "name": "Identity Insights",
+                      "id": "da8d0993-8129-4c00-b057-2a2321c67e3b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"name\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<string>\",\n  \"address\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/insights/identity",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "insights",
+                            "identity"
+                          ],
+                          "variable": [
+                            {
+                              "id": "af6c02d4-440c-47b9-8c62-af359a41311d",
+                              "key": "userId",
+                              "value": "<uuid>",
+                              "description": "(Required) Unique identifier for the user"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve identity insights for a specific user by comparing provided personal details (name, phone, email, address)."
+                      },
+                      "response": [
+                        {
+                          "id": "336c8ce9-3501-44a9-9b96-50ccf8f4cc09",
+                          "name": "Successfully retrieved identity insights",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<string>\",\n  \"address\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/identity",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "identity"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"insight\",\n  \"id\": \"<uuid>\",\n  \"created\": \"<dateTime>\",\n  \"insightType\": \"identity\",\n  \"data\": [\n    {\n      \"name\": {\n        \"input\": \"<string>\",\n        \"match\": \"<boolean>\",\n        \"confidence\": \"<float>\"\n      },\n      \"phone\": {\n        \"input\": \"<string>\",\n        \"match\": \"<boolean>\",\n        \"confidence\": \"<float>\"\n      },\n      \"email\": {\n        \"input\": \"<string>\",\n        \"match\": \"<boolean>\",\n        \"confidence\": \"<float>\"\n      },\n      \"address\": {\n        \"input\": \"<string>\",\n        \"match\": \"<boolean>\",\n        \"confidence\": \"<float>\"\n      }\n    },\n    {\n      \"name\": {\n        \"input\": \"<string>\",\n        \"match\": \"<boolean>\",\n        \"confidence\": \"<float>\"\n      },\n      \"phone\": {\n        \"input\": \"<string>\",\n        \"match\": \"<boolean>\",\n        \"confidence\": \"<float>\"\n      },\n      \"email\": {\n        \"input\": \"<string>\",\n        \"match\": \"<boolean>\",\n        \"confidence\": \"<float>\"\n      },\n      \"address\": {\n        \"input\": \"<string>\",\n        \"match\": \"<boolean>\",\n        \"confidence\": \"<float>\"\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": \"<uri>\"\n  }\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-336c8ce9-3501-44a9-9b96-50ccf8f4cc09"
+                        },
+                        {
+                          "id": "866d2032-7211-48e1-b651-2be5f8be1035",
+                          "name": "Bad Request - Invalid input parameters",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<string>\",\n  \"address\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/identity",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "identity"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-866d2032-7211-48e1-b651-2be5f8be1035"
+                        },
+                        {
+                          "id": "d48a88b4-c748-4f11-9d40-26c99bace040",
+                          "name": "Unauthorized - invalid or missing authentication",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<string>\",\n  \"address\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/identity",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "identity"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-d48a88b4-c748-4f11-9d40-26c99bace040"
+                        },
+                        {
+                          "id": "d8769b99-8ad9-4b02-b450-f117cb21a843",
+                          "name": "User not found",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<string>\",\n  \"address\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/identity",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "identity"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-d8769b99-8ad9-4b02-b450-f117cb21a843"
+                        },
+                        {
+                          "id": "94d50150-4e53-458b-ad26-2c0b3862528b",
+                          "name": "Internal server error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"name\": \"<string>\",\n  \"phone\": \"<string>\",\n  \"email\": \"<string>\",\n  \"address\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/identity",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "identity"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-94d50150-4e53-458b-ad26-2c0b3862528b"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:24:02.000Z",
+                      "updatedAt": "2026-10-22T02:24:02.000Z",
+                      "uid": "35240-da8d0993-8129-4c00-b057-2a2321c67e3b"
+                    }
+                  ],
+                  "id": "779ac1c0-c2f9-4126-96a4-a242687cd043",
+                  "createdAt": "2026-10-22T02:24:02.000Z",
+                  "updatedAt": "2026-10-22T02:24:02.000Z",
+                  "uid": "35240-779ac1c0-c2f9-4126-96a4-a242687cd043"
+                },
+                {
+                  "name": "income",
+                  "item": [
+                    {
+                      "name": "Income Insights",
+                      "id": "80907ca3-b712-422b-8f7c-0ca33127777e",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"income\": {\n    \"min\": \"<string>\",\n    \"max\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/insights/income",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "insights",
+                            "income"
+                          ],
+                          "variable": [
+                            {
+                              "id": "66e1f6ef-1364-4ec8-beee-44384266db29",
+                              "key": "userId",
+                              "value": "<uuid>",
+                              "description": "(Required) The unique identifier of the user"
+                            }
+                          ]
+                        },
+                        "description": "Verifies if a user's income falls within a specified range. Returns a match result with confidence level based on the user's financial data."
+                      },
+                      "response": [
+                        {
+                          "id": "67ad8110-e9d4-4524-b3b9-0e9a06cdea3b",
+                          "name": "Income insight successfully verified",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"income\": {\n    \"min\": \"<string>\",\n    \"max\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/income",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "income"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"insightType\": \"income\",\n  \"data\": [\n    {\n      \"input\": {\n        \"min\": \"<string>\",\n        \"max\": \"<string>\"\n      },\n      \"match\": \"<boolean>\",\n      \"confidence\": \"<number>\"\n    },\n    {\n      \"input\": {\n        \"min\": \"<string>\",\n        \"max\": \"<string>\"\n      },\n      \"match\": \"<boolean>\",\n      \"confidence\": \"<number>\"\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-67ad8110-e9d4-4524-b3b9-0e9a06cdea3b"
+                        },
+                        {
+                          "id": "8556b7e8-944a-487a-bfff-5fb2aa4c3bc3",
+                          "name": "Bad Request - Invalid parameters or request format",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"income\": {\n    \"min\": \"<string>\",\n    \"max\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/income",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "income"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-8556b7e8-944a-487a-bfff-5fb2aa4c3bc3"
+                        },
+                        {
+                          "id": "462b4ecd-e04d-44a5-ada5-da9825d10ebc",
+                          "name": "Unauthorized - Invalid or missing authentication token",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"income\": {\n    \"min\": \"<string>\",\n    \"max\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/income",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "income"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-462b4ecd-e04d-44a5-ada5-da9825d10ebc"
+                        },
+                        {
+                          "id": "dbba6d20-757b-458a-9290-e9cb72bf3592",
+                          "name": "User not found or no active consent",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"income\": {\n    \"min\": \"<string>\",\n    \"max\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/income",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "income"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-dbba6d20-757b-458a-9290-e9cb72bf3592"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:24:02.000Z",
+                      "updatedAt": "2026-10-22T02:24:02.000Z",
+                      "uid": "35240-80907ca3-b712-422b-8f7c-0ca33127777e"
+                    }
+                  ],
+                  "id": "f22f0dbd-9f85-474d-99c8-e43f7419e69c",
+                  "createdAt": "2026-10-22T02:24:02.000Z",
+                  "updatedAt": "2026-10-22T02:24:02.000Z",
+                  "uid": "35240-f22f0dbd-9f85-474d-99c8-e43f7419e69c"
+                },
+                {
+                  "name": "expense-ratio",
+                  "item": [
+                    {
+                      "name": "Expense Ratio Insights",
+                      "id": "20973862-75d6-4c1b-b531-857b3a548ed8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"expense\": \"<string>\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/insights/expense-ratio",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "insights",
+                            "expense-ratio"
+                          ],
+                          "variable": [
+                            {
+                              "id": "0ef8e199-4680-4de8-b87d-364a0c37a08d",
+                              "key": "userId",
+                              "value": "<uuid>",
+                              "description": "(Required) The unique identifier for the user"
+                            }
+                          ]
+                        },
+                        "description": "Calculate and return the expense-to-income ratio."
+                      },
+                      "response": [
+                        {
+                          "id": "bd6bf88f-dddb-4f7b-aa0f-e42b2a121d76",
+                          "name": "Successfully retrieved expense ratio insights",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"expense\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/expense-ratio",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "expense-ratio"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"insight\",\n  \"id\": \"<uuid>\",\n  \"created\": \"<dateTime>\",\n  \"insightType\": \"expense-ratio\",\n  \"data\": [\n    {\n      \"input\": {\n        \"expense\": \"<string>\"\n      },\n      \"result\": {\n        \"range\": \"50% to 60%\"\n      }\n    },\n    {\n      \"input\": {\n        \"expense\": \"<string>\"\n      },\n      \"result\": {\n        \"range\": \"10% to 20%\"\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": \"<uri>\"\n  }\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-bd6bf88f-dddb-4f7b-aa0f-e42b2a121d76"
+                        },
+                        {
+                          "id": "ba6a1109-ad44-4204-ac27-cbc2e5560ab0",
+                          "name": "Bad Request - Invalid request parameters",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"expense\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/expense-ratio",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "expense-ratio"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-ba6a1109-ad44-4204-ac27-cbc2e5560ab0"
+                        },
+                        {
+                          "id": "974448a1-5c2c-4d08-88f4-63041431809a",
+                          "name": "Unauthorized - Invalid or missing authentication token",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"expense\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/expense-ratio",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "expense-ratio"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-974448a1-5c2c-4d08-88f4-63041431809a"
+                        },
+                        {
+                          "id": "fc628a19-1eae-4d68-9826-5c9d238829e7",
+                          "name": "Forbidden - Insufficient authorization scopes",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"expense\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/expense-ratio",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "expense-ratio"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-fc628a19-1eae-4d68-9826-5c9d238829e7"
+                        },
+                        {
+                          "id": "802119b0-61e8-4b5a-91e5-55a745650ffa",
+                          "name": "User not found or no active consent",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"expense\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/expense-ratio",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "expense-ratio"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-802119b0-61e8-4b5a-91e5-55a745650ffa"
+                        },
+                        {
+                          "id": "7de8c330-d5ad-4bd8-9afa-eedbdcad14e5",
+                          "name": "Internal Server Error",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"expense\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/insights/expense-ratio",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "insights",
+                                "expense-ratio"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                          "createdAt": "2026-10-22T02:24:03.000Z",
+                          "updatedAt": "2026-10-22T02:24:03.000Z",
+                          "uid": "35240-7de8c330-d5ad-4bd8-9afa-eedbdcad14e5"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:24:02.000Z",
+                      "updatedAt": "2026-10-22T02:24:02.000Z",
+                      "uid": "35240-20973862-75d6-4c1b-b531-857b3a548ed8"
+                    }
+                  ],
+                  "id": "180a885e-7183-4c31-96bd-3d61481461cf",
+                  "createdAt": "2026-10-22T02:24:02.000Z",
+                  "updatedAt": "2026-10-22T02:24:02.000Z",
+                  "uid": "35240-180a885e-7183-4c31-96bd-3d61481461cf"
+                },
+                {
+                  "name": "List all Insights",
+                  "id": "b74a8de6-0ee8-4c6d-9389-42c20056b6c4",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId/insights?filter=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId",
+                        "insights"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter parameter supporting multiple filter fields separated by commas. Supported fields: 'created' (date in YYYY-MM-DD format) and 'insightType' (account, balance, identity, income, expense-ratio). Operators: gteq (>=), lteq (<=), gt (>), lt (<), eq (=), bt (between two dates). Examples: 'created.gteq('2025-06-16')', 'created.bt('2025-08-25','2025-09-02')', 'insightType.eq('account')', 'created.bt('2025-06-01','2025-08-30'),insightType.eq('balance')'",
+                          "key": "filter",
+                          "value": "<string>"
+                        }
+                      ],
+                      "variable": [
+                        {
+                          "id": "07852e7e-d41a-4df8-bc36-ab82260ae7fb",
+                          "key": "userId",
+                          "value": "<uuid>",
+                          "description": "(Required) The unique identifier of the user"
+                        }
+                      ]
+                    },
+                    "description": "Returns a paginated list of previously generated insights for the specified user. Supports filtering by creation date and insight type. Maximum 20 insights per page."
+                  },
+                  "response": [
+                    {
+                      "id": "48137e54-16de-40e2-b131-26bd7e57c462",
+                      "name": "Successful response with list of insights",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/insights?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "insights"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter parameter supporting multiple filter fields separated by commas. Supported fields: 'created' (date in YYYY-MM-DD format) and 'insightType' (account, balance, identity, income, expense-ratio). Operators: gteq (>=), lteq (<=), gt (>), lt (<), eq (=), bt (between two dates). Examples: 'created.gteq('2025-06-16')', 'created.bt('2025-08-25','2025-09-02')', 'insightType.eq('account')', 'created.bt('2025-06-01','2025-08-30'),insightType.eq('balance')'",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"list\",\n  \"count\": \"<integer>\",\n  \"data\": [\n    {\n      \"type\": \"insight\",\n      \"id\": \"<uuid>\",\n      \"created\": \"<dateTime>\",\n      \"insightType\": \"account\",\n      \"data\": [\n        {\n          \"accountId\": \"<uuid>\",\n          \"accountNumber\": {\n            \"input\": \"<string>\",\n            \"match\": \"<boolean,null>\",\n            \"confidence\": \"<float>\",\n            \"error\": \"<string>\"\n          },\n          \"accountType\": {\n            \"input\": \"<string>\",\n            \"match\": \"<boolean,null>\",\n            \"confidence\": \"<float>\",\n            \"error\": \"<string>\"\n          }\n        },\n        {\n          \"accountId\": \"<uuid>\",\n          \"accountNumber\": {\n            \"input\": \"<string>\",\n            \"match\": \"<boolean,null>\",\n            \"confidence\": \"<float>\",\n            \"error\": \"<string>\"\n          },\n          \"accountType\": {\n            \"input\": \"<string>\",\n            \"match\": \"<boolean,null>\",\n            \"confidence\": \"<float>\",\n            \"error\": \"<string>\"\n          }\n        }\n      ],\n      \"links\": {\n        \"self\": \"<uri>\"\n      },\n      \"users\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    },\n    {\n      \"type\": \"insight\",\n      \"id\": \"<uuid>\",\n      \"created\": \"<dateTime>\",\n      \"insightType\": \"income\",\n      \"data\": [\n        {\n          \"accountId\": \"<uuid>\",\n          \"accountNumber\": {\n            \"input\": \"<string>\",\n            \"match\": \"<boolean,null>\",\n            \"confidence\": \"<float>\",\n            \"error\": \"<string>\"\n          },\n          \"accountType\": {\n            \"input\": \"<string>\",\n            \"match\": \"<boolean,null>\",\n            \"confidence\": \"<float>\",\n            \"error\": \"<string>\"\n          }\n        },\n        {\n          \"accountId\": \"<uuid>\",\n          \"accountNumber\": {\n            \"input\": \"<string>\",\n            \"match\": \"<boolean,null>\",\n            \"confidence\": \"<float>\",\n            \"error\": \"<string>\"\n          },\n          \"accountType\": {\n            \"input\": \"<string>\",\n            \"match\": \"<boolean,null>\",\n            \"confidence\": \"<float>\",\n            \"error\": \"<string>\"\n          }\n        }\n      ],\n      \"links\": {\n        \"self\": \"<uri>\"\n      },\n      \"users\": [\n        \"<uuid>\",\n        \"<uuid>\"\n      ]\n    }\n  ],\n  \"links\": {\n    \"self\": \"<uri>\",\n    \"next\": \"<uri>\",\n    \"prev\": \"<uri>\"\n  }\n}",
+                      "createdAt": "2026-10-22T02:24:03.000Z",
+                      "updatedAt": "2026-10-22T02:24:03.000Z",
+                      "uid": "35240-48137e54-16de-40e2-b131-26bd7e57c462"
+                    },
+                    {
+                      "id": "8bf3722e-e979-4079-ae21-2bcc67e971d8",
+                      "name": "Bad Request - Invalid filter parameters or request content",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/insights?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "insights"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter parameter supporting multiple filter fields separated by commas. Supported fields: 'created' (date in YYYY-MM-DD format) and 'insightType' (account, balance, identity, income, expense-ratio). Operators: gteq (>=), lteq (<=), gt (>), lt (<), eq (=), bt (between two dates). Examples: 'created.gteq('2025-06-16')', 'created.bt('2025-08-25','2025-09-02')', 'insightType.eq('account')', 'created.bt('2025-06-01','2025-08-30'),insightType.eq('balance')'",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:24:03.000Z",
+                      "updatedAt": "2026-10-22T02:24:03.000Z",
+                      "uid": "35240-8bf3722e-e979-4079-ae21-2bcc67e971d8"
+                    },
+                    {
+                      "id": "5c6a5900-8605-41b1-af3a-48af5b3c8d61",
+                      "name": "Unauthorized - Invalid or missing authentication token",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/insights?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "insights"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter parameter supporting multiple filter fields separated by commas. Supported fields: 'created' (date in YYYY-MM-DD format) and 'insightType' (account, balance, identity, income, expense-ratio). Operators: gteq (>=), lteq (<=), gt (>), lt (<), eq (=), bt (between two dates). Examples: 'created.gteq('2025-06-16')', 'created.bt('2025-08-25','2025-09-02')', 'insightType.eq('account')', 'created.bt('2025-06-01','2025-08-30'),insightType.eq('balance')'",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:24:03.000Z",
+                      "updatedAt": "2026-10-22T02:24:03.000Z",
+                      "uid": "35240-5c6a5900-8605-41b1-af3a-48af5b3c8d61"
+                    },
+                    {
+                      "id": "edef1553-cdf5-4bfb-93bd-bf07c2c1508e",
+                      "name": "User not found",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/insights?filter=<string>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "insights"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter parameter supporting multiple filter fields separated by commas. Supported fields: 'created' (date in YYYY-MM-DD format) and 'insightType' (account, balance, identity, income, expense-ratio). Operators: gteq (>=), lteq (<=), gt (>), lt (<), eq (=), bt (between two dates). Examples: 'created.gteq('2025-06-16')', 'created.bt('2025-08-25','2025-09-02')', 'insightType.eq('account')', 'created.bt('2025-06-01','2025-08-30'),insightType.eq('balance')'",
+                              "key": "filter",
+                              "value": "<string>"
+                            }
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"list\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": null\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"pointer\": \"<string>\",\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                      "createdAt": "2026-10-22T02:24:03.000Z",
+                      "updatedAt": "2026-10-22T02:24:03.000Z",
+                      "uid": "35240-edef1553-cdf5-4bfb-93bd-bf07c2c1508e"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:24:02.000Z",
+                  "updatedAt": "2026-10-22T02:24:02.000Z",
+                  "uid": "35240-b74a8de6-0ee8-4c6d-9389-42c20056b6c4"
+                }
+              ],
+              "id": "fb6f038b-fd14-4eb0-8611-0eb5676c09bd",
+              "createdAt": "2026-10-22T02:24:02.000Z",
+              "updatedAt": "2026-10-22T02:24:02.000Z",
+              "uid": "35240-fb6f038b-fd14-4eb0-8611-0eb5676c09bd"
+            }
+          ],
+          "id": "6210c571-4a38-491f-90e2-63e5bf6ffc43",
+          "createdAt": "2026-10-22T02:24:02.000Z",
+          "updatedAt": "2026-10-22T02:24:02.000Z",
+          "uid": "35240-6210c571-4a38-491f-90e2-63e5bf6ffc43"
+        }
+      ],
+      "id": "25e6d843-4bc8-41b7-8375-66b540ffbb9d",
+      "createdAt": "2026-10-22T02:24:02.000Z",
+      "updatedAt": "2026-10-22T02:24:02.000Z",
+      "uid": "35240-25e6d843-4bc8-41b7-8375-66b540ffbb9d"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://au-api.basiq.io"
+    }
+  ]
+}

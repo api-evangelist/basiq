@@ -1,0 +1,12 @@
+{
+ "url": "https://api.basiq.io/openapi/insights.json",
+ "final": "https://api.basiq.io/openapi/insights.json",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 54710,
+ "sha256": "4aeb5d59dd1e550bb68a1b5edeb02ca4dcbe3893408fea0b86e1aa01846211a2",
+ "fetched_at": "2026-10-21",
+ "fetched_by": "contract module (curl)",
+ "mirror": "https://raw.githubusercontent.com/basiqio-oss/Basiq-docs/refs/heads/v3.0/reference/insights.json",
+ "ownership": "servers[] https://au-api.basiq.io (Basiq's documented production base) and termsOfService on docs.basiq.io where present; Basiq's own page https://api.basiq.io/reference/openapi.md links these files in its GitHub org basiqio-oss/Basiq-docs (same content)."
+}

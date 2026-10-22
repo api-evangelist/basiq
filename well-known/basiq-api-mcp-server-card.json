@@ -1,0 +1,1 @@
+{"$schema":"https://static.modelcontextprotocol.io/schemas/v1/server-card.schema.json","name":"com.readme/basiq","version":"3.0","title":"Basiq API","description":"MCP server for Basiq API. Lets AI agents explore this project's API reference and documentation.","remotes":[{"type":"streamable-http","url":"https://api.basiq.io/mcp"}]}

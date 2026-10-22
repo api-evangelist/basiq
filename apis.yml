@@ -1,13 +1,17 @@
 aid: basiq
+
 name: Basiq
-description: >-
-  Basiq is an Australian open banking and financial data API platform providing unified access to bank account data and
-  enrichment services. It enables fintechs, lenders, and financial service providers to connect to 180+ Australian and
-  New Zealand banks via CDR (Consumer Data Right) and third-party connectors. The Basiq API provides user management,
-  bank connections, account balances, transaction history, income verification, and expense categorization. Uses JWT
-  Bearer token authentication.
+
+description: Basiq is an Australian open banking and financial data API platform providing unified access to bank account data and enrichment
+  services. It enables fintechs, lenders, and financial service providers to connect to 180+ Australian and New Zealand banks via CDR (Consumer
+  Data Right) and third-party connectors. The Basiq API provides user management, bank connections, account balances, transaction history, income
+  verification, and expense categorization. Uses JWT Bearer token authentication. Basiq Pty Ltd (ABN 95 616 592 011) is an accredited data recipient
+  under the CDR and a wholly-owned but non-guaranteed subsidiary of Cuscal Limited.
+
 type: Index
+
 kind: company
+
 deliveryModel:
   model: saas
   open_source: false
@@ -20,6 +24,7 @@ deliveryModel:
   - pricing
   generated: '2026-08-28'
   method: derived
+
 accessModel:
   pricing: freemium
   onboarding: self-serve
@@ -34,30 +39,228 @@ accessModel:
   - security
   generated: '2026-09-03'
   method: derived
+
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/basiq.png
+
 x-docs-platform: readme
+
 x-docs-platform-confidence: high
+
 x-docs-platform-checked: 2026-09-20
+
 tags:
-  - Australia
-  - Banking
-  - CDR
-  - Financial Data
-  - Fintech
-  - Open Banking
-  - Transaction
+- Australia
+- Banking
+- CDR
+- Financial Data
+- Fintech
+- Open Banking
+- Transaction
+- Lending
+- Account Verification
+
 tags_raw:
-  - Australia
-  - Banking
-  - CDR
-  - Financial Data
-  - Fintech
-  - Open Banking
-  - Transactions
+- Australia
+- Banking
+- CDR
+- Financial Data
+- Fintech
+- Open Banking
+- Transactions
+
 url: https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/apis.yml
+
 created: '2026-03-27'
-modified: '2026-05-19'
+
+modified: '2026-10-21'
+
 specificationVersion: '0.23'
+
+maintainers:
+- FN: Kin Lane
+  email: kin@apievangelist.com
+
+common:
+- type: PostmanWorkspace
+  url: https://www.postman.com/kinlaneapi/basiq/overview
+- type: Spectral
+  url: rules/basiq-spectral-rules.yml
+- type: Spectral
+  url: rules/basiq-rules.yml
+- type: Spectral
+  url: rules/basiq-jsonschema-spectral-rules.yml
+- type: Vocabulary
+  url: vocabulary/basiq-vocabulary.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: Components
+  url: components/basiq-components.yml
+- type: ChangeLog
+  url: changelog/basiq-changelog.yml
+- type: Conventions
+  url: conventions/basiq-conventions.yml
+- type: Sandbox
+  url: sandbox/basiq-sandbox.yml
+- type: Deprecation
+  url: lifecycle/basiq-lifecycle.yml
+- type: Lifecycle
+  url: lifecycle/basiq-lifecycle.yml
+- type: ErrorCatalog
+  url: errors/basiq-error-codes.yml
+- type: ErrorCatalog
+  url: errors/basiq-problem-types.yml
+- type: Conformance
+  url: conformance/basiq-conformance.yml
+- type: Overlay
+  url: overlays/basiq-accounts-api-overlay.yaml
+- type: LLMsTxt
+  url: llms/basiq-llms.txt
+- type: ToolCrosswalk
+  url: mcp/basiq-tool-crosswalk.yml
+- type: MCPServer
+  url: mcp/basiq-mcp.yml
+- type: SecurityTxt
+  url: well-known/basiq-status-security.txt
+- type: SecurityTxt
+  url: well-known/basiq-docs-security.txt
+- type: WellKnown
+  url: well-known/basiq-well-known.yml
+- type: Hosts
+  url: hosts/basiq-hosts.yml
+- type: IntegrationEdges
+  url: integrations/basiq-integration-edges.yml
+- type: Vendors
+  url: vendors/basiq-vendors.yml
+- type: SDKs
+  url: packages/basiq-packages.yml
+- type: Packages
+  url: packages/basiq-packages.yml
+- type: Blog
+  url: https://blog.basiq.io
+- type: Plans
+  url: plans/basiq-plans-pricing.yml
+- type: RateLimits
+  url: rate-limits/basiq-rate-limits.yml
+- type: FinOps
+  url: finops/basiq-finops.yml
+- type: CapabilityMap
+  url: capabilities/basiq-capability-edges.yml
+  name: Basiq Business Capability Map
+- type: AgenticAccess
+  url: agentic-access/basiq-agentic-access.yml
+- type: DomainSecurity
+  url: security/basiq-domain-security.yml
+- type: Authentication
+  url: authentication/basiq-authentication.yml
+- type: Website
+  url: https://www.basiq.io/
+  name: Basiq
+- type: DeveloperPortal
+  url: https://api.basiq.io/docs
+  name: Basiq Developer Docs
+- type: Documentation
+  url: https://api.basiq.io/docs
+  name: Guides
+- type: APIReference
+  url: https://api.basiq.io/reference
+  name: API Reference
+- type: GettingStarted
+  url: https://api.basiq.io/docs/getting-started
+  name: Quickstart
+- type: ChangeLog
+  url: https://api.basiq.io/changelog
+  name: Changelog
+- type: StatusPage
+  url: https://status.basiq.io/
+  name: Basiq Status
+- type: HelpCenter
+  url: https://docs.basiq.io/en/
+  name: Basiq Help Center
+- type: Pricing
+  url: https://www.basiq.io/pricing.html
+  name: Pricing
+- type: SignUp
+  url: https://dashboard.basiq.io/register
+  name: Sign Up
+- type: Login
+  url: https://dashboard.basiq.io/login
+  name: Developer Dashboard Login
+- type: Dashboard
+  url: https://dashboard.basiq.io/
+  name: Developer Dashboard
+- type: GitHubOrganization
+  url: https://github.com/basiqio
+  name: GitHub Organization
+- type: Security
+  url: https://www.basiq.io/data-security.html
+  name: Data Security
+- type: Compliance
+  url: https://docs.basiq.io/en/articles/5088017-consumer-data-right-cdr-policy
+  name: Consumer Data Right (CDR) Policy
+- type: About
+  url: https://www.basiq.io/company/about.html
+  name: About Basiq
+- type: Contact
+  url: https://www.basiq.io/contact.html
+  name: Contact Us
+- type: TermsOfService
+  url: https://docs.basiq.io/en/articles/415750-basiq-terms-of-service
+  name: Basiq Terms of Service
+- type: PrivacyPolicy
+  url: https://docs.basiq.io/en/articles/382581-basiq-privacy-policy
+  name: Basiq Privacy Policy
+- type: SpectralRules
+  url: rules/basiq-spectral-rules.yml
+- type: Vocabulary
+  url: vocabulary/basiq-vocabulary.yaml
+- type: JSONLD
+  url: json-ld/basiq-context.jsonld
+- name: Features
+  type: Features
+  data:
+  - name: Bank Connections
+    description: Connect to 180+ Australian and New Zealand banks via CDR and third-party connectors.
+  - name: Account Data
+    description: Retrieve real-time account balances, available funds, and account metadata.
+  - name: Transaction History
+    description: Access enriched transaction history with categorization and merchant data.
+  - name: Income Verification
+    description: Automated income stream identification and regular/irregular income calculation.
+  - name: Expense Categorization
+    description: Transaction-based expense categorization for affordability and budgeting analysis.
+  - name: CDR Compliance
+    description: Consumer Data Right (CDR) compliant data access for Australian open banking.
+  - name: Data Enrichment
+    description: Transaction enrichment with merchant names, categories, and subcategories.
+- name: Use Cases
+  type: UseCases
+  data:
+  - name: Lending and Credit Assessment
+    description: Use income verification and expense data to assess creditworthiness and affordability.
+  - name: Personal Finance Apps
+    description: Aggregate bank accounts and transactions for budgeting and financial planning tools.
+  - name: Mortgage Applications
+    description: Automate bank statement verification and income confirmation for home loan applications.
+  - name: BNPL Affordability
+    description: Assess buy-now-pay-later affordability using real-time transaction and income data.
+  - name: Financial Advisory
+    description: Provide financial planners with complete client financial pictures across institutions.
+  - name: Account Verification
+    description: Verify bank account ownership for payment and identity verification workflows.
+- name: Integrations
+  type: Integrations
+  data:
+  - name: Xero
+  - name: MYOB
+  - name: Salesforce
+  - name: Zapier
+  - name: Commonwealth Bank
+  - name: ANZ
+  - name: Westpac
+  - name: NAB
+- type: LlmsText
+  url: https://api.basiq.io/llms.txt
+
 apis:
 - aid: basiq:basiq-accounts-api
   name: Basiq Accounts API
@@ -71,6 +274,9 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/basiq-accounts-api-openapi.yml
+  - type: OpenAPI
+    name: OpenAPI (provider-hosted)
+    url: https://api.basiq.io/openapi/connect.json
   - type: Documentation
     url: https://api.basiq.io/reference
   - type: Documentation
@@ -85,6 +291,9 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/basiq-authentication-api-openapi.yml
+  - type: OpenAPI
+    name: OpenAPI (provider-hosted)
+    url: https://api.basiq.io/openapi/connect.json
   - type: Documentation
     url: https://api.basiq.io/reference
   - type: Documentation
@@ -99,6 +308,9 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/basiq-connections-api-openapi.yml
+  - type: OpenAPI
+    name: OpenAPI (provider-hosted)
+    url: https://api.basiq.io/openapi/connect.json
   - type: Documentation
     url: https://api.basiq.io/reference
   - type: Documentation
@@ -115,6 +327,9 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/basiq-transactions-api-openapi.yml
+  - type: OpenAPI
+    name: OpenAPI (provider-hosted)
+    url: https://api.basiq.io/openapi/connect.json
   - type: Documentation
     url: https://api.basiq.io/reference
   - type: Documentation
@@ -131,6 +346,9 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/basiq-users-api-openapi.yml
+  - type: OpenAPI
+    name: OpenAPI (provider-hosted)
+    url: https://api.basiq.io/openapi/connect.json
   - type: Documentation
     url: https://api.basiq.io/reference
   - type: Documentation
@@ -145,6 +363,9 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/basiq-consents-api-openapi.yml
+  - type: OpenAPI
+    name: OpenAPI (provider-hosted)
+    url: https://api.basiq.io/openapi/connect.json
   - type: Documentation
     url: https://api.basiq.io/reference
   - type: Documentation
@@ -159,103 +380,565 @@ apis:
   properties:
   - type: OpenAPI
     url: openapi/basiq-jobs-api-openapi.yml
+  - type: OpenAPI
+    name: OpenAPI (provider-hosted)
+    url: https://api.basiq.io/openapi/connect.json
   - type: Documentation
     url: https://api.basiq.io/reference
   - type: Documentation
     url: https://api.basiq.io/reference/getting-started
-common:
-  - type: Plans
-    url: plans/basiq-plans-pricing.yml
-  - type: RateLimits
-    url: rate-limits/basiq-rate-limits.yml
-  - type: FinOps
-    url: finops/basiq-finops.yml
-  - type: CapabilityMap
-    url: capabilities/basiq-capability-edges.yml
-    name: Basiq Business Capability Map
-  - type: AgenticAccess
-    url: agentic-access/basiq-agentic-access.yml
-  - type: DomainSecurity
-    url: security/basiq-domain-security.yml
-  - type: Authentication
-    url: authentication/basiq-authentication.yml
-  - type: LinkedIn
-    url: https://www.linkedin.com/company/basiq-i-o
-  - type: Website
-    url: https://basiq.io/
-    name: Basiq
+- aid: basiq:basiq-affordability-api
+  name: Basiq Affordability API
+  description: The Affordability API from Basiq — 3 operation(s) for affordability.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Affordability
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-affordability-api-openapi.yml
   - type: Documentation
     url: https://api.basiq.io/reference
-    name: API Reference
-  - type: Website
-    url: https://dashboard.basiq.io/
-    name: Developer Dashboard
-  - type: Website
-    url: https://basiq.io/pricing/
-    name: Pricing
-  - type: Blog
-    url: https://basiq.io/blog/
-    name: Blog
-  - type: Website
-    url: https://github.com/basiqio
-    name: GitHub Organization
-  - type: TermsOfService
-    url: https://basiq.io/legal/terms-of-use/
-    name: Terms of Use
-  - type: PrivacyPolicy
-    url: https://basiq.io/legal/privacy-policy/
-    name: Privacy Policy
-  - type: SpectralRules
-    url: rules/basiq-spectral-rules.yml
-  - type: Vocabulary
-    url: vocabulary/basiq-vocabulary.yaml
-  - type: JSONLD
-    url: json-ld/basiq-context.jsonld
-  - name: Features
-    type: Features
-    data:
-      - name: Bank Connections
-        description: Connect to 180+ Australian and New Zealand banks via CDR and third-party connectors.
-      - name: Account Data
-        description: Retrieve real-time account balances, available funds, and account metadata.
-      - name: Transaction History
-        description: Access enriched transaction history with categorization and merchant data.
-      - name: Income Verification
-        description: Automated income stream identification and regular/irregular income calculation.
-      - name: Expense Categorization
-        description: Transaction-based expense categorization for affordability and budgeting analysis.
-      - name: CDR Compliance
-        description: Consumer Data Right (CDR) compliant data access for Australian open banking.
-      - name: Data Enrichment
-        description: Transaction enrichment with merchant names, categories, and subcategories.
-  - name: Use Cases
-    type: UseCases
-    data:
-      - name: Lending and Credit Assessment
-        description: Use income verification and expense data to assess creditworthiness and affordability.
-      - name: Personal Finance Apps
-        description: Aggregate bank accounts and transactions for budgeting and financial planning tools.
-      - name: Mortgage Applications
-        description: Automate bank statement verification and income confirmation for home loan applications.
-      - name: BNPL Affordability
-        description: Assess buy-now-pay-later affordability using real-time transaction and income data.
-      - name: Financial Advisory
-        description: Provide financial planners with complete client financial pictures across institutions.
-      - name: Account Verification
-        description: Verify bank account ownership for payment and identity verification workflows.
-  - name: Integrations
-    type: Integrations
-    data:
-      - name: Xero
-      - name: MYOB
-      - name: Salesforce
-      - name: Zapier
-      - name: Commonwealth Bank
-      - name: ANZ
-      - name: Westpac
-      - name: NAB
-  - type: LlmsText
-    url: https://api.basiq.io/llms.txt
-maintainers:
-  - FN: Kin Lane
-    email: kin@apievangelist.com
+  - type: JSONSchema
+    url: json-schema/basiq-single-merchant-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-merchant-details-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-webhook-stats-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-request-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-type-item-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-account-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-expense-ratio-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-connection-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payee-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payees-list-response-schema.json
+- aid: basiq:basiq-analytics-api
+  name: Basiq Analytics API
+  description: The Analytics API from Basiq — 2 operation(s) for analytics.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Analytics
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-analytics-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: JSONSchema
+    url: json-schema/basiq-single-merchant-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-merchant-details-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-webhook-stats-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-request-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-type-item-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-account-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-expense-ratio-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-connection-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payee-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payees-list-response-schema.json
+- aid: basiq:basiq-authlinks-api
+  name: Basiq Auth Links API
+  description: The AuthLinks API from Basiq — 1 operation(s) for authlinks.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - AuthLinks
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-authlinks-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: JSONSchema
+    url: json-schema/basiq-single-merchant-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-merchant-details-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-webhook-stats-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-request-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-type-item-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-account-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-expense-ratio-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-connection-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payee-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payees-list-response-schema.json
+- aid: basiq:basiq-connectors-api
+  name: Basiq Connectors API
+  description: The Connectors API from Basiq — 2 operation(s) for connectors.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Connectors
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-connectors-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: JSONSchema
+    url: json-schema/basiq-single-merchant-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-merchant-details-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-webhook-stats-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-request-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-type-item-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-account-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-expense-ratio-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-connection-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payee-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payees-list-response-schema.json
+- aid: basiq:basiq-enrich-api
+  name: Basiq Enrich API
+  description: The Enrich API from Basiq — 3 operation(s) for enrich.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Enrich
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-enrich-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: JSONSchema
+    url: json-schema/basiq-single-merchant-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-merchant-details-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-webhook-stats-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-request-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-type-item-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-account-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-expense-ratio-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-connection-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payee-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payees-list-response-schema.json
+- aid: basiq:basiq-events-api
+  name: Basiq Events API
+  description: The Events API from Basiq — 4 operation(s) for events.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Events
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-events-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: JSONSchema
+    url: json-schema/basiq-single-merchant-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-merchant-details-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-webhook-stats-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-request-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-type-item-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-account-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-expense-ratio-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-connection-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payee-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payees-list-response-schema.json
+- aid: basiq:basiq-expenses-api
+  name: Basiq Expenses API
+  description: The Expenses API from Basiq — 2 operation(s) for expenses.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Expenses
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-expenses-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: JSONSchema
+    url: json-schema/basiq-single-merchant-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-merchant-details-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-webhook-stats-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-request-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-type-item-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-account-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-expense-ratio-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-connection-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payee-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payees-list-response-schema.json
+- aid: basiq:basiq-identities-api
+  name: Basiq Identities API
+  description: The Identities API from Basiq — 2 operation(s) for identities.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Identities
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-identities-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: JSONSchema
+    url: json-schema/basiq-single-merchant-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-merchant-details-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-webhook-stats-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-request-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-type-item-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-account-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-expense-ratio-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-connection-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payee-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payees-list-response-schema.json
+- aid: basiq:basiq-income-api
+  name: Basiq Income API
+  description: The Income API from Basiq — 2 operation(s) for income.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Income
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-income-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: JSONSchema
+    url: json-schema/basiq-single-merchant-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-merchant-details-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-webhook-stats-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-request-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-type-item-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-account-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-expense-ratio-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-connection-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payee-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payees-list-response-schema.json
+- aid: basiq:basiq-insights-api
+  name: Basiq Insights API
+  description: The Insights API from Basiq — 10 operation(s) for insights.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Insights
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-insights-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: JSONSchema
+    url: json-schema/basiq-single-merchant-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-merchant-details-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-webhook-stats-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-request-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-type-item-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-account-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-expense-ratio-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-connection-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payee-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payees-list-response-schema.json
+- aid: basiq:basiq-payees-api
+  name: Basiq Payees API
+  description: The Payees API from Basiq — 2 operation(s) for payees.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Payees
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-payees-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: JSONSchema
+    url: json-schema/basiq-single-merchant-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-merchant-details-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-webhook-stats-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-request-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-type-item-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-account-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-expense-ratio-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-connection-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payee-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payees-list-response-schema.json
+- aid: basiq:basiq-reports-api
+  name: Basiq Reports API
+  description: The Reports API from Basiq — 5 operation(s) for reports.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Reports
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-reports-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: JSONSchema
+    url: json-schema/basiq-single-merchant-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-merchant-details-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-webhook-stats-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-request-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-type-item-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-account-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-expense-ratio-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-connection-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payee-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payees-list-response-schema.json
+- aid: basiq:basiq-statements-api
+  name: Basiq Statements API
+  description: The Statements API from Basiq — 1 operation(s) for statements.
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Statements
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-statements-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: JSONSchema
+    url: json-schema/basiq-single-merchant-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-merchant-details-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-webhook-stats-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-request-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-type-item-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-account-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-expense-ratio-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-connection-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payee-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payees-list-response-schema.json
+- aid: basiq:basiq-webhooks-api
+  name: Basiq Webhooks API
+  description: Basiq Webhooks
+  humanURL: https://api.basiq.io/reference
+  baseURL: https://au-api.basiq.io
+  tags:
+  - Webhooks
+  properties:
+  - type: OpenAPI
+    url: openapi/basiq-webhooks-api-openapi.yml
+  - type: Documentation
+    url: https://api.basiq.io/reference
+  - type: JSONSchema
+    url: json-schema/basiq-single-merchant-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-merchant-details-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-webhook-stats-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-request-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-post-insights-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-type-item-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-insight-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-account-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-expense-ratio-insight-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-connection-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-analytics-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payee-details-response-schema.json
+  - type: JSONSchema
+    url: json-schema/basiq-payees-list-response-schema.json
+x-coverage:
+  state: covered
+  reason: identity-verified
+  detail: Website www.basiq.io names Basiq Pty Ltd (subsidiary of Cuscal Limited). The former Blog pointers (basiq.io/blog, blog.basiq.io) now
+    redirect cross-domain to the Cuscal newsroom and were removed; dead basiq.io/legal pages were replaced with the Terms and Privacy articles
+    linked from the site footer.
+  generated: '2026-10-21'
+  evidence:
+  - url: https://basiq.io/
+    status: 200
+  - url: https://blog.basiq.io
+    status: 200
+    note: redirects to https://www.cuscal.com/newsroom/
+  - url: https://docs.basiq.io/en/articles/415750-basiq-terms-of-service
+    status: 200
+  - url: https://docs.basiq.io/en/articles/382581-basiq-privacy-policy
+    status: 200
+x-enrichment:
+  date: '2026-10-21'
+  status: enriched
+  artifacts_added: 64
+  pass: modular-v1
+  engine: identity=anthropic,contract=anthropic,surfaces=anthropic,docs=anthropic,regulatory=anthropic

@@ -1,0 +1,699 @@
+{
+  "info": {
+    "_postman_id": "c3932e38-a9f5-45ec-a499-9e17909b0911",
+    "name": "Enrich API",
+    "description": "All included utility endpoints for Basiq partners",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:23:33.000Z",
+    "updatedAt": "2026-10-22T02:23:33.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-c3932e38-a9f5-45ec-a499-9e17909b0911"
+  },
+  "item": [
+    {
+      "name": "enrich",
+      "item": [
+        {
+          "name": "Enrich",
+          "id": "495cb7b9-ba5e-4529-ac50-0d9ea1bba1c7",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/enrich?q=<string>&institution=<string>&country=<string>&mcc=<string>&accountType=<string>&amount=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "enrich"
+              ],
+              "query": [
+                {
+                  "description": "(Required) This is the search string that is used to lookup the entity (merchant) information.\n```**q=garfish%20MANLY%20NS**&country=AU&institution=AU06703```",
+                  "key": "q",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Identifies the institution from where the transaction was derived. This must be a Basiq recognisable institution ID.\n```enrich?METRO%20PETROLEUM%20FR%20FORE&country=AU&accountType=transaction&amount=-12.95&**institution=AU04301**```",
+                  "key": "institution",
+                  "value": "<string>"
+                },
+                {
+                  "description": "(Required) Specifies the country the search should be narrowed down to. Passing in a country value will limit the search to the specified country. The country must be in ISO 3166 Alpha-2 format\n```q=garfish%20MANLY%20NS&**country=AU**&institution=AU06703```",
+                  "key": "country",
+                  "value": "<string>"
+                },
+                {
+                  "description": "Merchant classification code as defined by Visa and Mastercard\n```q=garfish%20MANLY%20NS&country=AU&institution=AU06703&**mcc=3299**```",
+                  "key": "mcc",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The Account type from which the transaction was derived.\n```METRO%20PETROLEUM%20FR%20FORE&country=AU&accountType=transaction&institution=AU04301```\n**Valid values:**\n- `transaction` - `credit-card` - `savings` - `mortgage` - `loan` - `foreign`",
+                  "key": "accountType",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The dollar/cent amount relevant to the transaction.\n```q=garfish%20MANLY%20NS&country=AU&institution=AU06703&**amount=-12.95**```",
+                  "key": "amount",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "The Enrich resource enables you to retrieve details by passing in a search query containing a bank transaction description. The service enriches transaction data with multiple attributes, returning a transaction classification and three metadata components. The transaction classification will first determine if the transaction is of type payment, transfer, cash-withdrawal, bank-fee etc. The engine then derives merchant information, purchase location and prescribes an industry standard categorisation for each payment transaction."
+          },
+          "response": [
+            {
+              "id": "1ff7f4fa-13c6-4228-a4b2-8950f8818e8e",
+              "name": "The enrich endpoint will always return a 200 response to the user, along with a set of results for each of the datasets subscribed to: category, entity and location. If no results are found for the search query then an empty result set is returned. If par",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/enrich?q=<string>&institution=<string>&country=<string>&mcc=<string>&accountType=<string>&amount=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "enrich"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) This is the search string that is used to lookup the entity (merchant) information.\n```**q=garfish%20MANLY%20NS**&country=AU&institution=AU06703```",
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Identifies the institution from where the transaction was derived. This must be a Basiq recognisable institution ID.\n```enrich?METRO%20PETROLEUM%20FR%20FORE&country=AU&accountType=transaction&amount=-12.95&**institution=AU04301**```",
+                      "key": "institution",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Specifies the country the search should be narrowed down to. Passing in a country value will limit the search to the specified country. The country must be in ISO 3166 Alpha-2 format\n```q=garfish%20MANLY%20NS&**country=AU**&institution=AU06703```",
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Merchant classification code as defined by Visa and Mastercard\n```q=garfish%20MANLY%20NS&country=AU&institution=AU06703&**mcc=3299**```",
+                      "key": "mcc",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The Account type from which the transaction was derived.\n```METRO%20PETROLEUM%20FR%20FORE&country=AU&accountType=transaction&institution=AU04301```\n**Valid values:**\n- `transaction` - `credit-card` - `savings` - `mortgage` - `loan` - `foreign`",
+                      "key": "accountType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The dollar/cent amount relevant to the transaction.\n```q=garfish%20MANLY%20NS&country=AU&institution=AU06703&**amount=-12.95**```",
+                      "key": "amount",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"<string>\",\n  \"direction\": \"<string>\",\n  \"class\": \"<string>\",\n  \"links\": {\n    \"self\": \"<string>\",\n    \"logo-master\": \"<string>\",\n    \"logo-thumb\": \"<string>\"\n  },\n  \"data\": {\n    \"merchant\": {\n      \"id\": \"<string>\",\n      \"businessName\": \"<string>\",\n      \"website\": \"<string>\",\n      \"abn\": \"<string>\",\n      \"phoneNumber\": {\n        \"local\": \"<string>\",\n        \"international\": \"<string>\"\n      }\n    },\n    \"category\": {\n      \"matchType\": \"ml\",\n      \"matchScore\": \"<string>\",\n      \"anzsic\": {\n        \"division\": {\n          \"code\": \"<string>\",\n          \"title\": \"<string>\"\n        },\n        \"subdivision\": {\n          \"code\": \"<string>\",\n          \"title\": \"<string>\"\n        },\n        \"group\": {\n          \"code\": \"<string>\",\n          \"title\": \"<string>\"\n        },\n        \"class\": {\n          \"code\": \"<string>\",\n          \"title\": \"<string>\"\n        },\n        \"subclass\": {\n          \"code\": \"<string>\",\n          \"title\": \"<string>\"\n        }\n      }\n    },\n    \"location\": {\n      \"routeNo\": \"<string>\",\n      \"route\": \"<string>\",\n      \"postalCode\": \"<string>\",\n      \"suburb\": \"<string>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"formattedAddress\": \"<string>\",\n      \"geometry\": {\n        \"lat\": \"<string>\",\n        \"lng\": \"<string>\"\n      }\n    },\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+              "createdAt": "2026-10-22T02:23:33.000Z",
+              "updatedAt": "2026-10-22T02:23:33.000Z",
+              "uid": "35240-1ff7f4fa-13c6-4228-a4b2-8950f8818e8e"
+            },
+            {
+              "id": "15ebc508-6b1a-4991-a917-e87a8f9be6fb",
+              "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/enrich?q=<string>&institution=<string>&country=<string>&mcc=<string>&accountType=<string>&amount=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "enrich"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) This is the search string that is used to lookup the entity (merchant) information.\n```**q=garfish%20MANLY%20NS**&country=AU&institution=AU06703```",
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Identifies the institution from where the transaction was derived. This must be a Basiq recognisable institution ID.\n```enrich?METRO%20PETROLEUM%20FR%20FORE&country=AU&accountType=transaction&amount=-12.95&**institution=AU04301**```",
+                      "key": "institution",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Specifies the country the search should be narrowed down to. Passing in a country value will limit the search to the specified country. The country must be in ISO 3166 Alpha-2 format\n```q=garfish%20MANLY%20NS&**country=AU**&institution=AU06703```",
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Merchant classification code as defined by Visa and Mastercard\n```q=garfish%20MANLY%20NS&country=AU&institution=AU06703&**mcc=3299**```",
+                      "key": "mcc",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The Account type from which the transaction was derived.\n```METRO%20PETROLEUM%20FR%20FORE&country=AU&accountType=transaction&institution=AU04301```\n**Valid values:**\n- `transaction` - `credit-card` - `savings` - `mortgage` - `loan` - `foreign`",
+                      "key": "accountType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The dollar/cent amount relevant to the transaction.\n```q=garfish%20MANLY%20NS&country=AU&institution=AU06703&**amount=-12.95**```",
+                      "key": "amount",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"invalid-content\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"unsupported-accept\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T02:23:33.000Z",
+              "updatedAt": "2026-10-22T02:23:33.000Z",
+              "uid": "35240-15ebc508-6b1a-4991-a917-e87a8f9be6fb"
+            },
+            {
+              "id": "9148c950-01ad-4394-b119-00cdd1e0329a",
+              "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/enrich?q=<string>&institution=<string>&country=<string>&mcc=<string>&accountType=<string>&amount=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "enrich"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) This is the search string that is used to lookup the entity (merchant) information.\n```**q=garfish%20MANLY%20NS**&country=AU&institution=AU06703```",
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Identifies the institution from where the transaction was derived. This must be a Basiq recognisable institution ID.\n```enrich?METRO%20PETROLEUM%20FR%20FORE&country=AU&accountType=transaction&amount=-12.95&**institution=AU04301**```",
+                      "key": "institution",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Specifies the country the search should be narrowed down to. Passing in a country value will limit the search to the specified country. The country must be in ISO 3166 Alpha-2 format\n```q=garfish%20MANLY%20NS&**country=AU**&institution=AU06703```",
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Merchant classification code as defined by Visa and Mastercard\n```q=garfish%20MANLY%20NS&country=AU&institution=AU06703&**mcc=3299**```",
+                      "key": "mcc",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The Account type from which the transaction was derived.\n```METRO%20PETROLEUM%20FR%20FORE&country=AU&accountType=transaction&institution=AU04301```\n**Valid values:**\n- `transaction` - `credit-card` - `savings` - `mortgage` - `loan` - `foreign`",
+                      "key": "accountType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The dollar/cent amount relevant to the transaction.\n```q=garfish%20MANLY%20NS&country=AU&institution=AU06703&**amount=-12.95**```",
+                      "key": "amount",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"forbidden-access\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"forbidden-access\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T02:23:33.000Z",
+              "updatedAt": "2026-10-22T02:23:33.000Z",
+              "uid": "35240-9148c950-01ad-4394-b119-00cdd1e0329a"
+            },
+            {
+              "id": "15fc7221-8773-42f3-b06e-cb8d97f653b7",
+              "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/enrich?q=<string>&institution=<string>&country=<string>&mcc=<string>&accountType=<string>&amount=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "enrich"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) This is the search string that is used to lookup the entity (merchant) information.\n```**q=garfish%20MANLY%20NS**&country=AU&institution=AU06703```",
+                      "key": "q",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Identifies the institution from where the transaction was derived. This must be a Basiq recognisable institution ID.\n```enrich?METRO%20PETROLEUM%20FR%20FORE&country=AU&accountType=transaction&amount=-12.95&**institution=AU04301**```",
+                      "key": "institution",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "(Required) Specifies the country the search should be narrowed down to. Passing in a country value will limit the search to the specified country. The country must be in ISO 3166 Alpha-2 format\n```q=garfish%20MANLY%20NS&**country=AU**&institution=AU06703```",
+                      "key": "country",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "Merchant classification code as defined by Visa and Mastercard\n```q=garfish%20MANLY%20NS&country=AU&institution=AU06703&**mcc=3299**```",
+                      "key": "mcc",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The Account type from which the transaction was derived.\n```METRO%20PETROLEUM%20FR%20FORE&country=AU&accountType=transaction&institution=AU04301```\n**Valid values:**\n- `transaction` - `credit-card` - `savings` - `mortgage` - `loan` - `foreign`",
+                      "key": "accountType",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The dollar/cent amount relevant to the transaction.\n```q=garfish%20MANLY%20NS&country=AU&institution=AU06703&**amount=-12.95**```",
+                      "key": "amount",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T02:23:33.000Z",
+              "updatedAt": "2026-10-22T02:23:33.000Z",
+              "uid": "35240-15fc7221-8773-42f3-b06e-cb8d97f653b7"
+            }
+          ],
+          "createdAt": "2026-10-22T02:23:33.000Z",
+          "updatedAt": "2026-10-22T02:23:33.000Z",
+          "uid": "35240-495cb7b9-ba5e-4529-ac50-0d9ea1bba1c7"
+        }
+      ],
+      "id": "99ac00d2-5f63-4b1f-93c7-85263404fa0f",
+      "createdAt": "2026-10-22T02:23:33.000Z",
+      "updatedAt": "2026-10-22T02:23:33.000Z",
+      "uid": "35240-99ac00d2-5f63-4b1f-93c7-85263404fa0f"
+    },
+    {
+      "name": "merchants",
+      "item": [
+        {
+          "name": "{merchantId}",
+          "item": [
+            {
+              "name": "Retrieve a merchant",
+              "id": "74c87844-a5dc-4cdd-ac3a-51e315c4797a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/merchants/:merchantId",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "merchants",
+                    ":merchantId"
+                  ],
+                  "variable": [
+                    {
+                      "id": "b5f86231-b569-4461-9342-c1f0bbe4dd06",
+                      "key": "merchantId",
+                      "value": "<uuid>",
+                      "description": "(Required) The unique identifier of the merchant."
+                    }
+                  ]
+                },
+                "description": "Retrieves a single merchant's details using its unique ID."
+              },
+              "response": [
+                {
+                  "id": "adfad413-30f5-4032-af16-6769ac526d9b",
+                  "name": "Successful response with a single merchant's detailed data.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/merchants/:merchantId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "merchants",
+                        ":merchantId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "merchantId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"source\": \"<string>\",\n  \"merchant\": {\n    \"id\": \"<string>\",\n    \"businessName\": \"<string>\",\n    \"website\": \"<string>\",\n    \"abn\": \"<string>\",\n    \"phoneNumber\": {\n      \"local\": \"<string>\",\n      \"international\": \"<string>\"\n    }\n  },\n  \"category\": {\n    \"matchType\": \"mcc\",\n    \"matchScore\": \"<float>\",\n    \"anzsic\": {\n      \"division\": {\n        \"code\": \"<string>\",\n        \"title\": \"<string>\"\n      },\n      \"subdivision\": {\n        \"code\": \"<string>\",\n        \"title\": \"<string>\"\n      },\n      \"group\": {\n        \"code\": \"<string>\",\n        \"title\": \"<string>\"\n      },\n      \"class\": {\n        \"code\": \"<string>\",\n        \"title\": \"<string>\"\n      },\n      \"subclass\": {\n        \"code\": \"<string>\",\n        \"title\": \"<string>\"\n      }\n    }\n  },\n  \"location\": {\n    \"routeNo\": \"<string>\",\n    \"route\": \"<string>\",\n    \"postalCode\": \"<string>\",\n    \"suburb\": \"<string>\",\n    \"state\": \"<string>\",\n    \"country\": \"<string>\",\n    \"formattedAddress\": \"<string>\",\n    \"geometry\": {\n      \"lat\": \"<string>\",\n      \"lng\": \"<string>\"\n    }\n  },\n  \"links\": {\n    \"self\": \"<string>\",\n    \"logo-master\": \"<string,null>\",\n    \"logo-thumb\": \"<string,null>\"\n  }\n}",
+                  "createdAt": "2026-10-22T02:23:33.000Z",
+                  "updatedAt": "2026-10-22T02:23:33.000Z",
+                  "uid": "35240-adfad413-30f5-4032-af16-6769ac526d9b"
+                },
+                {
+                  "id": "449e11ce-ea80-42e2-a009-beee708ce8aa",
+                  "name": "Merchant not found.",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/merchants/:merchantId",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "merchants",
+                        ":merchantId"
+                      ],
+                      "variable": [
+                        {
+                          "key": "merchantId"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Not Found",
+                  "code": 404,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                  "createdAt": "2026-10-22T02:23:33.000Z",
+                  "updatedAt": "2026-10-22T02:23:33.000Z",
+                  "uid": "35240-449e11ce-ea80-42e2-a009-beee708ce8aa"
+                }
+              ],
+              "createdAt": "2026-10-22T02:23:33.000Z",
+              "updatedAt": "2026-10-22T02:23:33.000Z",
+              "uid": "35240-74c87844-a5dc-4cdd-ac3a-51e315c4797a"
+            }
+          ],
+          "id": "f1b43be5-cacd-411a-8e63-ea610c7c4842",
+          "createdAt": "2026-10-22T02:23:33.000Z",
+          "updatedAt": "2026-10-22T02:23:33.000Z",
+          "uid": "35240-f1b43be5-cacd-411a-8e63-ea610c7c4842"
+        },
+        {
+          "name": "Search Merchants",
+          "id": "958bf9db-6c51-4c07-a30c-426953732642",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
+          "request": {
+            "auth": {
+              "type": "bearer",
+              "bearer": [
+                {
+                  "key": "token",
+                  "value": "{{bearerToken}}",
+                  "type": "string"
+                }
+              ]
+            },
+            "method": "GET",
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "url": {
+              "raw": "{{baseUrl}}/merchants?abn=<string>&merchantName=<string>&suburb=<string>&entityType=<string>",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "merchants"
+              ],
+              "query": [
+                {
+                  "description": "The Australian Business Number (ABN) of the merchant. Required if `merchantName` is not provided.",
+                  "key": "abn",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The name of the merchant. Required if `abn` is not provided.",
+                  "key": "merchantName",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The suburb of the merchant location to filter by.",
+                  "key": "suburb",
+                  "value": "<string>"
+                },
+                {
+                  "description": "The type of the merchant entity to filter by.",
+                  "key": "entityType",
+                  "value": "<string>"
+                }
+              ]
+            },
+            "description": "Retrieves merchant details. At least one of `abn` or `merchantName` is required for a successful search. Optional filters for suburb and entity type can also be applied."
+          },
+          "response": [
+            {
+              "id": "b890cf4f-7532-4505-8a83-14ab10e4fc7e",
+              "name": "Successful response with merchant data.",
+              "originalRequest": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: bearer",
+                    "key": "Authorization",
+                    "value": "Bearer <token>"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/merchants?abn=<string>&merchantName=<string>&suburb=<string>&entityType=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "merchants"
+                  ],
+                  "query": [
+                    {
+                      "description": "The Australian Business Number (ABN) of the merchant. Required if `merchantName` is not provided.",
+                      "key": "abn",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The name of the merchant. Required if `abn` is not provided.",
+                      "key": "merchantName",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The suburb of the merchant location to filter by.",
+                      "key": "suburb",
+                      "value": "<string>"
+                    },
+                    {
+                      "description": "The type of the merchant entity to filter by.",
+                      "key": "entityType",
+                      "value": "<string>"
+                    }
+                  ]
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"type\": \"<string>\",\n  \"size\": \"<integer>\",\n  \"data\": [\n    {\n      \"merchantName\": \"<string>\",\n      \"merchantId\": \"<string>\",\n      \"matchScore\": \"<float>\",\n      \"suburb\": \"<string,null>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"abn\": \"<string>\",\n      \"entityType\": \"<string>\"\n    },\n    {\n      \"merchantName\": \"<string>\",\n      \"merchantId\": \"<string>\",\n      \"matchScore\": \"<float>\",\n      \"suburb\": \"<string,null>\",\n      \"state\": \"<string>\",\n      \"country\": \"<string>\",\n      \"abn\": \"<string>\",\n      \"entityType\": \"<string>\"\n    }\n  ],\n  \"links\": {\n    \"self\": \"<string>\"\n  }\n}",
+              "createdAt": "2026-10-22T02:23:33.000Z",
+              "updatedAt": "2026-10-22T02:23:33.000Z",
+              "uid": "35240-b890cf4f-7532-4505-8a83-14ab10e4fc7e"
+            }
+          ],
+          "createdAt": "2026-10-22T02:23:33.000Z",
+          "updatedAt": "2026-10-22T02:23:33.000Z",
+          "uid": "35240-958bf9db-6c51-4c07-a30c-426953732642"
+        }
+      ],
+      "id": "8864fe18-2e5c-48a3-b84b-a4714778681c",
+      "createdAt": "2026-10-22T02:23:33.000Z",
+      "updatedAt": "2026-10-22T02:23:33.000Z",
+      "uid": "35240-8864fe18-2e5c-48a3-b84b-a4714778681c"
+    }
+  ],
+  "auth": {
+    "type": "bearer",
+    "bearer": [
+      {
+        "key": "token",
+        "value": "{{bearerToken}}",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://au-api.basiq.io"
+    }
+  ]
+}

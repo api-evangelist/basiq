@@ -1,0 +1,56 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://raw.githubusercontent.com/api-evangelist/basiq/main/json-schema/basiq-insight-type-item-schema.json",
+  "title": "InsightTypeItem",
+  "description": "A single supported Insight type entry. The `dataSchema` field describes only the Insight-specific input — it does not represent the full `POST /insights` request body.",
+  "x-generated": "2026-10-21",
+  "x-method": "derived",
+  "x-generator": "derive-json-schema.py",
+  "x-source": "openapi/_original/basiq-insights-openapi.json#/components/schemas/InsightTypeItem",
+  "type": "object",
+  "required": [
+    "type",
+    "id",
+    "supportMultipleUsers",
+    "name",
+    "description",
+    "dataSchema"
+  ],
+  "properties": {
+    "type": {
+      "type": "string",
+      "enum": [
+        "insightType"
+      ],
+      "description": "Resource type identifier, always `insightType`."
+    },
+    "id": {
+      "type": "string",
+      "enum": [
+        "ACCOUNT_VERIFICATION",
+        "BALANCE_VERIFICATION",
+        "IDENTITY_VERIFICATION",
+        "INCOME_VERIFICATION",
+        "EXPENSE_RATIO_VERIFICATION"
+      ],
+      "description": "Unique identifier for the Insight type. Maps to the `insightType` values used by existing Insight endpoints: `account`, `balance`, `identity`, `income`, `expense-ratio`."
+    },
+    "supportMultipleUsers": {
+      "type": "boolean",
+      "description": "Whether this Insight type supports multiple users in a single request."
+    },
+    "name": {
+      "type": "string",
+      "description": "Human-readable name for the Insight type."
+    },
+    "description": {
+      "type": "string",
+      "description": "Description of what the Insight type verifies."
+    },
+    "dataSchema": {
+      "type": "object",
+      "description": "Describes only the Insight-specific input data accepted by existing Insight endpoints for this type. Does not include transport-level fields such as `users` or `type`.",
+      "additionalProperties": true
+    }
+  }
+}

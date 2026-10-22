@@ -1,0 +1,12 @@
+{
+ "url": "https://api.basiq.io/openapi/reporting.json",
+ "final": "https://api.basiq.io/openapi/reporting.json",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 242149,
+ "sha256": "2fae942cbf6658750c60ad256a43ed7adb279f3c15774f2d2611623a9619879d",
+ "fetched_at": "2026-10-21",
+ "fetched_by": "contract module (curl)",
+ "mirror": "https://raw.githubusercontent.com/basiqio-oss/Basiq-docs/refs/heads/v3.0/reference/reporting.json",
+ "ownership": "servers[] https://au-api.basiq.io (Basiq's documented production base) and termsOfService on docs.basiq.io where present; Basiq's own page https://api.basiq.io/reference/openapi.md links these files in its GitHub org basiqio-oss/Basiq-docs (same content)."
+}

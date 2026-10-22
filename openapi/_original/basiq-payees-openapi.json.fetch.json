@@ -1,0 +1,12 @@
+{
+ "url": "https://api.basiq.io/openapi/payees.json",
+ "final": "https://api.basiq.io/openapi/payees.json",
+ "status": 200,
+ "content_type": "application/json; charset=utf-8",
+ "bytes": 17769,
+ "sha256": "68fbcf75c812fea2546fe2f19e5866b9f82f9ba3985f4e4a78c61199cea99a8e",
+ "fetched_at": "2026-10-21",
+ "fetched_by": "contract module (curl)",
+ "mirror": "https://raw.githubusercontent.com/basiqio-oss/Basiq-docs/refs/heads/v3.0/reference/payees.json",
+ "ownership": "servers[] https://au-api.basiq.io (Basiq's documented production base) and termsOfService on docs.basiq.io where present; Basiq's own page https://api.basiq.io/reference/openapi.md links these files in its GitHub org basiqio-oss/Basiq-docs (same content)."
+}

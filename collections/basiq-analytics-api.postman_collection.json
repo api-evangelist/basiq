@@ -1,0 +1,759 @@
+{
+  "info": {
+    "_postman_id": "05ee56ad-363b-43b3-8376-8bd5d1388a32",
+    "name": "Core Analytics API",
+    "description": "All included utility endpoints for Basiq partners",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:23:17.000Z",
+    "updatedAt": "2026-10-22T02:23:17.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-05ee56ad-363b-43b3-8376-8bd5d1388a32"
+  },
+  "item": [
+    {
+      "name": "analytics",
+      "item": [
+        {
+          "name": "users",
+          "item": [
+            {
+              "name": "User Analytics",
+              "id": "485fcba5-0d21-4426-9d57-ad6f6e9340f5",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/analytics/users?interval=weekly&fromDate=<date>&toDate=<date>&connectionType=<string>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "analytics",
+                    "users"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Time interval for analytics.",
+                      "key": "interval",
+                      "value": "weekly"
+                    },
+                    {
+                      "description": "Start date of the analytics period (e.g., 2023-01-01).",
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "End date of the analytics period (e.g., 2024-01-01).",
+                      "key": "toDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "Filter analytics by one or more connection types. Must be a comma-separated string. Values are case-sensitive: all, cdr, pdf, web, csv.",
+                      "key": "connectionType",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "description": "Retrieve user analytics, such as number of users and connections created for an application over a given time interval."
+              },
+              "response": [
+                {
+                  "id": "8bea5592-9de2-4b68-92a8-0a7f63d9c8c6",
+                  "name": "Successful analytics response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/analytics/users?interval=weekly&fromDate=<date>&toDate=<date>&connectionType=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "analytics",
+                        "users"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Time interval for analytics.",
+                          "key": "interval",
+                          "value": "weekly"
+                        },
+                        {
+                          "description": "Start date of the analytics period (e.g., 2023-01-01).",
+                          "key": "fromDate",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "End date of the analytics period (e.g., 2024-01-01).",
+                          "key": "toDate",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Filter analytics by one or more connection types. Must be a comma-separated string. Values are case-sensitive: all, cdr, pdf, web, csv.",
+                          "key": "connectionType",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"interval\": \"<string>\",\n  \"fromDate\": \"<date>\",\n  \"toDate\": \"<date>\",\n  \"meta\": {\n    \"totalRecords\": \"<integer>\",\n    \"page\": \"<integer>\",\n    \"pageSize\": \"<integer>\"\n  },\n  \"initial\": {\n    \"created\": \"<integer>\",\n    \"deleted\": \"<integer>\"\n  },\n  \"data\": [\n    {\n      \"date\": \"<date>\",\n      \"created\": \"<integer>\",\n      \"deleted\": \"<integer>\",\n      \"active\": {\n        \"total\": \"<integer>\",\n        \"connected\": {\n          \"total\": \"<integer>\",\n          \"distribution\": {\n            \"CDR\": \"<integer>\",\n            \"WEB\": \"<integer>\",\n            \"PDF\": \"<integer>\",\n            \"CSV\": \"<integer>\"\n          }\n        }\n      }\n    },\n    {\n      \"date\": \"<date>\",\n      \"created\": \"<integer>\",\n      \"deleted\": \"<integer>\",\n      \"active\": {\n        \"total\": \"<integer>\",\n        \"connected\": {\n          \"total\": \"<integer>\",\n          \"distribution\": {\n            \"CDR\": \"<integer>\",\n            \"WEB\": \"<integer>\",\n            \"PDF\": \"<integer>\",\n            \"CSV\": \"<integer>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:23:17.000Z",
+                  "updatedAt": "2026-10-22T02:23:17.000Z",
+                  "uid": "35240-8bea5592-9de2-4b68-92a8-0a7f63d9c8c6"
+                },
+                {
+                  "id": "c755389a-0b47-4b23-8dce-317f0aa421e5",
+                  "name": "Invalid request parameters",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/analytics/users?interval=weekly&fromDate=<date>&toDate=<date>&connectionType=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "analytics",
+                        "users"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Time interval for analytics.",
+                          "key": "interval",
+                          "value": "weekly"
+                        },
+                        {
+                          "description": "Start date of the analytics period (e.g., 2023-01-01).",
+                          "key": "fromDate",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "End date of the analytics period (e.g., 2024-01-01).",
+                          "key": "toDate",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Filter analytics by one or more connection types. Must be a comma-separated string. Values are case-sensitive: all, cdr, pdf, web, csv.",
+                          "key": "connectionType",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"<string>\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:23:17.000Z",
+                  "updatedAt": "2026-10-22T02:23:17.000Z",
+                  "uid": "35240-c755389a-0b47-4b23-8dce-317f0aa421e5"
+                },
+                {
+                  "id": "b493a4ff-a005-4f74-ba63-1101fab273ee",
+                  "name": "Unauthorized - missing or invalid token",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/analytics/users?interval=weekly&fromDate=<date>&toDate=<date>&connectionType=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "analytics",
+                        "users"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Time interval for analytics.",
+                          "key": "interval",
+                          "value": "weekly"
+                        },
+                        {
+                          "description": "Start date of the analytics period (e.g., 2023-01-01).",
+                          "key": "fromDate",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "End date of the analytics period (e.g., 2024-01-01).",
+                          "key": "toDate",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Filter analytics by one or more connection types. Must be a comma-separated string. Values are case-sensitive: all, cdr, pdf, web, csv.",
+                          "key": "connectionType",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T02:23:17.000Z",
+                  "updatedAt": "2026-10-22T02:23:17.000Z",
+                  "uid": "35240-b493a4ff-a005-4f74-ba63-1101fab273ee"
+                },
+                {
+                  "id": "b230b224-9395-4250-bd55-b8dd9d10d20f",
+                  "name": "Access denied - expired or invalid token",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/analytics/users?interval=weekly&fromDate=<date>&toDate=<date>&connectionType=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "analytics",
+                        "users"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Time interval for analytics.",
+                          "key": "interval",
+                          "value": "weekly"
+                        },
+                        {
+                          "description": "Start date of the analytics period (e.g., 2023-01-01).",
+                          "key": "fromDate",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "End date of the analytics period (e.g., 2024-01-01).",
+                          "key": "toDate",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Filter analytics by one or more connection types. Must be a comma-separated string. Values are case-sensitive: all, cdr, pdf, web, csv.",
+                          "key": "connectionType",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"<string>\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:23:17.000Z",
+                  "updatedAt": "2026-10-22T02:23:17.000Z",
+                  "uid": "35240-b230b224-9395-4250-bd55-b8dd9d10d20f"
+                },
+                {
+                  "id": "bca26bfc-6852-4cfa-b94f-f0db45ec838e",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/analytics/users?interval=weekly&fromDate=<date>&toDate=<date>&connectionType=<string>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "analytics",
+                        "users"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Time interval for analytics.",
+                          "key": "interval",
+                          "value": "weekly"
+                        },
+                        {
+                          "description": "Start date of the analytics period (e.g., 2023-01-01).",
+                          "key": "fromDate",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "End date of the analytics period (e.g., 2024-01-01).",
+                          "key": "toDate",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "Filter analytics by one or more connection types. Must be a comma-separated string. Values are case-sensitive: all, cdr, pdf, web, csv.",
+                          "key": "connectionType",
+                          "value": "<string>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T02:23:17.000Z",
+                  "updatedAt": "2026-10-22T02:23:17.000Z",
+                  "uid": "35240-bca26bfc-6852-4cfa-b94f-f0db45ec838e"
+                }
+              ],
+              "createdAt": "2026-10-22T02:23:17.000Z",
+              "updatedAt": "2026-10-22T02:23:17.000Z",
+              "uid": "35240-485fcba5-0d21-4426-9d57-ad6f6e9340f5"
+            }
+          ],
+          "id": "ca1eaa95-f590-4123-a937-fb483fbbcd27",
+          "createdAt": "2026-10-22T02:23:17.000Z",
+          "updatedAt": "2026-10-22T02:23:17.000Z",
+          "uid": "35240-ca1eaa95-f590-4123-a937-fb483fbbcd27"
+        },
+        {
+          "name": "connections",
+          "item": [
+            {
+              "name": "Connection Analytics",
+              "id": "729fb8a2-eaf4-4267-b121-ff97941ff62a",
+              "protocolProfileBehavior": {
+                "disableBodyPruning": true
+              },
+              "request": {
+                "auth": {
+                  "type": "bearer",
+                  "bearer": [
+                    {
+                      "key": "token",
+                      "value": "{{bearerToken}}",
+                      "type": "string"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/analytics/connections?interval=weekly&fromDate=<date>&toDate=<date>",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "analytics",
+                    "connections"
+                  ],
+                  "query": [
+                    {
+                      "description": "(Required) Time interval for analytics.",
+                      "key": "interval",
+                      "value": "weekly"
+                    },
+                    {
+                      "description": "Start date of the analytics period (e.g., 2023-01-01).",
+                      "key": "fromDate",
+                      "value": "<date>"
+                    },
+                    {
+                      "description": "End date of the analytics period (e.g., 2024-01-01).",
+                      "key": "toDate",
+                      "value": "<date>"
+                    }
+                  ]
+                },
+                "description": "Retrieve connection analytics, including connection creation, status distribution, method distribution, and disruption rates over a given time interval."
+              },
+              "response": [
+                {
+                  "id": "a19cc3c9-d073-4150-a9ff-836e7149a892",
+                  "name": "Successful connection analytics response",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/analytics/connections?interval=weekly&fromDate=<date>&toDate=<date>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "analytics",
+                        "connections"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Time interval for analytics.",
+                          "key": "interval",
+                          "value": "weekly"
+                        },
+                        {
+                          "description": "Start date of the analytics period (e.g., 2023-01-01).",
+                          "key": "fromDate",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "End date of the analytics period (e.g., 2024-01-01).",
+                          "key": "toDate",
+                          "value": "<date>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"interval\": \"<string>\",\n  \"fromDate\": \"<date>\",\n  \"toDate\": \"<date>\",\n  \"meta\": {\n    \"totalRecords\": \"<integer>\",\n    \"page\": \"<integer>\",\n    \"pageSize\": \"<integer>\"\n  },\n  \"initial\": {\n    \"created\": {\n      \"count\": \"<integer>\",\n      \"methodDistribution\": {\n        \"CDR\": \"<integer>\",\n        \"CSV\": \"<integer>\",\n        \"PDF\": \"<integer>\",\n        \"WEB\": \"<integer>\"\n      }\n    }\n  },\n  \"data\": [\n    {\n      \"date\": \"<string>\",\n      \"disruptionRate\": \"<string>\",\n      \"created\": {\n        \"count\": \"<integer>\",\n        \"methodDistribution\": {\n          \"CDR\": \"<integer>\",\n          \"CSV\": \"<integer>\",\n          \"PDF\": \"<integer>\",\n          \"WEB\": \"<integer>\"\n        }\n      },\n      \"nonDeleted\": {\n        \"count\": \"<integer>\",\n        \"statusDistribution\": {\n          \"successful\": \"<integer>\",\n          \"pending\": \"<integer>\",\n          \"failed\": \"<integer>\"\n        },\n        \"methodDistribution\": {\n          \"CDR\": {\n            \"successful\": \"<integer>\",\n            \"pending\": \"<integer>\",\n            \"failed\": \"<integer>\"\n          },\n          \"CSV\": {\n            \"successful\": \"<integer>\",\n            \"pending\": \"<integer>\",\n            \"failed\": \"<integer>\"\n          },\n          \"PDF\": {\n            \"successful\": \"<integer>\",\n            \"pending\": \"<integer>\",\n            \"failed\": \"<integer>\"\n          },\n          \"WEB\": {\n            \"successful\": \"<integer>\",\n            \"pending\": \"<integer>\",\n            \"failed\": \"<integer>\"\n          }\n        }\n      }\n    },\n    {\n      \"date\": \"<string>\",\n      \"disruptionRate\": \"<string>\",\n      \"created\": {\n        \"count\": \"<integer>\",\n        \"methodDistribution\": {\n          \"CDR\": \"<integer>\",\n          \"CSV\": \"<integer>\",\n          \"PDF\": \"<integer>\",\n          \"WEB\": \"<integer>\"\n        }\n      },\n      \"nonDeleted\": {\n        \"count\": \"<integer>\",\n        \"statusDistribution\": {\n          \"successful\": \"<integer>\",\n          \"pending\": \"<integer>\",\n          \"failed\": \"<integer>\"\n        },\n        \"methodDistribution\": {\n          \"CDR\": {\n            \"successful\": \"<integer>\",\n            \"pending\": \"<integer>\",\n            \"failed\": \"<integer>\"\n          },\n          \"CSV\": {\n            \"successful\": \"<integer>\",\n            \"pending\": \"<integer>\",\n            \"failed\": \"<integer>\"\n          },\n          \"PDF\": {\n            \"successful\": \"<integer>\",\n            \"pending\": \"<integer>\",\n            \"failed\": \"<integer>\"\n          },\n          \"WEB\": {\n            \"successful\": \"<integer>\",\n            \"pending\": \"<integer>\",\n            \"failed\": \"<integer>\"\n          }\n        }\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:23:17.000Z",
+                  "updatedAt": "2026-10-22T02:23:17.000Z",
+                  "uid": "35240-a19cc3c9-d073-4150-a9ff-836e7149a892"
+                },
+                {
+                  "id": "6d8a545a-85c5-43fd-957a-fbe111412351",
+                  "name": "Invalid request parameters",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/analytics/connections?interval=weekly&fromDate=<date>&toDate=<date>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "analytics",
+                        "connections"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Time interval for analytics.",
+                          "key": "interval",
+                          "value": "weekly"
+                        },
+                        {
+                          "description": "Start date of the analytics period (e.g., 2023-01-01).",
+                          "key": "fromDate",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "End date of the analytics period (e.g., 2024-01-01).",
+                          "key": "toDate",
+                          "value": "<date>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Bad Request",
+                  "code": 400,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"<string>\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:23:17.000Z",
+                  "updatedAt": "2026-10-22T02:23:17.000Z",
+                  "uid": "35240-6d8a545a-85c5-43fd-957a-fbe111412351"
+                },
+                {
+                  "id": "dadf1a27-abd0-4b17-95bb-06fcf0c3212d",
+                  "name": "Unauthorized - missing or invalid token",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/analytics/connections?interval=weekly&fromDate=<date>&toDate=<date>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "analytics",
+                        "connections"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Time interval for analytics.",
+                          "key": "interval",
+                          "value": "weekly"
+                        },
+                        {
+                          "description": "Start date of the analytics period (e.g., 2023-01-01).",
+                          "key": "fromDate",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "End date of the analytics period (e.g., 2024-01-01).",
+                          "key": "toDate",
+                          "value": "<date>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Unauthorized",
+                  "code": 401,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T02:23:17.000Z",
+                  "updatedAt": "2026-10-22T02:23:17.000Z",
+                  "uid": "35240-dadf1a27-abd0-4b17-95bb-06fcf0c3212d"
+                },
+                {
+                  "id": "46e6f07c-b159-4a4d-a579-c9962c908cf4",
+                  "name": "Access denied - expired or invalid token",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/analytics/connections?interval=weekly&fromDate=<date>&toDate=<date>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "analytics",
+                        "connections"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Time interval for analytics.",
+                          "key": "interval",
+                          "value": "weekly"
+                        },
+                        {
+                          "description": "Start date of the analytics period (e.g., 2023-01-01).",
+                          "key": "fromDate",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "End date of the analytics period (e.g., 2024-01-01).",
+                          "key": "toDate",
+                          "value": "<date>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Forbidden",
+                  "code": 403,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": "{\n  \"type\": \"<string>\",\n  \"correlationId\": \"<uuid>\",\n  \"data\": [\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"type\": \"error\",\n      \"code\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    }\n  ]\n}",
+                  "createdAt": "2026-10-22T02:23:17.000Z",
+                  "updatedAt": "2026-10-22T02:23:17.000Z",
+                  "uid": "35240-46e6f07c-b159-4a4d-a579-c9962c908cf4"
+                },
+                {
+                  "id": "d55dbf01-7ed2-4d06-9178-e313ac599b92",
+                  "name": "Internal server error",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "description": "Added as a part of security scheme: bearer",
+                        "key": "Authorization",
+                        "value": "Bearer <token>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/analytics/connections?interval=weekly&fromDate=<date>&toDate=<date>",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "analytics",
+                        "connections"
+                      ],
+                      "query": [
+                        {
+                          "description": "(Required) Time interval for analytics.",
+                          "key": "interval",
+                          "value": "weekly"
+                        },
+                        {
+                          "description": "Start date of the analytics period (e.g., 2023-01-01).",
+                          "key": "fromDate",
+                          "value": "<date>"
+                        },
+                        {
+                          "description": "End date of the analytics period (e.g., 2024-01-01).",
+                          "key": "toDate",
+                          "value": "<date>"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "Internal Server Error",
+                  "code": 500,
+                  "_postman_previewlanguage": "text",
+                  "header": [],
+                  "cookie": [],
+                  "responseTime": null,
+                  "body": null,
+                  "createdAt": "2026-10-22T02:23:17.000Z",
+                  "updatedAt": "2026-10-22T02:23:17.000Z",
+                  "uid": "35240-d55dbf01-7ed2-4d06-9178-e313ac599b92"
+                }
+              ],
+              "createdAt": "2026-10-22T02:23:17.000Z",
+              "updatedAt": "2026-10-22T02:23:17.000Z",
+              "uid": "35240-729fb8a2-eaf4-4267-b121-ff97941ff62a"
+            }
+          ],
+          "id": "ebe358a1-615b-4b4a-94ae-fe27b20c77bd",
+          "createdAt": "2026-10-22T02:23:17.000Z",
+          "updatedAt": "2026-10-22T02:23:17.000Z",
+          "uid": "35240-ebe358a1-615b-4b4a-94ae-fe27b20c77bd"
+        }
+      ],
+      "id": "3afa333d-385a-4ad7-ae05-14bd307bdf66",
+      "createdAt": "2026-10-22T02:23:17.000Z",
+      "updatedAt": "2026-10-22T02:23:17.000Z",
+      "uid": "35240-3afa333d-385a-4ad7-ae05-14bd307bdf66"
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://au-api.basiq.io"
+    }
+  ]
+}

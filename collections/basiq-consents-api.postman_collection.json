@@ -1,0 +1,841 @@
+{
+  "info": {
+    "_postman_id": "a18c84f0-3a5d-4649-989e-1666a4095194",
+    "name": "Connect Consents API",
+    "description": "All included utility endpoints for Basiq partners",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:22:56.000Z",
+    "updatedAt": "2026-10-22T02:22:56.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-a18c84f0-3a5d-4649-989e-1666a4095194"
+  },
+  "item": [
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "{userId}",
+          "item": [
+            {
+              "name": "consents",
+              "item": [
+                {
+                  "name": "{consentId}",
+                  "item": [
+                    {
+                      "name": "Delete a consent",
+                      "id": "1e06282d-df49-4347-9c36-cdbcf26f4cc8",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "auth": {
+                          "type": "bearer",
+                          "bearer": [
+                            {
+                              "key": "token",
+                              "value": "{{bearerToken}}",
+                              "type": "string"
+                            }
+                          ]
+                        },
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/consents/:consentId",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "consents",
+                            ":consentId"
+                          ],
+                          "variable": [
+                            {
+                              "id": "8d5984f6-7536-4d94-a500-201078132e96",
+                              "key": "userId",
+                              "value": "<string>",
+                              "description": "(Required) User identification."
+                            },
+                            {
+                              "id": "6a77b27e-607e-4680-80e8-0145a596021a",
+                              "key": "consentId",
+                              "value": "<string>",
+                              "description": "(Required) Consent identification."
+                            }
+                          ]
+                        },
+                        "description": "Permanently deletes a users consent, this action cannot be undone."
+                      },
+                      "response": [
+                        {
+                          "id": "244f382e-f848-44b6-b18b-9a4f6791a802",
+                          "name": "Deletion succeeded.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/consents/:consentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "consents",
+                                ":consentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "consentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "No Content",
+                          "code": 204,
+                          "_postman_previewlanguage": "text",
+                          "header": [],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": null,
+                          "createdAt": "2026-10-22T02:22:57.000Z",
+                          "updatedAt": "2026-10-22T02:22:57.000Z",
+                          "uid": "35240-244f382e-f848-44b6-b18b-9a4f6791a802"
+                        },
+                        {
+                          "id": "70d9f94f-9e13-40ae-b23d-2b3e04270a4d",
+                          "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/consents/:consentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "consents",
+                                ":consentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "consentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Bad Request",
+                          "code": 400,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"parameter-not-valid\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"invalid-content\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:57.000Z",
+                          "updatedAt": "2026-10-22T02:22:57.000Z",
+                          "uid": "35240-70d9f94f-9e13-40ae-b23d-2b3e04270a4d"
+                        },
+                        {
+                          "id": "fbb85df3-5e23-4dd3-9323-dfe5d83a1d5e",
+                          "name": "Error status response code indicates that the request has not been applied because it lacks valid authentication credentials for the target resource.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/consents/:consentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "consents",
+                                ":consentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "consentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"unauthorized-access\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-authorization-token\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:57.000Z",
+                          "updatedAt": "2026-10-22T02:22:57.000Z",
+                          "uid": "35240-fbb85df3-5e23-4dd3-9323-dfe5d83a1d5e"
+                        },
+                        {
+                          "id": "3c814691-dd3e-47ec-8318-d74c2f69037e",
+                          "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/consents/:consentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "consents",
+                                ":consentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "consentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"access-denied\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"access-denied\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:57.000Z",
+                          "updatedAt": "2026-10-22T02:22:57.000Z",
+                          "uid": "35240-3c814691-dd3e-47ec-8318-d74c2f69037e"
+                        },
+                        {
+                          "id": "36d5331f-bd10-46b6-bc4e-973b64b49630",
+                          "name": "Returns error indicating that server can't find requested resource.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/consents/:consentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "consents",
+                                ":consentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "consentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:57.000Z",
+                          "updatedAt": "2026-10-22T02:22:57.000Z",
+                          "uid": "35240-36d5331f-bd10-46b6-bc4e-973b64b49630"
+                        },
+                        {
+                          "id": "dbce81fd-cb2b-49d2-a69b-c62b80da485d",
+                          "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/consents/:consentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "consents",
+                                ":consentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "consentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Internal Server Error",
+                          "code": 500,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:57.000Z",
+                          "updatedAt": "2026-10-22T02:22:57.000Z",
+                          "uid": "35240-dbce81fd-cb2b-49d2-a69b-c62b80da485d"
+                        },
+                        {
+                          "id": "c87b3e04-0e9b-41fa-975a-3e587ffd5a4b",
+                          "name": "Returns error response code indicates that the server is not ready to handle the request.",
+                          "originalRequest": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: bearer",
+                                "key": "Authorization",
+                                "value": "Bearer <token>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/users/:userId/consents/:consentId",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "users",
+                                ":userId",
+                                "consents",
+                                ":consentId"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "userId"
+                                },
+                                {
+                                  "key": "consentId"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Service Unavailable",
+                          "code": 503,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": {},\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": {},\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                          "createdAt": "2026-10-22T02:22:57.000Z",
+                          "updatedAt": "2026-10-22T02:22:57.000Z",
+                          "uid": "35240-c87b3e04-0e9b-41fa-975a-3e587ffd5a4b"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T02:22:57.000Z",
+                      "updatedAt": "2026-10-22T02:22:57.000Z",
+                      "uid": "35240-1e06282d-df49-4347-9c36-cdbcf26f4cc8"
+                    }
+                  ],
+                  "id": "dd15608f-0927-4a30-a521-73f8c7caa249",
+                  "createdAt": "2026-10-22T02:22:57.000Z",
+                  "updatedAt": "2026-10-22T02:22:57.000Z",
+                  "uid": "35240-dd15608f-0927-4a30-a521-73f8c7caa249"
+                },
+                {
+                  "name": "Retrieve consents",
+                  "id": "d2a3639e-8975-471d-8893-34c2d042dd94",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "auth": {
+                      "type": "bearer",
+                      "bearer": [
+                        {
+                          "key": "token",
+                          "value": "{{bearerToken}}",
+                          "type": "string"
+                        }
+                      ]
+                    },
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId/consents",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId",
+                        "consents"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e6b5631f-51b3-4a09-9e08-6105d6500dec",
+                          "key": "userId",
+                          "value": "<string>",
+                          "description": "(Required) The identifier of the user"
+                        }
+                      ]
+                    },
+                    "description": "Retrieves a list of the user consents"
+                  },
+                  "response": [
+                    {
+                      "id": "242000c9-d41e-4319-b3d6-c485348804f4",
+                      "name": "Returns a list of user consents if they exist.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/consents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "consents"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"<string>\",\n  \"size\": \"<integer>\",\n  \"data\": [\n    {\n      \"created\": \"<dateTime>\",\n      \"data\": {\n        \"permissions\": [\n          {\n            \"entity\": \"<string>\",\n            \"information\": {\n              \"attributeList\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"description\": \"<string>\",\n              \"name\": \"<string>\"\n            },\n            \"purpose\": {\n              \"description\": \"<string>\",\n              \"title\": \"<string>\"\n            },\n            \"required\": \"<boolean>\",\n            \"scope\": \"<string>\",\n            \"consented\": \"<boolean>\"\n          },\n          {\n            \"entity\": \"<string>\",\n            \"information\": {\n              \"attributeList\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"description\": \"<string>\",\n              \"name\": \"<string>\"\n            },\n            \"purpose\": {\n              \"description\": \"<string>\",\n              \"title\": \"<string>\"\n            },\n            \"required\": \"<boolean>\",\n            \"scope\": \"<string>\",\n            \"consented\": \"<boolean>\"\n          }\n        ],\n        \"retainData\": \"<boolean>\",\n        \"initialRetrievalDays\": \"<integer>\",\n        \"organisation\": \"<boolean,null>\"\n      },\n      \"expiryDate\": \"<dateTime>\",\n      \"id\": \"<uuid>\",\n      \"purpose\": {\n        \"primary\": {\n          \"description\": \"<string>\",\n          \"title\": \"<string>\"\n        },\n        \"other\": \"<boolean,null>\"\n      },\n      \"status\": \"<string>\",\n      \"type\": \"<string>\",\n      \"updated\": \"<dateTime>\",\n      \"origin\": \"<string>\",\n      \"revoked\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\",\n        \"consentPolicy\": \"<string>\",\n        \"latestConsentPolicy\": \"<string>\"\n      }\n    },\n    {\n      \"created\": \"<dateTime>\",\n      \"data\": {\n        \"permissions\": [\n          {\n            \"entity\": \"<string>\",\n            \"information\": {\n              \"attributeList\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"description\": \"<string>\",\n              \"name\": \"<string>\"\n            },\n            \"purpose\": {\n              \"description\": \"<string>\",\n              \"title\": \"<string>\"\n            },\n            \"required\": \"<boolean>\",\n            \"scope\": \"<string>\",\n            \"consented\": \"<boolean>\"\n          },\n          {\n            \"entity\": \"<string>\",\n            \"information\": {\n              \"attributeList\": [\n                \"<string>\",\n                \"<string>\"\n              ],\n              \"description\": \"<string>\",\n              \"name\": \"<string>\"\n            },\n            \"purpose\": {\n              \"description\": \"<string>\",\n              \"title\": \"<string>\"\n            },\n            \"required\": \"<boolean>\",\n            \"scope\": \"<string>\",\n            \"consented\": \"<boolean>\"\n          }\n        ],\n        \"retainData\": \"<boolean>\",\n        \"initialRetrievalDays\": \"<integer>\",\n        \"organisation\": \"<boolean,null>\"\n      },\n      \"expiryDate\": \"<dateTime>\",\n      \"id\": \"<uuid>\",\n      \"purpose\": {\n        \"primary\": {\n          \"description\": \"<string>\",\n          \"title\": \"<string>\"\n        },\n        \"other\": \"<boolean,null>\"\n      },\n      \"status\": \"<string>\",\n      \"type\": \"<string>\",\n      \"updated\": \"<dateTime>\",\n      \"origin\": \"<string>\",\n      \"revoked\": \"<string>\",\n      \"links\": {\n        \"self\": \"<string>\",\n        \"consentPolicy\": \"<string>\",\n        \"latestConsentPolicy\": \"<string>\"\n      }\n    }\n  ],\n  \"links\": {\n    \"self\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T02:22:57.000Z",
+                      "updatedAt": "2026-10-22T02:22:57.000Z",
+                      "uid": "35240-242000c9-d41e-4319-b3d6-c485348804f4"
+                    },
+                    {
+                      "id": "b176685f-bbbb-40bb-9972-062d57620149",
+                      "name": "Returns error that server cannot or will not process the request due to something that is perceived to be a client error.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/consents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "consents"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"parameter-not-valid\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"invalid-content\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:22:57.000Z",
+                      "updatedAt": "2026-10-22T02:22:57.000Z",
+                      "uid": "35240-b176685f-bbbb-40bb-9972-062d57620149"
+                    },
+                    {
+                      "id": "161ff97e-0e17-45d9-82f9-1d6d9151d332",
+                      "name": "Error status response code indicates that the request has not been applied because it lacks valid authentication credentials for the target resource.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/consents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "consents"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Unauthorized",
+                      "code": 401,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"unauthorized-access\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-authorization-token\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:22:57.000Z",
+                      "updatedAt": "2026-10-22T02:22:57.000Z",
+                      "uid": "35240-161ff97e-0e17-45d9-82f9-1d6d9151d332"
+                    },
+                    {
+                      "id": "d8352a8c-491b-4c3a-8902-ac3500c58b05",
+                      "name": "Error that access is forbidden and tied to the application logic, such as insufficient rights to a resource.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/consents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "consents"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"access-denied\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": \"access-denied\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:22:57.000Z",
+                      "updatedAt": "2026-10-22T02:22:57.000Z",
+                      "uid": "35240-d8352a8c-491b-4c3a-8902-ac3500c58b05"
+                    },
+                    {
+                      "id": "5b173ebd-3350-4285-9686-1470861d912f",
+                      "name": "Returns error indicating that server can't find requested resource.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/consents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "consents"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:22:57.000Z",
+                      "updatedAt": "2026-10-22T02:22:57.000Z",
+                      "uid": "35240-5b173ebd-3350-4285-9686-1470861d912f"
+                    },
+                    {
+                      "id": "07ded4e8-cf4c-43c3-8e83-5342e5fd63f6",
+                      "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: bearer",
+                            "key": "Authorization",
+                            "value": "Bearer <token>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/consents",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "consents"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:22:57.000Z",
+                      "updatedAt": "2026-10-22T02:22:57.000Z",
+                      "uid": "35240-07ded4e8-cf4c-43c3-8e83-5342e5fd63f6"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:22:57.000Z",
+                  "updatedAt": "2026-10-22T02:22:57.000Z",
+                  "uid": "35240-d2a3639e-8975-471d-8893-34c2d042dd94"
+                }
+              ],
+              "id": "4f45037c-c985-4960-86be-d3445cc6afc5",
+              "createdAt": "2026-10-22T02:22:57.000Z",
+              "updatedAt": "2026-10-22T02:22:57.000Z",
+              "uid": "35240-4f45037c-c985-4960-86be-d3445cc6afc5"
+            }
+          ],
+          "id": "ff7b4020-6768-42a5-92ba-62982c521d95",
+          "createdAt": "2026-10-22T02:22:57.000Z",
+          "updatedAt": "2026-10-22T02:22:57.000Z",
+          "uid": "35240-ff7b4020-6768-42a5-92ba-62982c521d95"
+        }
+      ],
+      "id": "1d1c6f78-753a-4897-b3e7-d08dc0399a59",
+      "createdAt": "2026-10-22T02:22:57.000Z",
+      "updatedAt": "2026-10-22T02:22:57.000Z",
+      "uid": "35240-1d1c6f78-753a-4897-b3e7-d08dc0399a59"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://au-api.basiq.io"
+    }
+  ]
+}

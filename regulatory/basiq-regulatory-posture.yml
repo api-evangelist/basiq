@@ -1,0 +1,85 @@
+generated: '2026-10-21'
+method: searched
+probe: true
+source: https://docs.basiq.io/en/articles/5088017-consumer-data-right-cdr-policy
+sources_checked:
+- url: https://basiq.io/legal/privacy-policy/
+  http_status: 404
+- url: https://basiq.io/legal/terms-of-use/
+  http_status: 404
+- url: https://docs.basiq.io/en/articles/382581-basiq-privacy-policy
+  http_status: 200
+- url: https://docs.basiq.io/en/articles/5088017-consumer-data-right-cdr-policy
+  http_status: 200
+- url: https://www.basiq.io/data-security.html
+  http_status: 200
+signals:
+  data_subject_request:
+    url: https://docs.basiq.io/en/articles/382581-basiq-privacy-policy
+    evidence:
+    - source: https://docs.basiq.io/en/articles/382581-basiq-privacy-policy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: If you need more information, want to access or update your personal information or if you have a privacy
+        concern, please contact us using the contact details below.
+    note: Access and update of personal information are offered via contact with Basiq; complaints escalate to the
+      OAIC. No deletion or portability right is named in the general privacy policy (CDR data deletion is covered
+      separately under data_retention).
+  data_retention:
+    url: https://docs.basiq.io/en/articles/5088017-consumer-data-right-cdr-policy
+    section: CDR Data deletion or de-identification
+    evidence:
+    - source: https://docs.basiq.io/en/articles/5088017-consumer-data-right-cdr-policy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: When you withdraw CDR consent or your consent expires, we’ll automatically, irretrievably destroy or
+        de-identify your CDR Data in accordance with your instructions, within seconds.  We’ll also automatically
+        notify any Partner with whom your data has been shared and require them to irretrievably destroy or de-identify
+        your CDR Data as well.
+    - source: https://www.basiq.io/data-security.html
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: Automated data governance and controls ensures your data is kept only as long as it's needed.
+    note: CDR data is destroyed or de-identified on consent expiry/withdrawal, propagated to partners, except where
+      Australian law requires retention.
+  subprocessors:
+    url: https://docs.basiq.io/en/articles/5088017-consumer-data-right-cdr-policy
+    section: Outsourced Service Provider Arrangements
+    evidence:
+    - source: https://docs.basiq.io/en/articles/5088017-consumer-data-right-cdr-policy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: Basiq’s Outsourced Service Providers are listed in Annexure 3 of this CDR Policy.
+    note: A named list of outsourced service providers with access to CDR data is published as Annexure 3 of the
+      CDR Policy (CDR Representatives in Annexure 2).
+  data_residency:
+    url: https://docs.basiq.io/en/articles/5088017-consumer-data-right-cdr-policy
+    section: Storage of CDR Data
+    evidence:
+    - source: https://docs.basiq.io/en/articles/5088017-consumer-data-right-cdr-policy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: Basiq stores data securely in AWS data centres in Sydney and Melbourne.
+    - source: https://docs.basiq.io/en/articles/5088017-consumer-data-right-cdr-policy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: Basiq has one New Zealand-based outsourced service provider. Otherwise all other outsourced service
+        providers are based in Australia.
+    - source: https://docs.basiq.io/en/articles/382581-basiq-privacy-policy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: If you use the Service to consent to the disclosure of your Personal Information to a client that is
+        based overseas, we will disclose your personal information to that client. This may include entities located
+        in New Zealand and within the European Economic Area (EEA).
+    note: Storage is in Australia (AWS Sydney/Melbourne); stated exceptions are one NZ service provider, two CDR
+      Representatives permitted to store overseas (NZ, UK), and consented disclosure to overseas clients.
+  incident_notification:
+    url: https://docs.basiq.io/en/articles/5088017-consumer-data-right-cdr-policy
+    section: What happens if there is a security breach
+    evidence:
+    - source: https://docs.basiq.io/en/articles/5088017-consumer-data-right-cdr-policy
+      http_status: 200
+      fetched: '2026-10-21'
+      quote: Basiq maintains a Data Breach Response Plan - Basiq can provide a copy of this policy on request.
+    note: A breach response plan exists (contain, assess, review), but the page states no explicit commitment or
+      timeline to notify affected customers or regulators.

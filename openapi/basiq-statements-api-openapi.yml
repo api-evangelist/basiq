@@ -1,0 +1,393 @@
+openapi: 3.2.0
+info:
+  title: Platform Statements API
+  description: All included utility endpoints for Basiq partners
+  version: 3.0.0
+  termsOfService: https://docs.basiq.io/en/collections/440849-privacy-terms-and-common-questions
+  license:
+    name: Commercial
+    url: https://basiq.io
+servers:
+- url: https://au-api.basiq.io
+security:
+- api_key: []
+- services_token: []
+tags:
+- name: Statements
+paths:
+  /users/{userId}/statements:
+    post:
+      tags:
+      - Statements
+      summary: Create a statement
+      description: 'Create a new statement by uploading an official PDF bank statement or CSV file. The server will create a job that processes the following steps:
+
+        1. **verify-credentials**: Verify the file, validate the layout, and attempt to parse the statement.
+
+        2. **retrieve-accounts**: Retrieve the list of accounts and their details (account number, name, balances).
+
+        3. **retrieve-transactions**: Fetch the transactions for each account.
+
+
+        The status of each step can be checked by querying the Retrieve a job.
+
+
+        > Note that this function is not supported in sandbox environments (AU00000).
+
+
+        For CSV file format specifications, please contact our support team.
+
+
+        > 🚧
+
+        >
+
+        > Note that the time it takes to complete the processes above will vary depending on the volume of data along with the complexity of the bank statement. As a rough guide this entire process could take anywhere between 10 - 30 secs. Upload multiple statements in parallel to provide the best user experience'
+      operationId: createStatement
+      parameters:
+      - name: userId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The unique identifier of the user
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required:
+              - institutionId
+              - statement
+              properties:
+                institutionId:
+                  type: string
+                  description: 'The identifier of the institution to which the statement relates (e.g., "AU01001"). **Note**: Sandbox institutions (AU00000) do not support file uploads.'
+                statement:
+                  type: string
+                  format: binary
+                  description: The official PDF bank statement or CSV file to be uploaded. CSV files must conform to the file specification provided by Basiq.
+      responses:
+        '202':
+          description: Job resource created successfully
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                - type
+                - id
+                - links
+                properties:
+                  type:
+                    type: string
+                    description: The type of resource, always "job".
+                    example: job
+                  id:
+                    type: string
+                    description: The unique identifier of the job.
+                    example: '61723'
+                  links:
+                    title: ResourceLink
+                    required:
+                    - self
+                    type: object
+                    properties:
+                      self:
+                        type: string
+                        description: URL of the resource.
+                        example: https://au-api.basiq.io/users/cd6fbd92/accounts/319ae910
+                    description: Link object containing a link to the resource, self reference.
+                    x-readme-ref-name: ResourceLink
+                description: Object containing details for the statement upload process
+                x-readme-ref-name: StatementUploadResource
+        '400':
+          description: Bad request due to missing or invalid parameters
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: parameter-not-valid
+                          enum:
+                          - parameter-not-supplied
+                          - parameter-not-valid
+                          - unsupported-accept
+                          - invalid-content
+                          - institution-not-supported
+                          - invalid-credentials
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: The provided filter parameter is in invalid format or unsupported.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Parameter not valid.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                x-readme-ref-name: BadRequestError
+        '403':
+          description: Forbidden access due to insufficient permissions
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - source
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: forbidden-access
+                          enum:
+                          - forbidden-access
+                          - no-production-access
+                          - access-denied
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Access to this resource is forbidden.
+                        source:
+                          title: Source
+                          type: object
+                          properties:
+                            parameter:
+                              type: string
+                              description: String indicating which URI query parameter caused the error.
+                              example: userId
+                            pointer:
+                              type: string
+                              description: Location to the object or attribute that the error relates to.
+                              example: users/userId
+                          description: An object containing references to the source of the error.
+                          x-readme-ref-name: Source
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Forbidden Access
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: ForbiddenAccessError
+        '404':
+          description: Resource not found
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: resource-not-found
+                          enum:
+                          - resource-not-found
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Resource not found.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Requested resource is not found.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: NotFoundError
+        '500':
+          description: Internal server error
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        code:
+                          type: string
+                          description: Application-specific error code, expressed as a string value.
+                          example: internal-server-error
+                          enum:
+                          - internal-server-error
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Internal Server error. Contact support.
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Internal Server error.
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                x-readme-ref-name: InternalServerError
+        '503':
+          description: Service unavailable
+          content:
+            application/json:
+              schema:
+                required:
+                - correlationId
+                - data
+                - type
+                type: object
+                properties:
+                  type:
+                    type: string
+                    description: Always "list".
+                    example: list
+                  correlationId:
+                    type: string
+                    description: Unique identifier for this particular occurrence of the problem.
+                    example: ac5ah5i
+                  data:
+                    type: array
+                    description: Error data.
+                    items:
+                      required:
+                      - code
+                      - type
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                          description: Type of the response, always "error"
+                          example: error
+                        title:
+                          type: string
+                          description: Title of the error
+                          example: Service Unavailable
+                        code:
+                          type: object
+                          description: Application-specific error code, expressed as a string value.
+                          example: service-unavailable
+                        detail:
+                          type: string
+                          description: Human-readable explanation specific to this occurrence of the problem.
+                          example: Service Unavailable. Try again later.
+                x-readme-ref-name: StatusServiceUnavailableError
+components:
+  securitySchemes:
+    api_key:
+      type: apiKey
+      name: Authorization
+      in: header
+      x-default: Basic NjMxMjNmMWMtZjYxMy00ZjMyLWFiYzUtYzBhZDdhYTY2YmU1OjQ3NWYwMzhkLTBlZmItNGM1ZS1iMzQ0LTAzMzYxOTkyYTRlMw==
+    services_token:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+x-readme:
+  explorer-enabled: true
+  proxy-enabled: true
+  samples-enabled: true
+  samples-languages:
+  - curl
+  - node
+  - ruby
+  - javascript
+  - python

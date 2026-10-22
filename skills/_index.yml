@@ -1,0 +1,36 @@
+name: Basiq agent skills
+type: AgentSkill
+generated: '2026-10-21'
+method: generated
+source: openapi/*.yml
+provider_published_skills: none found (no AGENTS.md or skills in the llms.txt index,
+  checked 2026-10-21)
+skills:
+- name: basiq-onboard-user
+  path: skills/basiq-onboard-user.md
+  operations:
+  - postToken
+  - createUser
+  - getUser
+  - getUserJobs
+  - getJobs
+  - postJobMfa
+- name: basiq-read-financial-data
+  path: skills/basiq-read-financial-data.md
+  operations:
+  - getAccounts
+  - getAccount
+  - getTransactions
+  - getTransaction
+- name: basiq-manage-connections-and-consent
+  path: skills/basiq-manage-connections-and-consent.md
+  operations:
+  - getConnections
+  - getConnection
+  - refreshConnection
+  - refreshConnections
+  - deleteConnection
+  - purgeConnectionData
+  - getConsents
+  - deleteConsent
+  - deleteUser

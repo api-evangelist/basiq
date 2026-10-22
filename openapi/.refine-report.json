@@ -1,22 +1,57 @@
 {
   "provider": "basiq",
   "sources": [
-    "_original/basiq-openapi.json"
+    "_original/basiq-affordability-openapi.json",
+    "_original/basiq-analytics-openapi.json",
+    "_original/basiq-enrich-openapi.json",
+    "_original/basiq-identity-openapi.json",
+    "_original/basiq-insights-openapi.json",
+    "_original/basiq-openapi.json",
+    "_original/basiq-payees-openapi.json",
+    "_original/basiq-platform-openapi.json",
+    "_original/basiq-reporting-openapi.json",
+    "_original/basiq-webhooks-openapi.json"
   ],
   "outputs": [
+    "basiq-affordability-api-openapi.yml",
+    "basiq-expenses-api-openapi.yml",
+    "basiq-income-api-openapi.yml",
+    "basiq-analytics-api-openapi.yml",
+    "basiq-enrich-api-openapi.yml",
+    "basiq-identities-api-openapi.yml",
+    "basiq-insights-api-openapi.yml",
     "basiq-accounts-api-openapi.yml",
     "basiq-authentication-api-openapi.yml",
     "basiq-connections-api-openapi.yml",
     "basiq-consents-api-openapi.yml",
     "basiq-jobs-api-openapi.yml",
     "basiq-transactions-api-openapi.yml",
-    "basiq-users-api-openapi.yml"
+    "basiq-users-api-openapi.yml",
+    "basiq-payees-api-openapi.yml",
+    "basiq-authlinks-api-openapi.yml",
+    "basiq-connectors-api-openapi.yml",
+    "basiq-events-api-openapi.yml",
+    "basiq-statements-api-openapi.yml",
+    "basiq-reports-api-openapi.yml",
+    "basiq-webhooks-api-openapi.yml"
   ],
   "archived": [],
   "errors": [],
   "warnings": [],
   "notes": [
-    "sourced from openapi/_original/ (1 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "sourced from openapi/_original/ (10 archived document(s)); previously refined output at the top level was skipped rather than re-split",
+    "basiq-affordability-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "basiq-affordability-openapi.json: declared missing tag: Affordability",
+    "basiq-affordability-openapi.json: declared missing tag: Expenses",
+    "basiq-affordability-openapi.json: declared missing tag: Income",
+    "basiq-analytics-openapi.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "basiq-analytics-openapi.json: declared missing tag: Analytics",
+    "basiq-enrich-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "basiq-enrich-openapi.json: declared missing tag: Enrich",
+    "basiq-identity-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "basiq-identity-openapi.json: declared missing tag: Identities",
+    "basiq-insights-openapi.json: upgraded openapi 3.0.3 -> OpenAPI 3.2.0",
+    "basiq-insights-openapi.json: declared missing tag: Insights",
     "basiq-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
     "basiq-openapi.json: declared missing tag: Accounts",
     "basiq-openapi.json: declared missing tag: Authentication",
@@ -25,7 +60,25 @@
     "basiq-openapi.json: declared missing tag: Jobs",
     "basiq-openapi.json: declared missing tag: Transactions",
     "basiq-openapi.json: declared missing tag: Users",
-    "apis.yml register: written (+2 apis, 7 total)"
+    "basiq-payees-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "basiq-payees-openapi.json: declared missing tag: Payees",
+    "basiq-platform-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "basiq-platform-openapi.json: declared missing tag: AuthLinks",
+    "basiq-platform-openapi.json: declared missing tag: Connectors",
+    "basiq-platform-openapi.json: declared missing tag: Events",
+    "basiq-platform-openapi.json: declared missing tag: Statements",
+    "basiq-reporting-openapi.json: upgraded openapi 3.0.2 -> OpenAPI 3.2.0",
+    "basiq-reporting-openapi.json: declared missing tag: Reports",
+    "basiq-webhooks-openapi.json: upgraded openapi 3.0.1 -> OpenAPI 3.2.0",
+    "apis.yml register: written (+14 apis, 21 total)"
   ],
-  "skipped": []
+  "skipped": [
+    "basiq-accounts-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "basiq-authentication-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "basiq-connections-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "basiq-consents-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "basiq-jobs-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "basiq-transactions-api-openapi.yml: previously refined output, superseded by openapi/_original/",
+    "basiq-users-api-openapi.yml: previously refined output, superseded by openapi/_original/"
+  ]
 }

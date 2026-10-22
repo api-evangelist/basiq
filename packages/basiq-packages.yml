@@ -1,0 +1,79 @@
+generated: '2026-10-21'
+method: searched
+source: https://registry.npmjs.org/-/v1/search?text=basiq
+note: >-
+  The current docs (api.basiq.io llms.txt index, AI Tools section) name no SDK; they point to OpenAPI specs
+  "for schema validation, SDK generation". Every first-party SDK repo in github.com/basiqio is ARCHIVED, and
+  the last SDK releases (2019-2021) predate the v3.0 API and the 2026 Payees/Insights/Webhooks APIs: an
+  abandonment signal. The only actively published first-party package is the Connect Auth UI component.
+  Ownership: maintainers carry @basiq.io addresses and/or the source repo sits in the basiqio GitHub org.
+packages:
+- name: '@basiq/connect-auth'
+  registry: npm
+  url: https://www.npmjs.com/package/@basiq/connect-auth
+  language: JavaScript
+  official: true
+  kind: ui-component
+  version: 1.1.44
+  published: '2026-09-28'
+  repository: https://github.com/basiqio/connect-code-validaiton
+  note: ReactJS UI component for the Basiq Connect auth flow; maintainers include developers@basiq.io.
+- name: '@basiq/basiq-javascript-sdk'
+  registry: npm
+  url: https://www.npmjs.com/package/@basiq/basiq-javascript-sdk
+  language: JavaScript
+  official: true
+  kind: sdk
+  version: 1.0.3
+  published: '2021-09-28'
+  repository: https://github.com/basiqio/basiq-javascript-sdk
+  note: Source repo is archived in the basiqio org.
+- name: '@basiq/basiq-connect-control'
+  registry: npm
+  url: https://www.npmjs.com/package/@basiq/basiq-connect-control
+  language: JavaScript
+  official: true
+  kind: ui-component
+  version: 1.0.72
+  published: '2022-04-29'
+  repository: https://github.com/basiqio/basiq-connect-control
+  note: Source repo is archived in the basiqio org.
+- name: basiq-sdk-nodejs
+  registry: npm
+  url: https://www.npmjs.com/package/basiq-sdk-nodejs
+  language: JavaScript
+  official: true
+  kind: sdk
+  version: 1.1.3
+  published: '2019-11-18'
+  repository: https://github.com/basiqio/basiq-sdk-nodejs
+  note: Maintainers carry @basiq.io addresses.
+- name: basiq
+  registry: pypi
+  url: https://pypi.org/project/basiq/
+  language: Python
+  official: true
+  kind: sdk
+  version: 1.0.1
+  published: '2019-06-12'
+  repository: https://github.com/basiqio/basiq-sdk-python
+  note: Homepage is github.com/basiqio/basiq-sdk-python; author a Basiq engineer (also maintainer of basiq-sdk-nodejs).
+- name: basiqio/basiq-sdk-php
+  registry: packagist
+  url: https://packagist.org/packages/basiqio/basiq-sdk-php
+  language: PHP
+  official: true
+  kind: sdk
+  version: 1.1.0
+  published: '2020-01-31'
+  repository: https://github.com/basiqio/basiq-sdk-php
+  note: Source repo is archived in the basiqio org.
+- name: basiq-api
+  registry: npm
+  url: https://www.npmjs.com/package/basiq-api
+  language: JavaScript
+  official: false
+  version: 0.2.2
+  published: '2017-10-05'
+  repository: https://github.com/FluentDevelopment/basiq-api
+  note: Community wrapper by a third party (FluentDevelopment).

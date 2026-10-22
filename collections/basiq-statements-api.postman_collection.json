@@ -1,0 +1,543 @@
+{
+  "info": {
+    "_postman_id": "56601d98-b20b-453f-a400-6c8f84fed07f",
+    "name": "Platform Statements API",
+    "description": "All included utility endpoints for Basiq partners",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:24:25.000Z",
+    "updatedAt": "2026-10-22T02:24:25.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-56601d98-b20b-453f-a400-6c8f84fed07f"
+  },
+  "item": [
+    {
+      "name": "users",
+      "item": [
+        {
+          "name": "{userId}",
+          "item": [
+            {
+              "name": "statements",
+              "item": [
+                {
+                  "name": "Create a statement",
+                  "id": "fa0377e7-032f-4ed7-8ea7-7c75789b3c24",
+                  "protocolProfileBehavior": {
+                    "disableBodyPruning": true
+                  },
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "multipart/form-data"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "formdata",
+                      "formdata": [
+                        {
+                          "description": "(Required) The identifier of the institution to which the statement relates (e.g., \"AU01001\"). **Note**: Sandbox institutions (AU00000) do not support file uploads.",
+                          "key": "institutionId",
+                          "value": "<string>",
+                          "type": "text"
+                        },
+                        {
+                          "description": "(Required) The official PDF bank statement or CSV file to be uploaded. CSV files must conform to the file specification provided by Basiq.",
+                          "key": "statement",
+                          "type": "file",
+                          "value": null
+                        }
+                      ]
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/users/:userId/statements",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "users",
+                        ":userId",
+                        "statements"
+                      ],
+                      "variable": [
+                        {
+                          "id": "e6ed33d5-cc4e-423f-aa0c-77595205ca11",
+                          "key": "userId",
+                          "value": "<string>",
+                          "description": "(Required) The unique identifier of the user"
+                        }
+                      ]
+                    },
+                    "description": "Create a new statement by uploading an official PDF bank statement or CSV file. The server will create a job that processes the following steps:\n1. **verify-credentials**: Verify the file, validate the layout, and attempt to parse the statement.\n2. **retrieve-accounts**: Retrieve the list of accounts and their details (account number, name, balances).\n3. **retrieve-transactions**: Fetch the transactions for each account.\n\nThe status of each step can be checked by querying the Retrieve a job.\n\n> Note that this function is not supported in sandbox environments (AU00000).\n\nFor CSV file format specifications, please contact our support team.\n\n> \ud83d\udea7\n>\n> Note that the time it takes to complete the processes above will vary depending on the volume of data along with the complexity of the bank statement. As a rough guide this entire process could take anywhere between 10 - 30 secs. Upload multiple statements in parallel to provide the best user experience"
+                  },
+                  "response": [
+                    {
+                      "id": "17246c45-730c-4b9b-b10a-e8e5fbf54132",
+                      "name": "Job resource created successfully",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The identifier of the institution to which the statement relates (e.g., \"AU01001\"). **Note**: Sandbox institutions (AU00000) do not support file uploads.",
+                              "key": "institutionId",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "(Required) The official PDF bank statement or CSV file to be uploaded. CSV files must conform to the file specification provided by Basiq.",
+                              "key": "statement",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/statements",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "statements"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Accepted",
+                      "code": 202,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"type\": \"<string>\",\n  \"id\": \"<string>\",\n  \"links\": {\n    \"self\": \"<string>\"\n  }\n}",
+                      "createdAt": "2026-10-22T02:24:25.000Z",
+                      "updatedAt": "2026-10-22T02:24:25.000Z",
+                      "uid": "35240-17246c45-730c-4b9b-b10a-e8e5fbf54132"
+                    },
+                    {
+                      "id": "1c4cd17e-2978-407b-9fe9-c3eb792b4462",
+                      "name": "Bad request due to missing or invalid parameters",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The identifier of the institution to which the statement relates (e.g., \"AU01001\"). **Note**: Sandbox institutions (AU00000) do not support file uploads.",
+                              "key": "institutionId",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "(Required) The official PDF bank statement or CSV file to be uploaded. CSV files must conform to the file specification provided by Basiq.",
+                              "key": "statement",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/statements",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "statements"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Bad Request",
+                      "code": 400,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"invalid-credentials\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"invalid-credentials\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:24:25.000Z",
+                      "updatedAt": "2026-10-22T02:24:25.000Z",
+                      "uid": "35240-1c4cd17e-2978-407b-9fe9-c3eb792b4462"
+                    },
+                    {
+                      "id": "105ecaef-a34b-4788-9ad0-8d765e32b072",
+                      "name": "Forbidden access due to insufficient permissions",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The identifier of the institution to which the statement relates (e.g., \"AU01001\"). **Note**: Sandbox institutions (AU00000) do not support file uploads.",
+                              "key": "institutionId",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "(Required) The official PDF bank statement or CSV file to be uploaded. CSV files must conform to the file specification provided by Basiq.",
+                              "key": "statement",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/statements",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "statements"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Forbidden",
+                      "code": 403,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"no-production-access\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"access-denied\",\n      \"source\": {\n        \"parameter\": \"<string>\",\n        \"pointer\": \"<string>\"\n      },\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:24:25.000Z",
+                      "updatedAt": "2026-10-22T02:24:25.000Z",
+                      "uid": "35240-105ecaef-a34b-4788-9ad0-8d765e32b072"
+                    },
+                    {
+                      "id": "5f5bb786-d6d7-4eea-aba3-2eb39b1706bc",
+                      "name": "Resource not found",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The identifier of the institution to which the statement relates (e.g., \"AU01001\"). **Note**: Sandbox institutions (AU00000) do not support file uploads.",
+                              "key": "institutionId",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "(Required) The official PDF bank statement or CSV file to be uploaded. CSV files must conform to the file specification provided by Basiq.",
+                              "key": "statement",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/statements",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "statements"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Not Found",
+                      "code": 404,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:24:25.000Z",
+                      "updatedAt": "2026-10-22T02:24:25.000Z",
+                      "uid": "35240-5f5bb786-d6d7-4eea-aba3-2eb39b1706bc"
+                    },
+                    {
+                      "id": "72681155-8a29-492d-9f79-bb112389424a",
+                      "name": "Internal server error",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The identifier of the institution to which the statement relates (e.g., \"AU01001\"). **Note**: Sandbox institutions (AU00000) do not support file uploads.",
+                              "key": "institutionId",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "(Required) The official PDF bank statement or CSV file to be uploaded. CSV files must conform to the file specification provided by Basiq.",
+                              "key": "statement",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/statements",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "statements"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Internal Server Error",
+                      "code": 500,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:24:25.000Z",
+                      "updatedAt": "2026-10-22T02:24:25.000Z",
+                      "uid": "35240-72681155-8a29-492d-9f79-bb112389424a"
+                    },
+                    {
+                      "id": "e15b75a2-396e-4721-a8f0-26f1dde456a0",
+                      "name": "Service unavailable",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "multipart/form-data"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "Authorization",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "formdata",
+                          "formdata": [
+                            {
+                              "description": "(Required) The identifier of the institution to which the statement relates (e.g., \"AU01001\"). **Note**: Sandbox institutions (AU00000) do not support file uploads.",
+                              "key": "institutionId",
+                              "value": "<string>",
+                              "type": "text"
+                            },
+                            {
+                              "description": "(Required) The official PDF bank statement or CSV file to be uploaded. CSV files must conform to the file specification provided by Basiq.",
+                              "key": "statement",
+                              "type": "file"
+                            }
+                          ]
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/users/:userId/statements",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "users",
+                            ":userId",
+                            "statements"
+                          ],
+                          "variable": [
+                            {
+                              "key": "userId"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "Service Unavailable",
+                      "code": 503,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "responseTime": null,
+                      "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": {},\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    },\n    {\n      \"code\": {},\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+                      "createdAt": "2026-10-22T02:24:25.000Z",
+                      "updatedAt": "2026-10-22T02:24:25.000Z",
+                      "uid": "35240-e15b75a2-396e-4721-a8f0-26f1dde456a0"
+                    }
+                  ],
+                  "createdAt": "2026-10-22T02:24:25.000Z",
+                  "updatedAt": "2026-10-22T02:24:25.000Z",
+                  "uid": "35240-fa0377e7-032f-4ed7-8ea7-7c75789b3c24"
+                }
+              ],
+              "id": "58a0e290-b0c6-4217-8a5e-d7eecf3d2303",
+              "createdAt": "2026-10-22T02:24:25.000Z",
+              "updatedAt": "2026-10-22T02:24:25.000Z",
+              "uid": "35240-58a0e290-b0c6-4217-8a5e-d7eecf3d2303"
+            }
+          ],
+          "id": "1edd4325-9c83-4298-b136-5a6c3b4762a5",
+          "createdAt": "2026-10-22T02:24:25.000Z",
+          "updatedAt": "2026-10-22T02:24:25.000Z",
+          "uid": "35240-1edd4325-9c83-4298-b136-5a6c3b4762a5"
+        }
+      ],
+      "id": "1537a5d0-3793-4a9c-9f0e-60a7f12b53cc",
+      "createdAt": "2026-10-22T02:24:25.000Z",
+      "updatedAt": "2026-10-22T02:24:25.000Z",
+      "uid": "35240-1537a5d0-3793-4a9c-9f0e-60a7f12b53cc"
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://au-api.basiq.io"
+    }
+  ]
+}

@@ -1,33 +1,52 @@
 {
+  "info": {
+    "_postman_id": "f56a1a6e-72d0-4381-8938-f462e963a780",
+    "name": "Connect Authentication API",
+    "description": "All included utility endpoints for Basiq partners",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T02:22:27.000Z",
+    "updatedAt": "2026-10-22T02:22:28.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f56a1a6e-72d0-4381-8938-f462e963a780"
+  },
   "item": [
     {
-      "id": "d14042b5-00b3-49fc-a247-b5a77215d5cc",
-      "name": "Authentication",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "token",
       "item": [
         {
-          "id": "bb0effb9-78a4-400d-aa58-e6a12a5198a5",
-          "name": "Create Token",
+          "name": "Generate an auth token",
+          "id": "004b457f-f2c9-4809-951c-4dc79d407ee1",
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          },
           "request": {
-            "name": "Create Token",
-            "description": {
-              "content": "Exchange API key for a server token or user token for API access.",
-              "type": "text/plain"
+            "auth": {
+              "type": "apikey",
+              "apikey": [
+                {
+                  "key": "key",
+                  "value": "Authorization",
+                  "type": "string"
+                },
+                {
+                  "key": "value",
+                  "value": "{{apiKey}}",
+                  "type": "string"
+                },
+                {
+                  "key": "in",
+                  "value": "header",
+                  "type": "string"
+                }
+              ]
             },
-            "url": {
-              "path": [
-                "token"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
+            "method": "POST",
             "header": [
+              {
+                "description": "(Required) ",
+                "key": "basiq-version",
+                "value": "<string>"
+              },
               {
                 "key": "Content-Type",
                 "value": "application/x-www-form-urlencoded"
@@ -37,191 +56,323 @@
                 "value": "application/json"
               }
             ],
-            "method": "POST",
-            "auth": null,
             "body": {
               "mode": "urlencoded",
               "urlencoded": [
                 {
-                  "disabled": false,
-                  "key": "grant_type",
-                  "value": "<string>",
-                  "description": "(Required) "
+                  "key": "scope",
+                  "value": "<string>"
                 },
                 {
-                  "disabled": false,
-                  "key": "scope",
-                  "value": "<string>",
-                  "description": "SERVER_ACCESS or CLIENT_ACCESS"
+                  "key": "userId",
+                  "value": "<string>"
                 }
               ]
-            }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/token",
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "path": [
+                "token"
+              ]
+            },
+            "description": "Use this endpoint to retrieve a token that will be passed as authorization header for Basiq API"
           },
           "response": [
             {
-              "id": "d27638fe-b262-4b29-a4ed-1f5da6e19378",
-              "name": "Access token",
+              "id": "2fb0f732-57f2-468f-a4ac-453de6533d24",
+              "name": "Return token object that will be used for Basiq API requests. ",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "token"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "description": "(Required) ",
+                    "key": "basiq-version",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "urlencoded",
                   "urlencoded": [
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) ",
-                        "type": "text/plain"
-                      },
-                      "key": "grant_type",
+                      "key": "scope",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "SERVER_ACCESS or CLIENT_ACCESS",
-                        "type": "text/plain"
-                      },
-                      "key": "scope",
+                      "key": "userId",
                       "value": "<string>"
                     }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/token",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "token"
                   ]
                 }
               },
               "status": "OK",
               "code": 200,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"access_token\": \"string\",\n  \"token_type\": \"string\",\n  \"expires_in\": 9055\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"access_token\": \"<string>\",\n  \"expires_in\": \"<long>\",\n  \"token_type\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T02:22:28.000Z",
+              "updatedAt": "2026-10-22T02:22:28.000Z",
+              "uid": "35240-2fb0f732-57f2-468f-a4ac-453de6533d24"
             },
             {
-              "id": "287a03d1-ff32-452a-9d9e-9a9d50339d28",
-              "name": "Invalid request parameters",
+              "id": "0cbb82db-6fa8-449f-b8d3-f9d8b6a79e11",
+              "name": "Returns error that server cannot or will not process the request as it does not conform.",
               "originalRequest": {
-                "url": {
-                  "path": [
-                    "token"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
+                "method": "POST",
                 "header": [
                   {
-                    "description": {
-                      "content": "Added as a part of security scheme: bearer",
-                      "type": "text/plain"
-                    },
-                    "key": "Authorization",
-                    "value": "Bearer <token>"
+                    "description": "(Required) ",
+                    "key": "basiq-version",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
                   },
                   {
                     "key": "Accept",
                     "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
                   }
                 ],
-                "method": "POST",
                 "body": {
                   "mode": "urlencoded",
                   "urlencoded": [
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "(Required) ",
-                        "type": "text/plain"
-                      },
-                      "key": "grant_type",
+                      "key": "scope",
                       "value": "<string>"
                     },
                     {
-                      "disabled": false,
-                      "description": {
-                        "content": "SERVER_ACCESS or CLIENT_ACCESS",
-                        "type": "text/plain"
-                      },
-                      "key": "scope",
+                      "key": "userId",
                       "value": "<string>"
                     }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/token",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "token"
                   ]
                 }
               },
               "status": "Bad Request",
               "code": 400,
+              "_postman_previewlanguage": "json",
               "header": [
                 {
                   "key": "Content-Type",
                   "value": "application/json"
                 }
               ],
-              "body": "{\n  \"type\": \"string\",\n  \"title\": \"string\",\n  \"code\": \"string\",\n  \"detail\": \"string\",\n  \"source\": {}\n}",
               "cookie": [],
-              "_postman_previewlanguage": "json"
+              "responseTime": null,
+              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"unsupported-accept\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    },\n    {\n      \"code\": \"invalid-content\",\n      \"type\": \"<string>\",\n      \"title\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"source\": {\n        \"parameter\": \"<string>\"\n      }\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T02:22:28.000Z",
+              "updatedAt": "2026-10-22T02:22:28.000Z",
+              "uid": "35240-0cbb82db-6fa8-449f-b8d3-f9d8b6a79e11"
+            },
+            {
+              "id": "73cebe03-2c78-4325-9107-abf2b25cabd2",
+              "name": "Returns error indicating that server can't find requested resource.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) ",
+                    "key": "basiq-version",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/token",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "token"
+                  ]
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"resource-not-found\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T02:22:28.000Z",
+              "updatedAt": "2026-10-22T02:22:28.000Z",
+              "uid": "35240-73cebe03-2c78-4325-9107-abf2b25cabd2"
+            },
+            {
+              "id": "8a3b6fe3-8223-4d8d-b02d-acc7003e1ba5",
+              "name": "Returns error response code indicates that the server encountered an unexpected condition that prevented it from fulfilling the request.",
+              "originalRequest": {
+                "method": "POST",
+                "header": [
+                  {
+                    "description": "(Required) ",
+                    "key": "basiq-version",
+                    "value": "<string>"
+                  },
+                  {
+                    "key": "Content-Type",
+                    "value": "application/x-www-form-urlencoded"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  },
+                  {
+                    "description": "Added as a part of security scheme: apikey",
+                    "key": "Authorization",
+                    "value": "<API Key>"
+                  }
+                ],
+                "body": {
+                  "mode": "urlencoded",
+                  "urlencoded": [
+                    {
+                      "key": "scope",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "<string>"
+                    }
+                  ]
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/token",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "token"
+                  ]
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "_postman_previewlanguage": "json",
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "cookie": [],
+              "responseTime": null,
+              "body": "{\n  \"correlationId\": \"<string>\",\n  \"data\": [\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    },\n    {\n      \"code\": \"internal-server-error\",\n      \"type\": \"<string>\",\n      \"detail\": \"<string>\",\n      \"title\": \"<string>\"\n    }\n  ],\n  \"type\": \"<string>\"\n}",
+              "createdAt": "2026-10-22T02:22:28.000Z",
+              "updatedAt": "2026-10-22T02:22:28.000Z",
+              "uid": "35240-8a3b6fe3-8223-4d8d-b02d-acc7003e1ba5"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "createdAt": "2026-10-22T02:22:28.000Z",
+          "updatedAt": "2026-10-22T02:22:28.000Z",
+          "uid": "35240-004b457f-f2c9-4809-951c-4dc79d407ee1"
         }
       ],
-      "event": []
-    }
-  ],
-  "event": [],
-  "variable": [
-    {
-      "type": "string",
-      "value": "https://au-api.basiq.io",
-      "key": "baseUrl"
+      "id": "2c062ca9-4a91-41d8-8635-3d663c287706",
+      "createdAt": "2026-10-22T02:22:28.000Z",
+      "updatedAt": "2026-10-22T02:22:28.000Z",
+      "uid": "35240-2c062ca9-4a91-41d8-8635-3d663c287706"
     }
   ],
   "auth": {
-    "type": "bearer",
-    "bearer": [
+    "type": "apikey",
+    "apikey": [
       {
-        "key": "token",
-        "value": "{{bearerToken}}"
+        "key": "key",
+        "value": "Authorization",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
       }
     ]
   },
-  "info": {
-    "_postman_id": "b92ae10b-0036-43db-842d-d9e1b21ae5f3",
-    "name": "Basiq Accounts Authentication API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "The Basiq API is an open banking and financial data platform providing unified access to Australian and New Zealand bank account data. It enables financial applications to retrieve account balances, transactions, income verification, and expense categorization via consumer-consented bank connections using CDR (Consumer Data Right) and third-party open banking standards.\n\nContact Support:\n Name: Basiq Support",
-      "type": "text/plain"
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://au-api.basiq.io"
     }
-  }
+  ]
 }
