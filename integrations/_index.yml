@@ -21,3 +21,126 @@
     detected: '2026-10-12'
   status: not-a-workflow
   arazzo: null
+- slug: basiq-codat
+  label: Codat
+  partner: codat
+  partner_name: Codat
+  type: claimed
+  channel: integration-partner
+  evidence: https://www.basiq.io/partners/codat.html
+  source: edge
+  relationship: consent-handoff
+  arazzo: basiq-codat-transactions-to-bank-feed.yml
+  status: arazzo
+- slug: basiq-moroku
+  label: Moroku
+  partner_name: Moroku
+  type: claimed
+  channel: integration-partner
+  evidence: https://www.basiq.io/partners/moroku.html
+  source: edge
+  relationship: consent-handoff
+  status: pending-partner-spec
+  arazzo: null
+- slug: basiq-authsignal
+  label: Authsignal
+  partner_name: Authsignal
+  type: claimed
+  channel: integration-partner
+  evidence: https://www.basiq.io/partners/authsignal.html
+  source: edge
+  relationship: consent-handoff
+  status: pending-partner-spec
+  arazzo: null
+- slug: basiq-zeal-solutions
+  label: Zeal Solutions
+  partner_name: Zeal Solutions
+  type: claimed
+  channel: integration-partner
+  evidence: https://www.basiq.io/partners/zeal.html
+  source: edge
+  relationship: consent-handoff
+  status: pending-partner-spec
+  arazzo: null
+- slug: basiq-nimo
+  label: Nimo
+  partner_name: Nimo
+  type: claimed
+  channel: integration-partner
+  evidence: https://www.basiq.io/partners/nimo.html
+  source: edge
+  relationship: consent-handoff
+  status: pending-partner-spec
+  arazzo: null
+- slug: basiq-simpology
+  label: Simpology
+  partner_name: Simpology
+  type: claimed
+  channel: integration-partner
+  evidence: https://www.basiq.io/partners/simpology.html
+  source: edge
+  relationship: consent-handoff
+  status: pending-partner-spec
+  arazzo: null
+- slug: basiq-crowdbotics
+  label: Crowdbotics
+  partner_name: Crowdbotics
+  type: claimed
+  channel: services-partner
+  evidence: https://www.basiq.io/partners.html
+  source: edge
+  status: pending-partner-spec
+  arazzo: null
+- slug: basiq-digital-creators
+  label: Digital Creators
+  partner_name: Digital Creators
+  type: claimed
+  channel: services-partner
+  evidence: https://www.basiq.io/partners.html
+  source: edge
+  status: pending-partner-spec
+  arazzo: null
+- slug: basiq-flying-donkey
+  label: Flying Donkey
+  partner_name: Flying Donkey
+  type: claimed
+  channel: services-partner
+  evidence: https://www.basiq.io/partners.html
+  source: edge
+  status: pending-partner-spec
+  arazzo: null
+- slug: basiq-consumer-data-right-accc-accredited-data-recipient
+  label: Consumer Data Right (ACCC accredited data recipient)
+  partner_name: Consumer Data Right (ACCC accredited data recipient)
+  category: Australian Consumer Data Right accreditation
+  type: register
+  channel: regulator-register
+  evidence: https://api.cdr.gov.au/cdr-register/v1/all/data-recipients
+  source: edge
+  relationship: standard-participant
+  contract_reference:
+    register: 'CDR Register (Australia, ACCC): accredited data recipients'
+    standard: Consumer Data Right
+    spec_file: null
+    role: accredited-data-recipient
+    registered_name: Basiq Pty Ltd
+    registered_brands:
+    - Basiq
+    register_id: ADRBNK000208
+    accreditation_level: UNRESTRICTED
+    register_status: ACTIVE
+    lapsed: false
+    register_country: AU
+    matched_domain: null
+    matched_by: register-name
+    signal_note: 'regulated: ACCC accreditation to receive CDR data (a licence, not a product conformance test);
+      software products under the accreditation are the recipient''s own products or its customers / CDR representatives
+      and are never counted'
+    detected_by: sweep-australia-cdr-register.py
+    detected: '2026-10-22'
+    register_name_note: register-name 'basiq' = basiq; no wikidata P856
+    identity_source: register-name
+    identity_note: register gave only the name; exact normalised match to the repo's apis.yml name, one repo, Wikidata
+      P856 not contradicting (Kin 2026-10-20 decision 2)
+  status: not-a-workflow
+  arazzo: null

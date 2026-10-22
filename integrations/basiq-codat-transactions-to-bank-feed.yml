@@ -1,0 +1,83 @@
+arazzo: 1.0.1
+info:
+  title: Basiq + Codat - push a consented user's bank transactions into a Codat bank feed
+  version: 1.0.0
+  description: >-
+    Reads a Basiq user's accounts and transactions (CDR / Open Banking data shared through Basiq's consent UI) and
+    pushes them into a Codat company's bank account via Codat's push bank-transactions endpoint, so the linked
+    accounting platform can reconcile them. Codat is listed as an Integration Partner on https://www.basiq.io/partners.html;
+    Basiq does not publish this workflow - it is composed by API Evangelist from the two contracts. The Codat company,
+    accounting-platform connection and target bank account must already exist; Basiq transactions must be mapped to
+    Codat's CreateBankTransactions shape (id, date, description, amount, balance), which Arazzo cannot transform.
+sourceDescriptions:
+- name: basiqAccounts
+  url: https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/openapi/basiq-accounts-api-openapi.yml
+  type: openapi
+- name: basiqTransactions
+  url: https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/openapi/basiq-transactions-api-openapi.yml
+  type: openapi
+- name: codatTransactions
+  url: https://raw.githubusercontent.com/api-evangelist/codat/refs/heads/main/openapi/codat-transactions-api-openapi.yml
+  type: openapi
+workflows:
+- workflowId: basiqTransactionsToCodatBankFeed
+  summary: List Basiq accounts and transactions for a user, then push them to a Codat bank account.
+  inputs:
+    type: object
+    required: [userId, companyId, connectionId, accountId]
+    properties:
+      userId: {type: string, description: Basiq user id with an active consent}
+      companyId: {type: string, description: Codat company id}
+      connectionId: {type: string, description: Codat connection id for the accounting platform}
+      accountId: {type: string, description: Codat bank account id to push into}
+      bankTransactions: {type: object, description: 'Basiq transactions mapped to Codat CreateBankTransactions (accountId and transactions array)'}
+  steps:
+  - stepId: listAccounts
+    operationId: $sourceDescriptions.basiqAccounts.getAccounts
+    parameters:
+    - {name: userId, in: path, value: $inputs.userId}
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      accounts: $response.body#/data
+  - stepId: listTransactions
+    operationId: $sourceDescriptions.basiqTransactions.getTransactions
+    parameters:
+    - {name: userId, in: path, value: $inputs.userId}
+    - {name: limit, in: query, value: 500}
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      transactions: $response.body#/data
+      next: $response.body#/links/next
+  - stepId: pushBankTransactions
+    operationId: $sourceDescriptions.codatTransactions.create-bank-transactions
+    parameters:
+    - {name: companyId, in: path, value: $inputs.companyId}
+    - {name: connectionId, in: path, value: $inputs.connectionId}
+    - {name: accountId, in: path, value: $inputs.accountId}
+    requestBody:
+      contentType: application/json
+      payload: $inputs.bankTransactions
+    successCriteria:
+    - condition: $statusCode == 200
+    outputs:
+      pushOperation: $response.body
+  outputs:
+    transactions: $steps.listTransactions.outputs.transactions
+    pushOperation: $steps.pushBankTransactions.outputs.pushOperation
+x-integration:
+  partner: codat
+  template: null
+  edge_evidence: https://www.basiq.io/partners/codat.html
+  edge_type: claimed
+  method: generated
+  generated: '2026-10-21'
+  generator: docs-module (claude-opus-5-5)
+  guessed_steps:
+  - step: pushBankTransactions
+    cause: partner-contract
+    why: The mapping from Basiq transaction objects to Codat CreateBankTransactions is not expressible in Arazzo; the caller supplies the mapped payload as $inputs.bankTransactions.
+  - step: listTransactions
+    cause: provider-contract
+    why: Restricting to one Basiq account relies on the free-text `filter` query parameter, whose account filter syntax the spec does not declare; the workflow lists all user transactions.
