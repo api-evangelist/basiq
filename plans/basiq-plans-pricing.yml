@@ -35,3 +35,23 @@ plans:
   price_text: charges will apply for any users on your platform
   features: []
   limits: []
+x-canonical:
+  generated: '2026-10-23'
+  vocabulary: all/0-working/economics/plans-canonical.yml
+  models:
+  - free
+  - negotiated
+  units: []
+  plans:
+  - name: Sandbox
+    access: other
+    model: free
+    model_how: derived
+    units: []
+    periods: []
+  - name: Paying customer
+    access: other
+    model: negotiated
+    model_how: derived
+    units: []
+    periods: []

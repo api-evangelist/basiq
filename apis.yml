@@ -376,6 +376,8 @@ apis:
   humanURL: https://api.basiq.io/reference
   baseURL: https://au-api.basiq.io
   tags:
+  - Job
+  tags_raw:
   - Jobs
   properties:
   - type: OpenAPI
@@ -583,6 +585,8 @@ apis:
   humanURL: https://api.basiq.io/reference
   baseURL: https://au-api.basiq.io
   tags:
+  - Event
+  tags_raw:
   - Events
   properties:
   - type: OpenAPI
@@ -887,6 +891,8 @@ apis:
   humanURL: https://api.basiq.io/reference
   baseURL: https://au-api.basiq.io
   tags:
+  - Webhook
+  tags_raw:
   - Webhooks
   properties:
   - type: OpenAPI
