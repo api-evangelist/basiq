@@ -1,4 +1,4 @@
-# Basiq (basiq)
+# Basiq
 
 <!-- API-EVANGELIST-PROVENANCE:BEGIN -->
 > ### About this repository
@@ -64,75 +64,258 @@
 > Full detail: **[Where this data comes from](https://apievangelist.com/about/where-our-data-comes-from)**
 <!-- API-EVANGELIST-PROVENANCE:END -->
 
-Basiq is an Australian open banking and financial data API platform providing unified access to bank account data and enrichment services. It enables fintechs, lenders, and financial service providers to connect to 180+ Australian and New Zealand banks via CDR (Consumer Data Right) and third-party connectors. The Basiq API provides user management, bank connections, account balances, transaction history, income verification, and expense categorization. Uses JWT Bearer token authentication.
+Basiq is an Australian open banking and financial data API platform providing unified access to bank account data and enrichment services. It enables fintechs, lenders, and financial service providers to connect to 180+ Australian and New Zealand banks via CDR (Consumer Data Right) and third-party connectors. The Basiq API provides user management, bank connections, account balances, transaction history, income verification, and expense categorization. Uses JWT Bearer token authentication. Basiq Pty Ltd (ABN 95 616 592 011) is an accredited data recipient under the CDR and a wholly-owned but non-guaranteed subsidiary of Cuscal Limited.
 
-**APIs.json:** [https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/apis.yml](https://raw.githubusercontent.com/api-evangelist/basiq/refs/heads/main/apis.yml)
+**Areas:** Australia · Banking · CDR · Financial Data · Fintech · Open Banking · Transaction · Lending · Account Verification
 
-## Scope
+## Basiq on APIs.io
 
-- **Type:** Index
+Everything profiled for Basiq is published on APIs.io rather than in this repository. Start at the provider page — **[apis.io/providers/basiq/](https://apis.io/providers/basiq/)** — or go straight to one of the APIs or properties below.
 
-## Tags
+### APIs (21)
 
-- Australia
-- Banking
-- CDR
-- Financial Data
-- Fintech
-- Open Banking
-- Transactions
+- [Basiq Accounts API](https://apis.io/apis/basiq/basiq-accounts-api/) — The Accounts API from Basiq — 2 operation(s) for accounts.
+- [Basiq Authentication API](https://apis.io/apis/basiq/basiq-authentication-api/) — The Authentication API from Basiq — 1 operation(s) for authentication.
+- [Basiq Connections API](https://apis.io/apis/basiq/basiq-connections-api/) — The Connections API from Basiq — 2 operation(s) for connections.
+- [Basiq Transactions API](https://apis.io/apis/basiq/basiq-transactions-api/) — The Transactions API from Basiq — 2 operation(s) for transactions.
+- [Basiq Users API](https://apis.io/apis/basiq/basiq-users-api/) — The Users API from Basiq — 2 operation(s) for users.
+- [Basiq Consents API](https://apis.io/apis/basiq/basiq-consents-api/) — The Consents API from Basiq — 2 operation(s) for consents.
+- [Basiq Jobs API](https://apis.io/apis/basiq/basiq-jobs-api/) — The Jobs API from Basiq — 3 operation(s) for jobs.
+- [Basiq Affordability API](https://apis.io/apis/basiq/basiq-affordability-api/) — The Affordability API from Basiq — 3 operation(s) for affordability.
+- [Basiq Analytics API](https://apis.io/apis/basiq/basiq-analytics-api/) — The Analytics API from Basiq — 2 operation(s) for analytics.
+- [Basiq Auth Links API](https://apis.io/apis/basiq/basiq-authlinks-api/) — The AuthLinks API from Basiq — 1 operation(s) for authlinks.
+- [Basiq Connectors API](https://apis.io/apis/basiq/basiq-connectors-api/) — The Connectors API from Basiq — 2 operation(s) for connectors.
+- [Basiq Enrich API](https://apis.io/apis/basiq/basiq-enrich-api/) — The Enrich API from Basiq — 3 operation(s) for enrich.
+- [Basiq Events API](https://apis.io/apis/basiq/basiq-events-api/) — The Events API from Basiq — 4 operation(s) for events.
+- [Basiq Expenses API](https://apis.io/apis/basiq/basiq-expenses-api/) — The Expenses API from Basiq — 2 operation(s) for expenses.
+- [Basiq Identities API](https://apis.io/apis/basiq/basiq-identities-api/) — The Identities API from Basiq — 2 operation(s) for identities.
+- [Basiq Income API](https://apis.io/apis/basiq/basiq-income-api/) — The Income API from Basiq — 2 operation(s) for income.
+- [Basiq Insights API](https://apis.io/apis/basiq/basiq-insights-api/) — The Insights API from Basiq — 10 operation(s) for insights.
+- [Basiq Payees API](https://apis.io/apis/basiq/basiq-payees-api/) — The Payees API from Basiq — 2 operation(s) for payees.
+- [Basiq Reports API](https://apis.io/apis/basiq/basiq-reports-api/) — The Reports API from Basiq — 5 operation(s) for reports.
+- [Basiq Statements API](https://apis.io/apis/basiq/basiq-statements-api/) — The Statements API from Basiq — 1 operation(s) for statements.
+- [Basiq Webhooks API](https://apis.io/apis/basiq/basiq-webhooks-api/) — Basiq Webhooks
 
-## Timestamps
+### Published properties
 
-- **Created:** 2026-03-27
-- **Modified:** 2026-05-19
+Each property below is a page on APIs.io carrying the machine-readable artifact and what it says.
 
-## APIs
+#### MCP servers (1)
 
-### Basiq API
+Model Context Protocol servers that expose the API to agents.
 
-The Basiq API provides open banking access to Australian and New Zealand bank data. Manage users, bank connections, accounts, transactions, and affordability data (income verification, expense categorization) via JWT Bearer token authentication.
+- [basiq](https://apis.io/servers/basiq/basiq/)
 
-- **Human URL:** [https://api.basiq.io/reference](https://api.basiq.io/reference)
-- **Base URL:** `https://au-api.basiq.io`
+#### Agentic access (1)
 
-#### Tags
+Which operations an agent can call, which act, and which need a human in the loop.
 
-- Accounts
-- Australia
-- CDR
-- Financial Data
-- Open Banking
-- Transactions
+- [Basiq Agentic Access](https://apis.io/agentic-access/basiq/basiq-agentic-access/)
 
-#### Properties
+#### JSON Schema (26)
 
-- [Documentation](https://api.basiq.io/reference)
-- [Documentation](https://api.basiq.io/reference/getting-started)
-- [OpenAPI](openapi/basiq-api-openapi.yml) — [OpenAPI Specification](https://spec.openapis.org/oas/latest.html)
-- [Postman Collection](collections/basiq-api.postman_collection.json) — [Postman Collection 2.1](https://schema.getpostman.com/json/collection/v2.1.0/collection.json)
-- [Open Collection](collections/basiq-api.opencollection.json) — [Open Collection 1.0](https://schema.opencollection.com/opencollection/v1.0.0.json)
+The data models the API reads and writes.
 
-## Common Properties
+- [Account](https://apis.io/schemas/basiq/account/)
+- [AccountListResponse](https://apis.io/schemas/basiq/accountlistresponse/)
+- [AccountInsightResponse](https://apis.io/schemas/basiq/basiq-account-insight-response/)
+- [AnalyticsResponse](https://apis.io/schemas/basiq/basiq-analytics-response/)
+- [ConnectionAnalyticsResponse](https://apis.io/schemas/basiq/basiq-connection-analytics-response/)
+- [ExpenseRatioInsightResponse](https://apis.io/schemas/basiq/basiq-expense-ratio-insight-response/)
+- [Insight](https://apis.io/schemas/basiq/basiq-insight/)
+- [InsightTypeItem](https://apis.io/schemas/basiq/basiq-insight-type-item/)
+- [MerchantDetails](https://apis.io/schemas/basiq/basiq-merchant-details/)
+- [PayeeDetailsResponse](https://apis.io/schemas/basiq/basiq-payee-details-response/)
+- [PayeesListResponse](https://apis.io/schemas/basiq/basiq-payees-list-response/)
+- [PostInsightsRequest](https://apis.io/schemas/basiq/basiq-post-insights-request/)
+- [PostInsightsResponse](https://apis.io/schemas/basiq/basiq-post-insights-response/)
+- [SingleMerchantResponse](https://apis.io/schemas/basiq/basiq-single-merchant-response/)
+- [WebhookStats](https://apis.io/schemas/basiq/basiq-webhook-stats/)
+- [Connection](https://apis.io/schemas/basiq/connection/)
+- [ConnectionListResponse](https://apis.io/schemas/basiq/connectionlistresponse/)
+- [CreateConnectionRequest](https://apis.io/schemas/basiq/createconnectionrequest/)
+- [CreateUserRequest](https://apis.io/schemas/basiq/createuserrequest/)
+- [ErrorResponse](https://apis.io/schemas/basiq/errorresponse/)
+- [ExpenseReport](https://apis.io/schemas/basiq/expensereport/)
+- [IncomeVerification](https://apis.io/schemas/basiq/incomeverification/)
+- [TokenResponse](https://apis.io/schemas/basiq/tokenresponse/)
+- [Transaction](https://apis.io/schemas/basiq/transaction/)
+- [TransactionListResponse](https://apis.io/schemas/basiq/transactionlistresponse/)
+- …and 1 more published on APIs.io
 
-- [LinkedIn](https://www.linkedin.com/company/basiq-i-o)
-- [Website](https://basiq.io/)
-- [Documentation](https://api.basiq.io/reference)
-- [Website](https://dashboard.basiq.io/)
-- [Website](https://basiq.io/pricing/)
-- [Blog](https://basiq.io/blog/)
-- [Website](https://github.com/basiqio)
-- [Terms of Service](https://basiq.io/legal/terms-of-use/)
-- [Privacy Policy](https://basiq.io/legal/privacy-policy/)
-- [Spectral Rules](rules/basiq-spectral-rules.yml)
-- [Vocabulary](vocabulary/basiq-vocabulary.yaml)
-- [JSON-LD](json-ld/basiq-context.jsonld) — [JSON-LD](https://www.w3.org/TR/json-ld11/)
-- [Features](undefined)
-- [Use Cases](undefined)
-- [Integrations](undefined)
-- [L L Ms Txt](https://api.basiq.io/llms.txt)
+#### JSON Structure (13)
 
-## Maintainers
+Data models expressed in JSON Structure.
 
-**FN:** Kin Lane
-**Email:** kin@apievangelist.com
+- [Account](https://apis.io/json-structure/basiq/account/)
+- [Accountlistresponse](https://apis.io/json-structure/basiq/accountlistresponse/)
+- [Connection](https://apis.io/json-structure/basiq/connection/)
+- [Connectionlistresponse](https://apis.io/json-structure/basiq/connectionlistresponse/)
+- [Createconnectionrequest](https://apis.io/json-structure/basiq/createconnectionrequest/)
+- [Createuserrequest](https://apis.io/json-structure/basiq/createuserrequest/)
+- [Errorresponse](https://apis.io/json-structure/basiq/errorresponse/)
+- [Expensereport](https://apis.io/json-structure/basiq/expensereport/)
+- [Incomeverification](https://apis.io/json-structure/basiq/incomeverification/)
+- [Tokenresponse](https://apis.io/json-structure/basiq/tokenresponse/)
+- [Transaction](https://apis.io/json-structure/basiq/transaction/)
+- [Transactionlistresponse](https://apis.io/json-structure/basiq/transactionlistresponse/)
+- [User](https://apis.io/json-structure/basiq/user/)
+
+#### JSON-LD (1)
+
+Linked-data contexts for the provider's vocabulary.
+
+- [Basiq Context](https://apis.io/jsonld/basiq/basiq-context/)
+
+#### Vocabulary (1)
+
+The provider's domain terms, defined.
+
+- [Basiq Vocabulary](https://apis.io/vocabularies/basiq/basiq-vocabulary/)
+
+#### Examples (13)
+
+Example requests and responses.
+
+- [Account](https://apis.io/examples/basiq/account/)
+- [Accountlistresponse](https://apis.io/examples/basiq/accountlistresponse/)
+- [Connection](https://apis.io/examples/basiq/connection/)
+- [Connectionlistresponse](https://apis.io/examples/basiq/connectionlistresponse/)
+- [Createconnectionrequest](https://apis.io/examples/basiq/createconnectionrequest/)
+- [Createuserrequest](https://apis.io/examples/basiq/createuserrequest/)
+- [Errorresponse](https://apis.io/examples/basiq/errorresponse/)
+- [Expensereport](https://apis.io/examples/basiq/expensereport/)
+- [Incomeverification](https://apis.io/examples/basiq/incomeverification/)
+- [Tokenresponse](https://apis.io/examples/basiq/tokenresponse/)
+- [Transaction](https://apis.io/examples/basiq/transaction/)
+- [Transactionlistresponse](https://apis.io/examples/basiq/transactionlistresponse/)
+- [User](https://apis.io/examples/basiq/user/)
+
+#### Collections (7)
+
+Postman and Open Collection request collections.
+
+- [Basiq Accounts API](https://apis.io/collections/basiq/open-basiq-accounts-api/)
+- [Basiq Accounts Affordability API](https://apis.io/collections/basiq/open-basiq-affordability-api/)
+- [Basiq API](https://apis.io/collections/basiq/open-basiq-api/)
+- [Basiq Accounts Authentication API](https://apis.io/collections/basiq/open-basiq-authentication-api/)
+- [Basiq Accounts Connections API](https://apis.io/collections/basiq/open-basiq-connections-api/)
+- [Basiq Accounts Transactions API](https://apis.io/collections/basiq/open-basiq-transactions-api/)
+- [Basiq Accounts Users API](https://apis.io/collections/basiq/open-basiq-users-api/)
+
+#### Overlays (7)
+
+OpenAPI overlays, including conversational phrasing for each operation.
+
+- [Basiq Accounts Api Overlay](https://apis.io/overlays/basiq/basiq-accounts-api-overlay/)
+- [Basiq Authentication Api Overlay](https://apis.io/overlays/basiq/basiq-authentication-api-overlay/)
+- [Basiq Connections Api Overlay](https://apis.io/overlays/basiq/basiq-connections-api-overlay/)
+- [Basiq Consents Api Overlay](https://apis.io/overlays/basiq/basiq-consents-api-overlay/)
+- [Basiq Jobs Api Overlay](https://apis.io/overlays/basiq/basiq-jobs-api-overlay/)
+- [Basiq Transactions Api Overlay](https://apis.io/overlays/basiq/basiq-transactions-api-overlay/)
+- [Basiq Users Api Overlay](https://apis.io/overlays/basiq/basiq-users-api-overlay/)
+
+#### Governance rules (3)
+
+Spectral rulesets for the provider's contracts.
+
+- [Basiq — jsonschema rules](https://apis.io/rules/basiq/basiq-jsonschema-spectral-rules/)
+- [Basiq API Rules](https://apis.io/rules/basiq/basiq-rules/)
+- [Basiq API Rules](https://apis.io/rules/basiq/basiq-spectral-rules/)
+
+#### Security (2)
+
+Authentication, trust centre, and vulnerability disclosure.
+
+- [Basiq Authentication](https://apis.io/security/basiq/basiq-authentication/)
+- [Basiq Domain Security](https://apis.io/security/basiq/basiq-domain-security/)
+
+#### Plans and pricing (1)
+
+Published plans, tiers and prices.
+
+- [Basiq Plans Pricing](https://apis.io/plans/basiq/basiq-plans-pricing/)
+
+#### Rate limits (1)
+
+Published request limits.
+
+- [Basiq Rate Limits](https://apis.io/rate-limits/basiq/basiq-rate-limits/)
+
+#### FinOps (1)
+
+What the API costs to run, by operation.
+
+- [Basiq Finops](https://apis.io/finops/basiq/basiq-finops/)
+
+## Where to find this API
+
+Links to the company's own pages. This repository publishes no copy of their specifications — the canonical document is theirs and lives at the URLs below.
+
+- [Website](https://www.basiq.io/)
+- [Documentation](https://api.basiq.io/docs)
+- [Getting started](https://api.basiq.io/docs/getting-started)
+- [API reference](https://api.basiq.io/reference)
+- [Pricing](https://www.basiq.io/pricing.html)
+- [Sign up](https://dashboard.basiq.io/register)
+- [Changelog](https://api.basiq.io/changelog)
+- [Blog](https://blog.basiq.io)
+- [Security](https://www.basiq.io/data-security.html)
+- [Compliance](https://docs.basiq.io/en/articles/5088017-consumer-data-right-cdr-policy)
+- [Terms of service](https://docs.basiq.io/en/articles/415750-basiq-terms-of-service)
+- [Privacy policy](https://docs.basiq.io/en/articles/382581-basiq-privacy-policy)
+- [GitHub](https://github.com/basiqio)
+- [Status](https://status.basiq.io/)
+
+## API Evangelist rating
+
+**Kin Score 60.0** — strong · rubric 0.24.0 · scored 2026-10-21
+
+| Facet | Score |
+|---|---|
+| Discoverability | 80.0 |
+| Contract quality | 63.8 |
+| Contract governance | 43.6 |
+| Operational transparency | 63.2 |
+| Developer ergonomics | 73.1 |
+| Access clarity | 36.8 |
+
+**Agent readiness 38.8** — agent-ready (gated down from agent-native)
+
+| Agent-readiness dimension | Result |
+|---|---|
+| Spec Presence | yes |
+| Agentic Access | derived (partial credit) |
+| Reversibility Documented | — |
+| MCP Server | platform (partial credit) |
+| Auth Clarity | bearer (partial credit) |
+| Idempotency | — |
+| Error Semantics | verified |
+| OpenAPI Examples | verified |
+| Rate Limit Signal | documented (partial credit) |
+| Event Surface Described | — |
+| Agent Skills | unknown |
+| Well Known Catalog | yes |
+| Consent Identity | — |
+| Agent Card | — |
+| Dry Run Mode | — |
+| Delegated Identity | — |
+| Protected Resource Metadata | — |
+| Dynamic Client Registration | — |
+| Agentic Commerce | — |
+
+**Regulatory alignment 29.1** — Banking & Open Finance
+
+The rubric is published at [github.com/api-evangelist/kin-score](https://github.com/api-evangelist/kin-score). The per-check breakdown behind these numbers — which checks were earned, partial or missed — along with score history and how this provider compares to its peers, is available at [apis.io/providers/basiq/](https://apis.io/providers/basiq/).
+
+## How this profile is made
+
+API Evangelist profiles a company's public API surface the way a developer would find it: the website, developer portal and documentation, the specifications it publishes, its public repositories, and its pricing, status and changelog pages. From that it derives the properties above — contracts split per API, workflows, schemas, collections, governance rules, plans and rate limits — and scores them against the published [Kin Score rubric](https://github.com/api-evangelist/kin-score).
+
+The artifacts are published on [APIs.io](https://apis.io), not in this repository. This repository is the public record for Basiq: the place to say something is wrong, missing or out of date, and to ask for a re-score or a removal.
+
+## Open an issue
+
+- **Something about this listing** — a wrong description, a missing API, a stale artifact or a question about the rating: [open an issue on this repository](https://github.com/api-evangelist/basiq/issues/new).
+- **A new API, or one that is not in the catalog yet** — [submit it on APIs.io](https://apis.io/add/).
+- **Anything else** — [the APIs.io inbox](https://github.com/api-search/inbox/issues/new) or [info@apievangelist.com](mailto:info@apievangelist.com).
